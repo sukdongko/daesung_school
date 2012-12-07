@@ -3761,7 +3761,7 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-
+'Å×½ºÆ® ¹Ù²ãºÁ¿ä
 Private Type tExcel_StdData
     ACID        As String
     EXMID       As String
