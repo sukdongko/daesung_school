@@ -1,0 +1,426 @@
+Attribute VB_Name = "basDataBase"
+'################################################################################################################
+'   시 스 템  명 : 대성학원 입학사정, 반배정 & 시간표 프로그램
+' 5  서브시스템명 :
+'   모   듈   명 : BASDATABASE
+'   모 듈  목 적 : 데이터베이스 접속
+'
+'   작   성   일 : 2007/08/20
+'   작   성   자 : 유하균
+' --------------------------------------------------------------------------------------------------------------
+' --------------------------------------------------------------------------------------------------------------
+'                 수     정     내     용
+' --------------------------------------------------------------------------------------------------------------
+'   1. 수정일 :
+'   2. 내  용 :
+'################################################################################################################
+
+Option Explicit
+
+'>> ODBC API 설정
+    Private Declare Function SQLConfigDataSource Lib "ODBCCP32.DLL" _
+                   (ByVal hwndParent As Long, _
+                    ByVal fRequest As Long, _
+                    ByVal lpszDriver As String, _
+                    ByVal lpszAttributes As String) As Long
+                    
+    Private Const ODBC_ADD_DSN_USER = 1     ' Add data source
+    Private Const ODBC_ADD_DSN_SYS = 4      ' Add data source
+    Private Const ODBC_CONFIG_DSN = 2       ' Configure (edit) data source
+    Private Const ODBC_REMOVE_DSN = 3       ' Remove data source
+    Private Const vbAPINull As Long = 0&    ' NULL Pointer
+
+    Private Const ODBCDrv = "Oracle ODBC Driver"
+    Private Const ODBCDrv92 = "Oracle in OraHome92"             ' 노량진
+    Private Const ODBCDrv11g = "{Microsoft ODBC for Oracle}"    ' 11g
+    
+    Private OracleVer       As String                           ' 오라클 버젼
+    
+    
+    Public DBConn As ADODB.Connection
+    
+    
+'>> REGISTRY 에 관여하는 DECLARE STATEMENT
+    Public Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As Long
+    Public Declare Function RegOpenKeyEx Lib "advapi32.dll" Alias "RegOpenKeyExA" (ByVal hKey As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, ByVal samDesired As Long, phkResult As Long) As Long
+    Public Declare Function RegQueryValueEx Lib "advapi32.dll" Alias "RegQueryValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal lpReserved As Long, lpType As Long, lpData As Any, lpcbData As Long) As Long         ' Note that if you declare the lpData parameter as String, you must pass it By Value.
+    
+    Public Declare Function RegCreateKeyEx Lib "advapi32.dll" Alias "RegCreateKeyExA" (ByVal hKey As Long, ByVal lpSubKey As String, ByVal Reserved As Long, ByVal lpClass As String, ByVal dwOptions As Long, ByVal samDesired As Long, lpSecurityAttributes As SECURITY_ATTRIBUTES, phkResult As Long, lpdwDisposition As Long) As Long
+    Public Declare Function RegSetValueEx Lib "advapi32.dll" Alias "RegSetValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal Reserved As Long, ByVal dwType As Long, lpData As Any, ByVal cbData As Long) As Long         ' Note that if you declare the lpData parameter as String, you must pass it By Value.
+    
+    Public Declare Function RegDeleteValue Lib "advapi32.dll" Alias "RegDeleteValueA" (ByVal hKey As Long, ByVal lpValueName As String) As Long
+    Public Declare Function RegDeleteKey Lib "advapi32.dll" Alias "RegDeleteKeyA" (ByVal hKey As Long, ByVal lpSubKey As String) As Long
+
+    ' ROOT 키를 처리
+    Public Const ERROR_SUCCESS = 0&
+    
+    Public Const REG_OPTION_BACKUP_RESTORE = 4                      '백업이나 복구를 위해 필요한 엑세스로 열린다.
+    Public Const REG_OPTION_VOLATILE = 1                            '휘발성 데이터가 아니므로 시스템 재시동시 손실되지 않는다.
+    Public Const REG_OPTION_NON_VOLATILE = &O0                      '데이터는 메모리에만 쓰여지고, 디스크 상에는 기록되지 않는다.
+    
+    Public Const REG_BINARY = 3                                     '이진데이터
+    Public Const REG_DWORD = 4                                      '32 BIT NUMBER
+    Public Const REG_DWORD_LITTLE_ENDIAN = 4                        '32 BIT NUMBER 최상위 바이트가 하위바이트
+    Public Const REG_DWORD_BIG_ENDIAN = 5                           '32 BIT NUMBER 최상위 바이트가 상위바이트
+    Public Const REG_EXPAND_SZ = 2                                  '환경변수에 대해 확장 되지 않은 참조형태의 문자열 (EX : %PATH%)
+    
+    Public Const REG_LINK = 6                                       '유니코드 심볼릭 연결
+    Public Const REG_MULTI_SZ = 7                                   '널로 끝나는 문자열의 리스트
+    Public Const REG_NONE = 0                                       '정의되지 않은 유형
+    Public Const REG_RESOURCE_LIST = 8                              '디바이스 드라이버 자원 목록
+    Public Const REG_SZ = 1                                         'NULL로 끝나는 문자열
+    
+    Public Const HKEY_CLASSES_ROOT = &H80000000
+    Public Const HKEY_CURRENT_USER = &H80000001
+    Public Const HKEY_LOCAL_MACHINE = &H80000002
+    Public Const HKEY_USERS = &H80000003
+    Public Const HKEY_CURRENT_CONFIG = &H80000005
+    Public Const HKEY_DYN_DATA = &H80000006
+    
+    Public Const STANDARD_RIGHT_ALL = &H1F0000
+    Public Const KEY_QUERY_VALUE = &H1
+    Public Const KEY_SET_VALUE = &H2
+    
+    Public Const KEY_ENUMERATE_SUB_KEYS = &H8
+    Public Const KEY_NOTIFY = &H10
+    
+    Public Const KEY_CREATE_LINK = &H20
+    Public Const KEY_CREATE_SUB_KEY = &H4
+    
+    Public Const SYNCHRONIZE = &H100000
+    Public Const KEY_ALL_ACCESS = ( _
+                    STANDARD_RIGHT_ALL Or _
+                    KEY_QUERY_VALUE Or _
+                    KEY_SET_VALUE Or _
+                    KEY_CREATE_SUB_KEY Or _
+                    KEY_ENUMERATE_SUB_KEYS Or _
+                    KEY_NOTIFY Or _
+                    KEY_CREATE_LINK _
+                    ) And _
+                    (Not SYNCHRONIZE)
+    
+    Public Type SECURITY_ATTRIBUTES
+        nLength                 As Long
+        lpSecurityDescriptor    As Long
+        bInHeritHandle          As Long
+    End Type
+    
+    Public Type ACL
+        AclRevision             As Byte
+        Sbz1                    As Byte
+        AclSize                 As Integer
+        AceCount                As Integer
+        Sbz2                    As Integer
+    End Type
+    
+    Public Type SECURITY_DESCRIPTOR
+        Revision                As Byte
+        Sbz1                    As Byte
+        Control                 As Long
+        Owner                   As Long
+        Group                   As Long
+        Sacl                    As ACL
+        Dacl                    As ACL
+    End Type
+    
+'>> SERVER 설정
+    Public Const PORT = "15800"
+    Public Const Dev_LoginHost = "dmdev.mimacstudy.com"
+    Public Const Mimac_LoginHost = "ms.mimacstudy.com"
+    'Public Const PassWord = "sybaQ#12"
+
+    Public Const hKey = HKEY_LOCAL_MACHINE
+    Public Const SubKey = "SOFTWARE\ORACLE\"
+    Private Oracle_Pass         As String                   '<< oracle pass
+    
+    
+Public Function Find_DB_Tnsnames_Location() As String
+    '>> Registry OPEN
+    Dim hSubKey     As Long
+    Dim dType       As Long
+    Dim strLength   As Long
+    Dim RetStr      As String
+    Dim Rtn         As Long
+    
+    '>> Registry Save
+    Dim iSecurity   As SECURITY_ATTRIBUTES
+    Dim strSubkey   As String
+    Dim KeyRet      As Long
+    Dim dPosition   As Long
+    Dim iRet        As Long
+    
+    Dim sTmp        As String
+    Dim sReturn     As String
+    
+    
+    sReturn = ""
+    
+    '>> registry open
+    
+    Rtn = RegOpenKeyEx(hKey, SubKey, 0, KEY_ALL_ACCESS, hSubKey)
+    If Rtn <> ERROR_SUCCESS Then
+        '레지스트리를 생성시켜주어야 한다.
+        iRet = RegCreateKeyEx(hKey, SubKey, 0, vbNullString, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, iSecurity, KeyRet, dPosition)
+        If iRet <> ERROR_SUCCESS Then
+            MsgBox "오라클을 설치하여 주십시요.", vbExclamation + vbOKOnly, "DB Connection"
+            Rtn = RegCloseKey(hSubKey)
+            
+            Find_DB_Tnsnames_Location = sReturn
+            Exit Function
+        End If
+    End If
+
+    '하위 키값을 얻는다.
+    strLength = 256
+    RetStr = String(strLength, 0)
+    
+    '>> oracle path
+        Rtn = RegQueryValueEx(hSubKey, "ORACLE_HOME", 0, dType, ByVal RetStr, strLength)
+        
+        If Rtn = ERROR_SUCCESS And dType = REG_SZ Then
+            '뒤에 따라오는 문자열을 제거한다
+            sReturn = Left(RetStr, strLength - 1)
+            sReturn = sReturn & "\network\admin\tnsnames.ora"
+            
+            Rtn = RegQueryValueEx(hSubKey, "ORACLE_HOME_NAME", 0, dType, ByVal RetStr, strLength)
+            
+            'MsgBox RetStr
+            OracleVer = "ORAHOME8"
+            If strLength > 0 Then OracleVer = Trim(Left(RetStr, strLength - 1))
+            
+            If InStr(1, UCase(OracleVer), "ORAHOME8", vbTextCompare) > 0 Then OracleVer = "ORA8"
+            If InStr(1, UCase(OracleVer), "ORAHOME9", vbTextCompare) > 0 Then OracleVer = "ORA9"
+            
+        Else
+            MsgBox "오라클 경로설정에 문제가 있습니다.", vbExclamation + vbOKOnly, "DB Connection"
+            
+        End If
+        Rtn = RegCloseKey(hSubKey)
+    
+        Find_DB_Tnsnames_Location = sReturn
+        
+        
+End Function
+
+
+
+
+
+'>> database connection <<
+Public Function DataBase_Connection(ByVal sDB_Tns_File_Path As String) As Boolean
+
+    Dim bRet        As Boolean
+    bRet = False
+    
+    
+    If OdbcCreate = False Then
+        MsgBox "ODBC 생성중 오류가 발생하였습니다.", vbCritical + vbOKOnly, "데이터 접속"
+    Else
+        If Oracle_TnsNames_Create(sDB_Tns_File_Path) = True Then
+            DataBase_Connection = Connection_Database           '<< 최종 DB접속
+        End If
+    End If
+
+End Function
+
+'>> ODBC 자동생성 함수
+Private Function OdbcCreate() As Boolean
+
+    Dim PsRet_User   As Long
+    Dim PsRet_SYS    As Long
+    Dim PsDriver     As String
+    Dim PsOdbc       As String
+
+   ' 드라이버는 제어판에서 ODBC 데이타원본을 클릭하여 드라이버를 보시면
+   ' 리스트가 나오는데 그것의 이름을 사용하면 된당^^.
+    If StrComp(OracleVer, "ORA8", vbTextCompare) = 0 Then
+        PsDriver = ODBCDrv
+    ElseIf StrComp(OracleVer, "ORA9", vbTextCompare) = 0 Then
+        PsDriver = ODBCDrv92
+    Else
+        PsDriver = ODBCDrv
+    End If
+    
+    Select Case UCase(Trim(basModule.connDB))
+        Case "MIMAC"
+            'PsOdbc = "SERVER=MI_CLASS" & Chr$(0)                '<< Oracle Net8 Easy Config에서 작성한것
+            PsOdbc = "SERVER=MI2_CLASS" & Chr$(0)                '<< Oracle Net8 Easy Config에서 작성한것
+            PsOdbc = PsOdbc & "DESCRIPTION=" & Chr$(0)          '<< ODBC 설명
+            PsOdbc = PsOdbc & "DSN=MI2_CLASS" & Chr$(0)          '<< ODBC 이름
+            PsOdbc = PsOdbc & "UID=CLASS" & Chr$(0)             '<< Oracle User
+            PsOdbc = PsOdbc & "PWD=sybaQ#12" & Chr$(0)          '<< Oracle User Password
+        Case Else
+            PsOdbc = "SERVER=DEV_CLASS" & Chr$(0)               '<< Oracle Net8 Easy Config에서 작성한것
+            PsOdbc = PsOdbc & "DESCRIPTION=" & Chr$(0)          '<< ODBC 설명
+            PsOdbc = PsOdbc & "DSN=DEV_CLASS" & Chr$(0)         '<< ODBC 이름
+            PsOdbc = PsOdbc & "UID=CLASS" & Chr$(0)             '<< Oracle User
+            PsOdbc = PsOdbc & "PWD=sybaQ#12" & Chr$(0)          '<< Oracle User Password
+    End Select
+
+    PsRet_User = SQLConfigDataSource(vbAPINull, ODBC_ADD_DSN_USER, PsDriver, PsOdbc)
+    PsRet_SYS = SQLConfigDataSource(vbAPINull, ODBC_ADD_DSN_SYS, PsDriver, PsOdbc)
+
+    If PsRet_User > 0 And PsRet_SYS > 0 Then
+        OdbcCreate = True
+    Else
+        OdbcCreate = False
+    End If
+End Function
+
+
+'>> Tnsnames 추가
+Private Function Oracle_TnsNames_Create(ByVal sDB_Tns_File_Path As String) As Boolean
+    Dim bChk        As Boolean
+    
+    Dim sData       As String
+    Dim sGbn        As String
+    
+    Dim Fn          As Integer
+    Dim sGetData    As String
+    
+    bChk = False
+    
+    On Error GoTo ErrStmt
+    
+    Select Case UCase(Trim(basModule.connDB))
+        Case "MIMAC"
+            'sData = "MI_CLASS  = (DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = ms.mimacstudy.com)(PORT = 15800)))(CONNECT_DATA =(SERVICE_NAME = DS)(INSTANCE_NAME = DS2)))"
+            sData = "MI2_CLASS =(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = ms.mimacstudy.com)(PORT = 30022)))(CONNECT_DATA =(SERVICE_NAME = DS)(INSTANCE_NAME = DS2)))"
+            'sData = "MI2_CLASS  = (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = ms.mimacstudy.com)(PORT = 44444)))(CONNECT_DATA = (SERVICE_NAME = DS)(INSTANCE_NAME = DS2)))"
+            
+            sGbn = "MIMAC"
+            
+        Case Else
+            sData = "DEV_CLASS = (DESCRIPTION =(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST=DMDEV.MIMACSTUDY.COM    )(PORT=1521    )))(CONNECT_DATA=(SERVICE_NAME=DM )))"
+            sGbn = "DEV"
+    End Select
+        
+    If Dir(sDB_Tns_File_Path) = "" Then
+        Fn = FreeFile
+        Open sDB_Tns_File_Path For Append As #Fn
+        
+        Print #Fn, sData
+        Close #Fn
+        
+        bChk = True
+        Oracle_TnsNames_Create = bChk
+    Else
+        
+        '>> Data 등록여부 파악
+        Fn = FreeFile
+        
+        Open sDB_Tns_File_Path For Input As #Fn
+    
+        While Not EOF(Fn)
+            Input #Fn, sGetData
+            
+            Select Case UCase(Trim(basModule.connDB))
+                Case "MIMAC"
+                    'If "MI_CLASS" = UCase(Mid(sGetData, 1, 8)) Then
+                    If "MI2_CLASS" = UCase(Mid(sGetData, 1, 9)) Then
+                        bChk = True
+                        
+                        Close #Fn
+                    End If
+                    
+                Case Else
+                    If "DEV_CLASS" = UCase(Mid(sGetData, 1, 9)) Then
+                        bChk = True
+                        
+                        Close #Fn
+                End If
+            End Select
+            
+            '>> 등록된 tns값이 있으면...
+            If bChk = True Then
+                Oracle_TnsNames_Create = bChk
+                Exit Function
+            End If
+        Wend
+        
+        '>> 등록된 tns값이 없으면
+        Close #Fn
+        
+        Open sDB_Tns_File_Path For Append As #Fn
+        
+        Print #Fn, sData
+        Close #Fn
+        
+        bChk = True
+        Oracle_TnsNames_Create = bChk
+    End If
+
+    Exit Function
+ErrStmt:
+    MsgBox "DB Connection 설정시 에러가 발생하였습니다." & vbCrLf & _
+           Trim(CStr(Err.Number)) & ":" & Trim(Err.Description), vbCritical + vbOKOnly, "데이터 접속"
+    Oracle_TnsNames_Create = bChk
+    
+End Function
+
+
+
+'>> 데이터베이스 접속
+Private Function Connection_Database() As Boolean
+    Dim DB_Str      As String
+    Dim Sel_ODBC    As String
+    
+    On Error GoTo ErrStmt
+    
+    If StrComp(OracleVer, "ORA8", vbTextCompare) = 0 Then
+        Sel_ODBC = ODBCDrv
+    ElseIf StrComp(OracleVer, "ORA9", vbTextCompare) = 0 Then
+        Sel_ODBC = ODBCDrv92
+    Else
+        Sel_ODBC = ODBCDrv
+    End If
+    
+    
+    Select Case UCase(Trim(basModule.connDB))
+        Case "MIMAC"                                                '<< 실제서버
+'            DB_Str = ""
+'            DB_Str = DB_Str & "DSN=MI_CLASS;"
+'            DB_Str = DB_Str & "UID=DSHW;"
+'            DB_Str = DB_Str & "PWD=sybaQ#12;"
+'            DB_Str = DB_Str & "DRIVER=" & Sel_ODBC & ";"
+                        
+            DB_Str = ""
+            DB_Str = DB_Str & "DRIVER=" & ODBCDrv11g & ";"
+           'DB_Str = DB_Str & "DRIVER=" & ODBCDrv & ";"
+           
+            DB_Str = DB_Str & "Server=MI2_CLASS;"
+            DB_Str = DB_Str & "Uid=DSHW;"
+            DB_Str = DB_Str & "Pwd=sybaQ#12;"
+
+        Case Else                                                   '<< 개발용
+            DB_Str = ""
+            DB_Str = DB_Str & "DSN=DEV_CLASS;"
+            DB_Str = DB_Str & "UID=CLASS;"
+            DB_Str = DB_Str & "PWD=yXhJK3H2;"
+            DB_Str = DB_Str & "DRIVER=" & Sel_ODBC & ";"
+            
+    End Select
+    
+    
+    Set DBConn = New ADODB.Connection
+
+    With DBConn
+        .ConnectionString = DB_Str                  '데이터베이스와 연결을 시도합니다.
+        .ConnectionTimeout = 30                     '제한 시간내에 연결이 되지 않으면 자동으로 끊습니다.
+        .Properties("Prompt") = adPromptNever       '이것은 ADO에서 기본 프롬프트 모드입니다.
+        .CursorLocation = adUseClient               '커서위치를 Client 쪽에 넣습니다.
+
+        .Open                                       '데이터베이스를 엽니다.
+
+        Do While .State And adStateConnecting
+            DoEvents
+        Loop
+    End With
+
+    Connection_Database = True
+    Exit Function
+ErrStmt:
+    MsgBox "데이터베이스 접속오류입니다.", vbCritical + vbOKOnly, "데이터 접속"
+    Connection_Database = False
+End Function
+

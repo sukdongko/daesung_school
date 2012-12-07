@@ -1,0 +1,46 @@
+.OPTION EXPLICIT
+.Set Cabinet=off
+.Set Compress=off
+.Set MaxDiskSize=CDROM
+.Set ReservePerCabinetSize=6144
+.Set DiskDirectoryTemplate=".."
+.Set CompressionType=MSZIP
+.Set CompressionLevel=7
+.Set CompressionMemory=21
+.Set CabinetNameTemplate="daesung_school2012.CAB"
+"Setup.Lst"
+"setup.exe"
+.Set Cabinet=on
+.Set Compress=on
+"daesung_school2012.exe"
+"msvbvm60.dll"
+"OLEAUT32.DLL"
+"OLEPRO32.DLL"
+"ASYCFILT.DLL"
+"STDOLE2.TLB"
+"COMCAT.DLL"
+"vb6ko.dll"
+"odbccp32.dll"
+"SPR32X60.ocx"
+"mfc42.dll"
+"MSVCRT.DLL"
+"Edt32x30.ocx"
+"COMDLG32.OCX"
+"CMDLGKO.DLL"
+"MSCOMCTL.OCX"
+"MSCMCKO.DLL"
+"msinet.ocx"
+"INETKO.DLL"
+"COMCT332.OCX"
+"CMCT3KO.DLL"
+"MSCOMCT2.OCX"
+"MSCC2KO.DLL"
+"RICHTX32.OCX"
+"RICHED32.DLL"
+"GAPI32.DLL"
+"RCHTXKO.DLL"
+"Tab32x30.ocx"
+"MDAC_TYP.EXE"
+"SETUP1.EXE"
+"VB6STKIT.DLL"
+"ST6UNST.EXE"

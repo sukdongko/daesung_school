@@ -1,0 +1,136 @@
+[Root]
+Most Recent Package=Standard Setup Package 1
+
+
+[Package|Standard Setup Package 1|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program
+
+[Package|Standard Setup Package 1|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Standard Setup Package 1|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Standard Setup Package 1|Files Found]
+
+[Package|Standard Setup Package 1|Files Released]
+User.DLL=
+
+[Package|Standard Setup Package 1|Missing Dependency Information]
+
+[Package|Standard Setup Package 1|Out-of-Date Dependency Information]
+C:\WINDOWS\system32\MSCOMCTL.OCX=
+C:\WINDOWS\system32\SPR32X60.ocx=
+
+[Package|Standard Setup Package 1|Files Added]
+
+[Package|Standard Setup Package 1|Files Removed]
+
+[Package|Standard Setup Package 1|Files In Project]
+\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program\bin\daesung_school2012.exe=Yes
+C:\WINDOWS\system32\msvbvm60.dll=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+C:\WINDOWS\system32\vb6ko.dll=Yes
+C:\WINDOWS\system32\odbccp32.dll=Yes
+C:\WINDOWS\system32\SPR32X60.ocx=Yes
+C:\WINDOWS\system32\mfc42.dll=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=Yes
+C:\WINDOWS\system32\Edt32x30.ocx=Yes
+C:\WINDOWS\system32\COMDLG32.OCX=Yes
+C:\WINDOWS\system32\CMDLGKO.DLL=Yes
+C:\WINDOWS\system32\MSCOMCTL.OCX=Yes
+C:\WINDOWS\system32\MSCMCKO.DLL=Yes
+C:\WINDOWS\system32\msinet.ocx=Yes
+C:\WINDOWS\system32\INETKO.DLL=Yes
+C:\WINDOWS\system32\COMCT332.OCX=Yes
+C:\WINDOWS\system32\CMCT3KO.DLL=Yes
+C:\WINDOWS\system32\MSCOMCT2.OCX=Yes
+C:\WINDOWS\system32\MSCC2KO.DLL=Yes
+C:\WINDOWS\system32\RICHTX32.OCX=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\GAPI32.DLL=Yes
+C:\WINDOWS\system32\RCHTXKO.DLL=Yes
+C:\WINDOWS\system32\Tab32x30.ocx=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MDAC_TYP.EXE=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\system32\VB6STKIT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|Standard Setup Package 1|Configure Registry Files]
+Applicable=No
+
+[Package|Standard Setup Package 1|Configure Remote Servers]
+Applicable=No
+
+[Package|Standard Setup Package 1|Install Locations]
+\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program\bin\daesung_school2012.exe=$(AppPath)
+C:\WINDOWS\system32\msvbvm60.dll=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\vb6ko.dll=$(WinSysPath)
+C:\WINDOWS\system32\odbccp32.dll=$(WinSysPath)
+C:\WINDOWS\system32\SPR32X60.ocx=$(WinSysPath)
+C:\WINDOWS\system32\mfc42.dll=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\Edt32x30.ocx=$(WinSysPath)
+C:\WINDOWS\system32\COMDLG32.OCX=$(WinSysPath)
+C:\WINDOWS\system32\CMDLGKO.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSCOMCTL.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCMCKO.DLL=$(WinSysPath)
+C:\WINDOWS\system32\msinet.ocx=$(WinSysPath)
+C:\WINDOWS\system32\INETKO.DLL=$(WinSysPath)
+C:\WINDOWS\system32\COMCT332.OCX=$(WinSysPath)
+C:\WINDOWS\system32\CMCT3KO.DLL=$(WinSysPath)
+C:\WINDOWS\system32\MSCOMCT2.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCC2KO.DLL=$(WinSysPath)
+C:\WINDOWS\system32\RICHTX32.OCX=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\GAPI32.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\RCHTXKO.DLL=$(WinSysPath)
+C:\WINDOWS\system32\Tab32x30.ocx=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MDAC_TYP.EXE=$(AppPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+
+[Package|Standard Setup Package 1|Configure Shared Files]
+Applicable=Yes
+\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program\bin\daesung_school2012.exe=No
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MDAC_TYP.EXE=No
+
+[Package|Standard Setup Package 1|Distribution]
+Type=single
+Size=
+Title=daesung_school2012
+
+[Package|Standard Setup Package 1|IconGroups]
+Group0=daesung_school2012
+PrivateGroup0=-1
+Parent0=$(Programs)
+
+[Package|Standard Setup Package 1|daesung_school2012]
+Icon1=daesung_school2012.exe
+Title1=daesung_school2012
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Standard Setup Package 1|Package]
+PackageFolder=\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program
+ProjectFolder=\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program
+ServerSideCab=
+File1=\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program\setup.exe
+File2=\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program\Setup.Lst
+File3=\\tsclient\D\고동석 업무\06. 노량진_입학사정_시간표(주민제거_동석)\노량진_입학사정_시간표최종본\program\daesung_school2012.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
