@@ -17,112 +17,112 @@ Function Set_Spread_Design1(ByRef sprControl As Object)
     
 End Function
 
-'노량진 계열 콤보박스 세팅.
-Function Init_Kaeyol_N(ByRef cboControl As Object)
-    With cboControl
-        .Clear
-        .AddItem "인문" & Space(30) & "01"
-        .AddItem "자연" & Space(30) & "02"
-        
-        
-    '<< 계열 >> : 2008.01.09
-        If Trim(basModule.SchCD) = "N" Then             '< 노량진
-        
-            .AddItem "서울대인문" & Space(30) & "21"
-            .AddItem "서울대자연" & Space(30) & "22"
-            .AddItem "예체" & Space(30) & "03"
-            .AddItem "수리(나)" & Space(30) & "04"
-            .AddItem "인문수능" & Space(30) & "05"
-            .AddItem "자연수능" & Space(30) & "06"
-            
-            .AddItem "인문-신" & Space(30) & "07"
-            .AddItem "자연-신" & Space(30) & "08"
-            '.AddItem "수능인문-신" & Space(30) & "09"
-            '.AddItem "수능자연-신" & Space(30) & "10"
-            
-            .AddItem "편)인문" & Space(30) & "11"
-            .AddItem "편)자연" & Space(30) & "12"
-            .AddItem "편)예체" & Space(30) & "13"
-            .AddItem "편)수리(나)" & Space(30) & "14"
-            .AddItem "편)인문수능" & Space(30) & "15"
-            .AddItem "편)자연수능" & Space(30) & "16"
-            
-        End If
-    '<< 계열 >> : 2008.01.10
-        'If Trim(basModule.SchCD) = "K" Then             '< 강남
-        Select Case Trim(basModule.SchCD)
-            Case "K", "W", "Q"
-                .AddItem "주말법대" & Space(30) & "04"
-                .AddItem "주말의대" & Space(30) & "05"
-                
-                .AddItem "야간법대" & Space(30) & "06"
-                .AddItem "야간의대" & Space(30) & "07"
-                
-                .AddItem "선착순인문" & Space(30) & "11"
-                .AddItem "선착순자연" & Space(30) & "12"
-                
-                .AddItem "선착순인문16" & Space(30) & "16"
-                .AddItem "선착순자연17" & Space(30) & "17"
-                
-        End Select
-    
-    '<< 계열 >> : 2008.02.15
-        Select Case Trim(basModule.SchCD)               '< 송파
-            Case "S"
-'                .AddItem "예체능" & Space(30) & "03"
+''노량진 계열 콤보박스 세팅.
+'Function Init_Kaeyol_N(ByRef cboControl As Object)
+'    With cboControl
+'        .Clear
+'        .AddItem "인문" & Space(30) & "01"
+'        .AddItem "자연" & Space(30) & "02"
 '
-'                .AddItem "인문수능" & Space(30) & "05"
-'                .AddItem "자연수능" & Space(30) & "06"
 '
-                .AddItem "신설인문" & Space(30) & "11"
-                .AddItem "신설자연" & Space(30) & "12"
-                
+'    '<< 계열 >> : 2008.01.09
+'        If Trim(basModule.SchCD) = "N" Then             '< 노량진
+'
+'            .AddItem "서울대인문" & Space(30) & "21"
+'            .AddItem "서울대자연" & Space(30) & "22"
+'            .AddItem "예체" & Space(30) & "03"
+'            .AddItem "수리(나)" & Space(30) & "04"
+'            .AddItem "인문수능" & Space(30) & "05"
+'            .AddItem "자연수능" & Space(30) & "06"
+'
+'            .AddItem "인문-신" & Space(30) & "07"
+'            .AddItem "자연-신" & Space(30) & "08"
+'            '.AddItem "수능인문-신" & Space(30) & "09"
+'            '.AddItem "수능자연-신" & Space(30) & "10"
+'
+'            .AddItem "편)인문" & Space(30) & "11"
+'            .AddItem "편)자연" & Space(30) & "12"
+'            .AddItem "편)예체" & Space(30) & "13"
+'            .AddItem "편)수리(나)" & Space(30) & "14"
+'            .AddItem "편)인문수능" & Space(30) & "15"
+'            .AddItem "편)자연수능" & Space(30) & "16"
+'
+'        End If
+'    '<< 계열 >> : 2008.01.10
+'        'If Trim(basModule.SchCD) = "K" Then             '< 강남
+'        Select Case Trim(basModule.SchCD)
+'            Case "K", "W", "Q"
+'                .AddItem "주말법대" & Space(30) & "04"
+'                .AddItem "주말의대" & Space(30) & "05"
+'
+'                .AddItem "야간법대" & Space(30) & "06"
+'                .AddItem "야간의대" & Space(30) & "07"
+'
+'                .AddItem "선착순인문" & Space(30) & "11"
+'                .AddItem "선착순자연" & Space(30) & "12"
+'
+'                .AddItem "선착순인문16" & Space(30) & "16"
+'                .AddItem "선착순자연17" & Space(30) & "17"
+'
+'        End Select
+'
+'    '<< 계열 >> : 2008.02.15
+'        Select Case Trim(basModule.SchCD)               '< 송파
+'            Case "S"
+''                .AddItem "예체능" & Space(30) & "03"
+''
+''                .AddItem "인문수능" & Space(30) & "05"
+''                .AddItem "자연수능" & Space(30) & "06"
+''
+'                .AddItem "신설인문" & Space(30) & "11"
+'                .AddItem "신설자연" & Space(30) & "12"
+'
+''                .AddItem "인문프리미엄" & Space(30) & "18"
+''                .AddItem "자연프리미엄" & Space(30) & "19"
+'
+'                .AddItem "서울대특별인문" & Space(30) & "21"
+'                .AddItem "서울대특별자연" & Space(30) & "22"
+'
+'                .AddItem "야간서울대인문" & Space(30) & "21"
+'                .AddItem "야간서울대자연" & Space(30) & "22"
+'
+'        End Select
+'
+'        Select Case Trim(basModule.SchCD)               '< 양재
+'            Case "J"
+'                .AddItem "신설인문" & Space(30) & "11"
+'                .AddItem "신설자연" & Space(30) & "12"
 '                .AddItem "인문프리미엄" & Space(30) & "18"
 '                .AddItem "자연프리미엄" & Space(30) & "19"
-
-                .AddItem "서울대특별인문" & Space(30) & "21"
-                .AddItem "서울대특별자연" & Space(30) & "22"
-                
-                .AddItem "야간서울대인문" & Space(30) & "21"
-                .AddItem "야간서울대자연" & Space(30) & "22"
-                
-        End Select
-        
-        Select Case Trim(basModule.SchCD)               '< 양재
-            Case "J"
-                .AddItem "신설인문" & Space(30) & "11"
-                .AddItem "신설자연" & Space(30) & "12"
-                .AddItem "인문프리미엄" & Space(30) & "18"
-                .AddItem "자연프리미엄" & Space(30) & "19"
-                .AddItem "서울대특별인문" & Space(30) & "21"
-                .AddItem "서울대특별자연" & Space(30) & "22"
-        End Select
-        
-    '<< 계열 >> : 2009.01.09
-        If Trim(basModule.SchCD) = "B" Then             '< 부산
-            
-            .AddItem "인문PS반" & Space(30) & "23"
-            .AddItem "자연PM반" & Space(30) & "24"
-            
-            .AddItem "수학선행인문" & Space(30) & "05"
-            .AddItem "수학선행자연" & Space(30) & "06"
-            
-            .AddItem "연.고대인문" & Space(30) & "07"
-            .AddItem "연.고대자연" & Space(30) & "08"
-            
-            .AddItem "심화인문" & Space(30) & "09"
-            .AddItem "심화자연" & Space(30) & "10"
-        End If
-        
-        Select Case Trim(basModule.SchCD)               '< 마강
-            Case "M"
-                .AddItem "서울대특별인문" & Space(30) & "21"
-                .AddItem "서울대특별자연" & Space(30) & "22"
-        End Select
-    
-        .ListIndex = 0
-    End With
-End Function
+'                .AddItem "서울대특별인문" & Space(30) & "21"
+'                .AddItem "서울대특별자연" & Space(30) & "22"
+'        End Select
+'
+'    '<< 계열 >> : 2009.01.09
+'        If Trim(basModule.SchCD) = "B" Then             '< 부산
+'
+'            .AddItem "인문PS반" & Space(30) & "23"
+'            .AddItem "자연PM반" & Space(30) & "24"
+'
+'            .AddItem "수학선행인문" & Space(30) & "05"
+'            .AddItem "수학선행자연" & Space(30) & "06"
+'
+'            .AddItem "연.고대인문" & Space(30) & "07"
+'            .AddItem "연.고대자연" & Space(30) & "08"
+'
+'            .AddItem "심화인문" & Space(30) & "09"
+'            .AddItem "심화자연" & Space(30) & "10"
+'        End If
+'
+'        Select Case Trim(basModule.SchCD)               '< 마강
+'            Case "M"
+'                .AddItem "서울대특별인문" & Space(30) & "21"
+'                .AddItem "서울대특별자연" & Space(30) & "22"
+'        End Select
+'
+'        .ListIndex = 0
+'    End With
+'End Function
 
 
 Function Init_KaeyolDefault(ByRef cboControl As Object)
@@ -154,6 +154,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
             .AddItem "편)인문수능" & Space(30) & "15"
             .AddItem "편)자연수능" & Space(30) & "16"
             
+            
         End If
     '<< 계열 >> : 2008.01.10
         'If Trim(basModule.SchCD) = "K" Then             '< 강남
@@ -175,7 +176,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
                 .AddItem "내신우수자자연" & Space(30) & "20"
         End Select
     
-    '<< 계열 >> : 2008.02.15
+        '<< 계열 >> : 2008.02.15
         Select Case Trim(basModule.SchCD)               '< 송파
             Case "S"
 '                .AddItem "예체능" & Space(30) & "03"
@@ -183,15 +184,20 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
 '                .AddItem "인문수능" & Space(30) & "05"
 '                .AddItem "자연수능" & Space(30) & "06"
 '
-'                .AddItem "신설인문" & Space(30) & "11"
-'                .AddItem "신설자연" & Space(30) & "12"
+                .AddItem "신설인문" & Space(30) & "11"
+                .AddItem "신설자연" & Space(30) & "12"
                 
 '                .AddItem "인문프리미엄" & Space(30) & "18"
 '                .AddItem "자연프리미엄" & Space(30) & "19"
 
                 .AddItem "서울대특별인문" & Space(30) & "21"
                 .AddItem "서울대특별자연" & Space(30) & "22"
+                
+                .AddItem "야간서울대인문" & Space(30) & "21"
+                .AddItem "야간서울대자연" & Space(30) & "22"
+                
         End Select
+        
         
         Select Case Trim(basModule.SchCD)               '< 양재
             Case "J"

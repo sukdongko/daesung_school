@@ -778,7 +778,7 @@ Begin VB.Form STD010_N
          Begin VB.Image Image1 
             Height          =   4080
             Left            =   30
-            Picture         =   "STD010_N.frx":19D6
+            Picture         =   "STD010_N.frx":1A1A
             Top             =   60
             Width           =   8730
          End
@@ -857,11 +857,11 @@ Begin VB.Form STD010_N
             EndProperty
             MaxCols         =   16
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010_N.frx":90A0
+            SpreadDesigner  =   "STD010_N.frx":90E4
          End
          Begin VB.Label Label30 
             BackStyle       =   0  '투명
-            Caption         =   $"STD010_N.frx":ACB6
+            Caption         =   $"STD010_N.frx":AD3E
             Height          =   615
             Left            =   240
             TabIndex        =   130
@@ -1572,12 +1572,12 @@ Begin VB.Form STD010_N
             MaxCols         =   40
             ProcessTab      =   -1  'True
             Protect         =   0   'False
-            SpreadDesigner  =   "STD010_N.frx":AD4D
+            SpreadDesigner  =   "STD010_N.frx":ADD5
          End
          Begin VB.Image imgExcel 
             Height          =   420
             Left            =   6150
-            Picture         =   "STD010_N.frx":CFC9
+            Picture         =   "STD010_N.frx":D095
             Stretch         =   -1  'True
             Top             =   1440
             Width           =   390
@@ -3725,7 +3725,7 @@ Begin VB.Form STD010_N
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      SpreadDesigner  =   "STD010_N.frx":D40A
+      SpreadDesigner  =   "STD010_N.frx":D4D6
    End
    Begin VB.Label Label64 
       BackColor       =   &H80000001&
@@ -4887,7 +4887,7 @@ Private Sub Form_Load()
     txtAddr2.Text = ""
     txtEmail.Text = ""
     
-    Call basCommonSTD.Init_Kaeyol_N(cboKaeyol)      '계열
+    Call basCommonSTD.Init_Kaeyol(cboKaeyol)      '계열
     Call basCommonSTD.Init_CboSch(cboSel1_Sch)   '1지망 학원
     cboSel1_Sch.RemoveItem (0)
     Call basCommonSTD.Init_CboSch(cboSel2_Sch)   '2지망 학원
@@ -4915,7 +4915,7 @@ Private Sub Form_Load()
     fpPayTot.value = 0
     
     
-    Call basCommonSTD.Init_Kaeyol_N(cboKaeyol_F)    '조회 계열
+    Call basCommonSTD.Init_Kaeyol(cboKaeyol_F)    '조회 계열
     cboKaeyol_F.AddItem "전체" & Space(30) & "ALL", 0
     cboKaeyol_F.ListIndex = 0
     

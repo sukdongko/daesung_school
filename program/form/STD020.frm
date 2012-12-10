@@ -2409,8 +2409,8 @@ Private Sub Form_Load()
         End With
     
         Call basCommonSTD.Init_KaeyolDefault(cboKaeyol)    '조회 계열
-        cboKaeyol_F.AddItem "전체" & Space(30) & "ALL", 0
-        cboKaeyol_F.ListIndex = 0
+        cboKaeyol.AddItem "전체" & Space(30) & "ALL", 0
+        cboKaeyol.ListIndex = 0
 '
 ''>> 계열
 '        With cboKaeyol
