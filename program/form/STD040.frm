@@ -753,7 +753,7 @@ Private Sub Form_Load()
             .AddItem "자연" & Space(30) & "02"
             
         '<< 계열 >> : 2008.01.09
-            If Trim(basModule.SchCD) = "N" Then             '< 노량진
+            If Trim(basModule.schcd) = "N" Then             '< 노량진
                 .AddItem "예체" & Space(30) & "03"
                 .AddItem "수리(나)" & Space(30) & "04"
                 .AddItem "인문수능" & Space(30) & "05"
@@ -773,7 +773,7 @@ Private Sub Form_Load()
 
             End If
         '<< 계열 >> : 2008.01.10
-            If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then           '< 강남 2008.03.24
+            If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then           '< 강남 2008.03.24
                 .AddItem "주말법대" & Space(30) & "04"
                 .AddItem "주말의대" & Space(30) & "05"
                 
@@ -787,7 +787,7 @@ Private Sub Form_Load()
                 .AddItem "선착순자연17" & Space(30) & "17"
             End If
         '<< 계열 >> : 2008.02.15
-            If Trim(basModule.SchCD) = "S" Then             '< 송파
+            If Trim(basModule.schcd) = "S" Then             '< 송파
 ''                .AddItem "예체능" & Space(30) & "03"
 ''
 ''                .AddItem "인문수능" & Space(30) & "05"
@@ -801,13 +801,13 @@ Private Sub Form_Load()
 
             End If
         '<< 계열 >> : 2008.02.15
-            If Trim(basModule.SchCD) = "P" Then             '< 마송
+            If Trim(basModule.schcd) = "P" Then             '< 마송
                 .AddItem "특별인문" & Space(30) & "03"
                 .AddItem "특별자연" & Space(30) & "04"
             End If
             
             
-            If Trim(basModule.SchCD) = "J" Then             '< 양재
+            If Trim(basModule.schcd) = "J" Then             '< 양재
                 .AddItem "신설인문" & Space(30) & "11"
                 .AddItem "신설자연" & Space(30) & "12"
                 
@@ -817,7 +817,7 @@ Private Sub Form_Load()
             
             
         '<< 계열 >> : 2009.01.09
-            If Trim(basModule.SchCD) = "B" Then             '< 부산
+            If Trim(basModule.schcd) = "B" Then             '< 부산
                 .AddItem "수학선행인문" & Space(30) & "05"
                 .AddItem "수학선행자연" & Space(30) & "06"
                 
@@ -944,7 +944,7 @@ Private Sub cmdFind_Click()
 '                Set DBParam = DBCmd.CreateParameter("ACID", adChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
         
         For ni = 1 To 4 Step 1
-            sTmp = Trim(basModule.SchCD)
+            sTmp = Trim(basModule.schcd)
                 sGbn = "PASS" & Trim(CStr(ni))
             nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
                 Set DBParam = DBCmd.CreateParameter(sGbn, adChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
@@ -1463,7 +1463,7 @@ Private Function Save_STD_Schedule() As Boolean
                 
         '>> 학원코드
             
-            sTmp = basModule.SchCD
+            sTmp = basModule.schcd
             nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
                 Set DBParam = DBCmd.CreateParameter("V_ACID", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
         
@@ -1618,20 +1618,20 @@ Private Function Finish_STD_Data() As Boolean
     sStr = sStr & "     SET CL_CLOSE = '" & Trim(fpOK.UnFmtText) & "'"
     sStr = sStr & "   WHERE SCHNO IN (SELECT SCHNO"
     sStr = sStr & "                     From CLSTD01TB"
-    sStr = sStr & "                    WHERE ACID = '" & Trim(basModule.SchCD) & "'"
-    sStr = sStr & "                      AND (PASS1 = '" & Trim(basModule.SchCD) & "' OR"
-    sStr = sStr & "                           PASS2 = '" & Trim(basModule.SchCD) & "' OR"
-    sStr = sStr & "                           PASS3 = '" & Trim(basModule.SchCD) & "' OR"
-    sStr = sStr & "                           PASS4 = '" & Trim(basModule.SchCD) & "')"
+    sStr = sStr & "                    WHERE ACID = '" & Trim(basModule.schcd) & "'"
+    sStr = sStr & "                      AND (PASS1 = '" & Trim(basModule.schcd) & "' OR"
+    sStr = sStr & "                           PASS2 = '" & Trim(basModule.schcd) & "' OR"
+    sStr = sStr & "                           PASS3 = '" & Trim(basModule.schcd) & "' OR"
+    sStr = sStr & "                           PASS4 = '" & Trim(basModule.schcd) & "')"
     sStr = sStr & "                      AND CY_ACNT > ' ' "
     sStr = sStr & "                      AND TOT_AMT > 0 "
     sStr = sStr & "                   Union"
     sStr = sStr & "                   SELECT SCHNO"
     sStr = sStr & "                     From CLSTD01TB"
-    sStr = sStr & "                    WHERE (PASS1 = '" & Trim(basModule.SchCD) & "' OR"
-    sStr = sStr & "                           PASS2 = '" & Trim(basModule.SchCD) & "' OR"
-    sStr = sStr & "                           PASS3 = '" & Trim(basModule.SchCD) & "' OR"
-    sStr = sStr & "                           PASS4 = '" & Trim(basModule.SchCD) & "')"
+    sStr = sStr & "                    WHERE (PASS1 = '" & Trim(basModule.schcd) & "' OR"
+    sStr = sStr & "                           PASS2 = '" & Trim(basModule.schcd) & "' OR"
+    sStr = sStr & "                           PASS3 = '" & Trim(basModule.schcd) & "' OR"
+    sStr = sStr & "                           PASS4 = '" & Trim(basModule.schcd) & "')"
     sStr = sStr & "                      AND CY_ACNT > ' ' "
     sStr = sStr & "                      AND TOT_AMT > 0 "
     sStr = sStr & "                  )"
@@ -1652,7 +1652,7 @@ Private Function Finish_STD_Data() As Boolean
         sStr = ""
         sStr = sStr & "  Update CLSTD01TB"
         sStr = sStr & "     SET CL_CLOSE = '" & Trim(fpOK.UnFmtText) & "'"
-        sStr = sStr & "   WHERE ACID = '" & Trim(basModule.SchCD) & "'"
+        sStr = sStr & "   WHERE ACID = '" & Trim(basModule.schcd) & "'"
         sStr = sStr & "     AND CL_CLOSE IS NULL "
                 
         DBCmd.CommandText = sStr
@@ -1881,7 +1881,7 @@ Private Function Delete_StdOut() As Boolean
                 Set DBParam = DBCmd.CreateParameter("V_SCHNO", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
                 
         '>> 학원코드
-            sTmp = basModule.SchCD
+            sTmp = basModule.schcd
             nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
                 Set DBParam = DBCmd.CreateParameter("V_ACID", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
 

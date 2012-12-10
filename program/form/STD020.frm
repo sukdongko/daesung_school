@@ -2353,7 +2353,7 @@ Private Sub Form_Load()
             .AddItem "부산" & Space(30) & "B"
             .AddItem "강남기숙(이천)" & Space(30) & "E"
             
-            Select Case basModule.SchCD
+            Select Case basModule.schcd
                 Case "N"
                     .ListIndex = 0
                 Case "K"
@@ -2408,7 +2408,7 @@ Private Sub Form_Load()
             .ListIndex = 0
         End With
     
-        Call basCommonSTD.Init_KaeyolDefault(cboKaeyol)    '조회 계열
+        Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol)    '조회 계열
         cboKaeyol.AddItem "전체" & Space(30) & "ALL", 0
         cboKaeyol.ListIndex = 0
 '
@@ -2810,7 +2810,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "         KAEYOL AS KAEYOL_CD,"
             
             '<< 계열 >> : 2008.01.09
-            If Trim(basModule.SchCD) = "N" Then
+            If Trim(basModule.schcd) = "N" Then
                 sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
                 sStr = sStr & "                   '02','자연',"
                 sStr = sStr & "                   '03','예체',"
@@ -2831,7 +2831,7 @@ Private Sub cmdFind_Click()
                 sStr = sStr & "                   '16','편)자연수능'"
                 sStr = sStr & "            ) AS KAEYOL_NM,"
             '<< 계열 >> : 2008.01.10
-            ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then
+            ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then
                 sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
                 sStr = sStr & "                   '02','자연',"
                 
@@ -2848,7 +2848,7 @@ Private Sub cmdFind_Click()
                 
                 sStr = sStr & "            ) AS KAEYOL_NM,"
             '<< 계열 >> : 2008.02.15
-            ElseIf Trim(basModule.SchCD) = "S" Then
+            ElseIf Trim(basModule.schcd) = "S" Then
                 sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
                 sStr = sStr & "                   '02','자연',"
                 sStr = sStr & "                   '03','예체능',"
@@ -2871,14 +2871,14 @@ Private Sub cmdFind_Click()
 
                 sStr = sStr & "            ) AS KAEYOL_NM,"
             '<< 계열 >> : 2008.02.15
-            ElseIf Trim(basModule.SchCD) = "P" Then         '< 마송
+            ElseIf Trim(basModule.schcd) = "P" Then         '< 마송
                 sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
                 sStr = sStr & "                   '02','자연',"
                 sStr = sStr & "                   '03','특별인문',"
                 sStr = sStr & "                   '04','특별자연'"
                 sStr = sStr & "            ) AS KAEYOL_NM,"
                 
-            ElseIf Trim(basModule.SchCD) = "J" Then         '< 양재
+            ElseIf Trim(basModule.schcd) = "J" Then         '< 양재
                 sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
                 sStr = sStr & "                   '02','자연',"
                 sStr = sStr & "                   '11','신설인문',"
@@ -2888,7 +2888,7 @@ Private Sub cmdFind_Click()
                 sStr = sStr & "                   '19','자연프리미엄'"
                 sStr = sStr & "            ) AS KAEYOL_NM,"
                 
-            ElseIf Trim(basModule.SchCD) = "B" Then         '< 부산 : 2009.01.09
+            ElseIf Trim(basModule.schcd) = "B" Then         '< 부산 : 2009.01.09
                 sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
                 sStr = sStr & "                   '02','자연',"
                 sStr = sStr & "                   '05','특별인문',"
@@ -2914,7 +2914,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "     AND BIGO2 IS NULL"          '< 2008.12. 수능본 학생은 년도가 들어가고 아니면 NULL
     
     
-    Select Case basModule.SchCD
+    Select Case basModule.schcd
         Case "K"
             sStr = sStr & "     AND TO_CHAR(REGDATE,'YYYYMMDDHH24') >= '" & sChasuTimes & "' "
             

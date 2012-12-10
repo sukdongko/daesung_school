@@ -6442,18 +6442,12 @@ Private Sub cmdFind_Click()
                 sprSTD_F.SetCellBorder sprSTD_F.Col, sprSTD_F.Row, sprSTD_F.Col, sprSTD_F.Row, 2, basModule.SectionColor1, CellBorderStyleSolid
                 
                 sprSTD_F.Col = 4
-                    sTmp = " ":
-                    If IsNull(.Fields("SEL1_SCH")) = False Then
-                        sTmp = basCommonSTD.Get_SchName
-                    End If
+                    sTmp = " ":  If IsNull(.Fields("SEL1_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(.Fields("SEL1_SCH"))
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
                 sprSTD_F.Col = 5
-                    sTmp = " "
-                    If IsNull(.Fields("SEL2_SCH")) = False Then
-                        sTmp = basCommonSTD.Get_SchName
-                    End If
+                    sTmp = " ":  If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(.Fields("SEL2_SCH"))
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
@@ -7152,739 +7146,739 @@ End Sub
 
 Private Sub Get_Excel_Data()
 
-    Dim sPath       As String
-    
-    ' Excel Data 처리
-    Dim xlsDBConn   As ADODB.Connection
-    Dim DBExCmd     As ADODB.Command
-    Dim DBExRec     As ADODB.Recordset
-    
-    Dim sConn       As String
-    Dim sSql        As String
-    
-    Dim nRow        As Long
-    Dim sTmp        As String
-    Dim nTmp        As Long
-    
-    Dim nJumsu      As Long
-    Dim ni          As Long
-    Dim nC          As Long
-    
-    On Error GoTo ErrStmt1
-    
-    With dlgFile
-        .CancelError = True
-        .fileName = ""
-        .InitDir = App.Path
-        .Filter = "EXCEL FILE(*.XLS)|*.XLS"
-        .DefaultExt = "*.XLS"
-        .ShowOpen
-        
-        If (.fileName) = "" Then
-            MsgBox "선택한 파일이 없습니다.", vbExclamation + vbOKOnly, Me.Caption
-            Exit Sub
-        End If
-        
-        sPath = .fileName
-        
-    End With
-    
-    On Error GoTo 0
-    
-    On Error GoTo ErrStmt2                          '>> error 처리
-    
-    Set xlsDBConn = New ADODB.Connection
-    sConn = "Provider=Microsoft.Jet.OLEDB.4.0;" & _
-            "Data Source=" & sPath & ";" & _
-            "Extended Properties=""Excel 8.0;HDR=no;"";"
-    
-    With xlsDBConn
-        .ConnectionString = sConn                   ' 데이터베이스와 연결을 시도합니다.
-        .ConnectionTimeout = 30                     ' 제한 시간내에 연결이 되지 않으면 자동으로 끊습니다.
-        .Properties("Prompt") = adPromptNever       ' 이것은 ADO에서 기본 프롬프트 모드입니다.
-        .CursorLocation = adUseClient               ' 커서위치를 Client 쪽에 넣습니다.
-        
-        .Open                                       ' 데이터베이스를 엽니다.
-        
-        Do While .State And adStateConnecting
-            DoEvents
-        Loop
-    End With
-       
-'>> 엑셀 DB Open
-    sSql = ""
-    sSql = sSql & " SELECT * "
-    sSql = sSql & "   FROM [Sheet1$] "
-    
-    Set DBExCmd = New ADODB.Command
-    Set DBExRec = New ADODB.Recordset
-    
-    DBExCmd.ActiveConnection = xlsDBConn
-    DBExCmd.CommandText = sSql
-    DBExCmd.CommandType = adCmdText
-    DBExCmd.CommandTimeout = 30
-    
-    DBExRec.Open DBExCmd, , adOpenStatic, adLockReadOnly, -1
-    Do While xlsDBConn.State And adStateExecuting
-        DoEvents
-    Loop
-    
-    If DBExRec.RecordCount = 0 Then
-        Set DBExCmd = Nothing
-        Set DBExRec = Nothing
-        Set xlsDBConn = Nothing
-        
-        MsgBox "Excel Data가 없습니다.", vbExclamation + vbOKOnly, "IT2008"
-        Exit Sub
-    End If
-        
-    
-    sprExcel_STD_Data.MaxRows = 0       ' 초기화
-    
-    
-    DBExRec.MoveFirst
-        
-    '## header 1 line skip
-    DBExRec.MoveNext
-    
-    
-    For nRow = 2 To DBExRec.RecordCount Step 1
-    '학원코드
-        sTmp = "":  If IsNull(DBExRec.Fields(0)) = False Then sTmp = UCase(Trim(DBExRec.Fields(0)))
-        uExcel_StdData.ACID = sTmp
-    '수험번호
-        sTmp = "":  If IsNull(DBExRec.Fields(1)) = False Then sTmp = Trim(DBExRec.Fields(1))
-        uExcel_StdData.EXMID = sTmp
-    '학생명
-        sTmp = "":  If IsNull(DBExRec.Fields(2)) = False Then sTmp = Trim(DBExRec.Fields(2))
-        uExcel_StdData.STDNM = sTmp
-    '생년월일
-        sTmp = "":  If IsNull(DBExRec.Fields(3)) = False Then sTmp = Trim(DBExRec.Fields(3))
-        sTmp = Replace(sTmp, "-", "", 1, -1, vbTextCompare)
-        If basFunction.LenKor(sTmp) > 6 Then
-            sTmp = Left(sTmp, 4) & "-" & Mid(sTmp, 5, 2) & "-" & Mid(sTmp, 7, 2)
-        End If
-        uExcel_StdData.Birth_ymd = sTmp
-    '유.무시험
-        sTmp = "1"
-        If IsNull(DBExRec.Fields(4)) = False Then
-            sTmp = UCase(Trim(DBExRec.Fields(4)))
-            Select Case sTmp
-                Case "0", "1"
-                    'no action
-                Case Else
-                    sTmp = "1"
-                    
-            End Select
-        End If
-        uExcel_StdData.EXMTYPE = sTmp
-    '계열
-        sTmp = "01"
-        If Trim(basModule.schcd) = "N" Then             '< 계열 : 2008.01.09 - 노량진
-            If IsNull(DBExRec.Fields(5)) = False Then
-                sTmp = UCase(Trim(DBExRec.Fields(5)))
-                Select Case sTmp
-                    Case "1" To "9"
-                        sTmp = Format(sTmp, "00")
-                    Case "인문", "인"
-                        sTmp = "01"
-                    Case "자연", "자"
-                        sTmp = "02"
-                    Case "예체", "예"
-                        sTmp = "03"
-                    
-                    Case "수리(나)", "수리나"
-                        sTmp = "04"
-                    Case "인문수능", "수능인문"
-                        sTmp = "05"
-                    Case "자연수능", "수능자연"
-                        sTmp = "06"
-                        
-                    Case "신설인문"
-                        sTmp = "07"
-                    Case "신설자연"
-                        sTmp = "08"
-                    'Case "신설수능인문"
-                    '    sTmp = "09"
-                    'Case "신설수능자연"
-                    '    sTmp = "10"
-                    
-                    Case "편입인문", "편인"
-                        sTmp = "11"
-                    Case "편입자연", "편자"
-                        sTmp = "12"
-                    Case "편예체", "편예"
-                        sTmp = "13"
-                    
-                    Case "편수리(나)", "편수리나"
-                        sTmp = "14"
-                    Case "편인문수능", "편수능인문"
-                        sTmp = "15"
-                    Case "편자연수능", "편수능자연"
-                        sTmp = "16"
-                    Case "서울대인문"
-                        sTmp = "21"
-                    Case "서울대자연"
-                        sTmp = "22"
-                    Case Else
-                        sTmp = "01"
-                End Select
-            End If
-        ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then           '< 계열 : 2008.01.09 - 노량진, 2008.03.24 - 강남
-            If IsNull(DBExRec.Fields(5)) = False Then
-                sTmp = UCase(Trim(DBExRec.Fields(5)))
-                Select Case sTmp
-                    Case "1" To "9"
-                        sTmp = Format(sTmp, "00")
-                    Case "인문", "인"
-                        sTmp = "01"
-                    Case "자연", "자"
-                        sTmp = "02"
-                    
-                    Case "주간법대", "주법"
-                        sTmp = "04"
-                    Case "주간의대", "주의"
-                        sTmp = "05"
-                    
-                    Case "야간법대", "야법"
-                        sTmp = "06"
-                    Case "야간의대", "야의"
-                        sTmp = "07"
-                    
-                    Case "선착순인문"
-                        sTmp = "11"
-                    Case "선착순자연"
-                        sTmp = "12"
-                        
-                    Case "선착순인문16"
-                        sTmp = "16"
-                    Case "선착순자연17"
-                        sTmp = "17"
-                        
-                    Case Else
-                        sTmp = "01"
-                End Select
-            End If
-        ElseIf Trim(basModule.schcd) = "S" Then             '< 계열 : 2008.02.15 - 송파
-            If IsNull(DBExRec.Fields(5)) = False Then
-                sTmp = UCase(Trim(DBExRec.Fields(5)))
-                Select Case sTmp
-                    Case "1" To "9"
-                        sTmp = Format(sTmp, "00")
-                    Case "인문", "인"
-                        sTmp = "01"
-                    Case "자연", "자"
-                        sTmp = "02"
-                        
-                    Case "특인", "특별인문"
-                        sTmp = "03"
-                    Case "특자", "특별자연"
-                        sTmp = "04"
-                    
-                    Case "신설수능인문"
-                        sTmp = "05"
-                    Case "신설수능자연"
-                        sTmp = "06"
-                        
-                    Case "신설인문"
-                        sTmp = "11"
-                    Case "신설자연"
-                        sTmp = "12"
-                        
-                    Case "신설수리나형"
-                        sTmp = "08"
-                        
-                    Case "인문프리미엄"
-                        sTmp = "18"
-                    Case "자연프리미엄"
-                        sTmp = "19"
-                    
-                    Case "야간서울대인문"
-                        sTmp = "23"
-                    Case "야간서울대자연"
-                        sTmp = "24"
-                        
-                    Case Else
-                        sTmp = "01"
-                End Select
-            End If
-        ElseIf Trim(basModule.schcd) = "P" Then             '< 계열 : 2008.02.15 - 마송
-            If IsNull(DBExRec.Fields(5)) = False Then
-                sTmp = UCase(Trim(DBExRec.Fields(5)))
-                Select Case sTmp
-                    Case "1" To "9"
-                        sTmp = Format(sTmp, "00")
-                    Case "인문", "인"
-                        sTmp = "01"
-                    Case "자연", "자"
-                        sTmp = "02"
-                        
-                    Case "특인", "특별인문"
-                        sTmp = "03"
-                    Case "특자", "특별자연"
-                        sTmp = "04"
-                        
-                    Case Else
-                        sTmp = "01"
-                End Select
-            End If
-        
-        ElseIf Trim(basModule.schcd) = "J" Then             '< 양재
-            If IsNull(DBExRec.Fields(5)) = False Then
-                sTmp = UCase(Trim(DBExRec.Fields(5)))
-                Select Case sTmp
-                    Case "1" To "9"
-                        sTmp = Format(sTmp, "00")
-                    Case "인문", "인"
-                        sTmp = "01"
-                    Case "자연", "자"
-                        sTmp = "02"
-                        
-                    Case "신설인문"
-                        sTmp = "11"
-                    Case "신설자연"
-                        sTmp = "12"
-                    
-                    Case "인문프리미엄"
-                        sTmp = "18"
-                    Case "자연프리미엄"
-                        sTmp = "19"
-                        
-                    Case Else
-                        sTmp = "01"
-                End Select
-            End If
-        ElseIf Trim(basModule.schcd) = "B" Then             '< 양재
-            If IsNull(DBExRec.Fields(5)) = False Then
-                sTmp = UCase(Trim(DBExRec.Fields(5)))
-                Select Case sTmp
-                    Case "1" To "9"
-                        sTmp = Format(sTmp, "00")
-                    Case "인문", "인"
-                        sTmp = "01"
-                    Case "자연", "자"
-                        sTmp = "02"
-                    Case "예체", "예"
-                        sTmp = "03"
-                    Case "인문PS반"
-                        sTmp = "23"
-                    Case "자연PM반"
-                        sTmp = "24"
-                    Case Else
-                        sTmp = "01"
-                End Select
-            End If
-        Else
-            If IsNull(DBExRec.Fields(5)) = False Then
-                sTmp = UCase(Trim(DBExRec.Fields(5)))
-                Select Case sTmp
-                    Case "1" To "9"
-                        sTmp = Format(sTmp, "00")
-                    Case "인문", "인"
-                        sTmp = "01"
-                    Case "자연", "자"
-                        sTmp = "02"
-                    Case "예체", "예"
-                        sTmp = "03"
-                    Case Else
-                        sTmp = "01"
-                End Select
-            End If
-        End If
-        uExcel_StdData.kaeyol = sTmp
-        
-    '1 지망학원
-        sTmp = Trim(basModule.schcd)
-        If IsNull(DBExRec.Fields(6)) = False Then
-            sTmp = UCase(Trim(DBExRec.Fields(6)))
-            Select Case sTmp
-                Case "N", "K", "S", "P", "M", "W", "Q", "J", "B"
-                    ' NEXT
-                Case "노량진"
-                    sTmp = "N"
-                Case "강남"
-                    sTmp = "K"
-                Case "송파"
-                    sTmp = "S"
-                Case "송파M", "송파마이맥", "송파 MIMAC", "송파MIMAC", "마송"
-                    sTmp = "P"
-                Case "강남M", "강남마이맥", "강남 MIMAC", "강남MIMAC", "마강"
-                    sTmp = "M"
-                    
-                Case "주말법의대", "주말법", "주법"
-                    sTmp = "W"
-                Case "야간법의대", "야간법", "야법"
-                    sTmp = "Q"
-                    
-                Case "양재"
-                    sTmp = "J"
-                    
-                Case "부산"
-                    sTmp = "B"
-                    
-                Case Else
-                    sTmp = Trim(basModule.schcd)
-            End Select
-        End If
-        uExcel_StdData.WANT_ACID1 = sTmp
-        
-    '2 지망학원
-        sTmp = Trim(basModule.schcd)
-        If IsNull(DBExRec.Fields(7)) = False Then
-            sTmp = UCase(Trim(DBExRec.Fields(7)))
-            Select Case sTmp
-                Case "N", "K", "S", "P", "M", "W", "Q", "J", "B"
-                    ' NEXT
-                Case "노량진"
-                    sTmp = "N"
-                Case "강남"
-                    sTmp = "K"
-                Case "송파"
-                    sTmp = "S"
-                Case "송파M", "송파마이맥", "송파 MIMAC", "송파MIMAC", "마송"
-                    sTmp = "P"
-                Case "강남M", "강남마이맥", "강남 MIMAC", "강남MIMAC", "마강"
-                    sTmp = "M"
-                    
-                Case "주말법의대", "주말법", "주법"
-                    sTmp = "W"
-                Case "야간법의대", "야간법", "야법"
-                    sTmp = "Q"
-                    
-                Case "양재"
-                    sTmp = "J"
-                    
-                Case "부산"
-                    sTmp = "B"
-                    
-                Case Else
-                    sTmp = Trim(basModule.schcd)
-            End Select
-        End If
-        uExcel_StdData.WANT_ACID2 = sTmp
-        
-    '국어
-        nTmp = 0:  If IsNumeric(DBExRec.Fields(8)) = True Then nTmp = CLng(Trim(DBExRec.Fields(8)))
-        uExcel_StdData.KOR = nTmp
-    '영어
-        nTmp = 0:  If IsNumeric(DBExRec.Fields(9)) = True Then nTmp = CLng(Trim(DBExRec.Fields(9)))
-        uExcel_StdData.ENG = nTmp
-    '수학
-        nTmp = 0:  If IsNumeric(DBExRec.Fields(10)) = True Then nTmp = CLng(Trim(DBExRec.Fields(10)))
-        uExcel_StdData.MAT = nTmp
-        
-    '사탐
-        uExcel_StdData.SATAM1 = ""
-        uExcel_StdData.SATAM2 = ""
-        uExcel_StdData.SATAM3 = ""
-        uExcel_StdData.SATAM4 = ""
-        uExcel_StdData.SATAM5 = ""
-        uExcel_StdData.SATAM6 = ""
-        uExcel_StdData.SATAM7 = ""
-        uExcel_StdData.SATAM8 = ""
-        uExcel_StdData.SATAM9 = ""
-        uExcel_StdData.SATAM10 = ""
-        
-        
-        For ni = 1 To SATAM_COUNT Step 1
-            sTmp = ""
-            nC = 10 + ni
-            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
-            
-            Select Case sTmp
-                Case ""
-                    'no action
-                Case constSatams(0)
-                    uExcel_StdData.SATAM1 = constSatamCodes(0) & "|"
-                Case constSatams(1)
-                    uExcel_StdData.SATAM2 = constSatamCodes(1) & "|"
-                Case constSatams(2)
-                    uExcel_StdData.SATAM3 = constSatamCodes(2) & "|"
-                Case constSatams(3)
-                    uExcel_StdData.SATAM4 = constSatamCodes(3) & "|"
-                Case constSatams(4)
-                    uExcel_StdData.SATAM5 = constSatamCodes(4) & "|"
-                Case constSatams(5)
-                    uExcel_StdData.SATAM6 = constSatamCodes(5) & "|"
-                Case constSatams(6)
-                    uExcel_StdData.SATAM7 = constSatamCodes(6) & "|"
-                Case constSatams(7)
-                    uExcel_StdData.SATAM8 = constSatamCodes(7) & "|"
-                Case constSatams(8)
-                    uExcel_StdData.SATAM9 = constSatamCodes(8) & "|"
-                Case constSatams(9)
-                    uExcel_StdData.SATAM10 = constSatamCodes(9) & "|"
-            End Select
-        Next ni
-    '제2외국어
-        uExcel_StdData.ENG2 = ""
-        
-        sTmp = ""
-            nC = 10 + 11 + 1
-            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
-            
-            Select Case sTmp
-                Case ""
-                    'no action
-                Case "독어"
-                    uExcel_StdData.ENG2 = "31|"
-                Case "일어"
-                    uExcel_StdData.ENG2 = "32|"
-                Case "에파", "에스파냐"
-                    uExcel_StdData.ENG2 = "33|"
-                Case "불어"
-                    uExcel_StdData.ENG2 = "34|"
-                Case "중국", "중어"
-                    uExcel_StdData.ENG2 = "35|"
-                Case "한문"
-                    uExcel_StdData.ENG2 = "36|"
-                    
-                '<< 송파 >> : 2008.01.09
-                Case "언어"
-                    uExcel_StdData.ENG2 = "37|"
-                Case "수리"
-                    uExcel_StdData.ENG2 = "38|"
-                Case "영어"
-                    uExcel_StdData.ENG2 = "39|"
-                Case "세계사"
-                    uExcel_StdData.ENG2 = "40|"
-                Case "세계지리"
-                    uExcel_StdData.ENG2 = "41|"
-                Case "아랍어"
-                    uExcel_StdData.ENG2 = "42|"
-                    
-            End Select
-    '과탐
-        uExcel_StdData.GWATAM1 = ""
-        uExcel_StdData.GWATAM2 = ""
-        uExcel_StdData.GWATAM3 = ""
-        uExcel_StdData.GWATAM4 = ""
-        uExcel_StdData.GWATAM5 = ""
-        uExcel_StdData.GWATAM6 = ""
-        uExcel_StdData.GWATAM7 = ""
-        uExcel_StdData.GWATAM8 = ""
-        
-        For ni = 1 To 8 Step 1
-            sTmp = ""
-            nC = 10 + ni
-            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
-            
-            Select Case sTmp
-                Case ""
-                    'no action
-                Case "물1"
-                    uExcel_StdData.GWATAM1 = "51|"
-                Case "화1"
-                    uExcel_StdData.GWATAM2 = "52|"
-                Case "생1"
-                    uExcel_StdData.GWATAM3 = "53|"
-                Case "지1"
-                    uExcel_StdData.GWATAM4 = "54|"
-                Case "물2"
-                    uExcel_StdData.GWATAM5 = "55|"
-                Case "화2"
-                    uExcel_StdData.GWATAM6 = "56|"
-                Case "생2"
-                    uExcel_StdData.GWATAM7 = "57|"
-                Case "지2"
-                    uExcel_StdData.GWATAM8 = "58|"
-            End Select
-        Next ni
-    '수리
-        uExcel_StdData.SURI = ""
-        
-        sTmp = ""
-            nC = 10 + 11 + 1
-            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
-            
-            Select Case sTmp
-                Case ""
-                    'no action
-                Case "미적"
-                    uExcel_StdData.SURI = "81|"
-                Case "이산"
-                    uExcel_StdData.SURI = "82|"
-                Case "확률"
-                    uExcel_StdData.SURI = "83|"
-                Case "나형"
-                    uExcel_StdData.SURI = "84|"
-            End Select
-    '논술
-        uExcel_StdData.NONSUL1 = ""
-        uExcel_StdData.NONSUL2 = ""
-        uExcel_StdData.NONSUL3 = ""
-        uExcel_StdData.NONSUL4 = ""
-        
-        For ni = 1 To 4 Step 1
-            sTmp = ""
-            nC = 10 + 11 + 1 + ni
-            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
-            
-            Select Case sTmp
-                Case ""
-                    'no action
-                Case "언어"
-                    uExcel_StdData.NONSUL1 = "91|"
-                Case "수리"
-                    uExcel_StdData.NONSUL2 = "92|"
-                Case "외국어"
-                    uExcel_StdData.NONSUL3 = "93|"
-                Case ""
-                    uExcel_StdData.NONSUL4 = "94|"
-            End Select
-        Next ni
-        
-        
-    '## 스프레드에 데이터 넣기 --------------------------------------------------------------------
-        With sprExcel_STD_Data
-            .MaxRows = .MaxRows + 1
-            .Row = .MaxRows:            .RowHeight(.Row) = 13
-            
-            '>> 학원
-                .Col = 1
-                    sTmp = uExcel_StdData.ACID
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-                    
-            '>> 수험번호
-                .Col = .Col + 1
-                    sTmp = uExcel_StdData.EXMID
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-            '>> 학생명
-                .Col = .Col + 1
-                    sTmp = uExcel_StdData.STDNM
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-            '>> 생년월일
-                .Col = .Col + 1
-                    sTmp = Replace(uExcel_StdData.Birth_ymd, "-", "", 1, -1, vbTextCompare)
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-            '>> 유.무시험
-                .Col = .Col + 1
-                    sTmp = uExcel_StdData.EXMTYPE
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-            '>> 계열
-                .Col = .Col + 1
-                    sTmp = uExcel_StdData.kaeyol
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-                    
-            '>> 1 지망학원
-                .Col = .Col + 1
-                    sTmp = uExcel_StdData.WANT_ACID1
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-            '>> 2 지망학원
-                .Col = .Col + 1
-                    sTmp = uExcel_StdData.WANT_ACID2
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-                    
-            '>> 국어
-                .Col = .Col + 1
-                    nTmp = uExcel_StdData.KOR
-                    Call basFunction.Set_SprType_Numeric(sprExcel_STD_Data, 0, 0, 9999, "", nTmp)
-            '>> 영어
-                .Col = .Col + 1
-                    nTmp = uExcel_StdData.ENG
-                    Call basFunction.Set_SprType_Numeric(sprExcel_STD_Data, 0, 0, 9999, "", nTmp)
-            '>> 수학
-                .Col = .Col + 1
-                    nTmp = uExcel_StdData.MAT
-                    Call basFunction.Set_SprType_Numeric(sprExcel_STD_Data, 0, 0, 9999, "", nTmp)
-                    
-            '>> 사탐
-                .Col = .Col + 1
-                    sTmp = ""
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM1)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM2)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM3)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM4)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM5)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM6)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM7)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM8)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM9)
-                    sTmp = sTmp & Trim(uExcel_StdData.SATAM10)
-                    
-                    sTmp = Replace(sTmp, " ", "", 1, -1, vbTextCompare)
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-                    
-            '>> 제2외국어
-                .Col = .Col + 1
-                    sTmp = Trim(uExcel_StdData.ENG2)
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-                    
-            '>> 과탐
-                .Col = .Col + 1
-                    sTmp = ""
-                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM1)
-                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM2)
-                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM3)
-                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM4)
-                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM5)
-                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM6)
-                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM7)
-                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM8)
-                    
-                    sTmp = Replace(sTmp, " ", "", 1, -1, vbTextCompare)
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-                    
-            '>> 수리
-                .Col = .Col + 1
-                    sTmp = Trim(uExcel_StdData.SURI)
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-                    
-            '>> 논술
-                .Col = .Col + 1
-                    sTmp = ""
-                    sTmp = sTmp & Trim(uExcel_StdData.NONSUL1)
-                    sTmp = sTmp & Trim(uExcel_StdData.NONSUL2)
-                    sTmp = sTmp & Trim(uExcel_StdData.NONSUL3)
-                    sTmp = sTmp & Trim(uExcel_StdData.NONSUL4)
-                    
-                    sTmp = Replace(sTmp, " ", "", 1, -1, vbTextCompare)
-                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
-                    
-        End With
-        
-        DBExRec.MoveNext
-        
-    Next nRow
-    
-    
-    
-    With sprExcel_STD_Data
-        If .MaxRows > 0 Then
-            .Row = 1:   .Row2 = .MaxRows
-            .Col = 1:   .Col2 = .MaxCols
-            .BlockMode = True
-                .BackColor = basModule.BackColor1
-                .BackColorStyle = BackColorStyleUnderGrid
-            .BlockMode = False
-            
-            '.ColsFrozen = 3
-            '.SetCellBorder 3, 1, 3, .MaxRows, 2, basModule.SectionColor1, CellBorderStyleSolid
-            
-        End If
-    End With
-
-    
-    Set DBExRec = Nothing
-    Set DBExCmd = Nothing
-    Set xlsDBConn = Nothing
-    
-    MsgBox "학생 엑셀자료를 가지고 왔습니다.", vbInformation + vbOKOnly, Me.Caption
-    
-    On Error GoTo 0
-    Exit Sub
-ErrStmt1:
-    MsgBox "엑셀 파일선택을 하십시요.", vbExclamation + vbOKOnly, Me.Caption
-    Exit Sub
-ErrStmt2:
-    Set DBExRec = Nothing
-    Set DBExCmd = Nothing
-    xlsDBConn.Close
-    Set xlsDBConn = Nothing
-    
-    MsgBox "EXCEL 자료 Open시 에러가 발생하였습니다.", vbCritical + vbOKOnly, Me.Caption
-    On Error GoTo 0
-    Exit Sub
+'    Dim sPath       As String
+'
+'    ' Excel Data 처리
+'    Dim xlsDBConn   As ADODB.Connection
+'    Dim DBExCmd     As ADODB.Command
+'    Dim DBExRec     As ADODB.Recordset
+'
+'    Dim sConn       As String
+'    Dim sSql        As String
+'
+'    Dim nRow        As Long
+'    Dim sTmp        As String
+'    Dim nTmp        As Long
+'
+'    Dim nJumsu      As Long
+'    Dim ni          As Long
+'    Dim nC          As Long
+'
+'    On Error GoTo ErrStmt1
+'
+'    With dlgFile
+'        .CancelError = True
+'        .fileName = ""
+'        .InitDir = App.Path
+'        .Filter = "EXCEL FILE(*.XLS)|*.XLS"
+'        .DefaultExt = "*.XLS"
+'        .ShowOpen
+'
+'        If (.fileName) = "" Then
+'            MsgBox "선택한 파일이 없습니다.", vbExclamation + vbOKOnly, Me.Caption
+'            Exit Sub
+'        End If
+'
+'        sPath = .fileName
+'
+'    End With
+'
+'    On Error GoTo 0
+'
+'    On Error GoTo ErrStmt2                          '>> error 처리
+'
+'    Set xlsDBConn = New ADODB.Connection
+'    sConn = "Provider=Microsoft.Jet.OLEDB.4.0;" & _
+'            "Data Source=" & sPath & ";" & _
+'            "Extended Properties=""Excel 8.0;HDR=no;"";"
+'
+'    With xlsDBConn
+'        .ConnectionString = sConn                   ' 데이터베이스와 연결을 시도합니다.
+'        .ConnectionTimeout = 30                     ' 제한 시간내에 연결이 되지 않으면 자동으로 끊습니다.
+'        .Properties("Prompt") = adPromptNever       ' 이것은 ADO에서 기본 프롬프트 모드입니다.
+'        .CursorLocation = adUseClient               ' 커서위치를 Client 쪽에 넣습니다.
+'
+'        .Open                                       ' 데이터베이스를 엽니다.
+'
+'        Do While .State And adStateConnecting
+'            DoEvents
+'        Loop
+'    End With
+'
+''>> 엑셀 DB Open
+'    sSql = ""
+'    sSql = sSql & " SELECT * "
+'    sSql = sSql & "   FROM [Sheet1$] "
+'
+'    Set DBExCmd = New ADODB.Command
+'    Set DBExRec = New ADODB.Recordset
+'
+'    DBExCmd.ActiveConnection = xlsDBConn
+'    DBExCmd.CommandText = sSql
+'    DBExCmd.CommandType = adCmdText
+'    DBExCmd.CommandTimeout = 30
+'
+'    DBExRec.Open DBExCmd, , adOpenStatic, adLockReadOnly, -1
+'    Do While xlsDBConn.State And adStateExecuting
+'        DoEvents
+'    Loop
+'
+'    If DBExRec.RecordCount = 0 Then
+'        Set DBExCmd = Nothing
+'        Set DBExRec = Nothing
+'        Set xlsDBConn = Nothing
+'
+'        MsgBox "Excel Data가 없습니다.", vbExclamation + vbOKOnly, "IT2008"
+'        Exit Sub
+'    End If
+'
+'
+'    sprExcel_STD_Data.MaxRows = 0       ' 초기화
+'
+'
+'    DBExRec.MoveFirst
+'
+'    '## header 1 line skip
+'    DBExRec.MoveNext
+'
+'
+'    For nRow = 2 To DBExRec.RecordCount Step 1
+'    '학원코드
+'        sTmp = "":  If IsNull(DBExRec.Fields(0)) = False Then sTmp = UCase(Trim(DBExRec.Fields(0)))
+'        uExcel_StdData.ACID = sTmp
+'    '수험번호
+'        sTmp = "":  If IsNull(DBExRec.Fields(1)) = False Then sTmp = Trim(DBExRec.Fields(1))
+'        uExcel_StdData.EXMID = sTmp
+'    '학생명
+'        sTmp = "":  If IsNull(DBExRec.Fields(2)) = False Then sTmp = Trim(DBExRec.Fields(2))
+'        uExcel_StdData.STDNM = sTmp
+'    '생년월일
+'        sTmp = "":  If IsNull(DBExRec.Fields(3)) = False Then sTmp = Trim(DBExRec.Fields(3))
+'        sTmp = Replace(sTmp, "-", "", 1, -1, vbTextCompare)
+'        If basFunction.LenKor(sTmp) > 6 Then
+'            sTmp = Left(sTmp, 4) & "-" & Mid(sTmp, 5, 2) & "-" & Mid(sTmp, 7, 2)
+'        End If
+'        uExcel_StdData.Birth_ymd = sTmp
+'    '유.무시험
+'        sTmp = "1"
+'        If IsNull(DBExRec.Fields(4)) = False Then
+'            sTmp = UCase(Trim(DBExRec.Fields(4)))
+'            Select Case sTmp
+'                Case "0", "1"
+'                    'no action
+'                Case Else
+'                    sTmp = "1"
+'
+'            End Select
+'        End If
+'        uExcel_StdData.EXMTYPE = sTmp
+'    '계열
+'        sTmp = "01"
+'        If Trim(basModule.schcd) = "N" Then             '< 계열 : 2008.01.09 - 노량진
+'            If IsNull(DBExRec.Fields(5)) = False Then
+'                sTmp = UCase(Trim(DBExRec.Fields(5)))
+'                Select Case sTmp
+'                    Case "1" To "9"
+'                        sTmp = Format(sTmp, "00")
+'                    Case "인문", "인"
+'                        sTmp = "01"
+'                    Case "자연", "자"
+'                        sTmp = "02"
+'                    Case "예체", "예"
+'                        sTmp = "03"
+'
+'                    Case "수리(나)", "수리나"
+'                        sTmp = "04"
+'                    Case "인문수능", "수능인문"
+'                        sTmp = "05"
+'                    Case "자연수능", "수능자연"
+'                        sTmp = "06"
+'
+'                    Case "신설인문"
+'                        sTmp = "07"
+'                    Case "신설자연"
+'                        sTmp = "08"
+'                    'Case "신설수능인문"
+'                    '    sTmp = "09"
+'                    'Case "신설수능자연"
+'                    '    sTmp = "10"
+'
+'                    Case "편입인문", "편인"
+'                        sTmp = "11"
+'                    Case "편입자연", "편자"
+'                        sTmp = "12"
+'                    Case "편예체", "편예"
+'                        sTmp = "13"
+'
+'                    Case "편수리(나)", "편수리나"
+'                        sTmp = "14"
+'                    Case "편인문수능", "편수능인문"
+'                        sTmp = "15"
+'                    Case "편자연수능", "편수능자연"
+'                        sTmp = "16"
+'                    Case "서울대인문"
+'                        sTmp = "21"
+'                    Case "서울대자연"
+'                        sTmp = "22"
+'                    Case Else
+'                        sTmp = "01"
+'                End Select
+'            End If
+'        ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then           '< 계열 : 2008.01.09 - 노량진, 2008.03.24 - 강남
+'            If IsNull(DBExRec.Fields(5)) = False Then
+'                sTmp = UCase(Trim(DBExRec.Fields(5)))
+'                Select Case sTmp
+'                    Case "1" To "9"
+'                        sTmp = Format(sTmp, "00")
+'                    Case "인문", "인"
+'                        sTmp = "01"
+'                    Case "자연", "자"
+'                        sTmp = "02"
+'
+'                    Case "주간법대", "주법"
+'                        sTmp = "04"
+'                    Case "주간의대", "주의"
+'                        sTmp = "05"
+'
+'                    Case "야간법대", "야법"
+'                        sTmp = "06"
+'                    Case "야간의대", "야의"
+'                        sTmp = "07"
+'
+'                    Case "선착순인문"
+'                        sTmp = "11"
+'                    Case "선착순자연"
+'                        sTmp = "12"
+'
+'                    Case "선착순인문16"
+'                        sTmp = "16"
+'                    Case "선착순자연17"
+'                        sTmp = "17"
+'
+'                    Case Else
+'                        sTmp = "01"
+'                End Select
+'            End If
+'        ElseIf Trim(basModule.schcd) = "S" Then             '< 계열 : 2008.02.15 - 송파
+'            If IsNull(DBExRec.Fields(5)) = False Then
+'                sTmp = UCase(Trim(DBExRec.Fields(5)))
+'                Select Case sTmp
+'                    Case "1" To "9"
+'                        sTmp = Format(sTmp, "00")
+'                    Case "인문", "인"
+'                        sTmp = "01"
+'                    Case "자연", "자"
+'                        sTmp = "02"
+'
+'                    Case "특인", "특별인문"
+'                        sTmp = "03"
+'                    Case "특자", "특별자연"
+'                        sTmp = "04"
+'
+'                    Case "신설수능인문"
+'                        sTmp = "05"
+'                    Case "신설수능자연"
+'                        sTmp = "06"
+'
+'                    Case "신설인문"
+'                        sTmp = "11"
+'                    Case "신설자연"
+'                        sTmp = "12"
+'
+'                    Case "신설수리나형"
+'                        sTmp = "08"
+'
+'                    Case "인문프리미엄"
+'                        sTmp = "18"
+'                    Case "자연프리미엄"
+'                        sTmp = "19"
+'
+'                    Case "야간서울대인문"
+'                        sTmp = "23"
+'                    Case "야간서울대자연"
+'                        sTmp = "24"
+'
+'                    Case Else
+'                        sTmp = "01"
+'                End Select
+'            End If
+'        ElseIf Trim(basModule.schcd) = "P" Then             '< 계열 : 2008.02.15 - 마송
+'            If IsNull(DBExRec.Fields(5)) = False Then
+'                sTmp = UCase(Trim(DBExRec.Fields(5)))
+'                Select Case sTmp
+'                    Case "1" To "9"
+'                        sTmp = Format(sTmp, "00")
+'                    Case "인문", "인"
+'                        sTmp = "01"
+'                    Case "자연", "자"
+'                        sTmp = "02"
+'
+'                    Case "특인", "특별인문"
+'                        sTmp = "03"
+'                    Case "특자", "특별자연"
+'                        sTmp = "04"
+'
+'                    Case Else
+'                        sTmp = "01"
+'                End Select
+'            End If
+'
+'        ElseIf Trim(basModule.schcd) = "J" Then             '< 양재
+'            If IsNull(DBExRec.Fields(5)) = False Then
+'                sTmp = UCase(Trim(DBExRec.Fields(5)))
+'                Select Case sTmp
+'                    Case "1" To "9"
+'                        sTmp = Format(sTmp, "00")
+'                    Case "인문", "인"
+'                        sTmp = "01"
+'                    Case "자연", "자"
+'                        sTmp = "02"
+'
+'                    Case "신설인문"
+'                        sTmp = "11"
+'                    Case "신설자연"
+'                        sTmp = "12"
+'
+'                    Case "인문프리미엄"
+'                        sTmp = "18"
+'                    Case "자연프리미엄"
+'                        sTmp = "19"
+'
+'                    Case Else
+'                        sTmp = "01"
+'                End Select
+'            End If
+'        ElseIf Trim(basModule.schcd) = "B" Then             '< 양재
+'            If IsNull(DBExRec.Fields(5)) = False Then
+'                sTmp = UCase(Trim(DBExRec.Fields(5)))
+'                Select Case sTmp
+'                    Case "1" To "9"
+'                        sTmp = Format(sTmp, "00")
+'                    Case "인문", "인"
+'                        sTmp = "01"
+'                    Case "자연", "자"
+'                        sTmp = "02"
+'                    Case "예체", "예"
+'                        sTmp = "03"
+'                    Case "인문PS반"
+'                        sTmp = "23"
+'                    Case "자연PM반"
+'                        sTmp = "24"
+'                    Case Else
+'                        sTmp = "01"
+'                End Select
+'            End If
+'        Else
+'            If IsNull(DBExRec.Fields(5)) = False Then
+'                sTmp = UCase(Trim(DBExRec.Fields(5)))
+'                Select Case sTmp
+'                    Case "1" To "9"
+'                        sTmp = Format(sTmp, "00")
+'                    Case "인문", "인"
+'                        sTmp = "01"
+'                    Case "자연", "자"
+'                        sTmp = "02"
+'                    Case "예체", "예"
+'                        sTmp = "03"
+'                    Case Else
+'                        sTmp = "01"
+'                End Select
+'            End If
+'        End If
+'        uExcel_StdData.kaeyol = sTmp
+'
+'    '1 지망학원
+'        sTmp = Trim(basModule.schcd)
+'        If IsNull(DBExRec.Fields(6)) = False Then
+'            sTmp = UCase(Trim(DBExRec.Fields(6)))
+'            Select Case sTmp
+'                Case "N", "K", "S", "P", "M", "W", "Q", "J", "B"
+'                    ' NEXT
+'                Case "노량진"
+'                    sTmp = "N"
+'                Case "강남"
+'                    sTmp = "K"
+'                Case "송파"
+'                    sTmp = "S"
+'                Case "송파M", "송파마이맥", "송파 MIMAC", "송파MIMAC", "마송"
+'                    sTmp = "P"
+'                Case "강남M", "강남마이맥", "강남 MIMAC", "강남MIMAC", "마강"
+'                    sTmp = "M"
+'
+'                Case "주말법의대", "주말법", "주법"
+'                    sTmp = "W"
+'                Case "야간법의대", "야간법", "야법"
+'                    sTmp = "Q"
+'
+'                Case "양재"
+'                    sTmp = "J"
+'
+'                Case "부산"
+'                    sTmp = "B"
+'
+'                Case Else
+'                    sTmp = Trim(basModule.schcd)
+'            End Select
+'        End If
+'        uExcel_StdData.WANT_ACID1 = sTmp
+'
+'    '2 지망학원
+'        sTmp = Trim(basModule.schcd)
+'        If IsNull(DBExRec.Fields(7)) = False Then
+'            sTmp = UCase(Trim(DBExRec.Fields(7)))
+'            Select Case sTmp
+'                Case "N", "K", "S", "P", "M", "W", "Q", "J", "B"
+'                    ' NEXT
+'                Case "노량진"
+'                    sTmp = "N"
+'                Case "강남"
+'                    sTmp = "K"
+'                Case "송파"
+'                    sTmp = "S"
+'                Case "송파M", "송파마이맥", "송파 MIMAC", "송파MIMAC", "마송"
+'                    sTmp = "P"
+'                Case "강남M", "강남마이맥", "강남 MIMAC", "강남MIMAC", "마강"
+'                    sTmp = "M"
+'
+'                Case "주말법의대", "주말법", "주법"
+'                    sTmp = "W"
+'                Case "야간법의대", "야간법", "야법"
+'                    sTmp = "Q"
+'
+'                Case "양재"
+'                    sTmp = "J"
+'
+'                Case "부산"
+'                    sTmp = "B"
+'
+'                Case Else
+'                    sTmp = Trim(basModule.schcd)
+'            End Select
+'        End If
+'        uExcel_StdData.WANT_ACID2 = sTmp
+'
+'    '국어
+'        nTmp = 0:  If IsNumeric(DBExRec.Fields(8)) = True Then nTmp = CLng(Trim(DBExRec.Fields(8)))
+'        uExcel_StdData.KOR = nTmp
+'    '영어
+'        nTmp = 0:  If IsNumeric(DBExRec.Fields(9)) = True Then nTmp = CLng(Trim(DBExRec.Fields(9)))
+'        uExcel_StdData.ENG = nTmp
+'    '수학
+'        nTmp = 0:  If IsNumeric(DBExRec.Fields(10)) = True Then nTmp = CLng(Trim(DBExRec.Fields(10)))
+'        uExcel_StdData.MAT = nTmp
+'
+'    '사탐
+'        uExcel_StdData.SATAM1 = ""
+'        uExcel_StdData.SATAM2 = ""
+'        uExcel_StdData.SATAM3 = ""
+'        uExcel_StdData.SATAM4 = ""
+'        uExcel_StdData.SATAM5 = ""
+'        uExcel_StdData.SATAM6 = ""
+'        uExcel_StdData.SATAM7 = ""
+'        uExcel_StdData.SATAM8 = ""
+'        uExcel_StdData.SATAM9 = ""
+'        uExcel_StdData.SATAM10 = ""
+'
+'
+'        For ni = 1 To SATAM_COUNT Step 1
+'            sTmp = ""
+'            nC = 10 + ni
+'            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
+'
+'            Select Case sTmp
+'                Case ""
+'                    'no action
+'                Case constSatams(0)
+'                    uExcel_StdData.SATAM1 = constSatamCodes(0) & "|"
+'                Case constSatams(1)
+'                    uExcel_StdData.SATAM2 = constSatamCodes(1) & "|"
+'                Case constSatams(2)
+'                    uExcel_StdData.SATAM3 = constSatamCodes(2) & "|"
+'                Case constSatams(3)
+'                    uExcel_StdData.SATAM4 = constSatamCodes(3) & "|"
+'                Case constSatams(4)
+'                    uExcel_StdData.SATAM5 = constSatamCodes(4) & "|"
+'                Case constSatams(5)
+'                    uExcel_StdData.SATAM6 = constSatamCodes(5) & "|"
+'                Case constSatams(6)
+'                    uExcel_StdData.SATAM7 = constSatamCodes(6) & "|"
+'                Case constSatams(7)
+'                    uExcel_StdData.SATAM8 = constSatamCodes(7) & "|"
+'                Case constSatams(8)
+'                    uExcel_StdData.SATAM9 = constSatamCodes(8) & "|"
+'                Case constSatams(9)
+'                    uExcel_StdData.SATAM10 = constSatamCodes(9) & "|"
+'            End Select
+'        Next ni
+'    '제2외국어
+'        uExcel_StdData.ENG2 = ""
+'
+'        sTmp = ""
+'            nC = 10 + 11 + 1
+'            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
+'
+'            Select Case sTmp
+'                Case ""
+'                    'no action
+'                Case "독어"
+'                    uExcel_StdData.ENG2 = "31|"
+'                Case "일어"
+'                    uExcel_StdData.ENG2 = "32|"
+'                Case "에파", "에스파냐"
+'                    uExcel_StdData.ENG2 = "33|"
+'                Case "불어"
+'                    uExcel_StdData.ENG2 = "34|"
+'                Case "중국", "중어"
+'                    uExcel_StdData.ENG2 = "35|"
+'                Case "한문"
+'                    uExcel_StdData.ENG2 = "36|"
+'
+'                '<< 송파 >> : 2008.01.09
+'                Case "언어"
+'                    uExcel_StdData.ENG2 = "37|"
+'                Case "수리"
+'                    uExcel_StdData.ENG2 = "38|"
+'                Case "영어"
+'                    uExcel_StdData.ENG2 = "39|"
+'                Case "세계사"
+'                    uExcel_StdData.ENG2 = "40|"
+'                Case "세계지리"
+'                    uExcel_StdData.ENG2 = "41|"
+'                Case "아랍어"
+'                    uExcel_StdData.ENG2 = "42|"
+'
+'            End Select
+'    '과탐
+'        uExcel_StdData.GWATAM1 = ""
+'        uExcel_StdData.GWATAM2 = ""
+'        uExcel_StdData.GWATAM3 = ""
+'        uExcel_StdData.GWATAM4 = ""
+'        uExcel_StdData.GWATAM5 = ""
+'        uExcel_StdData.GWATAM6 = ""
+'        uExcel_StdData.GWATAM7 = ""
+'        uExcel_StdData.GWATAM8 = ""
+'
+'        For ni = 1 To 8 Step 1
+'            sTmp = ""
+'            nC = 10 + ni
+'            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
+'
+'            Select Case sTmp
+'                Case ""
+'                    'no action
+'                Case "물1"
+'                    uExcel_StdData.GWATAM1 = "51|"
+'                Case "화1"
+'                    uExcel_StdData.GWATAM2 = "52|"
+'                Case "생1"
+'                    uExcel_StdData.GWATAM3 = "53|"
+'                Case "지1"
+'                    uExcel_StdData.GWATAM4 = "54|"
+'                Case "물2"
+'                    uExcel_StdData.GWATAM5 = "55|"
+'                Case "화2"
+'                    uExcel_StdData.GWATAM6 = "56|"
+'                Case "생2"
+'                    uExcel_StdData.GWATAM7 = "57|"
+'                Case "지2"
+'                    uExcel_StdData.GWATAM8 = "58|"
+'            End Select
+'        Next ni
+'    '수리
+'        uExcel_StdData.SURI = ""
+'
+'        sTmp = ""
+'            nC = 10 + 11 + 1
+'            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
+'
+'            Select Case sTmp
+'                Case ""
+'                    'no action
+'                Case "미적"
+'                    uExcel_StdData.SURI = "81|"
+'                Case "이산"
+'                    uExcel_StdData.SURI = "82|"
+'                Case "확률"
+'                    uExcel_StdData.SURI = "83|"
+'                Case "나형"
+'                    uExcel_StdData.SURI = "84|"
+'            End Select
+'    '논술
+'        uExcel_StdData.NONSUL1 = ""
+'        uExcel_StdData.NONSUL2 = ""
+'        uExcel_StdData.NONSUL3 = ""
+'        uExcel_StdData.NONSUL4 = ""
+'
+'        For ni = 1 To 4 Step 1
+'            sTmp = ""
+'            nC = 10 + 11 + 1 + ni
+'            If IsNull(DBExRec.Fields(nC)) = False Then sTmp = Trim(DBExRec.Fields(nC))
+'
+'            Select Case sTmp
+'                Case ""
+'                    'no action
+'                Case "언어"
+'                    uExcel_StdData.NONSUL1 = "91|"
+'                Case "수리"
+'                    uExcel_StdData.NONSUL2 = "92|"
+'                Case "외국어"
+'                    uExcel_StdData.NONSUL3 = "93|"
+'                Case ""
+'                    uExcel_StdData.NONSUL4 = "94|"
+'            End Select
+'        Next ni
+'
+'
+'    '## 스프레드에 데이터 넣기 --------------------------------------------------------------------
+'        With sprExcel_STD_Data
+'            .MaxRows = .MaxRows + 1
+'            .Row = .MaxRows:            .RowHeight(.Row) = 13
+'
+'            '>> 학원
+'                .Col = 1
+'                    sTmp = uExcel_StdData.ACID
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'
+'            '>> 수험번호
+'                .Col = .Col + 1
+'                    sTmp = uExcel_StdData.EXMID
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'            '>> 학생명
+'                .Col = .Col + 1
+'                    sTmp = uExcel_StdData.STDNM
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'            '>> 생년월일
+'                .Col = .Col + 1
+'                    sTmp = Replace(uExcel_StdData.Birth_ymd, "-", "", 1, -1, vbTextCompare)
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'            '>> 유.무시험
+'                .Col = .Col + 1
+'                    sTmp = uExcel_StdData.EXMTYPE
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'            '>> 계열
+'                .Col = .Col + 1
+'                    sTmp = uExcel_StdData.kaeyol
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'
+'            '>> 1 지망학원
+'                .Col = .Col + 1
+'                    sTmp = uExcel_StdData.WANT_ACID1
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'            '>> 2 지망학원
+'                .Col = .Col + 1
+'                    sTmp = uExcel_StdData.WANT_ACID2
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'
+'            '>> 국어
+'                .Col = .Col + 1
+'                    nTmp = uExcel_StdData.KOR
+'                    Call basFunction.Set_SprType_Numeric(sprExcel_STD_Data, 0, 0, 9999, "", nTmp)
+'            '>> 영어
+'                .Col = .Col + 1
+'                    nTmp = uExcel_StdData.ENG
+'                    Call basFunction.Set_SprType_Numeric(sprExcel_STD_Data, 0, 0, 9999, "", nTmp)
+'            '>> 수학
+'                .Col = .Col + 1
+'                    nTmp = uExcel_StdData.MAT
+'                    Call basFunction.Set_SprType_Numeric(sprExcel_STD_Data, 0, 0, 9999, "", nTmp)
+'
+'            '>> 사탐
+'                .Col = .Col + 1
+'                    sTmp = ""
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM1)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM2)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM3)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM4)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM5)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM6)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM7)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM8)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM9)
+'                    sTmp = sTmp & Trim(uExcel_StdData.SATAM10)
+'
+'                    sTmp = Replace(sTmp, " ", "", 1, -1, vbTextCompare)
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'
+'            '>> 제2외국어
+'                .Col = .Col + 1
+'                    sTmp = Trim(uExcel_StdData.ENG2)
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'
+'            '>> 과탐
+'                .Col = .Col + 1
+'                    sTmp = ""
+'                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM1)
+'                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM2)
+'                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM3)
+'                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM4)
+'                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM5)
+'                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM6)
+'                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM7)
+'                    sTmp = sTmp & Trim(uExcel_StdData.GWATAM8)
+'
+'                    sTmp = Replace(sTmp, " ", "", 1, -1, vbTextCompare)
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'
+'            '>> 수리
+'                .Col = .Col + 1
+'                    sTmp = Trim(uExcel_StdData.SURI)
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'
+'            '>> 논술
+'                .Col = .Col + 1
+'                    sTmp = ""
+'                    sTmp = sTmp & Trim(uExcel_StdData.NONSUL1)
+'                    sTmp = sTmp & Trim(uExcel_StdData.NONSUL2)
+'                    sTmp = sTmp & Trim(uExcel_StdData.NONSUL3)
+'                    sTmp = sTmp & Trim(uExcel_StdData.NONSUL4)
+'
+'                    sTmp = Replace(sTmp, " ", "", 1, -1, vbTextCompare)
+'                    Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
+'
+'        End With
+'
+'        DBExRec.MoveNext
+'
+'    Next nRow
+'
+'
+'
+'    With sprExcel_STD_Data
+'        If .MaxRows > 0 Then
+'            .Row = 1:   .Row2 = .MaxRows
+'            .Col = 1:   .Col2 = .MaxCols
+'            .BlockMode = True
+'                .BackColor = basModule.BackColor1
+'                .BackColorStyle = BackColorStyleUnderGrid
+'            .BlockMode = False
+'
+'            '.ColsFrozen = 3
+'            '.SetCellBorder 3, 1, 3, .MaxRows, 2, basModule.SectionColor1, CellBorderStyleSolid
+'
+'        End If
+'    End With
+'
+'
+'    Set DBExRec = Nothing
+'    Set DBExCmd = Nothing
+'    Set xlsDBConn = Nothing
+'
+'    MsgBox "학생 엑셀자료를 가지고 왔습니다.", vbInformation + vbOKOnly, Me.Caption
+'
+'    On Error GoTo 0
+'    Exit Sub
+'ErrStmt1:
+'    MsgBox "엑셀 파일선택을 하십시요.", vbExclamation + vbOKOnly, Me.Caption
+'    Exit Sub
+'ErrStmt2:
+'    Set DBExRec = Nothing
+'    Set DBExCmd = Nothing
+'    xlsDBConn.Close
+'    Set xlsDBConn = Nothing
+'
+'    MsgBox "EXCEL 자료 Open시 에러가 발생하였습니다.", vbCritical + vbOKOnly, Me.Caption
+'    On Error GoTo 0
+'    Exit Sub
 End Sub
 
 Private Sub sprExcel_STD_Data_Click(ByVal Col As Long, ByVal Row As Long)

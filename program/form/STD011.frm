@@ -2801,8 +2801,10 @@ Private Sub Form_Load()
     
     
     Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol_F)      '계열
-    Call basCommonSTD.Init_CboSch(cboSel1_Sch)   '1지망 학원
-    Call basCommonSTD.Init_CboSch(cboSel2_Sch)   '2지망 학원
+    cboKaeyol_F.AddItem "전체" & Space(30) & "ALL", 0
+    cboKaeyol_F.ListIndex = 0
+    Call basCommonSTD.Init_CboSch(cboSel1_SCH_F)   '1지망 학원
+    Call basCommonSTD.Init_CboSch(cboSel2_SCH_F)   '2지망 학원
     Call basCommonSTD.Init_CboSch(cboPass1)      '1지망 합격 학원
     Call basCommonSTD.Init_CboSch(cboPass2)      '2지망 합격 학원
     Call basCommonSTD.Init_CboSch(cboPass3)      '3지망 합격 학원
@@ -3696,12 +3698,11 @@ Private Sub cmdFind_Click()
                 sprSTD_F.SetCellBorder sprSTD_F.Col, sprSTD_F.Row, sprSTD_F.Col, sprSTD_F.Row, 2, basModule.SectionColor1, CellBorderStyleSolid
                 
                 sprSTD_F.Col = 4
-                    sTmp = IIf(IsNull(.Fields("SEL1_SCH")) = False, basCommonSTD.Get_SchName(.Fields("SEL2_SCH")), " ")
+                    sTmp = " ": If IsNull(.Fields("SEL1_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL1_SCH")))
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
-                
                 sprSTD_F.Col = 5
-                    sTmp = IIf(IsNull(.Fields("SEL2_SCH")) = False, basCommonSTD.Get_SchName(.Fields("SEL2_SCH")), " ")
+                    sTmp = " ": If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL2_SCH")))
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 

@@ -384,7 +384,7 @@ Private Type tExcel_StdData
     STDNM       As String
     Birth_ymd       As String
     EXMTYPE     As String
-    KAEYOL      As String
+    kaeyol      As String
     
 End Type
 Private uExcel_StdData      As tExcel_StdData
@@ -595,7 +595,7 @@ Private Sub Get_Excel_Data()
                     sTmp = "01"
             End Select
         End If
-        uExcel_StdData.KAEYOL = sTmp
+        uExcel_StdData.kaeyol = sTmp
         
     
         
@@ -631,7 +631,7 @@ Private Sub Get_Excel_Data()
                     Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
             '>> °è¿­
                 .Col = .Col + 1
-                    sTmp = uExcel_StdData.KAEYOL
+                    sTmp = uExcel_StdData.kaeyol
                     Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
                     
             

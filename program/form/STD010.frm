@@ -5000,12 +5000,12 @@ Private Sub cmdFind_Click()
                 sprSTD_F.SetCellBorder sprSTD_F.Col, sprSTD_F.Row, sprSTD_F.Col, sprSTD_F.Row, 2, basModule.SectionColor1, CellBorderStyleSolid
                 
                 sprSTD_F.Col = 4
-                    sTmp = IIf(IsNull(.Fields("SEL1_SCH")) = False, basCommonSTD.Get_SchName(.Fields("SEL2_SCH")), " ")
+                    sTmp = " ":  If IsNull(.Fields("SEL1_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(.Fields("SEL1_SCH"))
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
                 sprSTD_F.Col = 5
-                    sTmp = IIf(IsNull(.Fields("SEL2_SCH")) = False, basCommonSTD.Get_SchName(.Fields("SEL2_SCH")), " ")
+                    sTmp = " ":  If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(.Fields("SEL2_SCH"))
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 

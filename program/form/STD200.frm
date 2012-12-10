@@ -2368,7 +2368,7 @@ Private Sub Form_Load()
         .ListIndex = 0
     End With
     
-    Select Case Trim(SchCD)
+    Select Case Trim(schcd)
         Case "S"
             With cbo_gbn
                 .Enabled = True
@@ -2401,7 +2401,7 @@ Private Sub Form_Load()
         .AddItem "9월 평가원" & Space(30) & "3"
         .AddItem "고2 대성모의고사" & Space(30) & "4"
         .AddItem "고2 교육청모의고사" & Space(30) & "5"
-        If basModule.SchCD = "N" Then .AddItem "내신등급" & Space(30) & "9"
+        If basModule.schcd = "N" Then .AddItem "내신등급" & Space(30) & "9"
         .AddItem "없음" & Space(30) & "X"
         
         .Enabled = True
@@ -2792,7 +2792,7 @@ Private Function Save_Stdin() As Boolean
     sStr = sStr & "        ETC1        = '" & sTmp & "'"
 
     sStr = sStr & "  WHERE ORD_NO      = '" & Trim(txtOrd_No.Text) & "'"
-    sStr = sStr & "    AND ACACD       = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "    AND ACACD       = '" & Trim(basModule.schcd) & "'"
     
     nExe = 0
 
@@ -2876,9 +2876,9 @@ Private Function Save_Stdin() As Boolean
             sStr = sStr & " ) VALUES ("
             sStr = sStr & "                 " & sOrd_No & ","
             
-            sStr = sStr & "                 '" & Trim(basModule.SchCD) & "',"
+            sStr = sStr & "                 '" & Trim(basModule.schcd) & "',"
             
-            Select Case Trim(SchCD)
+            Select Case Trim(schcd)
                 Case "N"
                     sStr = sStr & "         'NR081126E" & sExmRoundX & "',"
                 Case "K"
@@ -3202,9 +3202,9 @@ Private Sub cmdFind_Click()
     sStr = sStr & "        SUBSTR(Birth,1,4)||'-'||SUBSTR(Birth,5,2) ||'-'|| SUBSTR(Birth,7,2) AS Birth,"
     sStr = sStr & "        GRADE_KOR KOR, GRADE_MAT MAT, GRADE_ENG ENG"
     sStr = sStr & "   From HWSIN01TB_WINTER"
-    sStr = sStr & "  WHERE ACACD = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "  WHERE ACACD = '" & Trim(basModule.schcd) & "'"
     sStr = sStr & "    AND EXMROUND LIKE "
-        Select Case Trim(SchCD)
+        Select Case Trim(schcd)
         Case "N"
             sStr = sStr & "           'NR081126%' "
         Case "K"
@@ -3500,7 +3500,7 @@ Private Sub Show_Select_STD(ByVal aOrdNO As String)
         sStr = sStr & "     AMNT        , ETC1       "
     sStr = sStr & "    From HWSIN01TB_WINTER "
     sStr = sStr & "   WHERE EXMROUND LIKE "
-    Select Case Trim(SchCD)
+    Select Case Trim(schcd)
         Case "N"
             sStr = sStr & "            'NR081126%' "
         Case "K"
@@ -3527,7 +3527,7 @@ Private Sub Show_Select_STD(ByVal aOrdNO As String)
     End Select
             
     sStr = sStr & "     AND ORD_NO = '" & Trim(aOrdNO) & "'"
-    sStr = sStr & "     AND ACACD  = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "     AND ACACD  = '" & Trim(basModule.schcd) & "'"
     
     Set DBCmd = New ADODB.Command
     Set DBRec = New ADODB.Recordset
@@ -3708,7 +3708,7 @@ Private Sub Show_Select_STD(ByVal aOrdNO As String)
             ElseIf Trim(txtPhoto.Text) > " " Then
                 
                 '2010.12.20 노량진,송파,양재의 경우에만 사진 파일이 수험번호로 지정, 그 외에는 주문 번호로 저장. 김한욱
-                Select Case Trim(SchCD)
+                Select Case Trim(schcd)
                     Case "N" '노량진
                         Call Get_STD_image(txtSu_No.Text, txtPhoto.Text)               '<< 이미지 자료 가져오기
                         
@@ -3917,7 +3917,7 @@ Private Sub Get_Excel_Data()
     sStr = sStr & "  SELECT "
         
         '2010.12.20 노량진 양재 송파 경우 엑셀 파일 No를 수험번호로 저장
-        Select Case Trim(SchCD)
+        Select Case Trim(schcd)
             Case "N"
                 sStr = sStr & "     SU_NO AS NO     , "
             Case "J"
@@ -4030,7 +4030,7 @@ Private Sub Get_Excel_Data()
         
     sStr = sStr & "    From HWSIN01TB_WINTER "
     sStr = sStr & "   WHERE EXMROUND LIKE "
-    Select Case Trim(SchCD)
+    Select Case Trim(schcd)
         Case "N"
             sStr = sStr & "            'NR081126E%' "
         Case "K"
@@ -4056,7 +4056,7 @@ Private Sub Get_Excel_Data()
             sStr = sStr & "            'BS081126E%' "
     End Select
     
-    sStr = sStr & "     AND ACACD  = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "     AND ACACD  = '" & Trim(basModule.schcd) & "'"
     
     Set DBCmd = New ADODB.Command
     Set DBRec = New ADODB.Recordset

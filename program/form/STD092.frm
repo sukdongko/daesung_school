@@ -534,7 +534,7 @@ Private Sub Form_Load()
         .AddItem "자연" & Space(30) & "02"
         
     '<< 계열 >> : 2008.01.09
-        If Trim(basModule.SchCD) = "N" Then             '< 노량진
+        If Trim(basModule.schcd) = "N" Then             '< 노량진
             .AddItem "예체" & Space(30) & "03"
             .AddItem "수리(나)" & Space(30) & "04"
             .AddItem "인문수능" & Space(30) & "05"
@@ -554,7 +554,7 @@ Private Sub Form_Load()
         End If
     '<< 계열 >> : 2008.01.10
         
-        If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then       '< 강남 2008.03.24
+        If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then       '< 강남 2008.03.24
             .AddItem "주말법대" & Space(30) & "04"
             .AddItem "주말의대" & Space(30) & "05"
             
@@ -569,7 +569,7 @@ Private Sub Form_Load()
         End If
         
     '<< 계열 >> : 2008.01.09
-        Select Case Trim(basModule.SchCD)
+        Select Case Trim(basModule.schcd)
             Case "S"                                        '< 송파
 '                .AddItem "예체능" & Space(30) & "03"
 '
@@ -584,7 +584,7 @@ Private Sub Form_Load()
 
         End Select
         
-        Select Case Trim(basModule.SchCD)
+        Select Case Trim(basModule.schcd)
             Case "P", "J"                                   '< 양재
                 .AddItem "신설인문" & Space(30) & "11"
                 .AddItem "신설자연" & Space(30) & "12"
@@ -592,7 +592,7 @@ Private Sub Form_Load()
         
         
     '<< 계열 >> : 2009.01.09
-        Select Case Trim(basModule.SchCD)
+        Select Case Trim(basModule.schcd)
             Case "B"                                    '< 부산
                 .AddItem "수학선행인문" & Space(30) & "05"
                 .AddItem "수학선행자연" & Space(30) & "06"
@@ -675,7 +675,7 @@ Private Sub cmdFind_Click()
     sStr = sStr & "  SELECT A.SCHNO, A.EXMID, STDNM, SEL1_SCH , SEL2_SCH, SUBSTR(REPLACE(Birth_ymd,'-',''),1,4)||'-'||SUBSTR(REPLACE(Birth_ymd,'-',''),5,2) ||'-'||SUBSTR(REPLACE(Birth_ymd,'-',''),7,2) AS Birth_ymd,"
     
     '<< 계열 >> : 2008.01.09
-    If Trim(basModule.SchCD) = "N" Then
+    If Trim(basModule.schcd) = "N" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','예체',"
@@ -695,7 +695,7 @@ Private Sub cmdFind_Click()
         sStr = sStr & "                   '16','편)자연수능'"
         sStr = sStr & "            ) AS GAEYUL,"
 '<< 계열 >> : 2008.01.10
-    ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then       '< 2008.03.24
+    ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then       '< 2008.03.24
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         
@@ -710,7 +710,7 @@ Private Sub cmdFind_Click()
         sStr = sStr & "                   '16','선착순인문16',"
         sStr = sStr & "                   '17','선착순자연17'"
         sStr = sStr & "            ) AS GAEYUL,"
-    ElseIf Trim(basModule.SchCD) = "S" Then
+    ElseIf Trim(basModule.schcd) = "S" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','예체능',"
@@ -722,21 +722,21 @@ Private Sub cmdFind_Click()
         
         sStr = sStr & "            ) AS GAEYUL,"
         
-    ElseIf Trim(basModule.SchCD) = "P" Then
+    ElseIf Trim(basModule.schcd) = "P" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','특별인문',"
         sStr = sStr & "                   '04','특별자연'"
         sStr = sStr & "            ) AS GAEYUL,"
     
-    ElseIf Trim(basModule.SchCD) = "J" Then
+    ElseIf Trim(basModule.schcd) = "J" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '11','신설인문',"
         sStr = sStr & "                   '12','신설자연'"
         sStr = sStr & "            ) AS GAEYUL,"
         
-    ElseIf Trim(basModule.SchCD) = "B" Then
+    ElseIf Trim(basModule.schcd) = "B" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '05','특별인문',"
@@ -859,7 +859,7 @@ Private Sub cmdFind_Click()
     sStr = sStr & "         ELSE"
     sStr = sStr & "             '00'"
     sStr = sStr & "         END SEL_N4, "
-    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "        '< 전체집계 하는 함수
+    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT, "        '< 전체집계 하는 함수
     sStr = sStr & "         K_NUM, M_NUM, E_NUM, TOT_NUM, "
     sStr = sStr & "         ZIP, ADDR1, ADDR2, TEL, CEL, "
     sStr = sStr & "         TO_CHAR(REGDATE,'YYYY-MM-DD HH24:MI:SS') AS REGDATE, "
@@ -867,7 +867,7 @@ Private Sub cmdFind_Click()
     
     sStr = sStr & "    FROM CLSTD91TB A, CLSTD92TB B"
     sStr = sStr & "   WHERE A.SCHNO = B.SCHNO "
-    sStr = sStr & "     AND A.ACID  = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "     AND A.ACID  = '" & Trim(basModule.schcd) & "'"
     
     '>> 유/무시험 체크
     If Trim(Right(cboExmType.Text, 30)) = "0" Then
