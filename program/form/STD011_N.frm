@@ -2727,7 +2727,7 @@ Private Type tExcel_StdData
     STDNM       As String
     Birth_ymd       As String
     EXMTYPE     As String
-    KAEYOL      As String
+    kaeyol      As String
     WANT_ACID1  As String
     WANT_ACID2  As String
     KOR         As Long
@@ -2800,7 +2800,7 @@ Private Sub Form_Load()
         .AddItem "자연" & Space(30) & "02"
         
     '<< 계열 >> : 2008.01.09
-        If Trim(basModule.SchCD) = "N" Then             '< 노량진
+        If Trim(basModule.schcd) = "N" Then             '< 노량진
             .AddItem "예체" & Space(30) & "03"
             .AddItem "수리(나)" & Space(30) & "04"
             .AddItem "인문수능" & Space(30) & "05"
@@ -2820,7 +2820,7 @@ Private Sub Form_Load()
             
         End If
     '<< 계열 >> : 2008.01.10
-        If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then           '< 강남
+        If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then           '< 강남
             .AddItem "주말법대" & Space(30) & "04"
             .AddItem "주말의대" & Space(30) & "05"
             
@@ -2834,7 +2834,7 @@ Private Sub Form_Load()
             .AddItem "선착순자연17" & Space(30) & "17"
         End If
     '<< 계열 >> : 2008.02.15
-        If Trim(basModule.SchCD) = "S" Then             '< 송파
+        If Trim(basModule.schcd) = "S" Then             '< 송파
 '            .AddItem "예체능" & Space(30) & "03"
 '
 '            .AddItem "인문수능" & Space(30) & "05"
@@ -2854,12 +2854,12 @@ Private Sub Form_Load()
 
         End If
     '<< 계열 >> : 2008.02.15
-        If Trim(basModule.SchCD) = "P" Then             '< 마송
+        If Trim(basModule.schcd) = "P" Then             '< 마송
             .AddItem "특별인문" & Space(30) & "03"
             .AddItem "특별자연" & Space(30) & "04"
         End If
         
-        If Trim(basModule.SchCD) = "J" Then             '< 양재
+        If Trim(basModule.schcd) = "J" Then             '< 양재
             .AddItem "신설인문" & Space(30) & "11"
             .AddItem "신설자연" & Space(30) & "12"
             
@@ -2868,7 +2868,7 @@ Private Sub Form_Load()
         End If
         
     '<< 계열 >> : 2009.01.09
-        If Trim(basModule.SchCD) = "B" Then             '< 부산
+        If Trim(basModule.schcd) = "B" Then             '< 부산
             .AddItem "수학선행인문" & Space(30) & "05"
             .AddItem "수학선행자연" & Space(30) & "06"
             
@@ -2889,7 +2889,7 @@ Private Sub Form_Load()
         .AddItem "자연" & Space(30) & "02"
         
     '<< 계열 >> : 2008.01.09
-        If Trim(basModule.SchCD) = "N" Then             '< 노량진
+        If Trim(basModule.schcd) = "N" Then             '< 노량진
             .AddItem "예체" & Space(30) & "03"
             .AddItem "수리(나)" & Space(30) & "04"
             .AddItem "인문수능" & Space(30) & "05"
@@ -2908,7 +2908,7 @@ Private Sub Form_Load()
             .AddItem "편)자연수능" & Space(30) & "16"
         End If
     '<< 계열 >> : 2008.01.10
-        If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then           '< 강남
+        If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then           '< 강남
             .AddItem "주말법대" & Space(30) & "04"
             .AddItem "주말의대" & Space(30) & "05"
             
@@ -2922,7 +2922,7 @@ Private Sub Form_Load()
             .AddItem "선착순자연17" & Space(30) & "17"
         End If
     '<< 계열 >> : 2008.02.15
-        If Trim(basModule.SchCD) = "S" Then             '< 송파
+        If Trim(basModule.schcd) = "S" Then             '< 송파
 ''            .AddItem "예체능" & Space(30) & "03"
 ''
 ''            .AddItem "인문수능" & Space(30) & "05"
@@ -2941,12 +2941,12 @@ Private Sub Form_Load()
 
         End If
     '<< 계열 >> : 2008.02.15
-        If Trim(basModule.SchCD) = "P" Then             '< 마송
+        If Trim(basModule.schcd) = "P" Then             '< 마송
             .AddItem "특별인문" & Space(30) & "03"
             .AddItem "특별자연" & Space(30) & "04"
         End If
         
-        If Trim(basModule.SchCD) = "J" Then             '< 양재
+        If Trim(basModule.schcd) = "J" Then             '< 양재
             .AddItem "신설인문" & Space(30) & "03"
             .AddItem "신설자연" & Space(30) & "04"
             
@@ -2955,7 +2955,7 @@ Private Sub Form_Load()
         End If
     
     '<< 계열 >> : 2009.01.09
-        If Trim(basModule.SchCD) = "B" Then             '< 부산
+        If Trim(basModule.schcd) = "B" Then             '< 부산
             .AddItem "수학선행인문" & Space(30) & "05"
             .AddItem "수학선행자연" & Space(30) & "06"
             
@@ -3271,7 +3271,7 @@ Private Sub cmdFind_Click()
     sStr = sStr & "         EXMID, STDNM, SEL1_SCH , SEL2_SCH, Birth_ymd,"
     
     '<< 계열 >> : 2008.01.09
-    If Trim(basModule.SchCD) = "N" Then
+    If Trim(basModule.schcd) = "N" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','예체',"
@@ -3293,7 +3293,7 @@ Private Sub cmdFind_Click()
         
         sStr = sStr & "            ) AS GAEYUL,"
     '<< 계열 >> : 2008.01.10
-    ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" And Trim(basModule.SchCD) = "Q" Then
+    ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" And Trim(basModule.schcd) = "Q" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         
@@ -3310,7 +3310,7 @@ Private Sub cmdFind_Click()
         
         sStr = sStr & "            ) AS GAEYUL,"
     '<< 계열 >> : 2008.02.15
-    ElseIf Trim(basModule.SchCD) = "S" Then
+    ElseIf Trim(basModule.schcd) = "S" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','예체능',"
@@ -3330,14 +3330,14 @@ Private Sub cmdFind_Click()
         
         sStr = sStr & "            ) AS GAEYUL,"
     '<< 계열 >> : 2008.02.15
-    ElseIf Trim(basModule.SchCD) = "P" Then             '< 마송
+    ElseIf Trim(basModule.schcd) = "P" Then             '< 마송
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','특별인문',"
         sStr = sStr & "                   '04','특별자연'"
         sStr = sStr & "            ) AS GAEYUL,"
         
-    ElseIf Trim(basModule.SchCD) = "J" Then             '< 양재
+    ElseIf Trim(basModule.schcd) = "J" Then             '< 양재
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '11','신설인문',"
@@ -3350,7 +3350,7 @@ Private Sub cmdFind_Click()
         sStr = sStr & "            ) AS GAEYUL,"
     
     '<< 계열 >> : 2009.01.09
-    ElseIf Trim(basModule.SchCD) = "B" Then             '< 부산
+    ElseIf Trim(basModule.schcd) = "B" Then             '< 부산
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '05','특별인문',"
@@ -3482,14 +3482,14 @@ Private Sub cmdFind_Click()
     sStr = sStr & "             '00'"
     sStr = sStr & "         END SEL_N4, "
     sStr = sStr & "         PAYOK, PAYNOT, "
-    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "        '< 전체집계 하는 함수
+    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT, "        '< 전체집계 하는 함수
     sStr = sStr & "         K_NUM, M_NUM, E_NUM, T_NUM, TOT_NUM, "
     sStr = sStr & "         ZIP, ADDR1, ADDR2, TEL, CEL, "
     sStr = sStr & "         REGDATE, PAYGBN, "
     
     sStr = sStr & "         DECODE(MU_TYPE,'1','수능등급','2','6월 평가원','3','9월 평가원','4','6월 평가원','9','내신등급','5','9월 평가원','수능') AS MU_TYPE, "
     
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
         Case "S"
             'sStr = sStr & " DECODE(PTS_SEL,'1','수능','2','2009 평가','','없음') AS PTS_SEL "
             sStr = sStr & " DECODE(PTS_SEL,'1','가형','2','나형','') AS PTS_SEL "
@@ -3635,7 +3635,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                                      END PAYNOT"
             sStr = sStr & "                                 FROM CLSTD01TB "
             
-            sStr = sStr & "                                WHERE ACID = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "                                WHERE ACID = '" & Trim(basModule.schcd) & "'"
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
                 sStr = sStr & "                              AND EXMTYPE = '0'"
@@ -3695,7 +3695,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                         GROUP BY ACID"
             sStr = sStr & "                      ) B"
             sStr = sStr & "                WHERE A.ACID = B.ACID"
-            sStr = sStr & "                  AND A.ACID = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "                  AND A.ACID = '" & Trim(basModule.schcd) & "'"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -3743,10 +3743,10 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                      SUBSTR(ZIP,1,3)||'-'||SUBSTR(ZIP,4,3) AS ZIP, ADDR1, ADDR2, TEL, CEL, "
             sStr = sStr & "                      TO_CHAR(REGDATE,'YYYY-MM-DD') AS REGDATE, GET_PAYGUBN(ORD_NO) AS PAYGBN, PTS_SEL, MU_TYPE "
             sStr = sStr & "                 From CLSTD01TB"
-            sStr = sStr & "                WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                       PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                       PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                       PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
+            sStr = sStr & "                WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                       PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                       PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                       PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -3856,7 +3856,7 @@ Private Sub cmdFind_Click()
                     sStr = sStr & "              KAEYOL,"
                     sStr = sStr & "              SEL1 , SEL2, SEL3, SEL4, SEL5, CL_CLOSE, "
                     sStr = sStr & "              0 AS PAYOK , 0 AS PAYNOT, "
-                    sStr = sStr & "              GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "           '< 전체집계 하는 함수
+                    sStr = sStr & "              GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT, "           '< 전체집계 하는 함수
                     sStr = sStr & "              TO_CHAR(REGDATE,'YYYY-MM-DD') AS REGDATE, GET_PAYGUBN(ORD_NO) AS PAYGBN, "
                     sStr = sStr & "              ZIP, ADDR1, ADDR2, CEL, TEL, "
                     sStr = sStr & "              NVL(K_NUM,0) AS K_NUM, NVL(M_NUM,0) AS M_NUM, NVL(E_NUM,0) AS E_NUM , NVL(T_NUM,0) AS T_NUM,"
@@ -3864,7 +3864,7 @@ Private Sub cmdFind_Click()
                     sStr = sStr & "              TOT_NUM , "
                     sStr = sStr & "              MU_TYPE "
                     sStr = sStr & "         From CLSTD01TB"
-                    sStr = sStr & "        WHERE PASS" & Trim(Right(cboPassCN, 30)) & " = '" & Trim(basModule.SchCD) & "'"
+                    sStr = sStr & "        WHERE PASS" & Trim(Right(cboPassCN, 30)) & " = '" & Trim(basModule.schcd) & "'"
                     
                     '>> 유/무시험 체크
                     If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -4690,7 +4690,7 @@ Private Sub Get_Excel_Data()
         uExcel_StdData.EXMTYPE = sTmp
     '계열
         sTmp = "01"
-        If Trim(basModule.SchCD) = "N" Then             '< 계열 : 2008.01.09 - 노량진
+        If Trim(basModule.schcd) = "N" Then             '< 계열 : 2008.01.09 - 노량진
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4737,7 +4737,7 @@ Private Sub Get_Excel_Data()
                         sTmp = "01"
                 End Select
             End If
-        ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then       '< 계열 : 2008.01.10 - 강남, 2008.03.24
+        ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then       '< 계열 : 2008.01.10 - 강남, 2008.03.24
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4772,7 +4772,7 @@ Private Sub Get_Excel_Data()
                         sTmp = "01"
                 End Select
             End If
-        ElseIf Trim(basModule.SchCD) = "S" Then         '< 계열 : 2008.02.15 - 송파
+        ElseIf Trim(basModule.schcd) = "S" Then         '< 계열 : 2008.02.15 - 송파
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4814,7 +4814,7 @@ Private Sub Get_Excel_Data()
                         sTmp = "01"
                 End Select
             End If
-        ElseIf Trim(basModule.SchCD) = "P" Then         '< 계열 : 2008.02.15 - 마송
+        ElseIf Trim(basModule.schcd) = "P" Then         '< 계열 : 2008.02.15 - 마송
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4835,7 +4835,7 @@ Private Sub Get_Excel_Data()
                 End Select
             End If
         
-        ElseIf Trim(basModule.SchCD) = "J" Then         '< 계열 : 2009.06.01
+        ElseIf Trim(basModule.schcd) = "J" Then         '< 계열 : 2009.06.01
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4877,10 +4877,10 @@ Private Sub Get_Excel_Data()
                 End Select
             End If
         End If
-        uExcel_StdData.KAEYOL = sTmp
+        uExcel_StdData.kaeyol = sTmp
         
     '1 지망학원
-        sTmp = Trim(basModule.SchCD)
+        sTmp = Trim(basModule.schcd)
         If IsNull(DBExRec.Fields(6)) = False Then
             sTmp = UCase(Trim(DBExRec.Fields(6)))
             Select Case sTmp
@@ -4908,13 +4908,13 @@ Private Sub Get_Excel_Data()
                     sTmp = "B"
                     
                 Case Else
-                    sTmp = Trim(basModule.SchCD)
+                    sTmp = Trim(basModule.schcd)
             End Select
         End If
         uExcel_StdData.WANT_ACID1 = sTmp
         
     '2 지망학원
-        sTmp = Trim(basModule.SchCD)
+        sTmp = Trim(basModule.schcd)
         If IsNull(DBExRec.Fields(7)) = False Then
             sTmp = UCase(Trim(DBExRec.Fields(7)))
             Select Case sTmp
@@ -4942,7 +4942,7 @@ Private Sub Get_Excel_Data()
                     sTmp = "B"
                     
                 Case Else
-                    sTmp = Trim(basModule.SchCD)
+                    sTmp = Trim(basModule.schcd)
             End Select
         End If
         uExcel_StdData.WANT_ACID2 = sTmp
@@ -5149,7 +5149,7 @@ Private Sub Get_Excel_Data()
                     Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
             '>> 계열
                 .Col = .Col + 1
-                    sTmp = uExcel_StdData.KAEYOL
+                    sTmp = uExcel_StdData.kaeyol
                     Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
                     
             '>> 1 지망학원

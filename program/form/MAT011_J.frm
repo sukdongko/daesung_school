@@ -1745,7 +1745,7 @@ Private Type tSTD
     MATJUM      As String
     
     EXMTYPE     As String
-    KAEYOL      As String
+    kaeyol      As String
     
     SEL1        As String
     SEL2        As String
@@ -2016,7 +2016,7 @@ Private Sub Get_STD_Data()
     sStr = sStr & "            FROM HWSIN01TB_WINTER"
     sStr = sStr & "           WHERE EXMROUND LIKE "
     
-    Select Case Trim(SchCD)
+    Select Case Trim(schcd)
         Case "N"
             sStr = sStr & "         'NR081126%'"
         Case "K"
@@ -2136,7 +2136,7 @@ Private Sub Get_STD_Data()
                     End If
                 End If
                 
-                If IsNull(.Fields("KEYOL")) = False Then uSTD(nRec).KAEYOL = .Fields("KEYOL")
+                If IsNull(.Fields("KEYOL")) = False Then uSTD(nRec).kaeyol = .Fields("KEYOL")
                 
                 If IsNull(.Fields("SEL1")) = False Then uSTD(nRec).SEL1 = .Fields("SEL1")
                 If IsNull(.Fields("SEL2")) = False Then uSTD(nRec).SEL2 = .Fields("SEL2")
@@ -2278,7 +2278,7 @@ Private Sub Get_STD_image()
     
         '2010.12.20 김한욱 노량진,송파,양재 경우 사진파일이 수험번호로 저장
         
-        Select Case Trim(SchCD)
+        Select Case Trim(schcd)
             Case "N"
                 sLocalFile = sSavePath & "\" & uSTD(nRec).SU_NO & ".jpg"                    '수험번호
             Case "S"
@@ -2293,7 +2293,7 @@ Private Sub Get_STD_image()
             If uSTD(nRec).PHOTO_PATH > " " Then
             
             
-                Select Case Trim(basModule.SchCD)
+                Select Case Trim(basModule.schcd)
                     Case "B"
                         sSourceUrl = "http://www.dsnschool.net" & uSTD(nRec).PHOTO_PATH        '<< 서버의 이미지 경로
                         
@@ -2354,7 +2354,7 @@ Private Sub Std_Data_Show(Index As Long)
     
     With uSTD(Index)
         
-        Select Case Trim(.KAEYOL)   '<< 계열: 01,02,03-인문,자연,예체   06,05-수능인문,자연  06,07 -강남법대,의대
+        Select Case Trim(.kaeyol)   '<< 계열: 01,02,03-인문,자연,예체   06,05-수능인문,자연  06,07 -강남법대,의대
             Case "11"
                     접수계열(0).Text = "인 문 계"
                     접수계열(1).Text = "인 문 계"
@@ -2377,12 +2377,12 @@ Private Sub Std_Data_Show(Index As Long)
         End If
         
         '점수종류 3학년 이하면 원점수, 재수생이면 표준점수
-        If CInt(.HAKYUN) < 4 Then
+        If Trim(.HAKYUN) = "4" Then
             수리성적.Text = "수리 원점수"   '1,2,3학년
         Else
             수리성적.Text = "수리 표준점수" '재수생
         End If
-        
+
          If Trim(.MATJUM) = "0" Or Trim(.MATJUM) = "" Then
             수리성적.Text = "X"
         Else
@@ -2491,7 +2491,7 @@ Private Sub Std_Data_Show(Index As Long)
         '제2지망.Text = .SEL2_SCH
         
         '2010.12.20 김한욱 노량진,송파,양재의 경우 수험번호로 된 사진 표시
-        Select Case Trim(SchCD)
+        Select Case Trim(schcd)
             Case "N"
                 Set Photo.Picture = CheckJPG(sSavePath & "\" & .SU_NO & ".jpg")
             Case "S"
@@ -2922,7 +2922,7 @@ Private Function Make_image_Path(ByVal aOrdNO As String, ByVal aExmID As String,
     Dim MaxSize         As Long
     
     sFilePath = ""
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
         Case "N"
             sFilePath = "/NDOC/dshw/noryangjin/register/ETC/"
         Case "K", "W", "Q"

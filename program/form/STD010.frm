@@ -591,7 +591,7 @@ Begin VB.Form STD010
          Begin VB.Image Image1 
             Height          =   4080
             Left            =   30
-            Picture         =   "STD010.frx":1A1A
+            Picture         =   "STD010.frx":19D6
             Top             =   60
             Width           =   8730
          End
@@ -670,11 +670,11 @@ Begin VB.Form STD010
             EndProperty
             MaxCols         =   16
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010.frx":90E4
+            SpreadDesigner  =   "STD010.frx":90A0
          End
          Begin VB.Label Label30 
             BackStyle       =   0  '투명
-            Caption         =   $"STD010.frx":AD58
+            Caption         =   $"STD010.frx":ACD0
             Height          =   615
             Left            =   240
             TabIndex        =   135
@@ -1381,12 +1381,12 @@ Begin VB.Form STD010
             EndProperty
             MaxCols         =   38
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010.frx":ADEF
+            SpreadDesigner  =   "STD010.frx":AD67
          End
          Begin VB.Image imgExcel 
             Height          =   420
             Left            =   6120
-            Picture         =   "STD010.frx":D00B
+            Picture         =   "STD010.frx":CF3F
             Stretch         =   -1  'True
             Top             =   1440
             Width           =   390
@@ -3387,7 +3387,7 @@ Begin VB.Form STD010
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      SpreadDesigner  =   "STD010.frx":D44C
+      SpreadDesigner  =   "STD010.frx":D380
    End
 End
 Attribute VB_Name = "STD010"
@@ -3513,7 +3513,7 @@ Private Sub Form_Load()
     Call basCommonSTD.Init_CboSch(cboPass2)      '2지망 합격 학원
     Call basCommonSTD.Init_CboSch(cboPass3)      '3지망 합격 학원
     Call basCommonSTD.Init_CboSch(cboPass4)      '4지망 합격 학원
-    Call basCommonSTD.Init_Mu_type(cboMu_type)       '등급
+    Call basCommonSTD.Init_Mu_type(cboMu_Type)       '등급
     Call basCommonSTD.Init_PTS_Sel(cboPTS_Sel)       '수리점수구분
     Call basCommonSTD.Init_Card(cboCard)             '카드
 '    Call basCommonSTD.Init_Clinic(cbo_Clinic_L, cbo_Clinic_M, cbo_Clinic_E)     '클리닉
@@ -3703,7 +3703,7 @@ Private Sub cmdNew_Click()
     txtEmail.Text = ""
     
     
-    cboMu_type.ListIndex = cboMu_type.ListCount - 1
+    cboMu_Type.ListIndex = cboMu_Type.ListCount - 1
     cboKaeyol.ListIndex = 0
     
     
@@ -4098,7 +4098,7 @@ Private Function Save_Stdin() As Boolean
             Set DBParam = DBCmd.CreateParameter("V_PTS", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
     '>> 등급
         sTmp = ""
-        If Trim(Right(cboMu_type.Text, 30)) <> "X" Then sTmp = Trim(Right(cboMu_type.Text, 30))
+        If Trim(Right(cboMu_Type.Text, 30)) <> "X" Then sTmp = Trim(Right(cboMu_Type.Text, 30))
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
             Set DBParam = DBCmd.CreateParameter("V_PTS", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
         
@@ -5000,16 +5000,12 @@ Private Sub cmdFind_Click()
                 sprSTD_F.SetCellBorder sprSTD_F.Col, sprSTD_F.Row, sprSTD_F.Col, sprSTD_F.Row, 2, basModule.SectionColor1, CellBorderStyleSolid
                 
                 sprSTD_F.Col = 4
-                    sTmp = " ":
-                    If IsNull(.Fields("SEL1_SCH")) = False Then
-                        
-                    End If
+                    sTmp = IIf(IsNull(.Fields("SEL1_SCH")) = False, basCommonSTD.Get_SchName(.Fields("SEL2_SCH")), " ")
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
                 sprSTD_F.Col = 5
-                    sTmp = basCommonSTD.Get_SchName(.Fields("SEL1_SCH"))
-                    
+                    sTmp = IIf(IsNull(.Fields("SEL2_SCH")) = False, basCommonSTD.Get_SchName(.Fields("SEL2_SCH")), " ")
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
@@ -5614,9 +5610,9 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             
             '수능등급
             If IsNull(.Fields("MU_TYPE")) = True Then
-                cboMu_type.ListIndex = 0
+                cboMu_Type.ListIndex = 0
             Else
-                Call Set_Mu_type(cboMu_type, .Fields("MU_TYPE"))
+                Call Set_Mu_type(cboMu_Type, .Fields("MU_TYPE"))
             End If
             
             
