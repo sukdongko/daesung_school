@@ -125,7 +125,7 @@ End Function
 'End Function
 
 
-Function Init_KaeyolDefault(ByRef cboControl As Object)
+Function Init_CboKaeyolDefault(ByRef cboControl As Object)
     With cboControl
         .Clear
         .AddItem "인문" & Space(30) & "01"
@@ -133,7 +133,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
         
         
     '<< 계열 >> : 2008.01.09
-        If Trim(basModule.SchCD) = "N" Then             '< 노량진
+        If Trim(basModule.schcd) = "N" Then             '< 노량진
         
             .AddItem "서울대인문" & Space(30) & "21"
             .AddItem "서울대자연" & Space(30) & "22"
@@ -158,7 +158,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
         End If
     '<< 계열 >> : 2008.01.10
         'If Trim(basModule.SchCD) = "K" Then             '< 강남
-        Select Case Trim(basModule.SchCD)
+        Select Case Trim(basModule.schcd)
             Case "K", "W", "Q"
                 .AddItem "주말법대" & Space(30) & "04"
                 .AddItem "주말의대" & Space(30) & "05"
@@ -177,7 +177,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
         End Select
     
         '<< 계열 >> : 2008.02.15
-        Select Case Trim(basModule.SchCD)               '< 송파
+        Select Case Trim(basModule.schcd)               '< 송파
             Case "S"
 '                .AddItem "예체능" & Space(30) & "03"
 '
@@ -199,7 +199,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
         End Select
         
         
-        Select Case Trim(basModule.SchCD)               '< 양재
+        Select Case Trim(basModule.schcd)               '< 양재
             Case "J"
                 .AddItem "신설인문" & Space(30) & "11"
                 .AddItem "신설자연" & Space(30) & "12"
@@ -210,7 +210,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
         End Select
         
     '<< 계열 >> : 2009.01.09
-        If Trim(basModule.SchCD) = "B" Then             '< 부산
+        If Trim(basModule.schcd) = "B" Then             '< 부산
             
             .AddItem "인문PS반" & Space(30) & "23"
             .AddItem "자연PM반" & Space(30) & "24"
@@ -225,7 +225,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
             .AddItem "심화자연" & Space(30) & "10"
         End If
         
-        Select Case Trim(basModule.SchCD)               '< 마강
+        Select Case Trim(basModule.schcd)               '< 마강
             Case "M"
                 .AddItem "서울대특별인문" & Space(30) & "21"
                 .AddItem "서울대특별자연" & Space(30) & "22"
@@ -235,6 +235,228 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
     End With
 End Function
 
+
+Function Set_CboKaeyol(ByRef cboControl As Object, ByVal schcd As String, ByVal kaeyol As String) As Boolean
+    
+    If IsNull(schcd) = True Or schcd = "" Then
+        Set_CboKaeyol = False
+        Exit Function
+    End If
+    
+    If IsNull(kaeyol) = True Or kaeyol = "" Then
+        Set_CboKaeyol = False
+        Exit Function
+    End If
+    
+    
+    If Trim(schcd) = "N" Then
+        If IsNull(kaeyol) = False Then
+            Select Case Trim(kaeyol)
+                Case "01"
+                    cboControl.ListIndex = 0
+                Case "02"
+                    cboControl.ListIndex = 1
+                Case "03"
+                    cboControl.ListIndex = 4
+                Case "04"
+                    cboControl.ListIndex = 5
+                Case "05"
+                    cboControl.ListIndex = 6
+                Case "06"
+                    cboControl.ListIndex = 7
+                    
+                    
+                Case "07"
+                    cboControl.ListIndex = 8
+                Case "08"
+                    cboControl.ListIndex = 9
+                'Case "09"
+                '    cboControl.ListIndex = 8
+                'Case "10"
+                '    cboControl.ListIndex = 9
+                    
+                Case "11"
+                    cboControl.ListIndex = 10
+                Case "12"
+                    cboControl.ListIndex = 11
+                Case "13"
+                    cboControl.ListIndex = 12
+                Case "14"
+                    cboControl.ListIndex = 13
+                Case "15"
+                    cboControl.ListIndex = 14
+                Case "16"
+                    cboControl.ListIndex = 15
+                Case "21"
+                    cboControl.ListIndex = 2
+                Case "22"
+                    cboControl.ListIndex = 3
+            End Select
+        End If
+        
+    ElseIf Trim(schcd) = "B" Then
+        If IsNull(kaeyol) = False Then
+            Select Case Trim(kaeyol)
+                Case "01"
+                    cboControl.ListIndex = 0
+                Case "02"
+                    cboControl.ListIndex = 1
+                Case "05"
+                    cboControl.ListIndex = 4
+                Case "06"
+                    cboControl.ListIndex = 5
+                    
+                Case "07"
+                    cboControl.ListIndex = 6
+                Case "08"
+                    cboControl.ListIndex = 7
+                Case "09"
+                    cboControl.ListIndex = 8
+                Case "10"
+                    cboControl.ListIndex = 9
+                Case "23"
+                    cboControl.ListIndex = 2
+                Case "24"
+                    cboControl.ListIndex = 3
+            End Select
+        End If
+        
+    ElseIf (Trim(schcd) = "K") Or (Trim(schcd) = "W") Or (Trim(schcd) = "Q") Then
+        If IsNull(kaeyol) = False Then
+            Select Case Trim(kaeyol)
+                Case "01"
+                    cboControl.ListIndex = 0
+                Case "02"
+                    cboControl.ListIndex = 1
+                    
+                Case "04"
+                    cboControl.ListIndex = 2
+                Case "05"
+                    cboControl.ListIndex = 3
+                Case "06"
+                    cboControl.ListIndex = 4
+                Case "07"
+                    cboControl.ListIndex = 5
+                    
+                Case "11"
+                    cboControl.ListIndex = 6
+                Case "12"
+                    cboControl.ListIndex = 7
+                    
+                Case "16"
+                    cboControl.ListIndex = 8
+                Case "17"
+                    cboControl.ListIndex = 9
+                    
+                Case "19"
+                    cboControl.ListIndex = 10
+                Case "20"
+                    cboControl.ListIndex = 11
+                    
+            End Select
+        End If
+        
+    ElseIf Trim(schcd) = "S" Then
+        If IsNull(kaeyol) = False Then
+            Select Case Trim(kaeyol)
+                Case "01"
+                    cboControl.ListIndex = 0
+                Case "02"
+                    cboControl.ListIndex = 1
+                    
+        ''                        Case "03"
+        ''                            cboControl.ListIndex = 2
+        ''
+        ''                        Case "05"
+        ''                            cboControl.ListIndex = 3
+        ''                        Case "06"
+        ''                            cboControl.ListIndex = 4
+        ''
+        ''                        Case "11"
+        ''                            cboControl.ListIndex = 5
+        ''                        Case "12"
+        ''                            cboControl.ListIndex = 6
+        '
+        '                        Case "18"
+        '                            cboControl.ListIndex = 7
+        '                        Case "19"
+        '                            cboControl.ListIndex = 8
+                    
+        '                        Case "18"
+        '                            cboControl.ListIndex = 2
+        '                        Case "19"
+        '                            cboControl.ListIndex = 3
+                Case "21"
+                    cboControl.ListIndex = 2
+                Case "22"
+                    cboControl.ListIndex = 3
+                    
+                    
+            End Select
+        End If
+    ElseIf Trim(schcd) = "P" Then                 '< 마송
+        If IsNull(kaeyol) = False Then
+            Select Case Trim(kaeyol)
+                Case "01"
+                    cboControl.ListIndex = 0
+                Case "02"
+                    cboControl.ListIndex = 1
+                    
+                Case "03"
+                    cboControl.ListIndex = 2
+                Case "04"
+                    cboControl.ListIndex = 3
+            End Select
+        End If
+        
+    ElseIf Trim(schcd) = "J" Then                 '< 양재
+        If IsNull(kaeyol) = False Then
+            Select Case Trim(kaeyol)
+                Case "01"
+                    cboControl.ListIndex = 0
+                Case "02"
+                    cboControl.ListIndex = 1
+                    
+                Case "11"
+                    cboControl.ListIndex = 2
+                Case "12"
+                    cboControl.ListIndex = 3
+                    
+                Case "18"
+                    cboControl.ListIndex = 4
+                Case "19"
+                    cboControl.ListIndex = 5
+                    
+            End Select
+        End If
+    ElseIf Trim(schcd) = "M" Then                 '< 마강
+        If IsNull(kaeyol) = False Then
+            Select Case Trim(kaeyol)
+                Case "01"
+                    cboControl.ListIndex = 0
+                Case "02"
+                    cboControl.ListIndex = 1
+                    
+                Case "21"
+                    cboControl.ListIndex = 2
+                Case "22"
+                    cboControl.ListIndex = 3
+            End Select
+        End If
+        
+    Else
+        If IsNull(kaeyol) = False Then
+            Select Case Trim(kaeyol)
+                Case "01"
+                    cboControl.ListIndex = 0
+                Case "02"
+                    cboControl.ListIndex = 1
+                Case "03"
+                    cboControl.ListIndex = 2
+            End Select
+        End If
+    End If
+End Function
 '학원
 Function Init_CboSch(ByRef cboControl As Object)
     With cboControl
@@ -343,8 +565,8 @@ Function Init_Mu_type(ByRef cboControl As Object)
         .AddItem "2013 6월 평가원" & Space(30) & "2"
         .AddItem "2013 9월 평가원" & Space(30) & "3"
         
-        If basModule.SchCD = "N" Or basModule.SchCD = "S" _
-            Or basModule.SchCD = "J" Or basModule.SchCD = "K" Or basModule.SchCD = "M" Then
+        If basModule.schcd = "N" Or basModule.schcd = "S" _
+            Or basModule.schcd = "J" Or basModule.schcd = "K" Or basModule.schcd = "M" Then
             .AddItem "내신등급" & Space(30) & "9"
         End If
         
@@ -372,7 +594,7 @@ End Function
 '카드
 Function Init_Card(ByRef cboControl As Object)
     With cboControl
-        Select Case Trim(basModule.SchCD)
+        Select Case Trim(basModule.schcd)
             Case "N", "K", "W", "Q", "S"
                 .AddItem "아멕스카드               AMX"
                 .AddItem "전북은행카드             CBB"
@@ -430,7 +652,7 @@ End Function
 '클리닉 콤보 초기화
 Sub Init_Clinic(ByRef chkClinic_L As Object, ByRef chkClinic_M As Object, ByRef chkClinic_E As Object)
 
-    If SchCD = "N" Or SchCD = "S" Then
+    If schcd = "N" Or schcd = "S" Then
         Dim i As Integer
     
         For i = 0 To chkClinic_L.count - 1
@@ -568,7 +790,7 @@ Public Function Get_StrGongji() As String()
     
     '>> 학년별 내역
     
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
     
         Case "N"
             ReDim strReturn(3)
@@ -625,7 +847,7 @@ Function Get_SqlKaeyolDecode()
     Dim sStr    As String
     
     sStr = ""
-    If Trim(basModule.SchCD) = "N" Then
+    If Trim(basModule.schcd) = "N" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','예체',"
@@ -650,7 +872,7 @@ Function Get_SqlKaeyolDecode()
         sStr = sStr & "            ) AS GAEYUL,"
         
     '<< 계열 >> : 2008.01.10/ 2008.03.24
-    ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then
+    ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         
@@ -671,8 +893,8 @@ Function Get_SqlKaeyolDecode()
         sStr = sStr & "            ) AS GAEYUL,"
         
     '<< 계열 >> : 2008.02.15
-    ElseIf Trim(basModule.SchCD) = "S" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
+    ElseIf Trim(basModule.schcd) = "S" Then
+       sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         
         sStr = sStr & "                   '03','예체능',"
@@ -684,10 +906,14 @@ Function Get_SqlKaeyolDecode()
         sStr = sStr & "                   '12','신설자연',"
         
         sStr = sStr & "                   '18','인문프리미엄',"
-        sStr = sStr & "                   '19','자연프리미엄'"
+        sStr = sStr & "                   '19','자연프리미엄',"
+        sStr = sStr & "                   '21','서울대특별인문',"
+        sStr = sStr & "                   '22','서울대특별자연',"
+        sStr = sStr & "                   '23','야간서울대인문',"
+        sStr = sStr & "                   '24','야간서울대자연'"
         
         sStr = sStr & "            ) AS GAEYUL,"
-    ElseIf Trim(basModule.SchCD) = "J" Then                 '< 양재
+    ElseIf Trim(basModule.schcd) = "J" Then                 '< 양재
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '11','신설인문',"
@@ -698,14 +924,14 @@ Function Get_SqlKaeyolDecode()
         
         sStr = sStr & "            ) AS GAEYUL,"
         
-    ElseIf Trim(basModule.SchCD) = "P" Then                 '< 마송
+    ElseIf Trim(basModule.schcd) = "P" Then                 '< 마송
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','특별인문',"
         sStr = sStr & "                   '04','특별자연'"
         sStr = sStr & "            ) AS GAEYUL,"
         
-    ElseIf Trim(basModule.SchCD) = "B" Then                 '< 부산 : 2009.01.09
+    ElseIf Trim(basModule.schcd) = "B" Then                 '< 부산 : 2009.01.09
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '23','인문PS',"
@@ -751,7 +977,7 @@ Public Function AddSQL_ClinicToExcel()
 End Function
 
 '학생 엑셀 저장 쿼리문 (노량진,송파)
-Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As String, Optional day2 As String) As String
+Public Function Get_StdExcuteSqlToExcel_N(kaeyol As String, Optional day1 As String, Optional day2 As String) As String
     Dim sStr        As String
     
     
@@ -766,7 +992,7 @@ Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As Str
     sStr = sStr & "         DECODE(KAEYOL,'01','인문',"
     sStr = sStr & "                       '02','자연',"
 '<< 계열 >> : 2008.01.09
-    If Trim(basModule.SchCD) = "N" Then
+    If Trim(basModule.schcd) = "N" Then
         sStr = sStr & "                   '03','예체',"
         sStr = sStr & "                   '04','수리(나)',"
         sStr = sStr & "                   '05','인문수능',"
@@ -787,7 +1013,7 @@ Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As Str
         sStr = sStr & "                   '22','서울대자연',"
     End If
 '<< 계열 >> : 2008.01.10
-    If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then
+    If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then
         sStr = sStr & "                   '04','주말법대',"
         sStr = sStr & "                   '05','주말의대',"
         sStr = sStr & "                   '06','야간법대',"
@@ -805,7 +1031,7 @@ Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As Str
 
     End If
 '<< 계열 >> : 2008.02.15
-    If Trim(basModule.SchCD) = "S" Then
+    If Trim(basModule.schcd) = "S" Then
         sStr = sStr & "                   '03','예체능',"
         'sStr = sStr & "                   '04','특별자연',"
         
@@ -824,12 +1050,12 @@ Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As Str
         
     End If
 '<< 계열 >> : 2008.02.15
-    If Trim(basModule.SchCD) = "P" Then         '< 마송
+    If Trim(basModule.schcd) = "P" Then         '< 마송
         sStr = sStr & "                   '03','특별인문',"
         sStr = sStr & "                   '04','특별자연',"
     End If
     
-    If Trim(basModule.SchCD) = "J" Then         '< 양재
+    If Trim(basModule.schcd) = "J" Then         '< 양재
         sStr = sStr & "                   '11','신설인문',"
         sStr = sStr & "                   '12','신설자연',"
         
@@ -838,7 +1064,7 @@ Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As Str
     End If
     
 '<< 계열 >> : 2009.01.09
-    If Trim(basModule.SchCD) = "B" Then         '< 부산
+    If Trim(basModule.schcd) = "B" Then         '< 부산
         sStr = sStr & "                   '05','특별인문',"
         sStr = sStr & "                   '06','특별자연',"
         sStr = sStr & "                   '07','연고대인문',"
@@ -1187,11 +1413,11 @@ Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As Str
             '---------------------------------------------------------------------------- 전체학생 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            FROM CLSTD01TB"
-            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.schcd) & "'"
             sStr = sStr & "             AND EXMID > ' ' "
             
-    If Trim(Right(KAEYOL, 30)) <> "ALL" Then
-            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(KAEYOL, 30)) & "'"
+    If Trim(Right(kaeyol, 30)) <> "ALL" Then
+            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(kaeyol, 30)) & "'"
     End If
     
     '<< 기간설정 >>
@@ -1215,13 +1441,13 @@ Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As Str
             '---------------------------------------------------------------------------- 합격자 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            From CLSTD01TB"
-            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
+            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
             sStr = sStr & "             AND EXMID > ' ' "
-    If Trim(Right(KAEYOL, 30)) <> "ALL" Then
-            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(KAEYOL, 30)) & "'"
+    If Trim(Right(kaeyol, 30)) <> "ALL" Then
+            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(kaeyol, 30)) & "'"
     End If
     
     
@@ -1307,7 +1533,7 @@ End Function
 
 
 '학생 엑셀 저장 쿼리문 (노량진,송파 이외에)
-Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As String, Optional day2 As String) As String
+Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As String, Optional day2 As String) As String
     
     Dim sStr         As String
     Dim ni           As Long
@@ -1322,7 +1548,7 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
     sStr = sStr & "         DECODE(KAEYOL,'01','인문',"
     sStr = sStr & "                       '02','자연',"
 '<< 계열 >> : 2008.01.09
-    If Trim(basModule.SchCD) = "N" Then
+    If Trim(basModule.schcd) = "N" Then
         sStr = sStr & "                   '03','예체',"
         sStr = sStr & "                   '04','수리(나)',"
         sStr = sStr & "                   '05','인문수능',"
@@ -1343,7 +1569,7 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
         sStr = sStr & "                   '22','서울대자연',"
     End If
 '<< 계열 >> : 2008.01.10
-    If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then
+    If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then
         sStr = sStr & "                   '04','주말법대',"
         sStr = sStr & "                   '05','주말의대',"
         sStr = sStr & "                   '06','야간법대',"
@@ -1359,7 +1585,7 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
         sStr = sStr & "                   '20','내신우수자자연',"
     End If
 '<< 계열 >> : 2008.02.15
-    If Trim(basModule.SchCD) = "S" Then
+    If Trim(basModule.schcd) = "S" Then
         sStr = sStr & "                   '03','예체능',"
         'sStr = sStr & "                   '04','특별자연',"
         
@@ -1374,12 +1600,12 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
         
     End If
 '<< 계열 >> : 2008.02.15
-    If Trim(basModule.SchCD) = "P" Then         '< 마송
+    If Trim(basModule.schcd) = "P" Then         '< 마송
         sStr = sStr & "                   '03','특별인문',"
         sStr = sStr & "                   '04','특별자연',"
     End If
     
-    If Trim(basModule.SchCD) = "J" Then         '< 양재
+    If Trim(basModule.schcd) = "J" Then         '< 양재
         sStr = sStr & "                   '11','신설인문',"
         sStr = sStr & "                   '12','신설자연',"
         
@@ -1388,7 +1614,7 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
     End If
     
 '<< 계열 >> : 2009.01.09
-    If Trim(basModule.SchCD) = "B" Then         '< 부산7
+    If Trim(basModule.schcd) = "B" Then         '< 부산7
         sStr = sStr & "                   '05','특별인문',"
         sStr = sStr & "                   '06','특별자연',"
         sStr = sStr & "                   '07','연고대인문',"
@@ -1419,7 +1645,7 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
     Next ni
     
     
-    If basModule.SchCD = "J" Then
+    If basModule.schcd = "J" Then
         sStr = sStr & "         CASE WHEN SEL1 > ' ' AND INSTR(SEL1,'" & TGANG_CODE & "|') > 0 THEN          /* 사탐-특강 */"
         sStr = sStr & "             '특강'"
         sStr = sStr & "         ELSE "
@@ -1530,7 +1756,7 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
     sStr = sStr & "         DECODE(MU_TYPE,'1','수능평가','2','6월 평가원','3','9월 평가원','4','6월 평가원','9','내신등급','5','9월 평가원','') AS 등급, "
     sStr = sStr & "         CL_CLOSE AS 완료년월 ,"
     
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
         Case "S"
             'sStr = sStr & " DECODE(PTS_SEL,'1','수능','2','6월 평가원','3','9월 평가원','4','6월 평가원','5','9월 평가원','') AS 구분, "
             sStr = sStr & " DECODE(PTS_SEL,'1','가형','2','나형','') AS 구분, "
@@ -1672,11 +1898,11 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
             '---------------------------------------------------------------------------- 전체학생 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            FROM CLSTD01TB"
-            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.schcd) & "'"
             sStr = sStr & "             AND EXMID > ' ' "
             
-    If Trim(Right(KAEYOL, 30)) <> "ALL" Then
-            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(KAEYOL, 30)) & "'"
+    If Trim(Right(kaeyol, 30)) <> "ALL" Then
+            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(kaeyol, 30)) & "'"
     End If
     
     '<< 기간설정 >>
@@ -1699,13 +1925,13 @@ Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As Strin
             '---------------------------------------------------------------------------- 합격자 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            From CLSTD01TB"
-            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
+            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
             sStr = sStr & "             AND EXMID > ' ' "
-    If Trim(Right(KAEYOL, 30)) <> "ALL" Then
-            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(KAEYOL, 30)) & "'"
+    If Trim(Right(kaeyol, 30)) <> "ALL" Then
+            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(kaeyol, 30)) & "'"
     End If
     
     '<< 기간설정 >>

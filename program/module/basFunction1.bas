@@ -90,42 +90,33 @@ End Function
 '송파
 Private Function setConstant_S()
     '>>클리닉
+    CLINIC_L_COUNT = 1
+    CLINIC_M_COUNT = 1
+    CLINIC_E_COUNT = 1
+    
     '국어
-    g_sClinic_Ls(0) = "(심화)어법&문학 개념어"
-    g_sClinic_Ls(1) = "(심화)고난도 취약유형 연습"
-    g_sClinic_Ls(2) = "(기본)어법&문학 개념어"
-    g_sClinic_Ls(3) = "(심화)비문학 취약유형 연습"
+    g_sClinic_Ls(0) = "국어"
     
     g_sClinic_LCodes(0) = "101"
-    g_sClinic_LCodes(1) = "102"
-    g_sClinic_LCodes(2) = "103"
-    g_sClinic_LCodes(3) = "104"
     
     '수학
-    g_sClinic_Ms(0) = "(기본)수능에 꼭 필요한 고1 수학"
-    g_sClinic_Ms(1) = "(심화)도형과 함수"
-    g_sClinic_Ms(2) = "(기본)함수의 극한&미분"
-    g_sClinic_Ms(3) = "(심화)공간도형과 벡터"
+    g_sClinic_Ms(0) = "수학"
     
     g_sClinic_MCodes(0) = "111"
-    g_sClinic_MCodes(1) = "112"
-    g_sClinic_MCodes(2) = "113"
-    g_sClinic_MCodes(3) = "114"
     
     '영어
-    g_sClinic_Es(0) = "(기본)핵심문법과 구문"
-    g_sClinic_Es(1) = "(심화)취약유형 독해연습"
-    g_sClinic_Es(2) = "(기본)기초문법 및 구문"
-    g_sClinic_Es(3) = "(심화)취약유형 독해연습"
+    g_sClinic_Es(0) = "영어"
     
     g_sClinic_ECodes(0) = "121"
-    g_sClinic_ECodes(1) = "122"
-    g_sClinic_ECodes(2) = "123"
-    g_sClinic_ECodes(3) = "124"
 End Function
 '노량진
 Private Function setConstant_N()
     '>>클리닉
+    
+    CLINIC_L_COUNT = 4
+    CLINIC_M_COUNT = 4
+    CLINIC_E_COUNT = 4
+    
     '국어
     g_sClinic_Ls(0) = "(심화)문학 독해"
     g_sClinic_Ls(1) = "(심화)비문학 독해"
@@ -427,18 +418,15 @@ Function Get_StrGwaMokRange(codes As String, rangeStart As Long, rangeEnd As Lon
     
     Dim sReturnVal As String
     
-    
     sReturnVal = ""
     
     arrTmp = Split(Trim(codes), "|", -1, vbTextCompare)
-    
     count = UBound(arrTmp)
-    
     For i = 0 To count - 1
     
         code = arrTmp(i)
         If code >= rangeStart And code <= rangeEnd Then
-        
+
             sReturnVal = sReturnVal & Get_StrGwaMokByCode(code)
         
         End If
