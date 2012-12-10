@@ -4888,13 +4888,13 @@ Private Sub Form_Load()
     txtEmail.Text = ""
     
     Call basCommonSTD.Init_Kaeyol_N(cboKaeyol)      '계열
-    Call basCommonSTD.Init_Sch(cboSel1_Sch)   '1지망 학원
+    Call basCommonSTD.Init_CboSch(cboSel1_Sch)   '1지망 학원
     cboSel1_Sch.RemoveItem (0)
-    Call basCommonSTD.Init_Sch(cboSel2_Sch)   '2지망 학원
-    Call basCommonSTD.Init_Sch(cboPass1)      '1지망 합격 학원
-    Call basCommonSTD.Init_Sch(cboPass2)      '2지망 합격 학원
-    Call basCommonSTD.Init_Sch(cboPass3)      '3지망 합격 학원
-    Call basCommonSTD.Init_Sch(cboPass4)      '4지망 합격 학원
+    Call basCommonSTD.Init_CboSch(cboSel2_Sch)   '2지망 학원
+    Call basCommonSTD.Init_CboSch(cboPass1)      '1지망 합격 학원
+    Call basCommonSTD.Init_CboSch(cboPass2)      '2지망 합격 학원
+    Call basCommonSTD.Init_CboSch(cboPass3)      '3지망 합격 학원
+    Call basCommonSTD.Init_CboSch(cboPass4)      '4지망 합격 학원
     Call basCommonSTD.Init_Mu_type(cboMu_type)       '등급
     Call basCommonSTD.Init_PTS_Sel(cboPTS_Sel)       '수리점수구분
     Call basCommonSTD.Init_Card(cboCard)             '카드
@@ -4923,8 +4923,8 @@ Private Sub Form_Load()
     Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
     Call basCommonSTD.Init_Pay(cboPay)               '조회 결제
     Call basCommonSTD.Init_PassCN(cboPassCN)         '조회 합격차수
-    Call basCommonSTD.Init_Sch(cboSel1_SCH_F)        '조회 1지망 학원
-    Call basCommonSTD.Init_Sch(cboSel2_SCH_F)        '조회 2지망 학원
+    Call basCommonSTD.Init_CboSch(cboSel1_SCH_F)        '조회 1지망 학원
+    Call basCommonSTD.Init_CboSch(cboSel2_SCH_F)        '조회 2지망 학원
     
     Call basCommonSTD.Set_Spread_Design1(sprSTD_F)              '학생조회 시트
     Call basCommonSTD.Set_Spread_Design1(sprExcel_STD_Data)     '엑셀가져오기 시트
@@ -4991,28 +4991,8 @@ Private Sub Form_Load()
     Dim ni As Integer
     
     '>> 1지망 학원
-    Select Case Trim(basModule.SchCD)
-        Case "N"
-            cboSel1_Sch.ListIndex = 0
-        Case "K"
-            cboSel1_Sch.ListIndex = 1
-        Case "S"
-            cboSel1_Sch.ListIndex = 2
-        Case "P"
-            cboSel1_Sch.ListIndex = 3
-        Case "M"
-            cboSel1_Sch.ListIndex = 4
-            
-        Case "W"
-            cboSel1_Sch.ListIndex = 5
-        Case "Q"
-            cboSel1_Sch.ListIndex = 6
-        Case "J"
-            cboSel1_Sch.ListIndex = 7
-        Case "B"
-            cboSel1_Sch.ListIndex = 8
-    End Select
-    
+    Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.SchCD)
+        
     '>> 학원
     Select Case Trim(basModule.SchCD)
         Case "N"        '노량진
@@ -5183,30 +5163,7 @@ Private Sub cmdNew_Click()
 
 
     '>> 1지망 학원
-    Select Case Trim(basModule.SchCD)
-        Case "N"
-            cboSel1_Sch.ListIndex = 0
-        Case "K"
-            cboSel1_Sch.ListIndex = 1
-        Case "S"
-            cboSel1_Sch.ListIndex = 2
-        Case "P"
-            cboSel1_Sch.ListIndex = 3
-        Case "M"
-            cboSel1_Sch.ListIndex = 4
-
-        Case "W"
-            cboSel1_Sch.ListIndex = 5
-        Case "Q"
-            cboSel1_Sch.ListIndex = 6
-
-        Case "J"
-            cboSel1_Sch.ListIndex = 7
-
-        Case "B"
-            cboSel1_Sch.ListIndex = 8
-
-    End Select
+    Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.SchCD)
 
     '>> 2지명 학원
     cboSel2_Sch.ListIndex = 0
@@ -10126,7 +10083,7 @@ Private Sub imgExcel_Click()
     On Error GoTo ErrStmt
     
     '학생 엑셀 저장 쿼리문
-    sStr = basCommonSTD.Get_StdExcuteSqlToExcel(cboKaeyol_F.Text)
+    sStr = basCommonSTD.Get_StdExcuteSqlToExcel_N(cboKaeyol_F.Text)
     
     
     Text1.Text = sStr

@@ -3507,13 +3507,12 @@ Private Sub Form_Load()
     txtEmail.Text = ""
     
     Call basCommonSTD.Init_KaeyolDefault(cboKaeyol)      '계열
-    Call basCommonSTD.Init_Sch(cboSel1_Sch)   '1지망 학원
-    cboSel1_Sch.RemoveItem (0)
-    Call basCommonSTD.Init_Sch(cboSel2_Sch)   '2지망 학원
-    Call basCommonSTD.Init_Sch(cboPass1)      '1지망 합격 학원
-    Call basCommonSTD.Init_Sch(cboPass2)      '2지망 합격 학원
-    Call basCommonSTD.Init_Sch(cboPass3)      '3지망 합격 학원
-    Call basCommonSTD.Init_Sch(cboPass4)      '4지망 합격 학원
+    Call basCommonSTD.Init_CboSch(cboSel1_Sch)   '1지망 학원
+    Call basCommonSTD.Init_CboSch(cboSel2_Sch)   '2지망 학원
+    Call basCommonSTD.Init_CboSch(cboPass1)      '1지망 합격 학원
+    Call basCommonSTD.Init_CboSch(cboPass2)      '2지망 합격 학원
+    Call basCommonSTD.Init_CboSch(cboPass3)      '3지망 합격 학원
+    Call basCommonSTD.Init_CboSch(cboPass4)      '4지망 합격 학원
     Call basCommonSTD.Init_Mu_type(cboMu_type)       '등급
     Call basCommonSTD.Init_PTS_Sel(cboPTS_Sel)       '수리점수구분
     Call basCommonSTD.Init_Card(cboCard)             '카드
@@ -3543,8 +3542,8 @@ Private Sub Form_Load()
     Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
     Call basCommonSTD.Init_Pay(cboPay)               '조회 결제
     Call basCommonSTD.Init_PassCN(cboPassCN)         '조회 합격차수
-    Call basCommonSTD.Init_Sch(cboSel1_SCH_F)        '조회 1지망 학원
-    Call basCommonSTD.Init_Sch(cboSel2_SCH_F)        '조회 2지망 학원
+    Call basCommonSTD.Init_CboSch(cboSel1_SCH_F)        '조회 1지망 학원
+    Call basCommonSTD.Init_CboSch(cboSel2_SCH_F)        '조회 2지망 학원
     
     Call basCommonSTD.Set_Spread_Design1(sprSTD_F)              '학생조회 시트
     Call basCommonSTD.Set_Spread_Design1(sprExcel_STD_Data)     '엑셀가져오기 시트
@@ -3586,27 +3585,8 @@ Private Sub Form_Load()
     End If
     
     '>> 1지망 학원
-    Select Case Trim(basModule.SchCD)
-        Case "N"
-            cboSel1_Sch.ListIndex = 0
-        Case "K"
-            cboSel1_Sch.ListIndex = 1
-        Case "S"
-            cboSel1_Sch.ListIndex = 2
-        Case "P"
-            cboSel1_Sch.ListIndex = 3
-        Case "M"
-            cboSel1_Sch.ListIndex = 4
-            
-        Case "W"
-            cboSel1_Sch.ListIndex = 5
-        Case "Q"
-            cboSel1_Sch.ListIndex = 6
-        Case "J"
-            cboSel1_Sch.ListIndex = 7
-        Case "B"
-            cboSel1_Sch.ListIndex = 8
-    End Select
+    Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.SchCD)
+    
     
     '>> 학원
     Select Case Trim(basModule.SchCD)
@@ -3744,31 +3724,8 @@ Private Sub cmdNew_Click()
         chkNonsul(ni).value = 0
     Next ni
 
-
     '>> 1지망 학원
-    Select Case Trim(basModule.SchCD)
-        Case "N"
-            cboSel1_Sch.ListIndex = 0
-        Case "K"
-            cboSel1_Sch.ListIndex = 1
-        Case "S"
-            cboSel1_Sch.ListIndex = 2
-        Case "P"
-            cboSel1_Sch.ListIndex = 3
-        Case "M"
-            cboSel1_Sch.ListIndex = 4
-
-        Case "W"
-            cboSel1_Sch.ListIndex = 5
-        Case "Q"
-            cboSel1_Sch.ListIndex = 6
-
-        Case "J"
-            cboSel1_Sch.ListIndex = 7
-
-        Case "B"
-            cboSel1_Sch.ListIndex = 8
-    End Select
+    Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.SchCD)
     
     '>> 2지명 학원
     cboSel2_Sch.ListIndex = 0
@@ -3987,9 +3944,6 @@ Private Function Save_Stdin() As Boolean
             Set DBParam = DBCmd.CreateParameter("V_birth_ymd", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
     
             
-    
-            
-            
     '>> 유/무시험 구분
         If optExmY.value = True Then
             sTmp = "1"
@@ -4202,49 +4156,6 @@ Private Function Save_Stdin() As Boolean
     
     basDataBase.DBConn.CommitTrans
     
-    
-    '2011-01-11 김한욱 노량진 요청으로 지원대학, 지원단대 추가
-'    '2011-01-11 김한욱 프로시저는 웹팀과 상의하에 전체를 바꿔야 함으로 따로 하나 업데이트 강제로 시킴
-'    Select Case Trim(basModule.SchCD)
-'        Case "N"
-'
-'            basDataBase.DBConn.BeginTrans
-'
-'            Set DBCmd = New ADODB.Command
-'            Set DBParam = New ADODB.Parameter
-'
-'            DBCmd.ActiveConnection = basDataBase.DBConn             '<< DB connection
-'
-'            nExe = 0
-'
-'            sTmp = ""
-'            sTmp = sTmp & " UPDATE CLSTD01TB"
-'            sTmp = sTmp & " SET D_UNIVCD = '" & txt_UNI.Text & "', D_MAJORCD = '" & txt_MAJOR.Text & "', PRNT_TEL = '" & txt_P_Phone.Text & "'"
-'            sTmp = sTmp & " WHERE STDNM   = '" & Trim(txtStdNM.Text) & "' AND EXMID   = '" & Trim(fpExmID.Text) & "' AND ACID = 'N'"
-'
-'
-'            DBCmd.CommandText = sTmp
-'            DBCmd.CommandType = adCmdText
-'            DBCmd.CommandTimeout = 30
-'
-'            DBCmd.Execute nExe, , -1
-'
-'
-'            Do While basDataBase.DBConn.State And adStateExecuting
-'                DoEvents
-'            Loop
-'
-'            If nExe = 1 Then
-'
-'            Else
-'               MsgBox "지원 대학에 대한 정보 입력에 실패 하였습니다. 다시 시도하여 주십시오."
-'            End If
-'
-'            Set DBCmd = Nothing
-'            Set DBParam = Nothing
-'
-'            basDataBase.DBConn.CommitTrans
-'    End Select
     Exit Function
 ErrStmt:
     basDataBase.DBConn.RollbackTrans
@@ -4368,10 +4279,7 @@ ErrStmt:
 End Function
 
 
-
-
-
-
+'>> 합격취소버튼 선택
 Private Sub cmdCancel_Click()
     
     Dim bRet        As Boolean
@@ -4429,7 +4337,6 @@ Private Function Cancel_StdOut() As Boolean
     Set DBParam = New ADODB.Parameter
     
     DBCmd.ActiveConnection = basDataBase.DBConn             '<< DB connection
-
 
     
     nExe = 0
@@ -4627,104 +4534,11 @@ Private Sub cmdFind_Click()
         sStr = sStr & " birth_ymd, "
     
 '<< 계열 >> : 2008.01.09
-    If Trim(basModule.SchCD) = "N" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '03','예체',"
-        sStr = sStr & "                   '04','수리(나)',"
-        sStr = sStr & "                   '05','인문수능',"
-        sStr = sStr & "                   '06','자연수능',"
-        
-        sStr = sStr & "                   '06','자연수능',"
-        sStr = sStr & "                   '07','신설인문',"
-        sStr = sStr & "                   '08','신설자연',"
-        sStr = sStr & "                   '09','신설수능인문',"
-        sStr = sStr & "                   '10','신설수능자연',"
-        
-        sStr = sStr & "                   '11','편)인문',"
-        sStr = sStr & "                   '12','편)자연',"
-        sStr = sStr & "                   '13','편)예체',"
-        sStr = sStr & "                   '14','편)수리(나)',"
-        sStr = sStr & "                   '15','편)인문수능',"
-        sStr = sStr & "                   '16','편)자연수능',"
-        sStr = sStr & "                   '21','서울대인문',"
-        sStr = sStr & "                   '22','서울대인문'"
-        sStr = sStr & "            ) AS GAEYUL,"
-        
-'<< 계열 >> : 2008.01.10/ 2008.03.24
-    ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        
-        sStr = sStr & "                   '04','주말법대',"
-        sStr = sStr & "                   '05','주말의대',"
-        sStr = sStr & "                   '06','야간법대',"
-        sStr = sStr & "                   '07','야간의대',"
-        
-        sStr = sStr & "                   '11','선착순인문',"
-        sStr = sStr & "                   '12','선착순자연',"
-        
-        sStr = sStr & "                   '16','선착순인문16',"
-        sStr = sStr & "                   '17','선착순자연17',"
-        
-        sStr = sStr & "                   '19','내신우수자인문',"
-        sStr = sStr & "                   '20','내신우수자자연'"
-        
-        sStr = sStr & "            ) AS GAEYUL,"
-        
-'<< 계열 >> : 2008.02.15
-    ElseIf Trim(basModule.SchCD) = "S" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        
-        sStr = sStr & "                   '03','예체능',"
-        
-        sStr = sStr & "                   '05','수능인문',"
-        sStr = sStr & "                   '06','수능자연',"
-        
-        sStr = sStr & "                   '11','신설인문',"
-        sStr = sStr & "                   '12','신설자연',"
-        
-        sStr = sStr & "                   '18','인문프리미엄',"
-        sStr = sStr & "                   '19','자연프리미엄'"
-        
-        sStr = sStr & "            ) AS GAEYUL,"
-    ElseIf Trim(basModule.SchCD) = "J" Then                 '< 양재
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '11','신설인문',"
-        sStr = sStr & "                   '12','신설자연',"
-        
-        sStr = sStr & "                   '18','인문프리미엄',"
-        sStr = sStr & "                   '19','자연프리미엄'"
-        
-        sStr = sStr & "            ) AS GAEYUL,"
-        
-    ElseIf Trim(basModule.SchCD) = "P" Then                 '< 마송
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '03','특별인문',"
-        sStr = sStr & "                   '04','특별자연'"
-        sStr = sStr & "            ) AS GAEYUL,"
-        
-    ElseIf Trim(basModule.SchCD) = "B" Then                 '< 부산 : 2009.01.09
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '23','인문PS',"
-        sStr = sStr & "                   '24','자연PM',"
-        sStr = sStr & "                   '05','특별인문',"
-        sStr = sStr & "                   '06','특별자연',"
-        sStr = sStr & "                   '07','연고대인문',"
-        sStr = sStr & "                   '08','연고대자연',"
-        sStr = sStr & "                   '09','심화인문',"
-        sStr = sStr & "                   '10','심화자연'"
-        sStr = sStr & "            ) AS GAEYUL,"
-        
-    Else
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연'"
-        sStr = sStr & "            ) AS GAEYUL,"
-    End If
+
+    '계열 decode sql문 공통
+    sStr = sStr & basCommonSTD.Get_SqlKaeyolDecode()
+
+    
     
     sStr = sStr & "     /* 사탐, 과탐 분리 */"
     sStr = sStr & "         CASE WHEN SEL1 > ' ' AND INSTR(SEL1,'" & constSatamCodes(0) & "|') > 0 THEN          /* 사탐-한국사 */"
@@ -5188,66 +5002,14 @@ Private Sub cmdFind_Click()
                 sprSTD_F.Col = 4
                     sTmp = " ":
                     If IsNull(.Fields("SEL1_SCH")) = False Then
-                        Select Case Trim(.Fields("SEL1_SCH"))
-                            Case "N"
-                                sTmp = "노량진"
-                            Case "K"
-                                sTmp = "강남"
-                            Case "S"
-                                sTmp = "송파"
-                            Case "P"
-                                sTmp = "송파 M"
-                            Case "M"
-                                sTmp = "강남 M"
-                                
-                            Case "W"
-                                sTmp = "주말법의대"
-                            Case "Q"
-                                sTmp = "야간법의대"
-                                
-                            Case "J"
-                                sTmp = "양재"
-                            Case "B"
-                                sTmp = "부산"
-                                
-                                
-                            Case Else
-                                sTmp = ""
-                        End Select
+                        
                     End If
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
                 sprSTD_F.Col = 5
-                    sTmp = " "
-                    If IsNull(.Fields("SEL2_SCH")) = False Then
-                        Select Case Trim(.Fields("SEL2_SCH"))
-                            Case "N"
-                                sTmp = "노량진"
-                            Case "K"
-                                sTmp = "강남"
-                            Case "S"
-                                sTmp = "송파"
-                            Case "P"
-                                sTmp = "송파 M"
-                            Case "M"
-                                sTmp = "강남 M"
-                                
-                            Case "W"
-                                sTmp = "주말법의대"
-                            Case "Q"
-                                sTmp = "야간법의대"
-                                
-                            Case "J"
-                                sTmp = "양재"
-                            Case "B"
-                                sTmp = "부산"
-                            Case "E"
-                                sTmp = "강남기숙(이천)"
-                            Case Else
-                                sTmp = ""
-                        End Select
-                    End If
+                    sTmp = basCommonSTD.Get_SchName(.Fields("SEL1_SCH"))
+                    
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
@@ -5285,36 +5047,18 @@ Private Sub cmdFind_Click()
                 
                 '>> 선택과목 (사탐/ 과탐)
                 For ni = 1 To 10 Step 1
-                
-                    If ni Mod 4 = 1 Then
-                        sprSTD_F.SetCellBorder sprSTD_F.Col, sprSTD_F.Row, sprSTD_F.Col, sprSTD_F.Row, 2, basModule.SectionColor2, CellBorderStyleSolid
-                    End If
-                
+
+                    '파란색 세로 경게선 긋기
+                    If ni Mod 4 = 1 Then: sprSTD_F.SetCellBorder sprSTD_F.Col, sprSTD_F.Row, sprSTD_F.Col, sprSTD_F.Row, 2, basModule.SectionColor2, CellBorderStyleSolid
+
                     sprSTD_F.Col = sprSTD_F.Col + 1
                     
-                    Select Case ni
-                        Case 1 To 8
-                            sGbn = "SEL" & Trim(CStr(ni))
-                        Case 9 To 11
-                            If sKaeyol = "02" Or sKaeyol = "04" Or sKaeyol = "06" Then
-                                sGbn = "X"
-                            Else
-                                sGbn = "SEL" & Trim(CStr(ni))
-                            End If
-                    End Select
-                    
-                    If sGbn = "X" Then
-                        Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", 10, "")
-                    Else
-                        sTmp = IIf(Trim(.Fields(sGbn)) = "00", "", Trim(.Fields(sGbn)))
-                        
-                        If IsNull(.Fields(sGbn)) = False Then
-                            If sTmp <> "" Then
-                                sTmp = basGwamok.Get_StrGwaMokByCode(sTmp)   ' sTmp(코드)에 따른 과목이름얻어오기
-                            End If
-                            Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
-                        End If
-                    End If
+                    sGbn = "SEL" & Trim(CStr(ni))
+                    sTmp = IIf(Trim(.Fields(sGbn)) = "00", "", Trim(.Fields(sGbn)))
+                    If sTmp <> "" Then: sTmp = basGwamok.Get_StrGwaMokByCode(sTmp)   ' sTmp(코드)에 따른 과목이름얻어오기
+
+                    Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
+                
                 Next ni
                 
                 
@@ -5599,12 +5343,10 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
     sStr = sStr & "    From CLSTD01TB "
     sStr = sStr & "   WHERE SCHNO = '" & Trim(aSchNO) & "'"
     
-   
+    
+    'W,Q는 강남의 새로운 계열 (반인데 계열로 추가)
     Select Case Trim(basModule.SchCD)
-        Case "W"
-            sStr = sStr & "     AND (ACID  = '" & Trim(basModule.SchCD) & "'"
-            sStr = sStr & "          OR ACID = 'K')"
-        Case "Q"
+        Case "W", "Q"
             sStr = sStr & "     AND (ACID  = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "          OR ACID = 'K')"
         Case Else

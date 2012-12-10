@@ -451,8 +451,8 @@ End Function
 
 '과목 코드 ->  과목명
 Function Get_StrGwaMokByCode(gwamokCode As String) As String
-
-   Dim i As Integer
+    
+    Dim i       As Integer
     
     For i = 0 To SATAM_COUNT - 1
         If constSatamCodes(i) = gwamokCode Then

@@ -230,7 +230,7 @@ Function Init_KaeyolDefault(ByRef cboControl As Object)
 End Function
 
 '학원
-Function Init_Sch(ByRef cboControl As Object)
+Function Init_CboSch(ByRef cboControl As Object)
     With cboControl
         .Clear
         .AddItem "없음" & Space(30) & "X"
@@ -249,6 +249,34 @@ Function Init_Sch(ByRef cboControl As Object)
         .ListIndex = 0
     End With
 End Function
+
+'학원
+Function Set_CboSch(ByRef cboControl As Object, ByVal sSch As String)
+
+    Select Case Trim(sSch)
+        Case "N"
+            cboControl.ListIndex = 1
+        Case "K"
+            cboControl.ListIndex = 2
+        Case "S"
+            cboControl.ListIndex = 3
+        Case "P"
+            cboControl.ListIndex = 4
+        Case "M"
+            cboControl.ListIndex = 5
+        Case "W"
+            cboControl.ListIndex = 6
+        Case "Q"
+            cboControl.ListIndex = 7
+        Case "J"
+            cboControl.ListIndex = 8
+        Case "B"
+            cboControl.ListIndex = 9
+        Case Else
+            cboControl.ListIndex = 0
+    End Select
+End Function
+
 
 '합격
 Function Init_PassCN(ByRef cboControl As Object)
@@ -423,6 +451,49 @@ End Sub
 '초기화 끝
 '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'데이터 가져오기/불러오기
+'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Function Get_SchName(sSch As String)
+
+    If IsNull(sSch) = True Then
+        Get_SchName = ""
+        Exit Function
+    End If
+    
+    Dim sTmp As String
+    Select Case Trim(sSch)
+        Case "N"
+            sTmp = "노량진"
+        Case "K"
+            sTmp = "강남"
+        Case "S"
+            sTmp = "송파"
+        Case "P"
+            sTmp = "송파 M"
+        Case "M"
+            sTmp = "강남 M"
+        Case "W"
+            sTmp = "주말법의대"
+        Case "Q"
+            sTmp = "야간법의대"
+        Case "J"
+            sTmp = "양재"
+        Case "B"
+            sTmp = "부산"
+        Case Else
+            sTmp = ""
+    End Select
+    
+    Get_SchName = sTmp
+End Function
+
+
+'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+'데이터 가져오기/불러오기
+'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
     
 '클리닉 콤보 설정
 Sub Set_Clinic(ByRef chkClinic_L As Object, ByRef chkClinic_M As Object, ByRef chkClinic_E As Object, ByVal SEL7 As String)
@@ -544,6 +615,112 @@ End Function
 '엑셀 저장 SQL문
 '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+Function Get_SqlKaeyolDecode()
+    Dim sStr    As String
+    
+    sStr = ""
+    If Trim(basModule.SchCD) = "N" Then
+        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
+        sStr = sStr & "                   '02','자연',"
+        sStr = sStr & "                   '03','예체',"
+        sStr = sStr & "                   '04','수리(나)',"
+        sStr = sStr & "                   '05','인문수능',"
+        sStr = sStr & "                   '06','자연수능',"
+        
+        sStr = sStr & "                   '06','자연수능',"
+        sStr = sStr & "                   '07','신설인문',"
+        sStr = sStr & "                   '08','신설자연',"
+        sStr = sStr & "                   '09','신설수능인문',"
+        sStr = sStr & "                   '10','신설수능자연',"
+        
+        sStr = sStr & "                   '11','편)인문',"
+        sStr = sStr & "                   '12','편)자연',"
+        sStr = sStr & "                   '13','편)예체',"
+        sStr = sStr & "                   '14','편)수리(나)',"
+        sStr = sStr & "                   '15','편)인문수능',"
+        sStr = sStr & "                   '16','편)자연수능',"
+        sStr = sStr & "                   '21','서울대인문',"
+        sStr = sStr & "                   '22','서울대인문'"
+        sStr = sStr & "            ) AS GAEYUL,"
+        
+    '<< 계열 >> : 2008.01.10/ 2008.03.24
+    ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then
+        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
+        sStr = sStr & "                   '02','자연',"
+        
+        sStr = sStr & "                   '04','주말법대',"
+        sStr = sStr & "                   '05','주말의대',"
+        sStr = sStr & "                   '06','야간법대',"
+        sStr = sStr & "                   '07','야간의대',"
+        
+        sStr = sStr & "                   '11','선착순인문',"
+        sStr = sStr & "                   '12','선착순자연',"
+        
+        sStr = sStr & "                   '16','선착순인문16',"
+        sStr = sStr & "                   '17','선착순자연17',"
+        
+        sStr = sStr & "                   '19','내신우수자인문',"
+        sStr = sStr & "                   '20','내신우수자자연'"
+        
+        sStr = sStr & "            ) AS GAEYUL,"
+        
+    '<< 계열 >> : 2008.02.15
+    ElseIf Trim(basModule.SchCD) = "S" Then
+        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
+        sStr = sStr & "                   '02','자연',"
+        
+        sStr = sStr & "                   '03','예체능',"
+        
+        sStr = sStr & "                   '05','수능인문',"
+        sStr = sStr & "                   '06','수능자연',"
+        
+        sStr = sStr & "                   '11','신설인문',"
+        sStr = sStr & "                   '12','신설자연',"
+        
+        sStr = sStr & "                   '18','인문프리미엄',"
+        sStr = sStr & "                   '19','자연프리미엄'"
+        
+        sStr = sStr & "            ) AS GAEYUL,"
+    ElseIf Trim(basModule.SchCD) = "J" Then                 '< 양재
+        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
+        sStr = sStr & "                   '02','자연',"
+        sStr = sStr & "                   '11','신설인문',"
+        sStr = sStr & "                   '12','신설자연',"
+        
+        sStr = sStr & "                   '18','인문프리미엄',"
+        sStr = sStr & "                   '19','자연프리미엄'"
+        
+        sStr = sStr & "            ) AS GAEYUL,"
+        
+    ElseIf Trim(basModule.SchCD) = "P" Then                 '< 마송
+        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
+        sStr = sStr & "                   '02','자연',"
+        sStr = sStr & "                   '03','특별인문',"
+        sStr = sStr & "                   '04','특별자연'"
+        sStr = sStr & "            ) AS GAEYUL,"
+        
+    ElseIf Trim(basModule.SchCD) = "B" Then                 '< 부산 : 2009.01.09
+        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
+        sStr = sStr & "                   '02','자연',"
+        sStr = sStr & "                   '23','인문PS',"
+        sStr = sStr & "                   '24','자연PM',"
+        sStr = sStr & "                   '05','특별인문',"
+        sStr = sStr & "                   '06','특별자연',"
+        sStr = sStr & "                   '07','연고대인문',"
+        sStr = sStr & "                   '08','연고대자연',"
+        sStr = sStr & "                   '09','심화인문',"
+        sStr = sStr & "                   '10','심화자연'"
+        sStr = sStr & "            ) AS GAEYUL,"
+        
+    Else
+        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
+        sStr = sStr & "                   '02','자연'"
+        sStr = sStr & "            ) AS GAEYUL,"
+    End If
+    
+    Get_SqlKaeyolDecode = sStr
+End Function
+
 Public Function AddSQL_ClinicToExcel()
     Dim sStr    As String
     
@@ -568,7 +745,7 @@ Public Function AddSQL_ClinicToExcel()
 End Function
 
 '학생 엑셀 저장 쿼리문 (노량진,송파)
-Public Function Get_StdExcuteSqlToExcel_N(kaeyol As String, Optional day1 As String, Optional day2 As String) As String
+Public Function Get_StdExcuteSqlToExcel_N(KAEYOL As String, Optional day1 As String, Optional day2 As String) As String
     Dim sStr        As String
     
     
@@ -1007,8 +1184,8 @@ Public Function Get_StdExcuteSqlToExcel_N(kaeyol As String, Optional day1 As Str
             sStr = sStr & "           WHERE ACID = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "             AND EXMID > ' ' "
             
-    If Trim(Right(kaeyol, 30)) <> "ALL" Then
-            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(kaeyol, 30)) & "'"
+    If Trim(Right(KAEYOL, 30)) <> "ALL" Then
+            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(KAEYOL, 30)) & "'"
     End If
     
     '<< 기간설정 >>
@@ -1037,8 +1214,8 @@ Public Function Get_StdExcuteSqlToExcel_N(kaeyol As String, Optional day1 As Str
             sStr = sStr & "                  PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
             sStr = sStr & "                  PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
             sStr = sStr & "             AND EXMID > ' ' "
-    If Trim(Right(kaeyol, 30)) <> "ALL" Then
-            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(kaeyol, 30)) & "'"
+    If Trim(Right(KAEYOL, 30)) <> "ALL" Then
+            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(KAEYOL, 30)) & "'"
     End If
     
     
@@ -1124,7 +1301,7 @@ End Function
 
 
 '학생 엑셀 저장 쿼리문 (노량진,송파 이외에)
-Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As String, Optional day2 As String) As String
+Public Function Get_StdExcuteSqlToExcel(KAEYOL As String, Optional day1 As String, Optional day2 As String) As String
     
     Dim sStr         As String
     Dim ni           As Long
@@ -1492,8 +1669,8 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
             sStr = sStr & "           WHERE ACID = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "             AND EXMID > ' ' "
             
-    If Trim(Right(kaeyol, 30)) <> "ALL" Then
-            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(kaeyol, 30)) & "'"
+    If Trim(Right(KAEYOL, 30)) <> "ALL" Then
+            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(KAEYOL, 30)) & "'"
     End If
     
     '<< 기간설정 >>
@@ -1521,8 +1698,8 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
             sStr = sStr & "                  PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
             sStr = sStr & "                  PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
             sStr = sStr & "             AND EXMID > ' ' "
-    If Trim(Right(kaeyol, 30)) <> "ALL" Then
-            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(kaeyol, 30)) & "'"
+    If Trim(Right(KAEYOL, 30)) <> "ALL" Then
+            sStr = sStr & "             AND KAEYOL = '" & Trim(Right(KAEYOL, 30)) & "'"
     End If
     
     '<< 기간설정 >>
