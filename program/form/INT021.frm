@@ -2007,7 +2007,7 @@ Private Type tSTD
     Birth       As String
     
     EXMTYPE     As String
-    KAEYOL      As String
+    kaeyol      As String
     
     SEL1        As String
     SEL2        As String
@@ -2195,7 +2195,7 @@ End Sub
 '>> 학생 조회
 Private Sub cmdFind_Click()
     
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
         Case "S"
         
         Case Else
@@ -2391,7 +2391,7 @@ Private Sub Get_STD_Data()
                 If IsNull(.Fields("birth")) = False Then uSTD(nRec).Birth = .Fields("birth")
                 
                 'If IsNull(.Fields("EXMTYPE")) = False Then uSTD(nRec).EXMTYPE = .Fields("EXMTYPE")
-                If IsNull(.Fields("KEYOL")) = False Then uSTD(nRec).KAEYOL = .Fields("KEYOL")
+                If IsNull(.Fields("KEYOL")) = False Then uSTD(nRec).kaeyol = .Fields("KEYOL")
                 
                 If IsNull(.Fields("SEL1")) = False Then uSTD(nRec).SEL1 = .Fields("SEL1")
                 If IsNull(.Fields("SEL2")) = False Then uSTD(nRec).SEL2 = .Fields("SEL2")
@@ -2561,7 +2561,7 @@ Private Sub Std_Data_Show(Index As Long)
         End Select
         
         
-        Select Case Trim(.KAEYOL)   '<< 계열: 01,02,03-인문,자연,예체   06,05-수능인문,자연  06,07 -강남법대,의대
+        Select Case Trim(.kaeyol)   '<< 계열: 01,02,03-인문,자연,예체   06,05-수능인문,자연  06,07 -강남법대,의대
             Case "1"
                 접수계열(0).Text = "인문 (O)"
                 접수계열(1).Text = "자연 ( )"

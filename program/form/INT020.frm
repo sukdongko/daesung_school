@@ -1896,7 +1896,7 @@ Private Type tSTD
     Birth       As String
     
     EXMTYPE     As String
-    KAEYOL      As String
+    kaeyol      As String
     
     SEL1        As String
     SEL2        As String
@@ -2009,6 +2009,7 @@ Private Sub Form_Load()
         Me.Height = 10755
         
         '>> 계열
+        Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol)        '계열
         With cboKaeyol
             .Clear
             .AddItem "인문" & Space(30) & "01"
@@ -2283,7 +2284,7 @@ Private Sub Get_STD_Data()
                 If IsNull(.Fields("birth")) = False Then uSTD(nRec).Birth = .Fields("birth")
                 
                 'If IsNull(.Fields("EXMTYPE")) = False Then uSTD(nRec).EXMTYPE = .Fields("EXMTYPE")
-                If IsNull(.Fields("KEYOL")) = False Then uSTD(nRec).KAEYOL = .Fields("KEYOL")
+                If IsNull(.Fields("KEYOL")) = False Then uSTD(nRec).kaeyol = .Fields("KEYOL")
                 
                 If IsNull(.Fields("SEL1")) = False Then uSTD(nRec).SEL1 = .Fields("SEL1")
                 If IsNull(.Fields("SEL2")) = False Then uSTD(nRec).SEL2 = .Fields("SEL2")
@@ -2300,45 +2301,12 @@ Private Sub Get_STD_Data()
                 'If IsNull(.Fields("GTOT")) = False Then uSTD(nRec).TOT_NUM = .Fields("GTOT")
                 
                 '## 지망학원 - WINTER는 필요없음.
-                If IsNull(.Fields("ACACD")) = False Then uSTD(nRec).ACID = .Fields("ACACD")
-                    Select Case Trim(.Fields("ACACD"))
-                        Case "N"
-                            uSTD(nRec).SEL1_SCH = "노량진"
-                        Case "K"
-                            uSTD(nRec).SEL1_SCH = "강남"
-                        Case "S"
-                            uSTD(nRec).SEL1_SCH = "송파"
-                        Case "P"
-                            uSTD(nRec).SEL1_SCH = "송파 M"
-                        Case "M"
-                            uSTD(nRec).SEL1_SCH = "강남 M"
-                            
-                        Case "W"
-                            uSTD(nRec).SEL1_SCH = "주말법의대"
-                        Case "Q"
-                            uSTD(nRec).SEL1_SCH = "야간법의대"
-                            
-                    End Select
+                sTmp = " ":     If IsNull(.Fields("ACACD")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("ACACD")))
+                    uSTD(nRec).SEL1_SCH = sTmp
+                sTmp = " ":     If IsNull(.Fields("ACACD")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("ACACD")))
+                    uSTD(nRec).SEL2_SCH = sTmp
+                    
                 
-                If IsNull(.Fields("ACACD")) = False Then uSTD(nRec).ACID = .Fields("ACACD")
-                    Select Case Trim(.Fields("ACACD"))
-                        Case "N"
-                            uSTD(nRec).SEL2_SCH = "노량진"
-                        Case "K"
-                            uSTD(nRec).SEL2_SCH = "강남"
-                        Case "S"
-                            uSTD(nRec).SEL2_SCH = "송파"
-                        Case "P"
-                            uSTD(nRec).SEL2_SCH = "송파 M"
-                        Case "M"
-                            uSTD(nRec).SEL2_SCH = "강남 M"
-                            
-                        Case "W"
-                            uSTD(nRec).SEL2_SCH = "주말법의대"
-                        Case "Q"
-                            uSTD(nRec).SEL2_SCH = "야간법의대"
-                            
-                    End Select
                 
                 'If IsNull(.Fields("PASS1")) = False Then uSTD(nRec).PASS1 = .Fields("PASS1")
                 'If IsNull(.Fields("PASS2")) = False Then uSTD(nRec).PASS2 = .Fields("PASS2")
@@ -2440,7 +2408,7 @@ Private Sub Std_Data_Show(Index As Long)
     With uSTD(Index)
         학년.Text = .HAKYUN
         
-        Select Case Trim(.KAEYOL)   '<< 계열: 01,02,03-인문,자연,예체   06,05-수능인문,자연  06,07 -강남법대,의대
+        Select Case Trim(.kaeyol)   '<< 계열: 01,02,03-인문,자연,예체   06,05-수능인문,자연  06,07 -강남법대,의대
             Case "1":  접수계열.Text = "인 문 계"
             Case "2":  접수계열.Text = "자 연 계"
             

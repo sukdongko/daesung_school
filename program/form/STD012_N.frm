@@ -2727,7 +2727,7 @@ Private Type tExcel_StdData
     STDNM       As String
     Birth_ymd       As String
     EXMTYPE     As String
-    KAEYOL      As String
+    kaeyol      As String
     WANT_ACID1  As String
     WANT_ACID2  As String
     KOR         As Long
@@ -2974,8 +2974,8 @@ Private Sub Form_Load()
     
     '<< 계열 >> : 2009.01.09
         If Trim(basModule.SchCD) = "B" Then             '< 부산
-            .AddItem "수학선행인문" & Space(30) & "05"
-            .AddItem "수학선행자연" & Space(30) & "06"
+            .AddItem "선행인문" & Space(30) & "05"
+            .AddItem "선행자연" & Space(30) & "06"
             
             .AddItem "연.고대인문" & Space(30) & "07"
             .AddItem "연.고대자연" & Space(30) & "08"
@@ -4916,7 +4916,7 @@ Private Sub Get_Excel_Data()
                 End Select
             End If
         End If
-        uExcel_StdData.KAEYOL = sTmp
+        uExcel_StdData.kaeyol = sTmp
         
     '1 지망학원
         sTmp = Trim(basModule.SchCD)
@@ -5188,7 +5188,7 @@ Private Sub Get_Excel_Data()
                     Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
             '>> 계열
                 .Col = .Col + 1
-                    sTmp = uExcel_StdData.KAEYOL
+                    sTmp = uExcel_StdData.kaeyol
                     Call basFunction.Set_SprType_Text(sprExcel_STD_Data, "center", "left", basFunction.LenKor(sTmp), sTmp)
                     
             '>> 1 지망학원

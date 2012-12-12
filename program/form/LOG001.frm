@@ -220,13 +220,13 @@ Private Sub Form_Load()
     sGbn = "SCHOOL"
     sData = ""
     nRtn = basModule.GetPrivateProfileString(sGbn, "SCHOOL", "", sData, 255, sini_Path)         '>> 학교코드
-    basModule.schcd = Trim(Replace(Left(Trim(sData), nRtn), Chr(0), "", 1, -1, vbTextCompare))
+    basModule.SchCD = Trim(Replace(Left(Trim(sData), nRtn), Chr(0), "", 1, -1, vbTextCompare))
     If nRtn = 0 Then
         Call Create_School_ini_File
     End If
     
     
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N"
             cboSchool.ListIndex = 0
         Case "K"
@@ -297,13 +297,13 @@ Private Sub Create_School_ini_File()
     Dim sGbn        As String
     Dim nRtn        As Long
     
-    basModule.schcd = "N"
+    basModule.SchCD = "N"
     basModule.SchNM = "노량진"
     basModule.connDB = "MIMAC"
         
     sGbn = "SCHOOL"
     'nRtn = basModule.WritePrivateProfileString(sGbn, "PATH_ORACLE_TNS", basDataBase.TNS_Path1, sini_Path)                  '<< oracle tns 경로 - 앞으로 변경될수있다.
-    nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", schcd, sini_Path)                  '<< 학원
+    nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", SchCD, sini_Path)                  '<< 학원
     nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", SchNM, sini_Path)          '<< 학원명
     nRtn = basModule.WritePrivateProfileString(sGbn, "DB", connDB, sini_Path)                  '<< DB 접속 - mimac 실서버, dev 개발서버
         
@@ -354,50 +354,50 @@ Private Sub cmdSchool_Click()
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "N", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "노량진", sini_Path)          '<< 학원명
             
-            schcd = "N":    SchNM = "노량진"
+            SchCD = "N":    SchNM = "노량진"
         Case "K"
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "K", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "강남", sini_Path)            '<< 학원명
             
-            schcd = "K":    SchNM = "강남"
+            SchCD = "K":    SchNM = "강남"
         Case "S"
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "S", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "송파", sini_Path)            '<< 학원명
             
-            schcd = "S":    SchNM = "송파"
+            SchCD = "S":    SchNM = "송파"
         Case "P"
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "P", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "송파 M", sini_Path)          '<< 학원명
             
-            schcd = "P":    SchNM = "송파 M"
+            SchCD = "P":    SchNM = "송파 M"
         Case "M"
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "M", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "강남 M", sini_Path)          '<< 학원명
             
-            schcd = "M":    SchNM = "강남 M"
+            SchCD = "M":    SchNM = "강남 M"
             
         Case "W"
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "W", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "주말법의대", sini_Path)      '<< 학원명
             
-            schcd = "W":    SchNM = "주말법의대"
+            SchCD = "W":    SchNM = "주말법의대"
         Case "Q"
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "Q", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "야간법의대", sini_Path)      '<< 학원명
             
-            schcd = "Q":    SchNM = "야간법의대"
+            SchCD = "Q":    SchNM = "야간법의대"
             
         Case "J"
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "J", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "양재", sini_Path)        '<< 학원명
             
-            schcd = "J":    SchNM = "양재"
+            SchCD = "J":    SchNM = "양재"
             
         Case "B"
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL", "B", sini_Path)                  '<< 학원
             nRtn = basModule.WritePrivateProfileString(sGbn, "SCHOOL_NM", "부산", sini_Path)            '<< 학원명
             
-            schcd = "B":    SchNM = "부산"
+            SchCD = "B":    SchNM = "부산"
             
     End Select
     
@@ -441,7 +441,7 @@ Private Sub cmdOK_Click()
         sSql = ""
         sSql = sSql & " SELECT EMPNO, EMPNM, PASSWD "
         sSql = sSql & "   FROM CLEMP01TB "
-        sSql = sSql & "  WHERE ACID   = '" & Trim(basModule.schcd) & "' "
+        sSql = sSql & "  WHERE ACID   = '" & Trim(basModule.SchCD) & "' "
         sSql = sSql & "    AND EMPNM  = '" & Trim(txtNM.Text) & "' "
         sSql = sSql & "    AND PASSWD = '" & Trim(txtPass.Text) & "' "
     End If

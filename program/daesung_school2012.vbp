@@ -77,7 +77,6 @@ Form=form\INT110_N.frm
 Module=basTNS; module\basTNS.bas
 Module=basGwamok; module\basFunction1.bas
 Module=basCommonSTD; module\basCommonSTD.bas
-Form=form\INT011_TEST.frm
 Form=form\MAT011_J.frm
 Form=form\Form4.frm
 IconForm="MDI001"

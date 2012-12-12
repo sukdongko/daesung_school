@@ -1,0 +1,844 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<title>부산대성학원에 오신것을 환영합니다.</title>
+<script type="text/javascript" src="/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.8.7.custom.min.js"></script>
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.button.js"></script>
+
+<script src="http://www.mimacstudy.com/common/js/common.js"></script>
+<link href="/common/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+	<div id="wrap">
+    	<div id="container">
+        	<div id="header">
+                <div class="flash"><script lang='javascript'>flashWrite('/img/main_menu.swf','947','98','main_menu','','transparent','pageNum=7&xmlURL=/menu.php');</script></div>
+            </div>
+            <div id="bodyContainer">
+
+<!----------------------------- 클릭시 데이터 저장  ------------------------------------------>
+<script type="text/javascript" src="http://darwin.dsnschool.net/common/js/jquery-1.4.min.js"></script>
+<span id='debugConsole'></span>
+<script>
+function log(msg) {
+    var console = document.getElementById("debugConsole");
+    if (console != null)    console.innerHTML += msg +"<br/>";
+    else                    alert('로그 레이어를 설정해주세요.') ;
+}
+$(function() {
+    var var_alt , var_href , var_location , prams ;
+    var_location = '/index.htm';
+
+    // 맵에 링크걸기
+    $("area").each(function(){
+        if($(this).attr("attr_save") != undefined) {
+            $(this).click(function(){
+                var_alt  = $(this).attr("alt");
+                var_href = $(this).attr("href");
+
+                if(!var_alt||!var_href) return;
+                prams = "&location="+var_location+"&alt="+var_alt+"&href="+var_href;
+                // 동기 통신
+                $.ajax({ url:"/include/ClickSave_ajax.htm?"+prams,async:false});
+                //alert($(this).attr("alt")); alert($(this).attr("href"));
+            });
+        }
+    });
+
+    // 이미지에 링크
+    $("img").each(function(){
+        if($(this).attr("attr_save") != undefined) {
+            $(this).click(function(){
+                var_alt  = $(this).attr("alt") ;
+                var_href = $(this).parent().attr("href") ;
+
+                if(!var_alt||!var_href) return;
+
+                prams = "&location="+var_location+"&alt="+var_alt+"&href="+var_href;
+                //alert(prams);
+                //alert($(this).attr("alt")) ; alert($(this).parent().attr("href")) ;
+
+                // 동기 통신
+                $.ajax({ url:"/include/ClickSave_ajax.htm?"+prams,async:false});
+            });
+        }
+    });
+});
+</script>
+
+<div id="left">
+    <div class="dDay">
+        <script lang='javascript'>flashWrite('/img/d-day.swf','185','41','main_menu','','transparent','d_day=330');</script>
+
+
+    </div>
+
+    <div class="quickLink">
+        <h2><img src="img/tit_quickLink.gif" alt="대성학원/관계사 바로가기" /></h2>
+        <div class="select">
+            <select name="select" onChange=" if(this.value) window.open(this.value)">
+                <option>==선택하세요==</option>
+							              <option value='http://www.dshw.co.kr'>대성학원은...</option>
+							              <option value='http://www.noryangjinds.co.kr'>노량진 대성학원</option>
+							              <option value='http://www.kangnamds.co.kr/'>강남 대성학원</option>
+							              <option value='http://www.songpads.co.kr/'>강남 대성학원(송파)</option>
+							              <option value='http://www.mkangnamds.co.kr/'>마이맥강남 대성학원</option>
+							              <option value='http://www.kangnamyjds.co.kr/'>강남 대성학원(양재)</option>
+							              <option value='http://campus.kangnamds.co.kr/'>강남대성기숙학원</option>
+							              <option value='http://www.dsbusan.com/'>부산 대성학원</option>
+							              <option value='http://www.dsulsan.com/'>울산 대성학원</option>
+							              <option value='http://www.digitaldaesung.co.kr/'>디지털대성</option>
+							              <option value='http://www.mimacstudy.com/'>대성마이맥</option>
+							              <option value='http://www.teachme.co.kr/'>티치미</option>
+            </select>
+        </div>
+    </div>
+
+    <br>
+    <iframe  width="100%" height="250"  src="http://www.mimacstudy.com/DSHW2/digital_ds/left.htm" frameborder=0 marginheight=0 marginwidth=0 scrolling=no name="aa"></iframe>
+
+
+    <!-- 부산대성 입시결과 -->
+	<div class="exmResult">
+        <h2><a href="/sub05/sub05.htm?mode=view&id=141"><img src="img/exm_title.gif" alt="부산대성 & 입시결과 자세히보기" /></a></h2>
+		<div class="con">
+			<ul>
+				<li><img src="img/exm_subtitle.gif" alt="2011학년도 합격자" /></li>
+				<li class="r"><a href="/sub05/sub05.htm?mode=view&id=141"><img src="img/btn_more2.gif" alt="more" /></a></li>
+			</ul>
+			<table>
+				<tr>
+					<th scope="row">서울대</th>
+					<td>18</td>
+					<th scope="row">의대</th>
+					<td>87</td>
+				</tr>
+				<tr>
+					<th scope="row">경찰대</th>
+					<td>3</td>
+					<th scope="row">고려대</th>
+					<td>40</td>
+				</tr>
+                <tr>
+					<th scope="row">연세대</th>
+					<td>28</td>
+					<th scope="row">성균관대</th>
+					<td>24</td>
+				</tr>
+				<tr>
+					<th scope="row">서강대</th>
+					<td>21</td>
+				    <th scope="row">한양대</th>
+					<td>16</td>
+				</tr>
+                <tr>
+					<th scope="row">중앙대</th>
+					<td>28</td>
+				    <th scope="row">교대</th>
+					<td>21</td>
+				</tr>
+			</table>
+			<p style="height:10px;"> </p>
+			<em><a href="/sub01/sub031.htm"><img src="img/exm_2012.gif" alt="2012학년도 부경대 이상 합격 704명, 전과목(언&middot;수&middot;외&middot;탐구 3과목) 만점자 2명" /></a></em>
+		</div>
+		<div class="btm"></div>
+    </div>
+	<!-- 취합테이블 없을 경우의 배너
+	<div class="exmResult"><img src="img/exm_res.gif" alt="2010년도 부산대성 대입결과" width="185" border="0" usemap="#Map2" />
+        <map name="Map2" id="Map2">
+            <area shape="rect" coords="14,215,168,245" href="./sub01/sub03.htm" alt="more" />
+        </map>
+    </div>
+	//부산대성 입시결과 -->
+
+	<div class="leftbanner01"><a href='http://www.mimacstudy.com/DSHW2/mimac_evt/' target='_blank'><img src="http://www.mimacstudy.com/DSHW2/img/bn_l_ppass.JPG"  border='0'></a></div>
+    <div class="leftbanner02"><a href='http://www.mimacstudy.com/DSHW2/mimac_evt/gmm/page_02.htm' target='_blank'><img src="img/bt_goodmorning.gif" alt="굿모닝 대성 마이맥"/></a></div>
+    <div class="leftbanner03"><a href='http://www.mimacstudy.com/DSPUB/' target='_blank'><img src="img/mimac_book.gif" alt="마이맥 book" /></a></div>
+    <div class="customer"><img src="img/customer.gif" alt="부산대성학원 상담&amp;문의 051-553-1616" /></div>
+    <div class="customer"><img src="img/customer2.gif" alt="부산 기숙학원 상담&amp;문의 055-381-0700" /></div>
+</div>
+<div id="contents">
+<div class="flashArea" style='position:relative;'>
+    <!-- 부산기숙 laybn
+	<div style="position:absolute; z-index:1; top:-10px;">
+        <script language="javascript">flashWrite('/img/bn_ys2.swf','676','327','main','','transparent')</script>
+    </div>
+	//부산기숙 laybn -->
+	<script lang='javascript'>flashWrite('/img/index.swf','669','324','main','','transparent','xmlURL=/menu.xml');</script>
+</div>
+<div class="stragy">
+    <h2><img src="img/tit_stragy.gif" alt="대성마이맥 입시전략" /></h2>
+    <div class="form">
+        <script type="text/javascript">
+
+var tickercontents=new Array()
+tickercontents[0]="<a href='http://www.mimacstudy.com/INF/bbs/bbs_strategy.htm?code=DMBS201TB&mode=view&id=4600'target='_blank'>2013학년도 서울대 정시 지원 가능 점수(최종) [2012/12/10]</a>"
+tickercontents[1]="<a href='http://www.mimacstudy.com/INF/bbs/bbs_strategy.htm?code=DMBS201TB&mode=view&id=4599'target='_blank'>2014학년도 대학입시 특징과 대비 전략 [2012/12/10]</a>"
+tickercontents[2]="<a href='http://www.mimacstudy.com/INF/bbs/bbs_strategy.htm?code=DMBS201TB&mode=view&id=4491'target='_blank'>2013학년도 수능 채점 결과와 정시 지원전략 [2012/11/28]</a>"
+
+var persistlastviewedmsg=1 //should messages' order persist after users navigate away (1=yes, 0=no)?
+var persistmsgbehavior="onload" //set to "onload" or "onclick".
+
+//configure the below variable to determine the delay between ticking of messages (in miliseconds):
+var tickdelay=3000
+
+////Do not edit pass this line////////////////
+
+var divonclick=(persistlastviewedmsg && persistmsgbehavior=="onclick")? 'onClick="savelastmsg()" ' : ''
+var currentmessage=0
+
+function changetickercontent(){
+
+	if (crosstick.filters && crosstick.filters.length>0)
+	crosstick.filters[0].Apply()
+	if(currentmessage > 5) currentmessage = 0;
+	crosstick.innerHTML=tickercontents[currentmessage];
+	
+	if (crosstick.filters && crosstick.filters.length>0)
+	crosstick.filters[0].Play()
+	currentmessage=(currentmessage==tickercontents.length-1)? currentmessage=0 : currentmessage+1
+	var filterduration=(crosstick.filters&&crosstick.filters.length>0)? crosstick.filters[0].duration*1000 : 0
+	setTimeout("changetickercontent()",tickdelay+filterduration)
+}
+
+function beginticker(){
+	
+if (persistlastviewedmsg && get_cookie("lastmsgnum")!="")
+revivelastmsg()
+
+crosstick=document.getElementById? document.getElementById("memoryticker") : document.all.memoryticker
+changetickercontent()
+}
+
+function get_cookie(Name) {
+
+var search = Name + "="
+var returnvalue = ""
+if (document.cookie.length > 0) {
+offset = document.cookie.indexOf(search)
+if (offset != -1) {
+offset += search.length
+end = document.cookie.indexOf(";", offset)
+if (end == -1)
+end = document.cookie.length;
+returnvalue=unescape(document.cookie.substring(offset, end))
+}
+}
+return returnvalue;
+}
+
+function savelastmsg(){
+document.cookie="lastmsgnum="+currentmessage
+}
+
+function revivelastmsg(){
+	
+currentmessage=parseInt(get_cookie("lastmsgnum"))
+
+currentmessage=(currentmessage==0)? tickercontents.length-1 : currentmessage-1
+}
+
+function showit()
+{
+	
+	if (persistlastviewedmsg && persistmsgbehavior=="onload") window.onunload=savelastmsg;
+												
+	if (document.all||document.getElementById)
+	
+	document.write('<div id="memoryticker" '+divonclick+'></div>')
+	if (window.addEventListener)
+	window.addEventListener("load", beginticker, false)
+	else if (window.attachEvent)
+	window.attachEvent("onload", beginticker)
+	else if (document.all || document.getElementById)
+	window.onload=beginticker	
+	
+}
+
+</script>
+<style type="text/css">
+
+#memoryticker{
+	width: 100%;
+	filter: progid:DXImageTransform.Microsoft.GradientWipe(GradientSize=1.0 Duration=0.7)
+}
+
+</style>
+<div class="txtWrap">
+  	<script>showit();</script>
+ </div>    </div>
+</div>
+<div class="mt3"><img src="img/main_cbr.gif" alt="안녕하세요 부산대성학원 입니다." width="669" height="87" border="0" usemap="#Map" />
+    <map name="Map" id="Map">
+        <area shape="rect" coords="337,1,665,82" href="/campus/" alt="부산대성 기숙학원 둘러보기" />
+    </map>
+</div>
+<div class="boardPreview">
+    <div class="notice">
+        <div class="titleArea">
+            <h2><img src="img/tit_notice.gif" alt="통학 공지사항" /></h2>
+            <div class="more"><a href="/sub05/sub05.htm"><img src="img/btn_more.gif" alt="more" /></a></div>
+        </div>
+        <ul class="list1">
+            <li><a href="/sub05/sub05.htm?mode=view&id=141">2012 부산대성학원 대입 결과 </a><span>2011-12-09</span></li><li><a href="/sub05/sub05.htm?mode=view&id=183">2013학년도 부산대성 의예, 연대, 고대 <img src="/img/ico_new.gif" alt="new" width="10" height="9" /></a><span>2012-12-10</span></li><li><a href="/sub05/sub05.htm?mode=view&id=182">2014 재수생 선행학습반 모집안내 <img src="/img/ico_new.gif" alt="new" width="10" height="9" /></a><span>2012-12-07</span></li><li><a href="/sub05/sub05.htm?mode=view&id=181">부산대성 논술학원 수시맞춤 전략 설명 <img src="/img/ico_new.gif" alt="new" width="10" height="9" /></a><span>2012-12-05</span></li>        </ul>
+    </div>
+    <div class="notice r">
+        <div class="titleArea">
+            <h2><img src="img/tit_notice_ys.gif" alt="기숙 공지사항" /></h2>
+            <div class="more"><a href="/campus/sub05/sub01.htm" target='_blank'><img src="img/btn_more.gif" alt="more" /></a></div>
+        </div>
+        <ul class="list1">
+            <li><a href="/campus/sub05/sub01.htm?mode=view&id=81">2012 부산대성학원 대입 결과 </a><span>2011-12-09</span></li><li><a href="/campus/sub05/sub01.htm?mode=view&id=83">부산대성 2012 수능 언수외 1등급 명단 </a><span>2011-12-30</span></li><li><a href="/campus/sub05/sub01.htm?mode=view&id=110">2013학년도 부산대성 의예과 연고대 수 <img src="/img/ico_new.gif" alt="new" width="10" height="9" /></a><span>2012-12-10</span></li><li><a href="/campus/sub05/sub01.htm?mode=view&id=109">2013학년도 서울대 정시 논·구술 특강 <img src="/img/ico_new.gif" alt="new" width="10" height="9" /></a><span>2012-11-23</span></li>        </ul>
+    </div>
+</div>
+<div class="classGuide">
+    <h2><img src="img/tit_classGuide.gif" alt="학원 과정 안내" /></h2>
+    <ul>
+        <li><a href="./sub03/sub01.htm" class="menu1">주간종합반</a></li>
+        <li><a href="./sub03/sub02.htm" class="menu2">선행반</a></li>
+        <li><a href="./sub03/sub03.htm" class="menu3">수학&middot;논술 집중 선행반</a></li>
+        <li><a href="./sub03/sub04.htm" class="menu4">재학생 윈터스쿨</a></li>
+        <li><a href="./sub03/sub05.htm" class="menu5">단과특강</a></li>
+        <li><a href="./sub03/sub05.htm" class="menu6">논술특강반</a></li>
+        <li><a href="./campus/" class="menu7">부산기숙학원</a></li>
+    </ul>
+</div>
+<div class="favService">
+    <h2><img src="img/tit_favService.gif" alt="자주 찾는 서비스" /></h2>
+    <ul>
+        <li><a href="./sub01/sub01.htm" class="menu1">학원소개</a></li>
+        <li><a href="./sub02/sub01.htm" class="menu2">강사소개</a></li>
+        <li><a href="./sub01/sub01.htm" class="menu3">학원홍보 동영상</a></li>
+        <li><a href="./sub04/sub01.htm" class="menu4">연간수업 시스템</a></li>
+        <li><a href="./sub04/sub02.htm" class="menu5">학원생활지도</a></li>
+        <li><a href="./sub04/sub03.htm" class="menu6">모의고사 일정</a></li>
+        <li><a href="./sub01/sub03.htm" class="menu7">대입결과</a></li>
+        <li><a href="./sub04/sub04.htm" class="menu8">faq</a></li>
+        <li><a href="./sub01/sub04.htm" class="menu9">학원 오시는 길</a></li>
+        <li><a href="./sub04/sub06.htm" class="menu10">고시원 안내</a></li>
+    </ul>
+</div>
+<div class="boardPreview">
+
+    <div class="info">
+        <div class="titleArea">
+            <h2><img src="img/tit_info.gif" alt="입시정보" width="45" height="13" /></h2>
+            <div class="more"><a href="http://www.mimacstudy.com/INF/bbs/bbs_news.htm" target='_blank'><img src="img/btn_more.gif" alt="more" /></a></div>
+        </div>
+        <ul class="list3">
+            <li><a href="http://www.mimacstudy.com/INF/bbs/bbs_news.htm?code=&g_cls=1&mode=view&id=4607" target="_blank"><img src='/img/ico_normal.gif' align='absmiddle'> 주요대 B형 가산점 안주고 백분위 추가 도입</a><span>2012-12-11</span></li><li><a href="http://www.mimacstudy.com/INF/bbs/bbs_news.htm?code=&g_cls=1&mode=view&id=4606" target="_blank"><img src='/img/ico_normal.gif' align='absmiddle'> 주요대학 2014 수시모집 최저학력기준</a><span>2012-12-11</span></li><li><a href="http://www.mimacstudy.com/INF/bbs/bbs_news.htm?code=&g_cls=1&mode=view&id=4605" target="_blank"><img src='/img/ico_normal.gif' align='absmiddle'> 수능 A/B 형 반영 주요 현황</a><span>2012-12-11</span></li><li><a href="http://www.mimacstudy.com/INF/bbs/bbs_news.htm?code=&g_cls=1&mode=view&id=4604" target="_blank"><img src='/img/ico_normal.gif' align='absmiddle'> 입시전문가 - 6월 모평까지 영어 B형 중심 공부</a><span>2012-12-11</span></li>        </ul>
+    </div>
+</div>
+<script language="javascript">
+
+/* -------------------------------------------------------------------------
+//	LAYER POPUP 1
+------------------------------------------------------------------------- */
+    var p1_dragswitch=0;
+    var p1_nsx;
+    var p1_nsy;
+    //var p1_nstemp;
+    var p1_dragapproved=false;
+
+    function p1_drag_dropns(name){
+        p1_temp=eval(name)
+        p1_temp.captureEvents(Event.MOUSEDOWN | Event.MOUSEUP)
+        p1_temp.onmousedown	=p1_gons
+        p1_temp.onmousemove	=p1_dragns
+        p1_temp.onmouseup	=p1_stopns
+    }
+
+    function p1_gons(e){
+        p1_temp.captureEvents(Event.MOUSEMOVE)
+        p1_nsx=e.x
+        p1_nsy=e.y
+    }
+
+    function p1_dragns(e){
+        if (p1_dragswitch==1){
+            p1_temp.moveBy(e.x-p1_nsx,e.y-p1_nsy)
+            return false
+        }
+    }
+
+    function p1_stopns(){
+        p1_temp.releaseEvents(Event.MOUSEMOVE)
+    }
+
+    function p1_drag_dropie(){
+
+        if (p1_dragapproved==true){
+            document.all.div_pop1.style.pixelLeft	=p1_tempx+event.clientX-p1_iex
+            document.all.div_pop1.style.pixelTop	=p1_tempy+event.clientY-p1_iey
+            return false
+        }
+    }
+
+    function p1_initializedragie(){
+    	div_pop1.style.zIndex = 30;
+    	div_pop2.style.zIndex = 20;
+    	div_pop3.style.zIndex = 20;
+
+        p1_iex=event.clientX
+        p1_iey=event.clientY
+        p1_tempx=div_pop1.style.pixelLeft
+        p1_tempy=div_pop1.style.pixelTop
+        p1_dragapproved=true
+        document.onmousemove=p1_drag_dropie
+    }
+
+
+    //var tid =setTimeout(initializedragie(),1000);
+
+    function p1_hidebox()
+    {
+    	var SILayer = document.getElementById('div_pop1');
+    	if (typeof(SILayer)=='object')  {
+    		SILayer.style.visibility="hidden"
+
+    		//clearTimeout(tid);
+
+    	}
+    	else if (document.layers) {
+    		document.div_pop1.visibility="hide"
+    		//clearTimeout(tid);
+    	}
+    } //end function
+
+
+/* -------------------------------------------------------------------------
+//	LAYER POPUP 2
+------------------------------------------------------------------------- */
+    var p2_dragswitch=0;
+    var p2_nsx;
+    var p2_nsy;
+    //var p2_nstemp;
+    var p2_dragapproved=false;
+
+    function p2_drag_dropns(name){
+        p2_temp=eval(name)
+        p2_temp.captureEvents(Event.MOUSEDOWN | Event.MOUSEUP)
+        p2_temp.onmousedown	=p2_gons
+        p2_temp.onmousemove	=p2_dragns
+        p2_temp.onmouseup	=p2_stopns
+
+    }
+
+    function p2_gons(e){
+        p2_temp.captureEvents(Event.MOUSEMOVE)
+        p2_nsx=e.x
+        p2_nsy=e.y
+    }
+
+    function p2_dragns(e){
+        if (p2_dragswitch==1){
+            p2_temp.moveBy(e.x-p2_nsx,e.y-p2_nsy)
+            return false
+        }
+    }
+
+    function p2_stopns(){
+        p2_temp.releaseEvents(Event.MOUSEMOVE)
+    }
+
+    function p2_drag_dropie(){
+        if (p2_dragapproved==true){
+            document.all.div_pop2.style.pixelLeft	=p2_tempx+event.clientX-p2_iex
+            document.all.div_pop2.style.pixelTop	=p2_tempy+event.clientY-p2_iey
+            return false
+        }
+    }
+
+    function p2_initializedragie(){
+    	div_pop2.style.zIndex = 30;
+    	div_pop1.style.zIndex = 20;
+    	div_pop3.style.zIndex = 20;
+
+        p2_iex=event.clientX
+        p2_iey=event.clientY
+        p2_tempx=div_pop2.style.pixelLeft
+        p2_tempy=div_pop2.style.pixelTop
+        p2_dragapproved=true
+        document.onmousemove=p2_drag_dropie
+    }
+
+    //var tid =setTimeout(initializedragie(),1000);
+
+    function p2_hidebox()
+    {
+
+    	var SILayer = document.getElementById('div_pop2');
+
+    	if (typeof(SILayer)=='object')  {
+    		SILayer.style.visibility="hidden"
+
+    		//clearTimeout(tid);
+
+    	}
+    	else if (document.layers) {
+    		document.div_pop2.visibility="hide"
+    		//clearTimeout(tid);
+    	}
+    } //end function
+
+
+
+
+
+/* -------------------------------------------------------------------------
+//	LAYER POPUP 3
+------------------------------------------------------------------------- */
+    var p3_dragswitch=0;
+    var p3_nsx;
+    var p3_nsy;
+    //var p3_nstemp;
+    var p3_dragapproved=false;
+
+    function p3_drag_dropns(name){
+        p3_temp=eval(name)
+        p3_temp.captureEvents(Event.MOUSEDOWN | Event.MOUSEUP)
+        p3_temp.onmousedown	=p3_gons
+        p3_temp.onmousemove	=p3_dragns
+        p3_temp.onmouseup	=p3_stopns
+
+    }
+
+    function p3_gons(e){
+        p3_temp.captureEvents(Event.MOUSEMOVE)
+        p3_nsx=e.x
+        p3_nsy=e.y
+    }
+
+    function p3_dragns(e){
+        if (p3_dragswitch==1){
+            p3_temp.moveBy(e.x-p3_nsx,e.y-p3_nsy)
+            return false
+        }
+    }
+
+    function p3_stopns(){
+        p3_temp.releaseEvents(Event.MOUSEMOVE)
+    }
+
+    function p3_drag_dropie(){
+        if (p3_dragapproved==true){
+            document.all.div_pop3.style.pixelLeft	=p3_tempx+event.clientX-p3_iex
+            document.all.div_pop3.style.pixelTop	=p3_tempy+event.clientY-p3_iey
+            return false
+        }
+    }
+
+    function p3_initializedragie(){
+    	div_pop3.style.zIndex = 30;
+    	div_pop1.style.zIndex = 20;
+    	div_pop2.style.zIndex = 20;
+
+        p3_iex=event.clientX
+        p3_iey=event.clientY
+        p3_tempx=div_pop3.style.pixelLeft
+        p3_tempy=div_pop3.style.pixelTop
+        p3_dragapproved=true
+        document.onmousemove=p3_drag_dropie
+    }
+
+    //var tid =setTimeout(initializedragie(),1000);
+
+    function p3_hidebox()
+    {
+    	var SILayer = document.getElementById('div_pop3');
+    	if (typeof(SILayer)=='object')  {
+    		SILayer.style.visibility="hidden"
+
+    		//clearTimeout(tid);
+
+    	}
+    	else if (document.layers) {
+    		document.div_pop3.visibility="hide"
+    		//clearTimeout(tid);
+    	}
+    } //end function
+
+
+
+/* -------------------------------------------------------------------------
+//	공통함수
+------------------------------------------------------------------------- */
+    if (document.all){
+    	document.onmouseup=new Function("p1_dragapproved=false;p2_dragapproved=false;p3_dragapproved=false;")
+    	//document.onmouseup=new Function("p2_dragapproved=false")
+    }
+
+    function NOPOP(PCD){
+
+    	if(PCD == 'P1') {
+    		var POP_DAY = 'P1_DAY';
+    		p1_hidebox();
+    	} else if(PCD == 'P2') {
+    		var POP_DAY = 'P2_DAY';
+    		p2_hidebox();
+    	} else if(PCD == 'P3') {
+    		var POP_DAY = 'P3_DAY';
+    		p3_hidebox();
+    	}
+
+       	var check_day = '20121211' ;
+       	SetCookie(POP_DAY,check_day,1);
+    }
+
+
+
+
+    function SetCookie( name, value, expiredays ){
+        var todayDate = new Date();
+        todayDate.setDate( todayDate.getDate() + expiredays );
+        document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() +";"
+        //alert(document.cookie);
+    }
+
+
+</script>
+
+    <div id="div_pop1"
+    	style="z-index:30;position:absolute;width:400px;height=1px;left:0px;top:0px;
+    	padding-bottom:4px;padding-right:4px;
+    	border:1px black; filter:progid:DXImageTransform.Microsoft.shadow(color='#666666', Direction=135,  Strength=4); color:white; text-align:center; font-weight:bold;"
+    class="clWindow" z-index="30">
+
+	<table width="400" border=0>
+    		<td onMousedown="p1_initializedragie();">
+                <ilayer width="100%">
+                <layer width="100%" onMouseover="p1_dragswitch=1;p1_drag_dropns(div_pop1)" onMouseout="p1_dragswitch=0">
+
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td align="center" valign="middle" bgcolor="#252525" style="padding:1px;">
+                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td bgcolor="#FFFFFF">
+                            	<table width="400" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td><img src="/popup/2012/1109/to.gif" width="400" height="800" usemap="#Mapto" border="0" /></td>
+    </tr>
+</table>
+<map name="Mapto" id="Mapto">
+    <area shape="rect" coords="124,364,273,389" href="http://www.dsbusan.com/sub05/sub05.htm?code=DSBBS12TB&mode=view&id=176&fid=&thread=&Smode=&Sval=" />
+    <area shape="rect" coords="31,724,185,746" href="/sub03/sub04.htm" />
+    <area shape="rect" coords="212,725,367,747" href="/campus/sub05/sub01.htm?&mode=view&id=101" />
+</map>                            </td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                      <tr>
+                        <td height="23" bgcolor="#252525" style="padding:0px 5px 0px 5px;">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="left"><a href="javascript:NOPOP('P1')"><img src="/popup/img/close2.gif" border="0" /></a></td>
+                            <td align="right"><a href="javascript:p1_hidebox();"><img src="/popup/img/close.gif" border="0" /></a></td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                    </table>
+                                </layer>
+                </ilayer>
+    		</td>
+    	</tr>
+    </table>
+    </div>
+
+
+    <div id="div_pop2"
+    	style="z-index:30;position:absolute;width:400px;height=1px;left:405px;top:0px;
+    	padding-bottom:4px;padding-right:4px;
+    	border:1px black; filter:progid:DXImageTransform.Microsoft.shadow(color='#666666', Direction=135,  Strength=4); color:white; text-align:center; font-weight:bold;"
+    class="clWindow" z-index="30">
+    <table width="400">
+    	<tr>
+    		<td onMousedown="p2_initializedragie();">
+                <ilayer width="100%">
+                <layer width="100%" onMouseover="dragswitch=1;drag_dropns(div_pop2)" onMouseout="dragswitch=0">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td align="center" valign="middle" bgcolor="#252525" style="padding:1px;">
+                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td bgcolor="#FFFFFF">
+                            	<table width="400" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td><img src="/popup/2012/1005/popup.gif"  usemap="#1005" border="0" /></td>
+    </tr>
+</table>
+<map name="1005" id="1005">	
+<map name="Map" id="Map">
+	<area shape="rect" coords="49,265,194,302" href="/sub03/sub02.htm" />
+    <area shape="rect" coords="204,265,349,302" href="/campus/sub03/sub02.htm" />
+    <area shape="rect" coords="123,590,274,616" href="http://www.dsbusan.com/sub05/sub05.htm?mode=view&id=181" alt="설명회 자세히보기" /> 
+<area shape='rect' coords='123,756,273,781' href='/sub05/sub05.htm?mode=view&id=178' />
+
+	
+    
+</map>
+                            </td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                      <tr>
+                        <td height="23" bgcolor="#252525" style="padding:0px 5px 0px 5px;">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="left"><a href="javascript:NOPOP('P2')"><img src="/popup/img/close2.gif" border="0" /></a></td>
+                            <td align="right"><a href="javascript:p2_hidebox();"><img src="/popup/img/close.gif" border="0" /></a></td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                    </table>
+                                </layer>
+                </ilayer>
+    		</td>
+    	</tr>
+    </table>
+    </div>
+
+
+
+    <div id="div_pop3"
+    	style="z-index:30;position:absolute;width:400px;height=1px;left:810px;top:0px;
+    	padding-bottom:4px;padding-right:4px;
+    	border:1px black; filter:progid:DXImageTransform.Microsoft.shadow(color='#666666', Direction=135,  Strength=4); color:white; text-align:center; font-weight:bold;"
+    class="clWindow" z-index="30">
+    <table width="400">
+    	<tr>
+    		<td onMousedown="p3_initializedragie();">
+                <ilayer width="100%">
+                <layer width="100%" onMouseover="dragswitch=1;drag_dropns(div_pop3)" onMouseout="dragswitch=0">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td align="center" valign="middle" bgcolor="#252525" style="padding:1px;">
+                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td bgcolor="#FFFFFF">
+                            	
+
+<p><img src="/img/1210_popup2.jpg"   border="0" usemap="#MapAll" /></p>
+<map name="MapAll" id="MapAll">
+    <area shape="rect" coords="124,474,275,501" href="/sub05/sub05.htm?mode=view&id=183" />
+    <area shape="rect" coords="124,761,274,785" href="/sub05/sub05.htm?mode=view&id=180" />
+</map>
+                            </td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                      <tr>
+                        <td height="23" bgcolor="#252525" style="padding:0px 5px 0px 5px;">
+                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="left"><a href="javascript:NOPOP('P3')"><img src="/popup/img/close2.gif" border="0" /></a></td>
+                            <td align="right"><a href="javascript:p3_hidebox();"><img src="/popup/img/close.gif" border="0" /></a></td>
+                          </tr>
+                        </table></td>
+                      </tr>
+                    </table>
+                                </layer>
+                </ilayer>
+    		</td>
+    	</tr>
+    </table>
+    </div>
+
+<script>
+    // 유시험 합격자 발표
+    function OpenPass_yu()
+    {
+    	  //alert("죄송합니다. 오후 12시 00분 부터 발표합니다."); return;
+        var w_type = 'menubar=no,scrollbars=no,resizable=no,width=540,height=490';
+        var url='/accept1/pass_yu/search.htm' ;
+     	window.open(url,'_Pass',w_type) ;
+    }
+
+    // 무시험 합격자 발표
+    function OpenPass_mu()
+    {
+    	  //alert("죄송합니다. 오후 12시 00분 부터 발표합니다."); return;
+        var w_type = 'menubar=no,scrollbars=no,resizable=no,width=540,height=490';
+        var url='/accept1/pass_mu/search.htm' ;
+     	window.open(url,'_Pass',w_type) ;
+    }
+
+    // 안내팝업
+    function popup_info()
+    {
+        var vwidth   = 330;
+        var vheight  = 490;
+
+        var vleft = 1;
+        var vtop  = 1;
+        var status= "menubar=no,scrollbars=no,resizable=no,";
+        var vpos  = "width=" + vwidth + ",height=" + vheight + ",top=" + vtop +",left=" + vleft;
+        var url='http://www.mimacstudy.com/DSHW/popup/20091211/popup.htm' ;
+        var obj = window.open(url,'_pop2',status + vpos) ;
+        obj.focus();
+    }
+
+
+    function popup_tch()
+    {
+    	  //alert("죄송합니다. 오후 12시 00분 부터 발표합니다."); return;
+        var w_type = 'menubar=no,scrollbars=no,resizable=no,width=350,height=400';
+        var url='/popup/2010/0407/pop_teacher.htm' ;
+     	window.open(url,'_Pass',w_type) ;
+    }
+
+</script>
+
+
+
+                </div>
+                
+              <div id="skyArea">
+              	
+<div id="Bn" style="text-align:right;">
+    <div id="Bn1" class="sky_banner"><a target='_blank' class='rolloverbanner' href="http://222.122.131.155/fmedia/MIMAC/PUBLIC/EVT/2012/EVT120203_01_450k.wmv" style='background-image:url(/img/bn_sky_busan_110413.gif);width:78px;height:107px;'></a></div>
+
+    <div class="sky_banner"></div>
+</div>
+<div id="Bn" style="text-align:right;">
+    <div id="Bn1" class="sky_banner"><a class='rolloverbanner' href="/sub01/sub03.htm" style='background-image:url(/img/sky_2012.gif);width:78px;height:107px;'></a></div>
+    <div class="sky_banner"></div>
+</div>
+<div id="Bn" style="text-align:right;">
+    <div id="Bn1" class="sky_banner"><a class='rolloverbanner' href="http://www.mimacstudy.com/DSHW2/mimac_evt/ds_ps_nonsul/" target=_new style='background-image:url(/img/120322_sky.gif);width:78px;height:107px;'></a></div>
+    <div class="sky_banner"></div>
+</div>              </div>
+                <div style="clear:both"></div>
+          </div>
+            
+          <div id="footer">
+           	  <div class="ci"><img src="/img/footer_ci.gif" alt="大成學院" /></div>
+            	<div class="address"><img src="/img/address.gif" alt="copyrights 부산대성학원 All Rights reserved For more info contact Webmaster." border="0" usemap="#Mapxx" />
+					<map name="Mapxx" id="Mapxx">
+						<area shape="rect" coords="483,0,570,19" href="http://www.mimacstudy.com/DSHW2/sub06/pinfo.htm" alt="개인정보취급방침" target='_blank'/>
+					</map>
+				</div>
+          </div>
+        
+      </div>
+    
+  </div>
+<!--script type="text/javascript" src="http://adcounter.emnet.co.kr/analysis/analysis.js?_ih_sidx=3839&_ih_ua=1&_ih_key=345ccd89e56e30329c4f4663eb1a2391"></script-->
+</body>
+</html>
+  
+<script language='javascript'>
+	function sitemap_open(){
+		document.getElementById('main_menu').height='519';
+	}
+
+	function sitemap_close(){
+		document.getElementById('main_menu').height='98';
+	}
+</script>

@@ -3482,7 +3482,7 @@ Private Type tSTD
     Birth_ymd       As String
     
     EXMTYPE     As String
-    KAEYOL      As String
+    kaeyol      As String
     
     SEL1        As String
     SEL2        As String
@@ -3716,8 +3716,8 @@ Private Sub Form_Load()
         '<< 계열 >> : 2009.01.09
             If Trim(basModule.SchCD) = "B" Then             '< 부산
                 
-                .AddItem "수학선행인문" & Space(30) & "05"
-                .AddItem "수학선행자연" & Space(30) & "06"
+                .AddItem "선행인문" & Space(30) & "05"
+                .AddItem "선행자연" & Space(30) & "06"
                 
                 .AddItem "연.고대인문" & Space(30) & "07"
                 .AddItem "연.고대자연" & Space(30) & "08"
@@ -4498,7 +4498,7 @@ Private Sub Get_STD_Data()
                 sTmp = "":      If IsNull(.Fields("EXMTYPE")) = False Then sTmp = .Fields("EXMTYPE")
                     uSTD(nRec).EXMTYPE = sTmp
                 sTmp = "":      If IsNull(.Fields("KAEYOL")) = False Then sTmp = .Fields("KAEYOL")
-                    uSTD(nRec).KAEYOL = sTmp
+                    uSTD(nRec).kaeyol = sTmp
                 
                 sTmp = "":      If IsNull(.Fields("SEL1")) = False Then sTmp = .Fields("SEL1")
                     uSTD(nRec).SEL1 = sTmp
@@ -4555,7 +4555,7 @@ Private Sub Get_STD_Data()
                     
                     '<< 2008.01.10 : 노량진 - 수능 전문반 >>
                     If Trim(basModule.SchCD) = "N" Then
-                        Select Case uSTD(nRec).KAEYOL
+                        Select Case uSTD(nRec).kaeyol
                             Case "05"
                                 uSTD(nRec).SEL2_SCH = "인문"
                             Case "06"
@@ -4765,7 +4765,7 @@ Private Sub Get_STD_Data()
                     
                 Select Case Trim(basModule.SchCD)
                     Case "K", "W", "Q", "M"
-                        Select Case uSTD(nRec).KAEYOL
+                        Select Case uSTD(nRec).kaeyol
                             Case "01", "04", "06", "11", "16"
                                 If uSTD(nRec).PTS_SEL = "1" Then '수리가형
                                 
@@ -5024,7 +5024,7 @@ Private Sub Std_Data_Show(Index As Long)
     
     With uSTD(Index)
         
-        Select Case Trim(.KAEYOL)   '<< 계열: 01,02,03-인문,자연,예체   06,05-수능인문,자연  06,07 -강남법대,의대
+        Select Case Trim(.kaeyol)   '<< 계열: 01,02,03-인문,자연,예체   06,05-수능인문,자연  06,07 -강남법대,의대
             Case "01":  접수계열.Text = "인 문 계"
                         접수계열2.Text = "인    문"
             Case "02":  접수계열.Text = "자 연 계"
@@ -5422,7 +5422,7 @@ Private Sub Std_Data_Show(Index As Long)
         
         Select Case Trim(basModule.SchCD)
             Case "K", "W", "Q"
-                Select Case Trim(.KAEYOL)
+                Select Case Trim(.kaeyol)
                     Case "01", "04", "06", "11", "16"
                         If Trim(.PTS_SEL) = "1" Then
                             수리선택.Caption = "수리[가]"
@@ -5443,7 +5443,7 @@ Private Sub Std_Data_Show(Index As Long)
                         수리선택.Caption = ""
                 End Select
             Case "S", "P"               '< 2009.01.12 : 송파/ 마송
-                Select Case Trim(.KAEYOL)
+                Select Case Trim(.kaeyol)
                     Case "01", "03", "05", "18"
                         수리선택.Caption = "수리[나]"
                     Case "02", "04", "06", "19"
@@ -5452,7 +5452,7 @@ Private Sub Std_Data_Show(Index As Long)
                         수리선택.Caption = ""
                 End Select
             Case Else
-                Select Case Trim(.KAEYOL)
+                Select Case Trim(.kaeyol)
                     Case "01", "02", "04", "05", "06", "07", "08", "09", "10", "11", "12", "14", "15", "16"
                         '2011-01-10 김한욱 수리 구분 PTS_SEL 1:가형 2:나형
                         '수리선택.Caption = IIf(Trim(.SEL4) > " ", "수리[가]", "수리[나]")

@@ -745,91 +745,11 @@ Private Sub Form_Load()
             .GrayAreaBackColor = basModule.GrayAreaBackColor1
         End With
         
-'>> 계열
-        With cboKaeyol
-            .Clear
-            .AddItem "전체" & Space(30) & "XX"
-            .AddItem "인문" & Space(30) & "01"
-            .AddItem "자연" & Space(30) & "02"
-            
-        '<< 계열 >> : 2008.01.09
-            If Trim(basModule.schcd) = "N" Then             '< 노량진
-                .AddItem "예체" & Space(30) & "03"
-                .AddItem "수리(나)" & Space(30) & "04"
-                .AddItem "인문수능" & Space(30) & "05"
-                .AddItem "자연수능" & Space(30) & "06"
-                
-                .AddItem "인문-신" & Space(30) & "07"
-                .AddItem "자연-신" & Space(30) & "08"
-                '.AddItem "수능인문-신" & Space(30) & "09"
-                '.AddItem "수능자연-신" & Space(30) & "10"
-                
-                .AddItem "편)인문" & Space(30) & "11"
-                .AddItem "편)자연" & Space(30) & "12"
-                .AddItem "편)예체" & Space(30) & "13"
-                .AddItem "편)수리(나)" & Space(30) & "14"
-                .AddItem "편)인문수능" & Space(30) & "15"
-                .AddItem "편)자연수능" & Space(30) & "16"
-
-            End If
-        '<< 계열 >> : 2008.01.10
-            If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then           '< 강남 2008.03.24
-                .AddItem "주말법대" & Space(30) & "04"
-                .AddItem "주말의대" & Space(30) & "05"
-                
-                .AddItem "야간법대" & Space(30) & "06"
-                .AddItem "야간의대" & Space(30) & "07"
-            
-                .AddItem "선착순인문" & Space(30) & "11"
-                .AddItem "선착순자연" & Space(30) & "12"
-                
-                .AddItem "선착순인문16" & Space(30) & "16"
-                .AddItem "선착순자연17" & Space(30) & "17"
-            End If
-        '<< 계열 >> : 2008.02.15
-            If Trim(basModule.schcd) = "S" Then             '< 송파
-''                .AddItem "예체능" & Space(30) & "03"
-''
-''                .AddItem "인문수능" & Space(30) & "05"
-''                .AddItem "자연수능" & Space(30) & "06"
-''
-''                .AddItem "신설인문" & Space(30) & "11"
-''                .AddItem "신설자연" & Space(30) & "12"
-                
-                .AddItem "인문프리미엄" & Space(30) & "18"
-                .AddItem "자연프리미엄" & Space(30) & "19"
-
-            End If
-        '<< 계열 >> : 2008.02.15
-            If Trim(basModule.schcd) = "P" Then             '< 마송
-                .AddItem "특별인문" & Space(30) & "03"
-                .AddItem "특별자연" & Space(30) & "04"
-            End If
-            
-            
-            If Trim(basModule.schcd) = "J" Then             '< 양재
-                .AddItem "신설인문" & Space(30) & "11"
-                .AddItem "신설자연" & Space(30) & "12"
-                
-                .AddItem "인문프리미엄" & Space(30) & "18"
-                .AddItem "자연프리미엄" & Space(30) & "19"
-            End If
-            
-            
-        '<< 계열 >> : 2009.01.09
-            If Trim(basModule.schcd) = "B" Then             '< 부산
-                .AddItem "수학선행인문" & Space(30) & "05"
-                .AddItem "수학선행자연" & Space(30) & "06"
-                
-                .AddItem "연.고대인문" & Space(30) & "07"
-                .AddItem "연.고대자연" & Space(30) & "08"
-                
-                .AddItem "심화인문" & Space(30) & "09"
-                .AddItem "심화자연" & Space(30) & "10"
-            End If
-            
-            .ListIndex = 0
-        End With
+        '>> 계열
+        Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol)      '계열
+        cboKaeyol.AddItem "전체" & Space(30) & "XX", 0
+        cboKaeyol.ListIndex = 0
+        
             
         sprData.Tag = "0"
             
@@ -1027,8 +947,7 @@ Private Sub cmdFind_Click()
             sprData.BlockMode = True
                 sprData.BackColor = basModule.BackColor1
                 sprData.BackColorStyle = BackColorStyleUnderGrid
-                
-                sprData.Lock = True
+7
                 sprData.Protect = True
             sprData.BlockMode = False
             

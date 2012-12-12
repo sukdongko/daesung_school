@@ -113,42 +113,30 @@ End Function
 Private Function setConstant_N()
     '>>클리닉
     
-    CLINIC_L_COUNT = 4
-    CLINIC_M_COUNT = 4
-    CLINIC_E_COUNT = 4
+    CLINIC_L_COUNT = 2
+    CLINIC_M_COUNT = 2
+    CLINIC_E_COUNT = 2
     
     '국어
-    g_sClinic_Ls(0) = "(심화)문학 독해"
-    g_sClinic_Ls(1) = "(심화)비문학 독해"
-    g_sClinic_Ls(2) = "(기본)문학 독해의 정석"
-    g_sClinic_Ls(3) = "(기본)비문학 독해의 정석"
+    g_sClinic_Ls(0) = "문학, 비문학 독해 심화하기"
+    g_sClinic_Ls(1) = "문학, 비문학 독해의 정석"
     
     g_sClinic_LCodes(0) = "101"
     g_sClinic_LCodes(1) = "102"
-    g_sClinic_LCodes(2) = "103"
-    g_sClinic_LCodes(3) = "104"
     
     '수학
-    g_sClinic_Ms(0) = "(심화)도형과 함수"
-    g_sClinic_Ms(1) = "(기본)수능에 꼭 필요한 고1 수학"
-    g_sClinic_Ms(2) = "(심화)공간도형과 벡터"
-    g_sClinic_Ms(3) = "(기본)수학1 핵심유형 총정리"
+    g_sClinic_Ms(0) = "수능에 꼭 필요한 고1수학"
+    g_sClinic_Ms(1) = "공간도형과 백터의 핵심을 잡아라"
     
     g_sClinic_MCodes(0) = "111"
     g_sClinic_MCodes(1) = "112"
-    g_sClinic_MCodes(2) = "113"
-    g_sClinic_MCodes(3) = "114"
     
     '영어
-    g_sClinic_Es(0) = "(심화)고난도 구문&독해"
-    g_sClinic_Es(1) = "(심화)어법"
-    g_sClinic_Es(2) = "(기본)독해 문제 풀이법"
-    g_sClinic_Es(3) = "(기본)어법"
+    g_sClinic_Es(0) = "(인문)어법 따라잡기"
+    g_sClinic_Es(1) = "(자연)어법 따라잡기"
     
     g_sClinic_ECodes(0) = "121"
     g_sClinic_ECodes(1) = "122"
-    g_sClinic_ECodes(2) = "123"
-    g_sClinic_ECodes(3) = "124"
 End Function
 '강남
 Private Function setConstant_K()
@@ -320,7 +308,7 @@ Function setConstant()
     
     
     '위의 코드들이 기본이고 나머지 바뀌는것들은 아래의 학원별 설정 함수에서 세팅함.
-    Select Case basModule.SchCD
+    Select Case basModule.schcd
         Case "M":   Call setConstant_M
         Case "P":   Call setConstant_P
         Case "B":   Call setConstant_B

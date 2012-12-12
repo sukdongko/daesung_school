@@ -73,6 +73,7 @@ Begin VB.MDIForm MDI001
          End
          Begin VB.Menu mnuINT012 
             Caption         =   "선행 입학원서 출력"
+            Visible         =   0   'False
          End
          Begin VB.Menu mnuINT013 
             Caption         =   "선행 입학원서 출력(마이맥)"
@@ -284,7 +285,7 @@ Private Sub MenuYN()
     
     '노량진만 메뉴를 제어한다. 다른 학원들은 모든 메뉴 보임.
     
-    If basModule.SchCD = "N" Then
+    If basModule.schcd = "N" Then
         Select Case basModule.RegID
             Case "10000", "00002", "10003", "00001" '김영덕과장 (10000), 노량진(00002), 김병철(10003), ADMIN(00001)
                 mnu100.Visible = True
@@ -364,7 +365,7 @@ Private Sub MDIForm_Load()
     Dim sAcID               As String
     Dim sConnections        As String
     
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
         Case "N"
             sAcID = "노량진"
         Case "K"
@@ -530,13 +531,7 @@ Private Sub mnuINT014_Click()
     INT014.ZOrder 0
 End Sub
 
-'>> 입학원서 출력 // 종합 입학원서 출력
-Private Sub mnuINT010_Click()
-    Load INT010
-    INT010.Show
-    INT010.ZOrder 0
-    
-End Sub
+
 
 Private Sub mnuINT110_Click()
     Load INT110

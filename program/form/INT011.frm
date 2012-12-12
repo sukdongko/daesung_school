@@ -862,7 +862,7 @@ Begin VB.Form INT011
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "국 어 (택 1)"
+            Caption         =   "국 어"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -874,14 +874,14 @@ Begin VB.Form INT011
             EndProperty
             Height          =   165
             Index           =   23
-            Left            =   2460
+            Left            =   2730
             TabIndex        =   135
             Top             =   6480
-            Width           =   1095
+            Width           =   555
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "수 학 (택 1)"
+            Caption         =   "수 학 "
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -893,14 +893,14 @@ Begin VB.Form INT011
             EndProperty
             Height          =   165
             Index           =   6
-            Left            =   2460
+            Left            =   2730
             TabIndex        =   134
             Top             =   6870
-            Width           =   1095
+            Width           =   555
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "영 어 (택 1)"
+            Caption         =   "영 어"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -912,10 +912,10 @@ Begin VB.Form INT011
             EndProperty
             Height          =   165
             Index           =   8
-            Left            =   2460
+            Left            =   2730
             TabIndex        =   133
             Top             =   7260
-            Width           =   1095
+            Width           =   555
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
@@ -3404,54 +3404,22 @@ Private Sub Form_Load()
         Me.Width = 14550
         Me.Height = 10755
         
-        fpExmID_S.Text = ""
-        fpExmID_E.Text = ""
         
-        checkSCH = basModule.schcd
+        checkSCH = basModule.SchCD
+        Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
+        Call basCommonSTD.Init_InGbn(cboinGbn)           '조회 인터넷/학원
+        Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol)      '계열
+        cboKaeyol.AddItem "전체" & Space(30) & "ALL", 0
+        cboKaeyol.ListIndex = 0
         
-        
-        
-        
-        
-        
-        '>> 무/유시험
-        With cboExmType
-            .Clear
-            .AddItem "전체" & Space(30) & "ALL"
-            .AddItem "유시험" & Space(30) & "1"
-            .AddItem "무시험" & Space(30) & "0"
-            
-            .ListIndex = 0
-        End With
-        
-        '>> 계열
-        With cboKaeyol
-            .Clear
-            .AddItem "인문" & Space(30) & "01"
-            .AddItem "자연" & Space(30) & "02"
-            .ListIndex = 0
-        End With
-        
-        txtStdNM.Text = ""
-        
-        '>> 인터넷/학원 구분
-        With cboinGbn
-            .Clear
-            .AddItem "전체" & Space(30) & "ALL"
-            .AddItem "인터넷" & Space(30) & "INT"
-            .AddItem "학원" & Space(30) & "HAK"
-            
-            .ListIndex = 0
-        End With
-        
-        '>> 선행반/ 종합반 구분
-        With cboSel
-            .Clear
-            .AddItem "선행" & Space(30) & "01"
-            '.AddItem "종합" & Space(30) & "02"
-            
-            .ListIndex = 0
-        End With
+'        '>> 선행반/ 종합반 구분
+'        With cboSel
+'            .Clear
+'            .AddItem "선행" & Space(30) & "01"
+'            '.AddItem "종합" & Space(30) & "02"
+'
+'            .ListIndex = 0
+'        End With
         
         ReDim uSTD(0) As tSTD
            
@@ -3473,56 +3441,29 @@ Private Sub Clear_Form_Control()
     
     학생성명.Tag = ""
     수험번호.Tag = ""
+    
+    fpExmID_S.Text = ""
+    fpExmID_E.Text = ""
+    txtStdNM.Text = ""
+    
     lab_UNI1(0).Caption = ""
     lab_Major1(0).Caption = ""
     lab_UNI2.Caption = ""
     lab_Major2.Caption = ""
+    
     'Height = 3990
     'Width = 4890   ' 높이와 너비를 설정합니다.
     Set Photo.Picture = imgList.ListImages.Item(1).Picture
     
-'>> 학년별 내역
-
-    Select Case Trim(basModule.schcd)
-
-        Case "N"
-            OPTIONS(0) = "● 국어, 수학, 영어, 과목 중 (심화)또는(기본) 수업 1과목을 선택해야 하며, 탐구과목 4과목 중 1과목을 선택할 수 있습니다."
-            OPTIONS(1) = "● 인문계는 생활과 윤리, 윤리와 사상, 세계지리, 동아시아사, 세계사, 경제, 제2외국어, 자연계는 과학Ⅱ(4과목)는 재수 정규반부터 수업합니다."
-            OPTIONS(2) = "● 반당 수강생 수 증감에 따라 분반 또는 합반할 수 있습니다."
-            OPTIONS(3) = "● 인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
-
-        Case "K", "W", "Q"
-            OPTIONS(0) = ""
-            OPTIONS(1) = ""
-
-        Case "S"
-            OPTIONS(0) = "● 국어, 수학, 영어, 과목 중 (심화)또는(기본) 수업 2과목을 선택해야 하며, 탐구과목중 1과목을 선택할 수 있습니다."
-            OPTIONS(1) = "● 인문계는 생활과 윤리, 윤리와 사상, 세계지리, 동아시아사, 세계사, 경제, 제2외국어, 자연계는 과학Ⅱ(4과목)는 재수 정규반부터 수업합니다."
-            OPTIONS(2) = "● 반당 수강생 수 증감에 따라 분반 또는 합반할 수 있습니다."
-            OPTIONS(3) = "● 인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
-
-        Case "P"
-            OPTIONS(0) = ""
-            OPTIONS(1) = ""
-
-        Case "M"        '> 강남 마이맥
-'            Labels(23).Caption = "사회탐구 (택4)"
-'            Labels(26).Caption = "과학탐구 (택4)"
-'
-'            OPTIONS(0) = "▶ 인문계 사회선택은 4과목을 선택하십시요. 세계지리, 경제지리는 극소수일 경우 성반되지 않을 수 있습니다."
-'            OPTIONS(1) = "▶ 자연계 수리영역 선택과목 중 확률통계는 극소수일 경우 성반되지 않을 수 있습니다. 이산수학은 수업하지 않습니다."
-'
-        Case "J"        '> 양재
-'            OPTIONS(0) = "▶ 인문계 : 사회탐구영역 선택과목 중 법과사회, 세계지리, 세계사, 경제기리, 및 제2외국어는 정규반부터 수업합니다."
-'            OPTIONS(1) = "▶ 자연계 : 과학탐구영역 선택과목 중 과학II(4과목)는 정규반부터 수업합니다."
-'            OPTIONS(2) = "※선행학습반 인문계는 7과목 중 2과목을, 자연계는 4과목 중 2과목을 선택할 수 있습니다."
-
-        Case "B"        '> 부산
-            OPTIONS(0) = "▶ 선행학습반 인문계는 6과목 중 3과목을 선택할 수 있으며, 경제, 세계지리, 세계사, 법과사회, 경제지리, 제2외국어 과목은 정규 종합반부터 수업합니다."
-            OPTIONS(1) = "▶ 선행학습반 자연계는 4과목 중 3과목을 선택할 수 있으며, 과학II(4과목), 수리영역 선택과목 적분, 확률통계는 정규 종합반부터 수업합니다."
-            OPTIONS(2) = ""
-
-    End Select
+    
+    '>> 학원별 공지사항 세팅.
+    Dim arrGongji()       As String
+    Dim ni                As Long
+    
+    arrGongji = Get_StrGongji
+    For ni = 0 To UBound(arrGongji)
+        OPTIONS(ni) = arrGongji(ni)
+    Next ni
 
 End Sub
 
@@ -3638,11 +3579,11 @@ Private Sub Get_STD_Data()
     sStr = sStr & "         PHOTO_PATH , DECODE(R_WAY,'1','','2','-int','3','') AS R_WAY, ORD_NO, "
     sStr = sStr & "         UNIVCD1 , MAJORCD1,  UNIVCD2 , MAJORCD2, MU_TYPE, "
     sStr = sStr & "         ACID||EXMID AS IMAGE_FILE, "
-    sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.schcd) & "','',ACID) AS WANT_ACID, "
+    sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.SchCD) & "','',ACID) AS WANT_ACID, "
     'sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.SchCD) & "','" & Trim(basModule.SchCD) & "',ACID) AS WANT_ACID "       '< TEST
     
     '****************************** < IMAGE 저장 디렉토리 > **********************************************
-    Select Case basModule.schcd
+    Select Case basModule.SchCD
         Case "N"        '< 노량진
             sStr = sStr & "'" & Noryangjin & "'||"
                                     
@@ -3713,7 +3654,7 @@ Private Sub Get_STD_Data()
             '---------------------------------------------------------------------------- 전체학생 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            FROM CLSTD01TB"
-            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.SchCD) & "'"
             '>> 수험번호
             If Trim(fpExmID_S.UnFmtText) > " " And Trim(fpExmID_E.UnFmtText) > " " Then
                 sStr = sStr & "         AND EXMID BETWEEN '" & Trim(fpExmID_S.UnFmtText) & "' AND '" & Trim(fpExmID_E.UnFmtText) & "'"
@@ -3731,17 +3672,17 @@ Private Sub Get_STD_Data()
                 sStr = sStr & "         AND EXMTYPE = '1'"
             End If
             '>> 계열
-'            If Trim(Right(cboKaeyol_F.Text, 30)) <> "ALL" Then      ' 인문
-'                sStr = sStr & "                              AND KAEYOL = '" & Trim(Right(cboKaeyol_F.Text, 30)) & "'"
-'            End If
-            Select Case Trim(Right(cboKaeyol, 30))
-                Case "XX"
-                    ' no action
-                Case "01", "03"
-                    sStr = sStr & "     AND SEL1 > ' ' "
-                Case "02"
-                    sStr = sStr & "     AND SEL3 > ' ' "
-            End Select
+            If Trim(Right(cboKaeyol.Text, 30)) <> "ALL" Then      ' 인문
+                sStr = sStr & "                              AND KAEYOL = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
+            End If
+'            Select Case Trim(Right(cboKaeyol, 30))
+'                Case "XX"
+'                    ' no action
+'                Case "01", "03"
+'                    sStr = sStr & "     AND SEL1 > ' ' "
+'                Case "02"
+'                    sStr = sStr & "     AND SEL3 > ' ' "
+'            End Select
             '>> 학생명
             If Trim(txtStdNM.Text) > " " Then
                 sStr = sStr & "         AND STDNM LIKE '%" & Trim(txtStdNM.Text) & "%'"
@@ -3760,10 +3701,10 @@ Private Sub Get_STD_Data()
             '---------------------------------------------------------------------------- 합격자 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            From CLSTD01TB"
-            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                  PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                  PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                  PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
+            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                  PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                  PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                  PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
             sStr = sStr & "             AND EXMID > ' ' "
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -3772,14 +3713,17 @@ Private Sub Get_STD_Data()
                 sStr = sStr & "         AND EXMTYPE = '1'"
             End If
             '>> 계열
-            Select Case Trim(Right(cboKaeyol, 30))
-                Case "XX"
-                    ' no action
-                Case "01", "03"
-                    sStr = sStr & "     AND SEL1 > ' ' "
-                Case "02"
-                    sStr = sStr & "     AND SEL3 > ' ' "
-            End Select
+            If Trim(Right(cboKaeyol.Text, 30)) <> "ALL" Then      ' 인문
+                sStr = sStr & "                              AND KAEYOL = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
+            End If
+'            Select Case Trim(Right(cboKaeyol, 30))
+'                Case "XX"
+'                    ' no action
+'                Case "01", "03"
+'                    sStr = sStr & "     AND SEL1 > ' ' "
+'                Case "02"
+'                    sStr = sStr & "     AND SEL3 > ' ' "
+'            End Select
             '>> 학생명
             If Trim(txtStdNM.Text) > " " Then
                 sStr = sStr & "         AND STDNM LIKE '%" & Trim(txtStdNM.Text) & "%'"
@@ -3928,62 +3872,10 @@ Private Sub Get_STD_Data()
                 nTmp = 0:      If IsNumeric(.Fields("N_NUM")) = True Then nTmp = .Fields("N_NUM")
                     uSTD(nRec).N_NUM = nTmp
                 
-                
-                sTmp = "":      If IsNull(.Fields("SEL1_SCH")) = False Then sTmp = .Fields("SEL1_SCH")
-                    uSTD(nRec).SEL1_SCH = .Fields("SEL1_SCH") = sTmp
-                    
-                    Select Case uSTD(nRec).SEL1_SCH
-                        Case "N"
-                            uSTD(nRec).SEL1_SCH = "노량진"
-                        Case "K"
-                            uSTD(nRec).SEL1_SCH = "강남"
-                        Case "S"
-                            uSTD(nRec).SEL1_SCH = "송파"
-                        Case "P"
-                            uSTD(nRec).SEL1_SCH = "송파 M"
-                        Case "M"
-                            uSTD(nRec).SEL1_SCH = "강남 M"
-                            
-                        Case "W"
-                            uSTD(nRec).SEL1_SCH = "주말법의대"
-                        Case "Q"
-                            uSTD(nRec).SEL1_SCH = "야간법의대"
-                        
-                        Case "J"
-                            uSTD(nRec).SEL1_SCH = "양재"
-                        Case "B"
-                            uSTD(nRec).SEL1_SCH = "부산"
-                            
-                    End Select
-                
-                
-                sTmp = "":      If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = .Fields("SEL2_SCH")
+                sTmp = " ":     If IsNull(.Fields("SEL1_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL1_SCH")))
+                    uSTD(nRec).SEL1_SCH = sTmp
+                sTmp = " ":     If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL2_SCH")))
                     uSTD(nRec).SEL2_SCH = sTmp
-                    
-                    Select Case uSTD(nRec).SEL2_SCH
-                        Case "N"
-                            uSTD(nRec).SEL2_SCH = "노량진"
-                        Case "K"
-                            uSTD(nRec).SEL2_SCH = "강남"
-                        Case "S"
-                            uSTD(nRec).SEL2_SCH = "송파"
-                        Case "P"
-                            uSTD(nRec).SEL2_SCH = "송파 M"
-                        Case "M"
-                            uSTD(nRec).SEL2_SCH = "강남 M"
-                            
-                        Case "W"
-                            uSTD(nRec).SEL2_SCH = "주말법의대"
-                        Case "Q"
-                            uSTD(nRec).SEL2_SCH = "야간법의대"
-                            
-                        Case "J"
-                            uSTD(nRec).SEL2_SCH = "양재"
-                        Case "B"
-                            uSTD(nRec).SEL2_SCH = "부산"
-                        
-                    End Select
-                
                 
                 sTmp = "":      If IsNull(.Fields("PASS1")) = False Then sTmp = .Fields("PASS1")
                     uSTD(nRec).PASS1 = sTmp
@@ -4016,12 +3908,10 @@ Private Sub Get_STD_Data()
                 nTmp = 0:       If IsNull(.Fields("BASE_AMT6")) = False Then nTmp = .Fields("BASE_AMT6")
                     uSTD(nRec).BASE_AMT6 = nTmp
                     
-                    
                 nTmp = 0:       If IsNull(.Fields("BASE_AMT7")) = False Then nTmp = .Fields("BASE_AMT7")
                     uSTD(nRec).BASE_AMT7 = nTmp
                 nTmp = 0:       If IsNull(.Fields("BASE_AMT8")) = False Then nTmp = .Fields("BASE_AMT8")
                     uSTD(nRec).BASE_AMT8 = nTmp
-                                                                                                                                                  
                 nTmp = 0:       If IsNull(.Fields("TAMGU_AMT1")) = False Then nTmp = .Fields("TAMGU_AMT1")
                     uSTD(nRec).TAMGU_AMT1 = nTmp
                 nTmp = 0:       If IsNull(.Fields("TAMGU_AMT2")) = False Then nTmp = .Fields("TAMGU_AMT2")
@@ -4044,10 +3934,8 @@ Private Sub Get_STD_Data()
                     uSTD(nRec).TAMGU_AMT10 = nTmp
                 nTmp = 0:       If IsNull(.Fields("TAMGU_AMT11")) = False Then nTmp = .Fields("TAMGU_AMT11")
                     uSTD(nRec).TAMGU_AMT11 = nTmp
-                                                                                                                                                  
                 sTmp = "":      If IsNull(.Fields("SEX")) = False Then sTmp = .Fields("SEX")
                     uSTD(nRec).SEX = sTmp
-                                                                                                                                                  
                 sTmp = "":      If IsNull(.Fields("ZIP")) = False Then sTmp = .Fields("ZIP")
                     uSTD(nRec).ZIP = sTmp
                 sTmp = "":      If IsNull(.Fields("ADDR1")) = False Then sTmp = .Fields("ADDR1")
@@ -4185,7 +4073,7 @@ Private Sub Std_Data_Show(Index As Long)
                         접수계열2.Text = "인    문"
             Case "02":  접수계열.Text = "자 연 계"
                         접수계열2.Text = "자    연"
-            Case "03":  Select Case Trim(basModule.schcd)
+            Case "03":  Select Case Trim(basModule.SchCD)
                                Case "S":  접수계열.Text = "신설-인문"
                                           접수계열2.Text = "인    문"
                                Case "N":  접수계열.Text = "예.체능계"
@@ -4193,7 +4081,7 @@ Private Sub Std_Data_Show(Index As Long)
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "04":  Select Case Trim(basModule.schcd)
+            Case "04":  Select Case Trim(basModule.SchCD)
                                Case "K":  접수계열.Text = "법대(주말)"
                                           접수계열2.Text = "인    문"
                                Case "S":  접수계열.Text = "신설-자연"
@@ -4203,7 +4091,7 @@ Private Sub Std_Data_Show(Index As Long)
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "05":  Select Case Trim(basModule.schcd)
+            Case "05":  Select Case Trim(basModule.SchCD)
                                Case "K":  접수계열.Text = "의대(주말)"
                                           접수계열2.Text = "자    연"
                                Case "S":  접수계열.Text = "수능 자연"
@@ -4213,13 +4101,13 @@ Private Sub Std_Data_Show(Index As Long)
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "06":  Select Case Trim(basModule.schcd)
+            Case "06":  Select Case Trim(basModule.SchCD)
                                Case "K":  접수계열.Text = "법대(야간)"
                                           접수계열2.Text = "인    문"
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "07":  Select Case Trim(basModule.schcd)
+            Case "07":  Select Case Trim(basModule.SchCD)
                                Case "K":  접수계열.Text = "의대(야간)"
                                           접수계열2.Text = "자    연"
                                Case "N":  접수계열.Text = "신설-인문"
@@ -4227,13 +4115,13 @@ Private Sub Std_Data_Show(Index As Long)
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "08":  Select Case Trim(basModule.schcd)
+            Case "08":  Select Case Trim(basModule.SchCD)
                                Case "N":  접수계열.Text = "신설-자연"
                                           접수계열2.Text = "자    연"
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "09":  Select Case Trim(basModule.schcd)
+            Case "09":  Select Case Trim(basModule.SchCD)
                                Case "N": 접수계열.Text = "교대-자연"
                                           접수계열2.Text = "자    연"
                                Case Else: 접수계열.Text = ""
@@ -4277,11 +4165,11 @@ Private Sub Std_Data_Show(Index As Long)
                              
         
         ' 클리닉
-        If basModule.schcd = "N" Then
+        If basModule.SchCD = "N" Then
             test1.Text = Get_StrGwaMokRange(.SEL7, CLINIC_L_CLASS, CLINIC_L_CLASS + (CLINIC_L_COUNT - 1)) ' 국어
             test2.Text = Get_StrGwaMokRange(.SEL7, CLINIC_M_CLASS, CLINIC_M_CLASS + (CLINIC_M_COUNT - 1))  ' 수학
             test3.Text = Get_StrGwaMokRange(.SEL7, CLINIC_E_CLASS, CLINIC_E_CLASS + (CLINIC_E_COUNT - 1))  ' 영어
-        ElseIf basModule.schcd = "S" Then
+        ElseIf basModule.SchCD = "S" Then
             test1.Text = Get_StrGwaMokRange(.SEL7, CLINIC_L_CLASS, CLINIC_L_CLASS + (CLINIC_L_COUNT - 1)) ' 국어
             test2.Text = Get_StrGwaMokRange(.SEL7, CLINIC_M_CLASS, CLINIC_M_CLASS + (CLINIC_M_COUNT - 1))  ' 수학
             test3.Text = Get_StrGwaMokRange(.SEL7, CLINIC_E_CLASS, CLINIC_E_CLASS + (CLINIC_E_COUNT - 1))  ' 영어
@@ -4358,7 +4246,7 @@ Private Sub Std_Data_Show(Index As Long)
         
         Set Photo.Picture = CheckJPG(sSavePath & "\" & .IMAGE_FILE & ".jpg")
         
-        If Trim(basModule.schcd) = "B" Then
+        If Trim(basModule.SchCD) = "B" Then
             'lbl_2Sel(0).Caption = ""
             'lbl_2Sel(1).Caption = ""
         End If
@@ -4555,7 +4443,7 @@ Private Sub Get_STD_image()
         
         If Dir(sLocalFile, vbNormal) = "" Then                                      '<< 학생 이미지 없는 것만 받음
         
-            Select Case Trim(basModule.schcd)
+            Select Case Trim(basModule.SchCD)
                 Case "B"        '<< 부산직영
                     sSourceUrl = "http://www.dsbusan.com" & uSTD(nRec).PHOTO_PATH           '<< 서버의 이미지 경로
                 Case Else
@@ -4713,7 +4601,7 @@ ErrPrint:
                 '  테두리 없는 사각 박스를 만들고 내부색을 칠한다.
                 '********************************************************************
                 
-                Select Case Trim(basModule.schcd)
+                Select Case Trim(basModule.SchCD)
                     Case "B"
                     
                     Case Else
@@ -4746,7 +4634,7 @@ ErrPrint:
                 '  테두리 없는 사각 박스를 만들고 내부색을 칠한다.
                 '********************************************************************
                 
-                Select Case Trim(basModule.schcd)
+                Select Case Trim(basModule.SchCD)
                     Case "B"
                     
                     Case Else
@@ -4766,7 +4654,7 @@ ErrPrint:
              Select Case UCase(TypeName(UsrCtl))
                     Case "LINE"
 
-                        If Trim(basModule.schcd) = "B" Then
+                        If Trim(basModule.SchCD) = "B" Then
                             If UCase(UsrCtl.Name) = "L_B1" Then
                                 
                             Else
@@ -4787,7 +4675,7 @@ ErrPrint:
                           '  단) transparent는 true로 처리하고 실행한다.
                           '  SetBkMode(Printer.hdc, TRANSPARENT)문장은 MS버그를 처리하기 위함
                           '********************************************************************
-                            If Trim(basModule.schcd) = "B" Then
+                            If Trim(basModule.SchCD) = "B" Then
                                 If (UCase(UsrCtl.Name) = "B_LB") Then
                                 Else
                                     If (.Name <> "NonPrintLbl") Then
@@ -4984,7 +4872,7 @@ Private Function Make_image_Path(ByVal aSchNO As String, ByVal aExmID As String,
     Dim MaxSize         As Long
     
     sFilePath = ""
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N"
             sFilePath = "/NDOC/dshw/noryangjin/register/ACC/"
         Case "K", "W", "Q"
@@ -5001,7 +4889,7 @@ Private Function Make_image_Path(ByVal aSchNO As String, ByVal aExmID As String,
             sFilePath = "/NDOC/dshw/busan/register/ACC/"
     End Select
     
-    sFilePath = sFilePath & Trim(basModule.schcd) & aExmID & ".jpg"
+    sFilePath = sFilePath & Trim(basModule.SchCD) & aExmID & ".jpg"
     
     On Error GoTo ErrStmt
     

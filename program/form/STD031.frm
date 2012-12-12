@@ -4405,156 +4405,17 @@ Private Sub Form_Load()
             .Tag = "0"      '<< 다중선택
         End With
         
-        With cboHakwon
-            .Clear
-            .AddItem "노량진" & Space(30) & "N"
-            .AddItem "강남" & Space(30) & "K"
-            .AddItem "송파" & Space(30) & "S"
-            .AddItem "송파 M" & Space(30) & "P"
-            .AddItem "강남 M" & Space(30) & "M"
-            
-            .AddItem "주말법의대" & Space(30) & "W"
-            .AddItem "야간법의대" & Space(30) & "Q"
-            
-            .AddItem "양재" & Space(30) & "J"
-            .AddItem "부산" & Space(30) & "B"
-            
-            Select Case basModule.schcd
-                Case "N"
-                    .ListIndex = 0
-                Case "K"
-                    .ListIndex = 1
-                Case "S"
-                    .ListIndex = 2
-                Case "P"
-                    .ListIndex = 3
-                Case "M"
-                    .ListIndex = 4
-                    
-                Case "W"
-                    .ListIndex = 5
-                Case "Q"
-                    .ListIndex = 6
-                    
-                Case "J"
-                    .ListIndex = 7
-                Case "B"
-                    .ListIndex = 8
-                    
-            End Select
-        End With
         
-        With cboExmType
-            .Clear
-            .AddItem "전체" & Space(30) & "ALL"
-            .AddItem "무시험" & Space(30) & "0"
-            .AddItem "유시험" & Space(30) & "1"
-            
-            .ListIndex = 0
-        End With
+        Call basCommonSTD.Init_CboSch(cboHakwon)   '1지망 학원
+        Call basCommonSTD.Set_CboSch(cboHakwon, basModule.schcd)
+        Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
         
         
-'>> 계열
-        With cboKaeyol
-            .Clear
+        '>> 계열
+        Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol)      '계열
+        cboKaeyol.AddItem "계열무시" & Space(30) & "98"
+        'cboKaeyol.AddItem "계열무시자연" & Space(30) & "99"
             
-            .AddItem "인문" & Space(30) & "01"
-            .AddItem "자연" & Space(30) & "02"
-            
-        '<< 계열 >> : 2008.01.09
-            If Trim(basModule.schcd) = "N" Then             '< 노량진
-                .AddItem "예체" & Space(30) & "03"
-                .AddItem "수리(나)" & Space(30) & "04"
-                .AddItem "인문수능" & Space(30) & "05"
-                .AddItem "자연수능" & Space(30) & "06"
-                
-                .AddItem "인문-신" & Space(30) & "07"
-                .AddItem "자연-신" & Space(30) & "08"
-                '.AddItem "수능인문-신" & Space(30) & "09"
-                '.AddItem "수능자연-신" & Space(30) & "10"
-                
-                .AddItem "편)인문" & Space(30) & "11"
-                .AddItem "편)자연" & Space(30) & "12"
-                .AddItem "편)예체" & Space(30) & "13"
-                .AddItem "편)수리(나)" & Space(30) & "14"
-                .AddItem "편)인문수능" & Space(30) & "15"
-                .AddItem "편)자연수능" & Space(30) & "16"
-            End If
-        '<< 계열 >> : 2008.01.10
-            If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Or Trim(basModule.schcd) = "M" Then        '< 강남 2008.03.24
-                .AddItem "주말법대" & Space(30) & "04"
-                .AddItem "주말의대" & Space(30) & "05"
-                
-                .AddItem "야간법대" & Space(30) & "06"
-                .AddItem "야간의대" & Space(30) & "07"
-            
-                .AddItem "선착순인문" & Space(30) & "11"
-                .AddItem "선착순자연" & Space(30) & "12"
-                
-                .AddItem "선착순인문16" & Space(30) & "16"
-                .AddItem "선착순자연17" & Space(30) & "17"
-                
-                .AddItem "내신우수자인문" & Space(30) & "19"
-                .AddItem "내신우수자자연" & Space(30) & "20"
-                
-            End If
-        '<< 계열 >> : 2008.02.15
-            If Trim(basModule.schcd) = "S" Then             '< 송파
-''                .AddItem "예체능" & Space(30) & "03"
-''
-''                .AddItem "인문수능" & Space(30) & "05"
-''                .AddItem "자연수능" & Space(30) & "06"
-''
-                .AddItem "신설인문" & Space(30) & "11"
-                .AddItem "신설자연" & Space(30) & "12"
-                
-                .AddItem "인문프리미엄" & Space(30) & "18"
-                .AddItem "자연프리미엄" & Space(30) & "19"
-                
-                .AddItem "서울대특별인문" & Space(30) & "21"
-                .AddItem "서울대특별자연" & Space(30) & "22"
-                .AddItem "야간서울대인문" & Space(30) & "23"
-                .AddItem "야간서울대자연" & Space(30) & "24"
-             
-                
-            End If
-            
-        '<< 계열 >> : 2008.02.15
-            If Trim(basModule.schcd) = "P" Then             '< 마송
-                .AddItem "특별인문" & Space(30) & "03"
-                .AddItem "특별자연" & Space(30) & "04"
-                
-            End If
-            
-            If Trim(basModule.schcd) = "J" Then             '< 양재
-                .AddItem "신설인문" & Space(30) & "11"
-                .AddItem "신설자연" & Space(30) & "12"
-                
-                .AddItem "인문프리미엄" & Space(30) & "18"
-                .AddItem "자연프리미엄" & Space(30) & "19"
-                
-            End If
-            
-        '<< 계열 >> : 2009.01.09
-            If Trim(basModule.schcd) = "B" Then             '< 부산
-                .AddItem "수학선행인문" & Space(30) & "05"
-                .AddItem "수학선행자연" & Space(30) & "06"
-                
-                .AddItem "연.고대인문" & Space(30) & "07"
-                .AddItem "연.고대자연" & Space(30) & "08"
-                
-                .AddItem "심화인문" & Space(30) & "09"
-                .AddItem "심화자연" & Space(30) & "10"
-                
-            End If
-            
-            
-            .AddItem "계열무시" & Space(30) & "98"
-            '.AddItem "계열무시자연" & Space(30) & "99"
-            
-            
-            .ListIndex = 0
-        End With
         
         
         sini_Path = App.Path & "\DAESUNG.INI"

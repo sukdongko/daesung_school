@@ -2338,240 +2338,26 @@ Private Sub Form_Load()
             .GrayAreaBackColor = basModule.GrayAreaBackColor2
         End With
         
-        With cboHakwon
-            .Clear
-            .AddItem "노량진" & Space(30) & "N"
-            .AddItem "강남" & Space(30) & "K"
-            .AddItem "송파" & Space(30) & "S"
-            .AddItem "송파 M" & Space(30) & "P"
-            .AddItem "강남 M" & Space(30) & "M"
-            
-            .AddItem "주말법의대" & Space(30) & "W"
-            .AddItem "야간법의대" & Space(30) & "Q"
-            
-            .AddItem "양재" & Space(30) & "J"
-            .AddItem "부산" & Space(30) & "B"
-            .AddItem "강남기숙(이천)" & Space(30) & "E"
-            
-            Select Case basModule.schcd
-                Case "N"
-                    .ListIndex = 0
-                Case "K"
-                    .ListIndex = 1
-                Case "S"
-                    .ListIndex = 2
-                Case "P"
-                    .ListIndex = 3
-                Case "M"
-                    .ListIndex = 4
-                    
-                Case "W"
-                    .ListIndex = 5
-                Case "Q"
-                    .ListIndex = 6
-                    
-                Case "J"
-                    .ListIndex = 7
-                Case "B"
-                    .ListIndex = 8
-                 Case "E"
-                    .ListIndex = 9
-            End Select
-        End With
-        
-        With cboExmType
-            .Clear
-            .AddItem "전체" & Space(30) & "ALL"
-            .AddItem "무시험" & Space(30) & "0"
-            .AddItem "유시험" & Space(30) & "1"
-            
-            .ListIndex = 0
-        End With
-        
-        '제2지망
-        With cboSel2_Sch
-            .Clear
-            .AddItem "없음" & Space(30) & "X"
-            .AddItem "노량진" & Space(30) & "N"
-            .AddItem "강남" & Space(30) & "K"
-            .AddItem "송파" & Space(30) & "S"
-            .AddItem "송파 M" & Space(30) & "P"
-            .AddItem "강남 M" & Space(30) & "M"
-            
-            .AddItem "주말법의대" & Space(30) & "W"
-            .AddItem "야간법의대" & Space(30) & "Q"
-            
-            .AddItem "양재" & Space(30) & "J"
-            .AddItem "부산" & Space(30) & "B"
-            .AddItem "강남기숙(이천)" & Space(30) & "E"
-            
-            .ListIndex = 0
-        End With
-    
+        Call basCommonSTD.Init_CboSch(cboHakwon)   '1지망 학원
+        Call basCommonSTD.Init_CboSch(cboSel2_Sch)   '2지망 학원
+        cboSel2_Sch.AddItem "강남기숙(이천)" & Space(30) & "E"  '강남기숙 추가
+        Call basCommonSTD.Set_CboSch(cboHakwon, basModule.schcd)
+        Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
         Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol)    '조회 계열
         cboKaeyol.AddItem "전체" & Space(30) & "ALL", 0
         cboKaeyol.ListIndex = 0
-'
-''>> 계열
-'        With cboKaeyol
-'            .Clear
-'            .AddItem "전체" & Space(30) & "ALL"
-'            .AddItem "인문" & Space(30) & "01"
-'            .AddItem "자연" & Space(30) & "02"
-'
-'        '<< 계열 >> : 2008.01.09
-'            If Trim(basModule.SchCD) = "N" Then             '< 노량진
-'                .AddItem "예체" & Space(30) & "03"
-'                .AddItem "수리(나)" & Space(30) & "04"
-'                .AddItem "인문수능" & Space(30) & "05"
-'                .AddItem "자연수능" & Space(30) & "06"
-'
-'                .AddItem "인문-신" & Space(30) & "07"
-'                .AddItem "자연-신" & Space(30) & "08"
-'                '.AddItem "수능인문-신" & Space(30) & "09"
-'                '.AddItem "수능자연-신" & Space(30) & "10"
-'
-'                .AddItem "편)인문" & Space(30) & "11"
-'                .AddItem "편)자연" & Space(30) & "12"
-'                .AddItem "편)예체" & Space(30) & "13"
-'                .AddItem "편)수리(나)" & Space(30) & "14"
-'                .AddItem "편)인문수능" & Space(30) & "15"
-'                .AddItem "편)자연수능" & Space(30) & "16"
-'            End If
-'        '<< 계열 >> : 2008.01.10
-'            If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then           '< 강남 2008.03.24
-'                .AddItem "주말법대" & Space(30) & "04"
-'                .AddItem "주말의대" & Space(30) & "05"
-'
-'                .AddItem "야간법대" & Space(30) & "06"
-'                .AddItem "야간의대" & Space(30) & "07"
-'
-'                .AddItem "선착순인문" & Space(30) & "11"
-'                .AddItem "선착순자연" & Space(30) & "12"
-'
-'                .AddItem "선착순인문16" & Space(30) & "16"
-'                .AddItem "선착순자연17" & Space(30) & "17"
-'
-'            End If
-'        '<< 계열 >> : 2008.02.15
-'            If Trim(basModule.SchCD) = "S" Then             '< 송파
-'''                .AddItem "예체능" & Space(30) & "03"
-'''
-'''                .AddItem "인문수능" & Space(30) & "05"
-'''                .AddItem "자연수능" & Space(30) & "06"
-'''
-'                .AddItem "신설인문" & Space(30) & "11"
-'                .AddItem "신설자연" & Space(30) & "12"
-'
-'                .AddItem "인문프리미엄" & Space(30) & "18"
-'                .AddItem "자연프리미엄" & Space(30) & "19"
-'
-'               .AddItem "서울대특별인문" & Space(30) & "21"
-'               .AddItem "서울대특별자연" & Space(30) & "22"
-'               .AddItem "야간서울대인문" & Space(30) & "23"
-'               .AddItem "야간서울대자연" & Space(30) & "24"
-'
-'
-'            End If
-'        '<< 계열 >> : 2008.02.15
-'            If Trim(basModule.SchCD) = "P" Then             '< 마송
-'                .AddItem "특별인문" & Space(30) & "03"
-'                .AddItem "특별자연" & Space(30) & "04"
-'            End If
-'
-'            If Trim(basModule.SchCD) = "J" Then             '< 양재
-'                .AddItem "신설인문" & Space(30) & "11"
-'                .AddItem "신설자연" & Space(30) & "12"
-'
-'                .AddItem "인문프리미엄" & Space(30) & "18"
-'                .AddItem "자연프리미엄" & Space(30) & "19"
-'            End If
-'
-'
-'        '<< 계열 >> : 2009.01.09
-'            If Trim(basModule.SchCD) = "B" Then             '< 부산
-'                .AddItem "수학선행인문" & Space(30) & "05"
-'                .AddItem "수학선행자연" & Space(30) & "06"
-'
-'                .AddItem "연.고대인문" & Space(30) & "07"
-'                .AddItem "연.고대자연" & Space(30) & "08"
-'
-'                .AddItem "심화인문" & Space(30) & "09"
-'                .AddItem "심화자연" & Space(30) & "10"
-'            End If
-'
-'            .ListIndex = 0
-'        End With
         
+
+        Call basCommonSTD.Init_CboSch(cboPass(0))      '1지망 합격 학원
+        cboSel2_Sch.AddItem "강남기숙(이천)" & Space(30) & "E"  '강남기숙 추가
+        Call basCommonSTD.Init_CboSch(cboPass(1))      '2지망 합격 학원
+        cboSel2_Sch.AddItem "강남기숙(이천)" & Space(30) & "E"  '강남기숙 추가
+        Call basCommonSTD.Init_CboSch(cboPass(2))      '3지망 합격 학원
+        cboSel2_Sch.AddItem "강남기숙(이천)" & Space(30) & "E"  '강남기숙 추가
+        Call basCommonSTD.Init_CboSch(cboPass(3))      '4지망 합격 학원
+        cboSel2_Sch.AddItem "강남기숙(이천)" & Space(30) & "E"  '강남기숙 추가
             
-        With cboPass(0)
-            .Clear
-            .AddItem "없음" & Space(30) & "X"
-            .AddItem "노량진" & Space(30) & "N"
-            .AddItem "강남" & Space(30) & "K"
-            .AddItem "송파" & Space(30) & "S"
-            .AddItem "송파 M" & Space(30) & "P"
-            .AddItem "강남 M" & Space(30) & "M"
-            
-            .AddItem "주말법의대" & Space(30) & "W"
-            .AddItem "야간법의대" & Space(30) & "Q"
-            
-            .AddItem "양재" & Space(30) & "J"
-            .AddItem "부산" & Space(30) & "B"
-            .AddItem "강남기숙(이천)" & Space(30) & "E"
-            .ListIndex = 0
-        End With
-        With cboPass(1)
-            .Clear
-            .AddItem "없음" & Space(30) & "X"
-            .AddItem "노량진" & Space(30) & "N"
-            .AddItem "강남" & Space(30) & "K"
-            .AddItem "송파" & Space(30) & "S"
-            .AddItem "송파 M" & Space(30) & "P"
-            .AddItem "강남 M" & Space(30) & "M"
-            
-            .AddItem "주말법의대" & Space(30) & "W"
-            .AddItem "야간법의대" & Space(30) & "Q"
-            
-            .AddItem "양재" & Space(30) & "J"
-            .AddItem "부산" & Space(30) & "B"
-            .AddItem "강남기숙(이천)" & Space(30) & "E"
-            .ListIndex = 0
-        End With
-        With cboPass(2)
-            .Clear
-            .AddItem "없음" & Space(30) & "X"
-            .AddItem "노량진" & Space(30) & "N"
-            .AddItem "강남" & Space(30) & "K"
-            .AddItem "송파" & Space(30) & "S"
-            .AddItem "송파 M" & Space(30) & "P"
-            .AddItem "강남 M" & Space(30) & "M"
-            
-            .AddItem "주말법의대" & Space(30) & "W"
-            .AddItem "야간법의대" & Space(30) & "Q"
-            
-            .AddItem "양재" & Space(30) & "J"
-            .AddItem "부산" & Space(30) & "B"
-            .AddItem "강남기숙(이천)" & Space(30) & "E"
-            .ListIndex = 0
-        End With
-        With cboPass(3)
-            .Clear
-            .AddItem "없음" & Space(30) & "X"
-            .AddItem "노량진" & Space(30) & "N"
-            .AddItem "강남" & Space(30) & "K"
-            .AddItem "송파" & Space(30) & "S"
-            .AddItem "송파 M" & Space(30) & "P"
-            .AddItem "강남 M" & Space(30) & "M"
-            
-            .AddItem "주말법의대" & Space(30) & "W"
-            .AddItem "야간법의대" & Space(30) & "Q"
-            
-            .AddItem "양재" & Space(30) & "J"
-            .AddItem "부산" & Space(30) & "B"
-            .AddItem "강남기숙(이천)" & Space(30) & "E"
-            .ListIndex = 0
-        End With
+        
             
         sprPass.Tag = "0"           '<< 여러개 선택을 위해서
         
@@ -2790,7 +2576,7 @@ Private Sub cmdFind_Click()
     'sStr = sStr & "         GAEYUL, "
     sStr = sStr & "         SEL2_SCH, "                                     '< 2008.01.11 : 송파 M -> 제2지망
     
-    sStr = sStr & "         KAEYOL_CD, KAEYOL_NM, "
+    sStr = sStr & "         KAEYOL_CD, GAEYUL, "
     sStr = sStr & "         PASS1, PASS2, PASS3, PASS4 "
     sStr = sStr & "    FROM ("
             sStr = sStr & "  SELECT SCHNO, ACID, EXMID, STDNM, SUBSTR(Birth_ymd,1,4)||'-'||SUBSTR(Birth_ymd,5,2)  ||'-'||SUBSTR(Birth_ymd,7,2) AS Birth_ymd_F, Birth_ymd ,"
@@ -2809,101 +2595,9 @@ Private Sub cmdFind_Click()
             
             sStr = sStr & "         KAEYOL AS KAEYOL_CD,"
             
-            '<< 계열 >> : 2008.01.09
-            If Trim(basModule.schcd) = "N" Then
-                sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-                sStr = sStr & "                   '02','자연',"
-                sStr = sStr & "                   '03','예체',"
-                sStr = sStr & "                   '04','수리(나)',"
-                sStr = sStr & "                   '05','인문수능',"
-                sStr = sStr & "                   '06','자연수능',"
-                
-                sStr = sStr & "                   '07','신설인문',"
-                sStr = sStr & "                   '08','신설자연',"
-                sStr = sStr & "                   '09','신설수능인문',"
-                sStr = sStr & "                   '10','신설수능자연',"
-                
-                sStr = sStr & "                   '11','편)인문',"
-                sStr = sStr & "                   '12','편)자연',"
-                sStr = sStr & "                   '13','편)예체',"
-                sStr = sStr & "                   '14','편)수리(나)',"
-                sStr = sStr & "                   '15','편)인문수능',"
-                sStr = sStr & "                   '16','편)자연수능'"
-                sStr = sStr & "            ) AS KAEYOL_NM,"
-            '<< 계열 >> : 2008.01.10
-            ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then
-                sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-                sStr = sStr & "                   '02','자연',"
-                
-                sStr = sStr & "                   '04','주말법대',"
-                sStr = sStr & "                   '05','주말의대',"
-                sStr = sStr & "                   '06','야간법대',"
-                sStr = sStr & "                   '07','야간의대',"
-                
-                sStr = sStr & "                   '11','선착순인문',"
-                sStr = sStr & "                   '12','선착순자연',"
-                
-                sStr = sStr & "                   '16','선착순인문16',"
-                sStr = sStr & "                   '17','선착순자연17'"
-                
-                sStr = sStr & "            ) AS KAEYOL_NM,"
-            '<< 계열 >> : 2008.02.15
-            ElseIf Trim(basModule.schcd) = "S" Then
-                sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-                sStr = sStr & "                   '02','자연',"
-                sStr = sStr & "                   '03','예체능',"
-                
-                sStr = sStr & "                   '05','수능인문',"
-                sStr = sStr & "                   '06','수능자연',"
-                
-                sStr = sStr & "                   '11','신설인문',"
-                sStr = sStr & "                   '12','신설자연',"
-                
-                sStr = sStr & "                   '18','인문프리미엄',"
-                sStr = sStr & "                   '19','자연프리미엄',"
-                
-                sStr = sStr & "                   '21','서울대특별인문',"
-                sStr = sStr & "                   '22','서울대특별자연',"
-                
-                sStr = sStr & "                   '23','야간서울대인문',"
-                sStr = sStr & "                   '24','야간서울대자연'"
-                
-
-                sStr = sStr & "            ) AS KAEYOL_NM,"
-            '<< 계열 >> : 2008.02.15
-            ElseIf Trim(basModule.schcd) = "P" Then         '< 마송
-                sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-                sStr = sStr & "                   '02','자연',"
-                sStr = sStr & "                   '03','특별인문',"
-                sStr = sStr & "                   '04','특별자연'"
-                sStr = sStr & "            ) AS KAEYOL_NM,"
-                
-            ElseIf Trim(basModule.schcd) = "J" Then         '< 양재
-                sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-                sStr = sStr & "                   '02','자연',"
-                sStr = sStr & "                   '11','신설인문',"
-                sStr = sStr & "                   '12','신설자연',"
-                
-                sStr = sStr & "                   '18','인문프리미엄',"
-                sStr = sStr & "                   '19','자연프리미엄'"
-                sStr = sStr & "            ) AS KAEYOL_NM,"
-                
-            ElseIf Trim(basModule.schcd) = "B" Then         '< 부산 : 2009.01.09
-                sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-                sStr = sStr & "                   '02','자연',"
-                sStr = sStr & "                   '05','특별인문',"
-                sStr = sStr & "                   '06','특별자연',"
-                sStr = sStr & "                   '07','연고대인문',"
-                sStr = sStr & "                   '08','연고대자연',"
-                sStr = sStr & "                   '09','심화인문',"
-                sStr = sStr & "                   '10','심화자연'"
-                sStr = sStr & "            ) AS KAEYOL_NM,"
-                
-            Else
-                sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-                sStr = sStr & "                   '02','자연'"
-                sStr = sStr & "            ) AS KAEYOL_NM,"
-            End If
+            '계열 decode sql문 공통
+            sStr = sStr & basCommonSTD.Get_SqlKaeyolDecode()
+            
             
             sStr = sStr & "         PASS1, PASS2, PASS3, PASS4 "
             sStr = sStr & "    From CLSTD01TB"
@@ -3151,38 +2845,14 @@ Private Sub cmdFind_Click()
                     sTmp = " ": If IsNull(.Fields("KAEYOL_CD")) = False Then sTmp = Trim(.Fields("KAEYOL_CD"))
                         Call basFunction.Set_SprType_Text(sprPass, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 sprPass.Col = sprPass.Col + 1
-                    sTmp = " ": If IsNull(.Fields("KAEYOL_NM")) = False Then sTmp = Trim(.Fields("KAEYOL_NM"))
+                    sTmp = " ": If IsNull(.Fields("GAEYUL")) = False Then sTmp = Trim(.Fields("GAEYUL"))
                         Call basFunction.Set_SprType_Text(sprPass, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
 '                sprPass.Col = sprPass.Col + 1
 '                    sTmp = " ": If IsNull(.Fields("GAEYUL")) = False Then sTmp = Trim(.Fields("GAEYUL"))
 '                        Call basFunction.Set_SprType_Text(sprPass, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 sprPass.Col = sprPass.Col + 1
-                    sTmp = " ": If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = Trim(.Fields("SEL2_SCH"))        '< 2008.01.11 : 송파 M -> 제2지망
-                    Select Case UCase(Trim(sTmp))
-                        Case "N"
-                            sTmp = "노량진"
-                        Case "K"
-                            sTmp = "강남"
-                        Case "S"
-                            sTmp = "송파"
-                        Case "P"
-                            sTmp = "송파 M"
-                        Case "M"
-                            sTmp = "강남 M"
-                            
-                        Case "W"
-                            sTmp = "주말법의대"
-                        Case "Q"
-                            sTmp = "야간법의대"
-                            
-                        Case "J"
-                            sTmp = "양재"
-                        Case "B"
-                            sTmp = "부산"
-                       Case "E"
-                            sTmp = "강남기숙(이천)"
-                    End Select
+                    sTmp = " ": If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL2_SCH"))) '< 2008.01.11 : 송파 M -> 제2지망
                     Call basFunction.Set_SprType_Text(sprPass, "CENTER", "LEFT", LenB(sTmp), sTmp)
                         
                 
@@ -3190,124 +2860,28 @@ Private Sub cmdFind_Click()
                     sprPass.Col = sprPass.Col + 1
                 Else
                     sprPass.Col = sprPass.Col + 1
-                    sTmp = Trim(.Fields("PASS1"))
-                    Select Case UCase(Trim(sTmp))
-                        Case "N"
-                            sTmp = "노량진" & Space(30) & "N"
-                        Case "K"
-                            sTmp = "강남" & Space(30) & "K"
-                        Case "S"
-                            sTmp = "송파" & Space(30) & "S"
-                        Case "P"
-                            sTmp = "송파 M" & Space(30) & "P"
-                        Case "M"
-                            sTmp = "강남 M" & Space(30) & "M"
-                            
-                        Case "W"
-                            sTmp = "주말법의대" & Space(30) & "W"
-                        Case "Q"
-                            sTmp = "야간법의대" & Space(30) & "Q"
-                            
-                        Case "J"
-                            sTmp = "양재" & Space(30) & "J"
-                        Case "B"
-                            sTmp = "부산" & Space(30) & "B"
-                        Case "E"
-                            sTmp = "강남기숙(이천)" & Space(30) & "E"
-                    End Select
+                    sTmp = " ": If IsNull(.Fields("PASS1")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("PASS1")))
                     Call basFunction.Set_SprType_Text(sprPass, "CENTER", "LEFT", 300, sTmp)
                 End If
                 If IsNull(.Fields("PASS2")) = True Then
                     sprPass.Col = sprPass.Col + 1
                 Else
                     sprPass.Col = sprPass.Col + 1
-                    sTmp = Trim(.Fields("PASS2"))
-                    Select Case UCase(Trim(sTmp))
-                        Case "N"
-                            sTmp = "노량진" & Space(30) & "N"
-                        Case "K"
-                            sTmp = "강남" & Space(30) & "K"
-                        Case "S"
-                            sTmp = "송파" & Space(30) & "S"
-                        Case "P"
-                            sTmp = "송파 M" & Space(30) & "P"
-                        Case "M"
-                            sTmp = "강남 M" & Space(30) & "M"
-                            
-                        Case "W"
-                            sTmp = "주말법의대" & Space(30) & "W"
-                        Case "Q"
-                            sTmp = "야간법의대" & Space(30) & "Q"
-                            
-                        Case "J"
-                            sTmp = "양재" & Space(30) & "J"
-                        Case "B"
-                            sTmp = "부산" & Space(30) & "B"
-                         Case "E"
-                            sTmp = "강남기숙(이천)" & Space(30) & "E"
-                    End Select
+                    sTmp = " ": If IsNull(.Fields("PASS2")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("PASS2")))
                     Call basFunction.Set_SprType_Text(sprPass, "CENTER", "LEFT", 300, sTmp)
                 End If
                 If IsNull(.Fields("PASS3")) = True Then
                     sprPass.Col = sprPass.Col + 1
                 Else
                     sprPass.Col = sprPass.Col + 1
-                    sTmp = Trim(.Fields("PASS3"))
-                    Select Case UCase(Trim(sTmp))
-                        Case "N"
-                            sTmp = "노량진" & Space(30) & "N"
-                        Case "K"
-                            sTmp = "강남" & Space(30) & "K"
-                        Case "S"
-                            sTmp = "송파" & Space(30) & "S"
-                        Case "P"
-                            sTmp = "송파 M" & Space(30) & "P"
-                        Case "M"
-                            sTmp = "강남 M" & Space(30) & "M"
-                            
-                        Case "W"
-                            sTmp = "주말법의대" & Space(30) & "W"
-                        Case "Q"
-                            sTmp = "야간법의대" & Space(30) & "Q"
-                            
-                        Case "J"
-                            sTmp = "양재" & Space(30) & "J"
-                        Case "B"
-                            sTmp = "부산" & Space(30) & "B"
-                        Case "E"
-                            sTmp = "강남기숙(이천)" & Space(30) & "E"
-                    End Select
+                    sTmp = " ": If IsNull(.Fields("PASS3")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("PASS3")))
                     Call basFunction.Set_SprType_Text(sprPass, "CENTER", "LEFT", 300, sTmp)
                 End If
                 If IsNull(.Fields("PASS4")) = True Then
                     sprPass.Col = sprPass.Col + 1
                 Else
                     sprPass.Col = sprPass.Col + 1
-                    sTmp = Trim(.Fields("PASS4"))
-                    Select Case UCase(Trim(sTmp))
-                        Case "N"
-                            sTmp = "노량진" & Space(30) & "N"
-                        Case "K"
-                            sTmp = "강남" & Space(30) & "K"
-                        Case "S"
-                            sTmp = "송파" & Space(30) & "S"
-                        Case "P"
-                            sTmp = "송파 M" & Space(30) & "P"
-                        Case "M"
-                            sTmp = "강남 M" & Space(30) & "M"
-                            
-                        Case "W"
-                            sTmp = "주말법의대" & Space(30) & "W"
-                        Case "Q"
-                            sTmp = "야간법의대" & Space(30) & "Q"
-                            
-                        Case "J"
-                            sTmp = "양재" & Space(30) & "J"
-                        Case "B"
-                            sTmp = "부산" & Space(30) & "B"
-                        Case "E"
-                            sTmp = "강남기숙(이천)" & Space(30) & "E"
-                    End Select
+                    sTmp = " ": If IsNull(.Fields("PASS4")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("PASS4")))
                     Call basFunction.Set_SprType_Text(sprPass, "CENTER", "LEFT", 300, sTmp)
                 End If
                 

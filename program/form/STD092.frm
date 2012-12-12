@@ -527,104 +527,12 @@ Private Sub Form_Load()
         .GrayAreaBackColor = basModule.GrayAreaBackColor1
     End With
     
-    With cboKaeyol_F
-        .Clear
-        .AddItem "전체" & Space(30) & "ALL"
-        .AddItem "인문" & Space(30) & "01"
-        .AddItem "자연" & Space(30) & "02"
-        
-    '<< 계열 >> : 2008.01.09
-        If Trim(basModule.schcd) = "N" Then             '< 노량진
-            .AddItem "예체" & Space(30) & "03"
-            .AddItem "수리(나)" & Space(30) & "04"
-            .AddItem "인문수능" & Space(30) & "05"
-            .AddItem "자연수능" & Space(30) & "06"
-            
-            .AddItem "인문-신" & Space(30) & "07"
-            .AddItem "자연-신" & Space(30) & "08"
-            '.AddItem "수능인문-신" & Space(30) & "09"
-            '.AddItem "수능자연-신" & Space(30) & "10"
-            
-            .AddItem "편)인문" & Space(30) & "11"
-            .AddItem "편)자연" & Space(30) & "12"
-            .AddItem "편)예체" & Space(30) & "13"
-            .AddItem "편)수리(나)" & Space(30) & "14"
-            .AddItem "편)인문수능" & Space(30) & "15"
-            .AddItem "편)자연수능" & Space(30) & "16"
-        End If
-    '<< 계열 >> : 2008.01.10
-        
-        If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then       '< 강남 2008.03.24
-            .AddItem "주말법대" & Space(30) & "04"
-            .AddItem "주말의대" & Space(30) & "05"
-            
-            .AddItem "야간법대" & Space(30) & "06"
-            .AddItem "야간의대" & Space(30) & "07"
-            
-            .AddItem "선착순인문" & Space(30) & "11"
-            .AddItem "선착순자연" & Space(30) & "12"
-            
-            .AddItem "선착순인문16" & Space(30) & "16"
-            .AddItem "선착순자연17" & Space(30) & "17"
-        End If
-        
-    '<< 계열 >> : 2008.01.09
-        Select Case Trim(basModule.schcd)
-            Case "S"                                        '< 송파
-'                .AddItem "예체능" & Space(30) & "03"
-'
-'                .AddItem "인문수능" & Space(30) & "05"
-'                .AddItem "자연수능" & Space(30) & "06"
-'
-'                .AddItem "신설인문" & Space(30) & "11"
-'                .AddItem "신설자연" & Space(30) & "12"
-
-                .AddItem "인문프리미엄" & Space(30) & "18"
-                .AddItem "자연프리미엄" & Space(30) & "19"
-
-        End Select
-        
-        Select Case Trim(basModule.schcd)
-            Case "P", "J"                                   '< 양재
-                .AddItem "신설인문" & Space(30) & "11"
-                .AddItem "신설자연" & Space(30) & "12"
-        End Select
-        
-        
-    '<< 계열 >> : 2009.01.09
-        Select Case Trim(basModule.schcd)
-            Case "B"                                    '< 부산
-                .AddItem "수학선행인문" & Space(30) & "05"
-                .AddItem "수학선행자연" & Space(30) & "06"
-                
-                .AddItem "연.고대인문" & Space(30) & "07"
-                .AddItem "연.고대자연" & Space(30) & "08"
-                
-                .AddItem "심화인문" & Space(30) & "09"
-                .AddItem "심화자연" & Space(30) & "10"
-
-        End Select
-        
-        .ListIndex = 0
-    End With
+    Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol_F)      '계열
+    cboKaeyol_F.AddItem "전체" & Space(30) & "ALL", 0
+    cboKaeyol_F.ListIndex = 0
     
-    With cboExmType
-        .Clear
-        .AddItem "전체" & Space(30) & "ALL"
-        .AddItem "유시험" & Space(30) & "1"
-        .AddItem "무시험" & Space(30) & "0"
-        
-        .ListIndex = 0
-    End With
-    
-    With cboinGbn
-        .Clear
-        .AddItem "전체" & Space(30) & "ALL"
-        .AddItem "인터넷" & Space(30) & "INT"
-        .AddItem "학원" & Space(30) & "HAK"
-        
-        .ListIndex = 0
-    End With
+    Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
+    Call basCommonSTD.Init_InGbn(cboinGbn)           '조회 인터넷/학원
     
     Call init_Form
     
@@ -674,84 +582,10 @@ Private Sub cmdFind_Click()
     sStr = ""
     sStr = sStr & "  SELECT A.SCHNO, A.EXMID, STDNM, SEL1_SCH , SEL2_SCH, SUBSTR(REPLACE(Birth_ymd,'-',''),1,4)||'-'||SUBSTR(REPLACE(Birth_ymd,'-',''),5,2) ||'-'||SUBSTR(REPLACE(Birth_ymd,'-',''),7,2) AS Birth_ymd,"
     
-    '<< 계열 >> : 2008.01.09
-    If Trim(basModule.schcd) = "N" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '03','예체',"
-        sStr = sStr & "                   '04','수리(나)',"
-        sStr = sStr & "                   '05','인문수능',"
-        sStr = sStr & "                   '06','자연수능',"
-        sStr = sStr & "                   '07','신설인문',"
-        sStr = sStr & "                   '08','신설자연',"
-        sStr = sStr & "                   '09','신설수능인문',"
-        sStr = sStr & "                   '10','신설수능자연',"
-        
-        sStr = sStr & "                   '11','편)인문',"
-        sStr = sStr & "                   '12','편)자연',"
-        sStr = sStr & "                   '13','편)예체',"
-        sStr = sStr & "                   '14','편)수리(나)',"
-        sStr = sStr & "                   '15','편)인문수능',"
-        sStr = sStr & "                   '16','편)자연수능'"
-        sStr = sStr & "            ) AS GAEYUL,"
-'<< 계열 >> : 2008.01.10
-    ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then       '< 2008.03.24
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        
-        sStr = sStr & "                   '04','주말법대',"
-        sStr = sStr & "                   '05','주말의대',"
-        sStr = sStr & "                   '06','야간법대',"
-        sStr = sStr & "                   '07','야간의대',"
-        
-        sStr = sStr & "                   '11','선착순인문',"
-        sStr = sStr & "                   '12','선착순자연',"
-        
-        sStr = sStr & "                   '16','선착순인문16',"
-        sStr = sStr & "                   '17','선착순자연17'"
-        sStr = sStr & "            ) AS GAEYUL,"
-    ElseIf Trim(basModule.schcd) = "S" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '03','예체능',"
-        sStr = sStr & "                   '05','수능인문',"
-        sStr = sStr & "                   '06','수능자연',"
-        
-        sStr = sStr & "                   '11','신설인문',"
-        sStr = sStr & "                   '12','신설자연'"
-        
-        sStr = sStr & "            ) AS GAEYUL,"
-        
-    ElseIf Trim(basModule.schcd) = "P" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '03','특별인문',"
-        sStr = sStr & "                   '04','특별자연'"
-        sStr = sStr & "            ) AS GAEYUL,"
     
-    ElseIf Trim(basModule.schcd) = "J" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '11','신설인문',"
-        sStr = sStr & "                   '12','신설자연'"
-        sStr = sStr & "            ) AS GAEYUL,"
-        
-    ElseIf Trim(basModule.schcd) = "B" Then
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연',"
-        sStr = sStr & "                   '05','특별인문',"
-        sStr = sStr & "                   '06','특별자연',"
-        sStr = sStr & "                   '07','연고대인문',"
-        sStr = sStr & "                   '08','연고대자연',"
-        sStr = sStr & "                   '09','심화인문',"
-        sStr = sStr & "                   '10','심화자연'"
-        sStr = sStr & "            ) AS GAEYUL,"
-        
-    Else
-        sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
-        sStr = sStr & "                   '02','자연'"
-        sStr = sStr & "            ) AS GAEYUL,"
-    End If
+    '계열 decode sql문 공통
+    sStr = sStr & basCommonSTD.Get_SqlKaeyolDecode()
+    
     
     sStr = sStr & "     /* 사탐, 과탐 분리 */"
     sStr = sStr & "         CASE WHEN SEL1 > ' ' AND INSTR(SEL1,'" & constSatamCodes(0) & "|') > 0 THEN          /* 사탐-한국사 */"
@@ -998,63 +832,13 @@ Private Sub cmdFind_Click()
                 
                 sprSTD_F.Col = 4
                     sTmp = " ":
-                    If IsNull(.Fields("SEL1_SCH")) = False Then
-                        Select Case Trim(.Fields("SEL1_SCH"))
-                            Case "N"
-                                sTmp = "노량진"
-                            Case "K"
-                                sTmp = "강남"
-                            Case "S"
-                                sTmp = "송파"
-                            Case "P"
-                                sTmp = "송파 M"
-                            Case "M"
-                                sTmp = "강남 M"
-                            
-                            Case "W"
-                                sTmp = "주말법의대"
-                            Case "Q"
-                                sTmp = "야간법의대"
-                                
-                            Case "J"
-                                sTmp = "양재"
-                            Case "B"
-                                sTmp = "부산"
-                                
-                        End Select
-                    End If
+                    sTmp = " ": If IsNull(.Fields("SEL1_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL1_SCH")))
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
                 sprSTD_F.Col = 5
                     sTmp = " "
-                    If IsNull(.Fields("SEL2_SCH")) = False Then
-                        Select Case Trim(.Fields("SEL2_SCH"))
-                            Case "N"
-                                sTmp = "노량진"
-                            Case "K"
-                                sTmp = "강남"
-                            Case "S"
-                                sTmp = "송파"
-                            Case "P"
-                                sTmp = "송파 M"
-                            Case "M"
-                                sTmp = "강남 M"
-                            
-                            Case "W"
-                                sTmp = "주말법의대"
-                            Case "Q"
-                                sTmp = "야간법의대"
-                                
-                            Case "J"
-                                sTmp = "양재"
-                            Case "B"
-                                sTmp = "부산"
-                                
-                            Case Else
-                                sTmp = ""
-                        End Select
-                    End If
+                    sTmp = " ": If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL2_SCH")))
                     Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 
                 
@@ -1087,56 +871,16 @@ Private Sub cmdFind_Click()
                 '>> 선택과목 (사탐/ 과탐)
                 For ni = 1 To SATAM_COUNT Step 1
                 
-                    If ni Mod 4 = 1 Then
-                        sprSTD_F.SetCellBorder sprSTD_F.Col, sprSTD_F.Row, sprSTD_F.Col, sprSTD_F.Row, 2, basModule.SectionColor2, CellBorderStyleSolid
-                    End If
-                
+                    '파란색 세로 경게선 긋기
+                    If ni Mod 4 = 1 Then: sprSTD_F.SetCellBorder sprSTD_F.Col, sprSTD_F.Row, sprSTD_F.Col, sprSTD_F.Row, 2, basModule.SectionColor2, CellBorderStyleSolid
+
                     sprSTD_F.Col = sprSTD_F.Col + 1
                     
-                    Select Case ni
-                        Case 1 To 8
-                            sGbn = "SEL" & Trim(CStr(ni))
-                        Case 9 To 11
-                            If sKaeyol = "02" Then
-                                sGbn = "X"
-                            Else
-                                sGbn = "SEL" & Trim(CStr(ni))
-                            End If
-                    End Select
-                    
-                    If sGbn = "X" Then
-                        Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", 10, "")
-                    Else
-                        sTmp = IIf(Trim(.Fields(sGbn)) = "00", "", Trim(.Fields(sGbn)))
-                        
-                        If IsNull(.Fields(sGbn)) = False Then
-                            If sTmp <> "" Then
-                                Select Case sTmp
-                                    Case constSatamCodes(0):  sTmp = constSatams(0)
-                                    Case constSatamCodes(1):  sTmp = constSatams(1)
-                                    Case constSatamCodes(2):  sTmp = constSatams(2)
-                                    Case constSatamCodes(3):  sTmp = constSatams(3)
-                                    Case constSatamCodes(4):  sTmp = constSatams(4)
-                                    Case constSatamCodes(5):  sTmp = constSatams(5)
-                                    Case constSatamCodes(6):  sTmp = constSatams(6)
-                                    Case constSatamCodes(7):  sTmp = constSatams(7)
-                                    Case constSatamCodes(8):  sTmp = constSatams(8)
-                                    Case constSatamCodes(9):  sTmp = constSatams(9)
-                                    
-                                    Case "51":   sTmp = "물1"
-                                    Case "52":   sTmp = "화1"
-                                    Case "53":   sTmp = "생1"
-                                    Case "54":   sTmp = "지1"
-                                    Case "55":   sTmp = "물2"
-                                    Case "56":   sTmp = "화2"
-                                    Case "57":   sTmp = "생2"
-                                    Case "58":   sTmp = "지2"
-                                    
-                                End Select
-                            End If
-                            Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
-                        End If
-                    End If
+                    sGbn = "SEL" & Trim(CStr(ni))
+                    sTmp = IIf(Trim(.Fields(sGbn)) = "00", "", Trim(.Fields(sGbn)))
+                    If sTmp <> "" Then: sTmp = basGwamok.Get_StrGwaMokByCode(sTmp)   ' sTmp(코드)에 따른 과목이름얻어오기
+
+                    Call basFunction.Set_SprType_Text(sprSTD_F, "CENTER", "LEFT", LenB(sTmp), sTmp)
                 Next ni
                 
                 '사탐과목하나 늘면서 빈칸으로 처리
