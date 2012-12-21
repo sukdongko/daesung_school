@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.Form STD090 
    Caption         =   "입학사정 >> 등록취소 학생 엑셀로 삭제하기"
    ClientHeight    =   10065
@@ -100,7 +100,7 @@ Begin VB.Form STD090
             GrayAreaBackColor=   16777215
             MaxCols         =   6
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD050.frx":1873
+            SpreadDesigner  =   "STD050.frx":18EF
          End
          Begin EditLib.fpLongInteger fpTotCnt 
             Height          =   345
@@ -344,7 +344,7 @@ Begin VB.Form STD090
          End
          Begin VB.Label Label30 
             BackStyle       =   0  '투명
-            Caption         =   $"STD050.frx":31C2
+            Caption         =   $"STD050.frx":32BA
             Height          =   615
             Left            =   240
             TabIndex        =   5

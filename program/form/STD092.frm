@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.Form STD092 
    Caption         =   "입학사정 >> 학생취소자 조회"
    ClientHeight    =   9720
@@ -484,7 +484,7 @@ Begin VB.Form STD092
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      SpreadDesigner  =   "STD092.frx":20A9
+      SpreadDesigner  =   "STD092.frx":2125
    End
 End
 Attribute VB_Name = "STD092"
@@ -693,7 +693,7 @@ Private Sub cmdFind_Click()
     sStr = sStr & "         ELSE"
     sStr = sStr & "             '00'"
     sStr = sStr & "         END SEL_N4, "
-    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT, "        '< 전체집계 하는 함수
+    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "        '< 전체집계 하는 함수
     sStr = sStr & "         K_NUM, M_NUM, E_NUM, TOT_NUM, "
     sStr = sStr & "         ZIP, ADDR1, ADDR2, TEL, CEL, "
     sStr = sStr & "         TO_CHAR(REGDATE,'YYYY-MM-DD HH24:MI:SS') AS REGDATE, "
@@ -701,7 +701,7 @@ Private Sub cmdFind_Click()
     
     sStr = sStr & "    FROM CLSTD91TB A, CLSTD92TB B"
     sStr = sStr & "   WHERE A.SCHNO = B.SCHNO "
-    sStr = sStr & "     AND A.ACID  = '" & Trim(basModule.schcd) & "'"
+    sStr = sStr & "     AND A.ACID  = '" & Trim(basModule.SchCD) & "'"
     
     '>> 유/무시험 체크
     If Trim(Right(cboExmType.Text, 30)) = "0" Then

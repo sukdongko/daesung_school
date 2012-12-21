@@ -1,13 +1,13 @@
 VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.Form STD010 
    Caption         =   "입학사정 >> 학생등록"
-   ClientHeight    =   12960
+   ClientHeight    =   11010
    ClientLeft      =   -240
    ClientTop       =   -2400
-   ClientWidth     =   15495
+   ClientWidth     =   15240
    LinkTopic       =   "Form1"
    LockControls    =   -1  'True
    MDIChild        =   -1  'True
@@ -592,7 +592,7 @@ Begin VB.Form STD010
          Begin VB.Image Image1 
             Height          =   4080
             Left            =   30
-            Picture         =   "STD010.frx":19D6
+            Picture         =   "STD010.frx":1A0E
             Top             =   60
             Width           =   8730
          End
@@ -671,11 +671,11 @@ Begin VB.Form STD010
             EndProperty
             MaxCols         =   16
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010.frx":90A0
+            SpreadDesigner  =   "STD010.frx":90D8
          End
          Begin VB.Label Label30 
             BackStyle       =   0  '투명
-            Caption         =   $"STD010.frx":ACD0
+            Caption         =   $"STD010.frx":AD26
             Height          =   615
             Left            =   240
             TabIndex        =   135
@@ -1382,12 +1382,12 @@ Begin VB.Form STD010
             EndProperty
             MaxCols         =   38
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010.frx":AD67
+            SpreadDesigner  =   "STD010.frx":ADBD
          End
          Begin VB.Image imgExcel 
             Height          =   420
             Left            =   6120
-            Picture         =   "STD010.frx":CF3F
+            Picture         =   "STD010.frx":CFCD
             Stretch         =   -1  'True
             Top             =   1440
             Width           =   390
@@ -3388,7 +3388,7 @@ Begin VB.Form STD010
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      SpreadDesigner  =   "STD010.frx":D380
+      SpreadDesigner  =   "STD010.frx":D40E
    End
 End
 Attribute VB_Name = "STD010"
@@ -4141,7 +4141,7 @@ Private Function Save_Stdin() As Boolean
     
     '>> 데이터 등록
     DBCmd.CommandType = adCmdStoredProc
-    DBCmd.CommandText = "PG_STD2.PROC_STD_SAVE"
+    DBCmd.CommandText = "PG_STD.PROC_STD_SAVE"
     DBCmd.CommandTimeout = 30
     
     DBCmd.Execute
@@ -4250,7 +4250,7 @@ Private Function Delete_StdOut() As Boolean
     
     '>> 데이터 등록
     DBCmd.CommandType = adCmdStoredProc
-    DBCmd.CommandText = "PG_STD1.PROC_STD_DELETE"
+    DBCmd.CommandText = "PG_STD.PROC_STD_DELETE"
     DBCmd.CommandTimeout = 30
     
     DBCmd.Execute
@@ -4280,7 +4280,7 @@ ErrStmt:
 End Function
 
 
-'>> 합격취소버튼 선택
+'>> 학생 합격취소버튼 선택
 Private Sub cmdCancel_Click()
     
     Dim bRet        As Boolean
@@ -4312,7 +4312,7 @@ ErrStmt:
     
 End Sub
 
-'>> 합격취소하기
+'>> 학생 합격취소하기
 Private Function Cancel_StdOut() As Boolean
     Dim bRet        As Boolean
     
@@ -4908,7 +4908,8 @@ Private Sub cmdFind_Click()
     sStr = sStr & "     AND CL_CLOSE IS NULL "
     
     sStr = sStr & "   ORDER BY EXMID "
-    'Text1.Text = sStr
+    
+    Text1.Text = sStr
     Set DBCmd = New ADODB.Command
     Set DBRec = New ADODB.Recordset
     Set DBParam = New ADODB.Parameter
@@ -5355,6 +5356,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
     Set DBParam = New ADODB.Parameter
     
 
+    Text1.Text = sStr
     
     DBCmd.ActiveConnection = basDataBase.DBConn             '<< DB connection
     DBCmd.CommandText = sStr
@@ -6725,7 +6727,7 @@ Private Function Save_Excel_Stdin() As Boolean
             
         '>> 데이터 등록
         DBCmd.CommandType = adCmdStoredProc
-        DBCmd.CommandText = "PG_STD1.PROC_STD_SAVE"
+        DBCmd.CommandText = "PG_STD.PROC_STD_SAVE"
         DBCmd.CommandTimeout = 30
         
         DBCmd.Execute

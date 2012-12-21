@@ -4407,7 +4407,7 @@ Private Sub Form_Load()
         
         
         Call basCommonSTD.Init_CboSch(cboHakwon)   '1지망 학원
-        Call basCommonSTD.Set_CboSch(cboHakwon, basModule.schcd)
+        Call basCommonSTD.Set_CboSch(cboHakwon, basModule.SchCD)
         Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
         
         
@@ -4647,7 +4647,7 @@ Private Sub init_Form(ByVal aBaseiN As String, _
     Next ni
 
     '>> 금액 공통
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N", "B"
             Select Case Trim(Right(cboKaeyol.Text, 30))
                 Case "01"           '< 인문계
@@ -4943,7 +4943,7 @@ Private Sub init_Form(ByVal aBaseiN As String, _
     Next ni
     
     '>> 과탐
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N"
             Select Case Trim(Right(cboKaeyol.Text, 30))
                 Case "04"           '< 수리나형
@@ -5162,7 +5162,7 @@ Private Sub cboKaeyol_Click()
     Next ni
 
     '>> 금액
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N", "B"
             Select Case Trim(Right(cboKaeyol.Text, 30))
                 Case "01"                   '< 인문계
@@ -5439,7 +5439,7 @@ Private Sub cboKaeyol_Click()
 
     
     '>> 과탐
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N"
             Select Case Trim(Right(cboKaeyol.Text, 30))
                 Case "04"                       '< 수리나형
@@ -5461,7 +5461,7 @@ Private Sub cboKaeyol_Click()
     End Select
     
     
-    Select Case Trim(basModule.schcd)           '< 2008.01.09
+    Select Case Trim(basModule.SchCD)           '< 2008.01.09
         Case "N", "B"
             Select Case Trim(Right(cboKaeyol.Text, 30))
                 Case "01", "03", "05", "07", "09", "11", "13", "15", "98"
@@ -6008,7 +6008,7 @@ Private Sub cmdFind_Click()
     
     
     
-    Select Case basModule.schcd
+    Select Case basModule.SchCD
         Case "K"
             sStr = sStr & "         AND TO_CHAR(REGDATE,'YYYYMMDDHH24') >= '" & sChasuTimes & "' "
             
@@ -6537,7 +6537,7 @@ Private Sub cmdAmt_Click()
     
     '## 등록전 금액정도 ini 파일에 등록 ---------------------------------------------------
     '> base
-        Select Case Trim(basModule.schcd)
+        Select Case Trim(basModule.SchCD)
             Case "N", "B"
                 Select Case Trim(Right(cboKaeyol.Text, 30))
                     Case "01"
@@ -6814,7 +6814,7 @@ Private Sub cmdAmt_Click()
     
     
     '> gwatam
-        Select Case Trim(basModule.schcd)
+        Select Case Trim(basModule.SchCD)
             Case "N"
                 Select Case Trim(Right(cboKaeyol.Text, 30))
                     Case "04"       '< 수리나형
@@ -6857,14 +6857,14 @@ Private Sub cmdAmt_Click()
             MsgBox "금액 등록할 학생을 선택하여 주십시요.", vbExclamation + vbOKOnly, "금액 등록"
             Exit Sub
         End If
-        
+        ㄴ
         For ni = 1 To .MaxRows Step 1
             .Row = ni
             .Col = 10
             
             If .value = 1 Then
             
-                Select Case Trim(basModule.schcd)           '< 2008.01.09
+                Select Case Trim(basModule.SchCD)           '< 2008.01.09
                     Case "N", "B"
                         Select Case Trim(Right(cboKaeyol.Text, 30))
                         
@@ -6978,7 +6978,7 @@ Private Sub cmdAmt_Click()
                                         Case "미적분"
                                             .Col = 48:      .value = fpGwatam(9).value
                                         Case "이산", "확률", "나형", "이산수학", "확률통계", "수리나형"
-                                            If Trim(basModule.schcd) = "N" Then         '< 노량진 요청사항
+                                            If Trim(basModule.SchCD) = "N" Then         '< 노량진 요청사항
                                                 .Col = 48:      .value = 0
                                             Else
                                                 .Col = 48:      .value = fpGwatam(9).value
@@ -6993,7 +6993,7 @@ Private Sub cmdAmt_Click()
                         Select Case Trim(Right(cboKaeyol.Text, 30))
                         
                         '>> 사탐
-                            Case "01", "03", "05", "11", "18"
+                            Case "01", "03", "05", "11", "18", "19"
                             '>> 기본금액
                                 For nRec = 1 To 4 Step 1
                                     .Col = 27 + nRec - 1
@@ -7050,7 +7050,7 @@ Private Sub cmdAmt_Click()
                                     End Select
                                     
                         '>> 과탐
-                            Case "02", "04", "06", "08", "12", "19"
+                            Case "02", "04", "06", "08", "12", "20"
                             '>> 기본금액
                                 For nRec = 1 To 4 Step 1
                                     .Col = 27 + nRec - 1
@@ -7103,7 +7103,7 @@ Private Sub cmdAmt_Click()
                                         Case "미적분"
                                             .Col = 48:      .value = fpGwatam(9).value
                                         Case "이산", "확률", "나형", "이산수학", "확률통계", "수리나형"
-                                            If Trim(basModule.schcd) = "N" Then             '< 노량진 요청사항
+                                            If Trim(basModule.SchCD) = "N" Then             '< 노량진 요청사항
                                                 .Col = 48:      .value = 0
                                             Else
                                                 .Col = 48:      .value = fpGwatam(9).value
@@ -7228,7 +7228,7 @@ Private Sub cmdAmt_Click()
                                         Case "미적분"
                                             .Col = 48:      .value = fpGwatam(9).value
                                         Case "이산", "확률", "나형", "이산수학", "확률통계", "수리나형"
-                                            If Trim(basModule.schcd) = "N" Then             '< 노량진 요청사항
+                                            If Trim(basModule.SchCD) = "N" Then             '< 노량진 요청사항
                                                 .Col = 48:      .value = 0
                                             Else
                                                 .Col = 48:     .value = fpGwatam(9).value
@@ -7320,7 +7320,7 @@ Private Sub cmdSave_Click()
     
     '## 등록전 금액정도 ini 파일에 등록 ------------------------------------------------
     '> base
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N", "B"
             Select Case Trim(Right(cboKaeyol.Text, 30))
                 Case "01"
@@ -7513,7 +7513,7 @@ Private Sub cmdSave_Click()
         sTmp = insert_AMT_ini_File("SATAM", sTmp)
     
     '> gwatam
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N", "B"
             Select Case Trim(Right(cboKaeyol.Text, 30))
                 Case "04"       '< 수리나형

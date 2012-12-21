@@ -1,0 +1,9 @@
+===== FarPoint Technologies, Inc =====
+===== Begin of Excel Export =====
+12/21/2012 - 10:05
+
+Col	Row	Information
+___	___	___________
+		Export Excel File: \\tsclient\D\GitHub\daesung_school\program\TEST1.XLS
+-	-	102:Excel reads the AllowDragDrop, AutoClipboard, and EditEnterAction properties from the registry. If you modify these properties in Spread, the changes are not saved at export.
+-	-	165:The Spread control contains more columns than Excel supports. Excel supports only 256 columns; columns beyond 256 have been truncated. Number of columns in Spread = 501

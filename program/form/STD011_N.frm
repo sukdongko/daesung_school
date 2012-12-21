@@ -3024,14 +3024,14 @@ Private Sub cmdFind_Click()
     sStr = sStr & "             '00'"
     sStr = sStr & "         END SEL_N4, "
     sStr = sStr & "         PAYOK, PAYNOT, "
-    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT, "        '< 전체집계 하는 함수
+    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "        '< 전체집계 하는 함수
     sStr = sStr & "         K_NUM, M_NUM, E_NUM, T_NUM, TOT_NUM, "
     sStr = sStr & "         ZIP, ADDR1, ADDR2, TEL, CEL, "
     sStr = sStr & "         REGDATE, PAYGBN, "
     
     sStr = sStr & "         DECODE(MU_TYPE,'1','수능등급','2','6월 평가원','3','9월 평가원','4','6월 평가원','9','내신등급','5','9월 평가원','수능') AS MU_TYPE, "
     
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "S"
             'sStr = sStr & " DECODE(PTS_SEL,'1','수능','2','2009 평가','','없음') AS PTS_SEL "
             sStr = sStr & " DECODE(PTS_SEL,'1','가형','2','나형','') AS PTS_SEL "
@@ -3177,7 +3177,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                                      END PAYNOT"
             sStr = sStr & "                                 FROM CLSTD01TB "
             
-            sStr = sStr & "                                WHERE ACID = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "                                WHERE ACID = '" & Trim(basModule.SchCD) & "'"
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
                 sStr = sStr & "                              AND EXMTYPE = '0'"
@@ -3237,7 +3237,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                         GROUP BY ACID"
             sStr = sStr & "                      ) B"
             sStr = sStr & "                WHERE A.ACID = B.ACID"
-            sStr = sStr & "                  AND A.ACID = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "                  AND A.ACID = '" & Trim(basModule.SchCD) & "'"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -3285,10 +3285,10 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                      SUBSTR(ZIP,1,3)||'-'||SUBSTR(ZIP,4,3) AS ZIP, ADDR1, ADDR2, TEL, CEL, "
             sStr = sStr & "                      TO_CHAR(REGDATE,'YYYY-MM-DD') AS REGDATE, GET_PAYGUBN(ORD_NO) AS PAYGBN, PTS_SEL, MU_TYPE "
             sStr = sStr & "                 From CLSTD01TB"
-            sStr = sStr & "                WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                       PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                       PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                       PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
+            sStr = sStr & "                WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                       PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                       PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                       PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -3398,7 +3398,7 @@ Private Sub cmdFind_Click()
                     sStr = sStr & "              KAEYOL,"
                     sStr = sStr & "              SEL1 , SEL2, SEL3, SEL4, SEL5, CL_CLOSE, "
                     sStr = sStr & "              0 AS PAYOK , 0 AS PAYNOT, "
-                    sStr = sStr & "              GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT, "           '< 전체집계 하는 함수
+                    sStr = sStr & "              GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "           '< 전체집계 하는 함수
                     sStr = sStr & "              TO_CHAR(REGDATE,'YYYY-MM-DD') AS REGDATE, GET_PAYGUBN(ORD_NO) AS PAYGBN, "
                     sStr = sStr & "              ZIP, ADDR1, ADDR2, CEL, TEL, "
                     sStr = sStr & "              NVL(K_NUM,0) AS K_NUM, NVL(M_NUM,0) AS M_NUM, NVL(E_NUM,0) AS E_NUM , NVL(T_NUM,0) AS T_NUM,"
@@ -3406,7 +3406,7 @@ Private Sub cmdFind_Click()
                     sStr = sStr & "              TOT_NUM , "
                     sStr = sStr & "              MU_TYPE "
                     sStr = sStr & "         From CLSTD01TB"
-                    sStr = sStr & "        WHERE PASS" & Trim(Right(cboPassCN, 30)) & " = '" & Trim(basModule.schcd) & "'"
+                    sStr = sStr & "        WHERE PASS" & Trim(Right(cboPassCN, 30)) & " = '" & Trim(basModule.SchCD) & "'"
                     
                     '>> 유/무시험 체크
                     If Trim(Right(cboExmType.Text, 30)) = "0" Then

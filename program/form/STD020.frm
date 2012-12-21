@@ -2341,7 +2341,7 @@ Private Sub Form_Load()
         Call basCommonSTD.Init_CboSch(cboHakwon)   '1지망 학원
         Call basCommonSTD.Init_CboSch(cboSel2_Sch)   '2지망 학원
         cboSel2_Sch.AddItem "강남기숙(이천)" & Space(30) & "E"  '강남기숙 추가
-        Call basCommonSTD.Set_CboSch(cboHakwon, basModule.schcd)
+        Call basCommonSTD.Set_CboSch(cboHakwon, basModule.SchCD)
         Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
         Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol)    '조회 계열
         cboKaeyol.AddItem "전체" & Space(30) & "ALL", 0
@@ -2608,7 +2608,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "     AND BIGO2 IS NULL"          '< 2008.12. 수능본 학생은 년도가 들어가고 아니면 NULL
     
     
-    Select Case basModule.schcd
+    Select Case basModule.SchCD
         Case "K"
             sStr = sStr & "     AND TO_CHAR(REGDATE,'YYYYMMDDHH24') >= '" & sChasuTimes & "' "
             
@@ -2838,8 +2838,8 @@ Private Sub cmdFind_Click()
                     nTmp = 0:   If IsNull(.Fields("TOT_NUM")) = False Then nTmp = CDbl(Trim(.Fields("TOT_NUM")))
                         Call basFunction.Set_SprType_Numeric(sprPass, 1, 1, 9999, "", nTmp)
                 sprPass.Col = sprPass.Col + 1
-                    nTmp = 0:   If IsNull(.Fields("N_NUM")) = False Then nTmp = CDbl(Trim(.Fields("N_NUM"))) '내신등급
-                        Call basFunction.Set_SprType_Numeric(sprPass, 1, 1, 9999, "", nTmp)
+                    sTmp = 0:   If IsNull(.Fields("N_NUM")) = False Then sTmp = CStr(Trim(.Fields("N_NUM"))) '내신등급
+                        Call basFunction.Set_SprType_Text(sprPass, "CENTER", "RIGHT", LenB(sTmp), sTmp)
                 
                 sprPass.Col = sprPass.Col + 1
                     sTmp = " ": If IsNull(.Fields("KAEYOL_CD")) = False Then sTmp = Trim(.Fields("KAEYOL_CD"))
