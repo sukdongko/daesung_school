@@ -6134,7 +6134,7 @@ Private Sub cmdFind_Click()
                 sprTamgu.Col = sprTamgu.Col + 1
                     sTmp = " ":     If IsNull(.Fields("CY_ACNT3")) = False Then sTmp = Trim(.Fields("CY_ACNT3"))
                         Call basFunction.Set_SprType_Text(sprTamgu, "CENTER", "LEFT", 30, sTmp)
-                sprTamgu.Col = sprTamgu.Col + 1
+                 sprTamgu.Col = sprTamgu.Col + 1
                     sTmp = " ":     If IsNull(.Fields("TOT_AMT")) = False Then nTmp = CDbl(.Fields("TOT_AMT"))
                         Call basFunction.Set_SprType_Numeric(sprTamgu, 0, 0, 999999999, ",", nTmp)
                                     
@@ -6840,6 +6840,7 @@ Private Sub cmdAmt_Click()
         
     '---------------------------------------------------------------------------------------
         
+        
     
         If .MaxRows = 0 Then Exit Sub
         
@@ -6857,12 +6858,14 @@ Private Sub cmdAmt_Click()
             MsgBox "금액 등록할 학생을 선택하여 주십시요.", vbExclamation + vbOKOnly, "금액 등록"
             Exit Sub
         End If
-        ㄴ
+        
+        '전체금액
         For ni = 1 To .MaxRows Step 1
             .Row = ni
             .Col = 10
             
             If .value = 1 Then
+            .Col = 9: MsgBox .value
             
                 Select Case Trim(basModule.SchCD)           '< 2008.01.09
                     Case "N", "B"
@@ -6992,9 +6995,13 @@ Private Sub cmdAmt_Click()
                     Case "S", "P", "J"           '< 송파/ 마송/양재 : 2008.02.15
                         Select Case Trim(Right(cboKaeyol.Text, 30))
                         
+                        
+                                
                         '>> 사탐
                             Case "01", "03", "05", "11", "18", "19"
-                            '>> 기본금액
+                            .Col = 9: MsgBox .value
+                            
+                            '>> 기본금액 전체금액
                                 For nRec = 1 To 4 Step 1
                                     .Col = 27 + nRec - 1
                                     .value = fpBase(nRec).value
@@ -7002,7 +7009,8 @@ Private Sub cmdAmt_Click()
                                 
                                 .Col = 29:      .value = fpBase(9).value        '< 수익자 부담금 : 2007.12.21
                                 .Col = 30:      .value = fpBase(10).value       '< 기타 : 2008.01.09
-                                
+                                .Col = 9
+                                MsgBox .value
                             '>> 논술금액
                                 .Col = 33:  .value = 0
                                 .Col = 34:  .value = 0

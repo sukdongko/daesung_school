@@ -142,7 +142,7 @@ Attribute VB_Exposed = False
 
 Option Explicit
 Private sini_Path      As String    '>> 대성학원
-Private Const sDebug = 1
+Private Const sDebug = 0
 
 
 Private Sub cmdExit_Click()

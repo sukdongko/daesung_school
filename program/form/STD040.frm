@@ -200,7 +200,7 @@ Begin VB.Form STD040
          End
          Begin VB.Label Label4 
             BackStyle       =   0  '≈ı∏Ì
-            Caption         =   $"STD040.frx":1A22
+            Caption         =   $"STD040.frx":19DE
             BeginProperty Font 
                Name            =   "±º∏≤"
                Size            =   9.75

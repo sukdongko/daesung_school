@@ -790,7 +790,7 @@ Begin VB.Form STD010_N
          Begin VB.Image Image1 
             Height          =   4080
             Left            =   30
-            Picture         =   "STD010_N.frx":19D6
+            Picture         =   "STD010_N.frx":03F1
             Top             =   60
             Width           =   8730
          End
@@ -869,11 +869,11 @@ Begin VB.Form STD010_N
             EndProperty
             MaxCols         =   16
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010_N.frx":90A0
+            SpreadDesigner  =   "STD010_N.frx":7ABB
          End
          Begin VB.Label Label30 
             BackStyle       =   0  '≈ı∏Ì
-            Caption         =   $"STD010_N.frx":ACB6
+            Caption         =   $"STD010_N.frx":8011
             Height          =   615
             Left            =   240
             TabIndex        =   130
@@ -1584,12 +1584,12 @@ Begin VB.Form STD010_N
             MaxCols         =   40
             ProcessTab      =   -1  'True
             Protect         =   0   'False
-            SpreadDesigner  =   "STD010_N.frx":AD4D
+            SpreadDesigner  =   "STD010_N.frx":80A8
          End
          Begin VB.Image imgExcel 
             Height          =   420
             Left            =   6150
-            Picture         =   "STD010_N.frx":CFC9
+            Picture         =   "STD010_N.frx":8A34
             Stretch         =   -1  'True
             Top             =   1440
             Width           =   390
@@ -3737,7 +3737,7 @@ Begin VB.Form STD010_N
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      SpreadDesigner  =   "STD010_N.frx":D40A
+      SpreadDesigner  =   "STD010_N.frx":8E75
    End
    Begin VB.Label Label64 
       BackColor       =   &H80000001&
@@ -5764,7 +5764,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             sStr = sStr & "     AND (ACID  = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "          OR ACID = 'K')"
         Case Else
-            sStr = sStr & "     AND ACID  = '" & Trim(basModule.SchCD) & "'"
+            'sStr = sStr & "     AND ACID  = '" & Trim(basModule.SchCD) & "'"
     End Select
     
     Set DBCmd = New ADODB.Command

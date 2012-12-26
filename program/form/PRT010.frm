@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.Form PRT010 
    BackColor       =   &H00FFFFFF&
    Caption         =   "시간표 출력 >> 반별 시간표 출력"
@@ -61,7 +61,7 @@ Begin VB.Form PRT010
       MaxRows         =   11
       ProcessTab      =   -1  'True
       ScrollBars      =   0
-      SpreadDesigner  =   "PRT010.frx":184D
+      SpreadDesigner  =   "PRT010.frx":1885
    End
    Begin FPSpread.vaSpread sprTime 
       Height          =   5535
@@ -87,7 +87,7 @@ Begin VB.Form PRT010
       MaxRows         =   22
       ProcessTab      =   -1  'True
       ScrollBars      =   0
-      SpreadDesigner  =   "PRT010.frx":1D0B
+      SpreadDesigner  =   "PRT010.frx":1D7B
    End
    Begin VB.PictureBox pReportControl 
       BorderStyle     =   0  '없음
@@ -7614,62 +7614,62 @@ Private Sub cmdTime_in_Click()
         sprTime.Col = 1
         sGbn = "TIME"
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "11", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(11).Caption = sTmp:  RC(11).Caption = sTmp:      sprTime.Row = 1:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(11).Caption = sTmp:  RC(11).Caption = sTmp:      sprTime.Row = 1:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                 
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "12", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(12).Caption = sTmp:  RC(12).Caption = sTmp:      sprTime.Row = 2:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(12).Caption = sTmp:  RC(12).Caption = sTmp:      sprTime.Row = 2:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                                                                                                                                                                           
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "21", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(21).Caption = sTmp:  RC(21).Caption = sTmp:      sprTime.Row = 3:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(21).Caption = sTmp:  RC(21).Caption = sTmp:      sprTime.Row = 3:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "22", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(22).Caption = sTmp:  RC(22).Caption = sTmp:      sprTime.Row = 4:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(22).Caption = sTmp:  RC(22).Caption = sTmp:      sprTime.Row = 4:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                                                                                                                                                                           
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "31", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(31).Caption = sTmp:  RC(31).Caption = sTmp:      sprTime.Row = 5:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(31).Caption = sTmp:  RC(31).Caption = sTmp:      sprTime.Row = 5:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "32", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(32).Caption = sTmp:  RC(32).Caption = sTmp:      sprTime.Row = 6:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(32).Caption = sTmp:  RC(32).Caption = sTmp:      sprTime.Row = 6:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                                                                                                                                                                           
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "41", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(41).Caption = sTmp:  RC(41).Caption = sTmp:      sprTime.Row = 7:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(41).Caption = sTmp:  RC(41).Caption = sTmp:      sprTime.Row = 7:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "42", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(42).Caption = sTmp:  RC(42).Caption = sTmp:      sprTime.Row = 8:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(42).Caption = sTmp:  RC(42).Caption = sTmp:      sprTime.Row = 8:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                                                                                                                                                                           
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "51", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(51).Caption = sTmp:  RC(51).Caption = sTmp:      sprTime.Row = 9:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(51).Caption = sTmp:  RC(51).Caption = sTmp:      sprTime.Row = 9:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "52", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(52).Caption = sTmp:  RC(52).Caption = sTmp:      sprTime.Row = 10:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(52).Caption = sTmp:  RC(52).Caption = sTmp:      sprTime.Row = 10:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                 
             
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "B1", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LTB(1).Text = sTmp:     RTB(1).Text = sTmp:      sprTime.Row = 11:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LTB(1).Text = sTmp:     RTB(1).Text = sTmp:      sprTime.Row = 11:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "B2", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LTB(2).Text = sTmp:     RTB(2).Text = sTmp:      sprTime.Row = 12:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LTB(2).Text = sTmp:     RTB(2).Text = sTmp:      sprTime.Row = 12:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                 
                                                                                                                                                                           
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "61", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(61).Caption = sTmp:  RC(61).Caption = sTmp:      sprTime.Row = 13:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(61).Caption = sTmp:  RC(61).Caption = sTmp:      sprTime.Row = 13:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "62", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(62).Caption = sTmp:  RC(62).Caption = sTmp:      sprTime.Row = 14:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(62).Caption = sTmp:  RC(62).Caption = sTmp:      sprTime.Row = 14:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                                                                                                                                                                           
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "71", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(71).Caption = sTmp:  RC(71).Caption = sTmp:      sprTime.Row = 15:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(71).Caption = sTmp:  RC(71).Caption = sTmp:      sprTime.Row = 15:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "72", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(72).Caption = sTmp:  RC(72).Caption = sTmp:      sprTime.Row = 16:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(72).Caption = sTmp:  RC(72).Caption = sTmp:      sprTime.Row = 16:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                                                                                                                                                                           
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "81", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(81).Caption = sTmp:  RC(81).Caption = sTmp:      sprTime.Row = 17:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(81).Caption = sTmp:  RC(81).Caption = sTmp:      sprTime.Row = 17:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "82", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(82).Caption = sTmp:  RC(82).Caption = sTmp:      sprTime.Row = 18:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(82).Caption = sTmp:  RC(82).Caption = sTmp:      sprTime.Row = 18:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                                                                                                                                                                           
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "91", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(91).Caption = sTmp:  RC(91).Caption = sTmp:      sprTime.Row = 19:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(91).Caption = sTmp:  RC(91).Caption = sTmp:      sprTime.Row = 19:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "92", "", sData, 255, sini_Path):     If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(92).Caption = sTmp:  RC(92).Caption = sTmp:      sprTime.Row = 20:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(92).Caption = sTmp:  RC(92).Caption = sTmp:      sprTime.Row = 20:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "101", "", sData, 255, sini_Path):    If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(101).Caption = sTmp:  RC(101).Caption = sTmp:      sprTime.Row = 21:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(101).Caption = sTmp:  RC(101).Caption = sTmp:      sprTime.Row = 21:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
             sTmp = "":  nRtn = basModule.GetPrivateProfileString(sGbn, "102", "", sData, 255, sini_Path):    If nRtn > 0 Then sTmp = Left(sData, nRtn)
-                LC(102).Caption = sTmp:  RC(102).Caption = sTmp:      sprTime.Row = 22:        sprTime.Value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
+                LC(102).Caption = sTmp:  RC(102).Caption = sTmp:      sprTime.Row = 22:        sprTime.value = Replace(Trim(sTmp), ":", "", 1, -1, vbTextCompare)
                             
         sprTime.Visible = True
         cmdTime_in.Tag = "SAVE"
@@ -8334,7 +8334,7 @@ Private Sub VScroll1_Change()
     If Me.Tag = "LOAD" Then Exit Sub
     
     VScroll1.Enabled = False
-        Call Disp_TimeTable_All_Data(VScroll1.Value)
+        Call Disp_TimeTable_All_Data(VScroll1.value)
     VScroll1.Enabled = True
     
 End Sub
@@ -8351,9 +8351,9 @@ Private Sub cmdShiftLeft_Click()
         nE = CLng(sDiv(1))
         
         If (nS - 1) >= 1 Then
-            VScroll1.Value = nS - 1
+            VScroll1.value = nS - 1
             VScroll1.Enabled = False
-                Call Disp_TimeTable_All_Data(VScroll1.Value)
+                Call Disp_TimeTable_All_Data(VScroll1.value)
             VScroll1.Enabled = True
         End If
     End If
@@ -8371,9 +8371,9 @@ Private Sub cmdShiftRight_Click()
         nE = CLng(sDiv(1))
         
         If (nS + 1) <= nE Then
-            VScroll1.Value = nS + 1
+            VScroll1.value = nS + 1
             VScroll1.Enabled = False
-                Call Disp_TimeTable_All_Data(VScroll1.Value)
+                Call Disp_TimeTable_All_Data(VScroll1.value)
             VScroll1.Enabled = True
         End If
     End If
@@ -8600,7 +8600,7 @@ ErrPrint:
         
         
         Me.Tag = "LOAD"
-            VScroll1.Value = nRec
+            VScroll1.value = nRec
             Call CmdPrint_Click:        DoEvents                '<< 현재 조회된 시간표 출력
             
         Me.Tag = ""

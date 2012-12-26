@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form STD010 
    Caption         =   "입학사정 >> 학생등록"
    ClientHeight    =   11010
@@ -9,11 +9,33 @@ Begin VB.Form STD010
    ClientTop       =   -2400
    ClientWidth     =   15240
    LinkTopic       =   "Form1"
-   LockControls    =   -1  'True
    MDIChild        =   -1  'True
    ScaleHeight     =   14850
    ScaleMode       =   0  '사용자
    ScaleWidth      =   16242.14
+   Begin FPSpread.vaSpread sprStdData 
+      Height          =   1095
+      Left            =   8520
+      TabIndex        =   209
+      Top             =   9840
+      Visible         =   0   'False
+      Width           =   1695
+      _Version        =   393216
+      _ExtentX        =   2990
+      _ExtentY        =   1931
+      _StockProps     =   64
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      MaxCols         =   256
+      SpreadDesigner  =   "STD010.frx":0000
+   End
    Begin VB.OptionButton optExmN 
       BackColor       =   &H00F7EFE7&
       Caption         =   "무시험"
@@ -38,7 +60,7 @@ Begin VB.Form STD010
       Height          =   345
       Index           =   12
       Left            =   7140
-      TabIndex        =   201
+      TabIndex        =   200
       Top             =   5070
       Visible         =   0   'False
       Width           =   1188
@@ -48,7 +70,7 @@ Begin VB.Form STD010
       BorderStyle     =   0  '없음
       Height          =   2295
       Left            =   15360
-      TabIndex        =   173
+      TabIndex        =   172
       Top             =   540
       Width           =   5625
       Begin VB.Frame Frame7 
@@ -56,14 +78,14 @@ Begin VB.Form STD010
          BorderStyle     =   0  '없음
          Height          =   2235
          Left            =   30
-         TabIndex        =   174
+         TabIndex        =   173
          Top             =   30
          Width           =   5565
          Begin VB.TextBox txtPayChg 
             Height          =   270
             IMEMode         =   10  '한글 
             Left            =   1470
-            TabIndex        =   185
+            TabIndex        =   184
             Text            =   "txtPayChg"
             Top             =   810
             Width           =   1605
@@ -73,7 +95,7 @@ Begin VB.Form STD010
             BorderStyle     =   0  '없음
             Height          =   435
             Left            =   1260
-            TabIndex        =   183
+            TabIndex        =   182
             Top             =   1140
             Width           =   3405
             Begin VB.OptionButton OptPay1 
@@ -81,7 +103,7 @@ Begin VB.Form STD010
                Caption         =   "카드"
                Height          =   285
                Left            =   0
-               TabIndex        =   176
+               TabIndex        =   175
                Top             =   90
                Width           =   885
             End
@@ -90,7 +112,7 @@ Begin VB.Form STD010
                Caption         =   "핸드폰"
                Height          =   285
                Left            =   1830
-               TabIndex        =   177
+               TabIndex        =   176
                Top             =   90
                Width           =   885
             End
@@ -99,7 +121,7 @@ Begin VB.Form STD010
             Height          =   270
             IMEMode         =   10  '한글 
             Left            =   1260
-            TabIndex        =   175
+            TabIndex        =   174
             Text            =   "txtPay"
             Top             =   240
             Width           =   1605
@@ -108,7 +130,7 @@ Begin VB.Form STD010
             Height          =   300
             Left            =   1230
             Style           =   2  '드롭다운 목록
-            TabIndex        =   178
+            TabIndex        =   177
             Top             =   1560
             Width           =   1725
          End
@@ -116,7 +138,7 @@ Begin VB.Form STD010
             Caption         =   "등록하기"
             Height          =   450
             Left            =   3840
-            TabIndex        =   179
+            TabIndex        =   178
             Top             =   1680
             Width           =   1395
          End
@@ -126,7 +148,7 @@ Begin VB.Form STD010
             Caption         =   "주문번호가 변경시에만"
             Height          =   210
             Left            =   900
-            TabIndex        =   186
+            TabIndex        =   185
             Top             =   600
             Width           =   2175
          End
@@ -136,7 +158,7 @@ Begin VB.Form STD010
             Caption         =   "주문번호"
             Height          =   210
             Left            =   -150
-            TabIndex        =   182
+            TabIndex        =   181
             Top             =   300
             Width           =   1185
          End
@@ -146,7 +168,7 @@ Begin VB.Form STD010
             Caption         =   "결제"
             Height          =   210
             Left            =   -150
-            TabIndex        =   181
+            TabIndex        =   180
             Top             =   1290
             Width           =   1185
          End
@@ -166,7 +188,7 @@ Begin VB.Form STD010
             ForeColor       =   &H000000FF&
             Height          =   375
             Left            =   4470
-            TabIndex        =   180
+            TabIndex        =   179
             Top             =   150
             Width           =   1035
          End
@@ -177,7 +199,7 @@ Begin VB.Form STD010
       BorderStyle     =   0  '없음
       Height          =   5295
       Left            =   180
-      TabIndex        =   166
+      TabIndex        =   165
       Top             =   11280
       Width           =   7185
       Begin VB.Frame Frame6 
@@ -185,14 +207,14 @@ Begin VB.Form STD010
          BorderStyle     =   0  '없음
          Height          =   5235
          Left            =   30
-         TabIndex        =   167
+         TabIndex        =   166
          Top             =   30
          Width           =   7125
          Begin VB.CommandButton cmdAddPointRow 
             Caption         =   "과목점수 추가"
             Height          =   450
             Left            =   930
-            TabIndex        =   171
+            TabIndex        =   170
             Top             =   4680
             Width           =   1635
          End
@@ -200,14 +222,14 @@ Begin VB.Form STD010
             Caption         =   "점수등록"
             Height          =   450
             Left            =   4380
-            TabIndex        =   168
+            TabIndex        =   167
             Top             =   4680
             Width           =   2595
          End
          Begin FPSpread.vaSpread sprPoint 
             Height          =   4035
             Left            =   30
-            TabIndex        =   170
+            TabIndex        =   169
             Top             =   510
             Width           =   7035
             _Version        =   393216
@@ -226,7 +248,7 @@ Begin VB.Form STD010
             EndProperty
             MaxCols         =   9
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010.frx":0000
+            SpreadDesigner  =   "STD010.frx":0258
          End
          Begin VB.Label Label54 
             Alignment       =   1  '오른쪽 맞춤
@@ -234,7 +256,7 @@ Begin VB.Form STD010
             Caption         =   "과목을 신규등록내용 삭제시 삭제내용 선택후 del 키를 누르세요."
             Height          =   210
             Left            =   -270
-            TabIndex        =   172
+            TabIndex        =   171
             Top             =   270
             Width           =   5625
          End
@@ -254,7 +276,7 @@ Begin VB.Form STD010
             ForeColor       =   &H000000FF&
             Height          =   375
             Left            =   6030
-            TabIndex        =   169
+            TabIndex        =   168
             Top             =   120
             Width           =   1035
          End
@@ -265,7 +287,7 @@ Begin VB.Form STD010
       BorderStyle     =   0  '없음
       Height          =   3015
       Left            =   15270
-      TabIndex        =   155
+      TabIndex        =   154
       Top             =   6060
       Width           =   6315
       Begin VB.Frame Frame5 
@@ -273,7 +295,7 @@ Begin VB.Form STD010
          BorderStyle     =   0  '없음
          Height          =   2955
          Left            =   30
-         TabIndex        =   156
+         TabIndex        =   155
          Top             =   30
          Width           =   6255
          Begin VB.TextBox txtEmail 
@@ -498,7 +520,7 @@ Begin VB.Form STD010
             Caption         =   "이메일"
             Height          =   210
             Left            =   90
-            TabIndex        =   162
+            TabIndex        =   161
             Top             =   1867
             Width           =   975
          End
@@ -508,7 +530,7 @@ Begin VB.Form STD010
             Caption         =   "생년월일"
             Height          =   210
             Left            =   90
-            TabIndex        =   161
+            TabIndex        =   160
             Top             =   217
             Width           =   975
          End
@@ -528,7 +550,7 @@ Begin VB.Form STD010
             ForeColor       =   &H000000FF&
             Height          =   375
             Left            =   5070
-            TabIndex        =   160
+            TabIndex        =   159
             Top             =   180
             Width           =   1035
          End
@@ -538,7 +560,7 @@ Begin VB.Form STD010
             Caption         =   "주소"
             Height          =   210
             Left            =   90
-            TabIndex        =   159
+            TabIndex        =   158
             Top             =   1447
             Width           =   975
          End
@@ -548,7 +570,7 @@ Begin VB.Form STD010
             Caption         =   "우편주소"
             Height          =   210
             Left            =   90
-            TabIndex        =   158
+            TabIndex        =   157
             Top             =   1057
             Width           =   975
          End
@@ -558,7 +580,7 @@ Begin VB.Form STD010
             Caption         =   "우편번호"
             Height          =   210
             Left            =   90
-            TabIndex        =   157
+            TabIndex        =   156
             Top             =   637
             Width           =   975
          End
@@ -592,7 +614,7 @@ Begin VB.Form STD010
          Begin VB.Image Image1 
             Height          =   4080
             Left            =   30
-            Picture         =   "STD010.frx":1A0E
+            Picture         =   "STD010.frx":068D
             Top             =   60
             Width           =   8730
          End
@@ -671,11 +693,11 @@ Begin VB.Form STD010
             EndProperty
             MaxCols         =   16
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010.frx":90D8
+            SpreadDesigner  =   "STD010.frx":7D57
          End
          Begin VB.Label Label30 
             BackStyle       =   0  '투명
-            Caption         =   $"STD010.frx":AD26
+            Caption         =   $"STD010.frx":82F1
             Height          =   615
             Left            =   240
             TabIndex        =   135
@@ -724,7 +746,7 @@ Begin VB.Form STD010
          Begin VB.TextBox Text1 
             Height          =   2655
             Left            =   930
-            TabIndex        =   203
+            TabIndex        =   202
             Text            =   "Text1"
             Top             =   2730
             Visible         =   0   'False
@@ -1363,7 +1385,7 @@ Begin VB.Form STD010
          Begin FPSpread.vaSpread sprSTD_F 
             Height          =   4035
             Left            =   30
-            TabIndex        =   154
+            TabIndex        =   153
             Top             =   1890
             Width           =   6495
             _Version        =   393216
@@ -1382,12 +1404,12 @@ Begin VB.Form STD010
             EndProperty
             MaxCols         =   38
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD010.frx":ADBD
+            SpreadDesigner  =   "STD010.frx":8388
          End
          Begin VB.Image imgExcel 
             Height          =   420
             Left            =   6120
-            Picture         =   "STD010.frx":CFCD
+            Picture         =   "STD010.frx":8D07
             Stretch         =   -1  'True
             Top             =   1440
             Width           =   390
@@ -1773,7 +1795,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   9
                   Left            =   5760
-                  TabIndex        =   209
+                  TabIndex        =   208
                   Top             =   780
                   Width           =   1245
                End
@@ -2052,7 +2074,7 @@ Begin VB.Form STD010
                Caption         =   ">> 사회탐구 선택과목"
                Height          =   1155
                Left            =   30
-               TabIndex        =   189
+               TabIndex        =   188
                Top             =   30
                Width           =   8175
                Begin VB.CheckBox chkSatam 
@@ -2061,7 +2083,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   11
                   Left            =   7080
-                  TabIndex        =   208
+                  TabIndex        =   207
                   Top             =   750
                   Width           =   1245
                End
@@ -2071,7 +2093,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   1
                   Left            =   240
-                  TabIndex        =   199
+                  TabIndex        =   198
                   Top             =   330
                   Width           =   1245
                End
@@ -2081,7 +2103,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   2
                   Left            =   1620
-                  TabIndex        =   198
+                  TabIndex        =   197
                   Top             =   330
                   Width           =   1245
                End
@@ -2091,7 +2113,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   3
                   Left            =   2970
-                  TabIndex        =   197
+                  TabIndex        =   196
                   Top             =   330
                   Width           =   1245
                End
@@ -2101,7 +2123,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   4
                   Left            =   4320
-                  TabIndex        =   196
+                  TabIndex        =   195
                   Top             =   330
                   Width           =   1245
                End
@@ -2111,7 +2133,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   5
                   Left            =   5790
-                  TabIndex        =   195
+                  TabIndex        =   194
                   Top             =   330
                   Width           =   1245
                End
@@ -2121,7 +2143,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   6
                   Left            =   240
-                  TabIndex        =   194
+                  TabIndex        =   193
                   Top             =   750
                   Width           =   1245
                End
@@ -2131,7 +2153,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   7
                   Left            =   1620
-                  TabIndex        =   193
+                  TabIndex        =   192
                   Top             =   750
                   Width           =   1245
                End
@@ -2141,7 +2163,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   8
                   Left            =   2970
-                  TabIndex        =   192
+                  TabIndex        =   191
                   Top             =   750
                   Width           =   1245
                End
@@ -2151,7 +2173,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   9
                   Left            =   4320
-                  TabIndex        =   191
+                  TabIndex        =   190
                   Top             =   750
                   Width           =   1245
                End
@@ -2161,7 +2183,7 @@ Begin VB.Form STD010
                   Height          =   345
                   Index           =   10
                   Left            =   5790
-                  TabIndex        =   190
+                  TabIndex        =   189
                   Top             =   750
                   Width           =   1245
                End
@@ -2180,7 +2202,7 @@ Begin VB.Form STD010
                   ForeColor       =   &H00FF0000&
                   Height          =   285
                   Left            =   60
-                  TabIndex        =   200
+                  TabIndex        =   199
                   Top             =   90
                   Width           =   2625
                End
@@ -2217,7 +2239,7 @@ Begin VB.Form STD010
                   EndProperty
                   Height          =   345
                   Left            =   4260
-                  TabIndex        =   165
+                  TabIndex        =   164
                   Top             =   750
                   Width           =   1725
                End
@@ -2524,7 +2546,7 @@ Begin VB.Form STD010
                Begin EditLib.fpLongInteger fpN_Num 
                   Height          =   345
                   Left            =   5220
-                  TabIndex        =   206
+                  TabIndex        =   205
                   Top             =   300
                   Width           =   765
                   _Version        =   196608
@@ -2617,7 +2639,7 @@ Begin VB.Form STD010
                   Caption         =   "내신등급"
                   Height          =   195
                   Left            =   4410
-                  TabIndex        =   207
+                  TabIndex        =   206
                   Top             =   360
                   Width           =   885
                End
@@ -2628,7 +2650,7 @@ Begin VB.Form STD010
                   ForeColor       =   &H00C000C0&
                   Height          =   180
                   Left            =   5010
-                  TabIndex        =   152
+                  TabIndex        =   151
                   Top             =   45
                   Width           =   1365
                End
@@ -2747,7 +2769,7 @@ Begin VB.Form STD010
                   EndProperty
                   Height          =   255
                   Left            =   5445
-                  TabIndex        =   184
+                  TabIndex        =   183
                   Top             =   3090
                   Width           =   1245
                End
@@ -3115,7 +3137,7 @@ Begin VB.Form STD010
                   Caption         =   "성별"
                   Height          =   210
                   Left            =   90
-                  TabIndex        =   205
+                  TabIndex        =   204
                   Top             =   2160
                   Width           =   975
                End
@@ -3125,7 +3147,7 @@ Begin VB.Form STD010
                   Caption         =   "유/무시험"
                   Height          =   210
                   Left            =   90
-                  TabIndex        =   204
+                  TabIndex        =   203
                   Top             =   2670
                   Width           =   975
                End
@@ -3133,7 +3155,7 @@ Begin VB.Form STD010
                   Caption         =   "학부모HP"
                   Height          =   255
                   Left            =   3000
-                  TabIndex        =   202
+                  TabIndex        =   201
                   Top             =   2280
                   Width           =   880
                End
@@ -3142,7 +3164,7 @@ Begin VB.Form STD010
                   Caption         =   "지원단대"
                   Height          =   300
                   Left            =   5520
-                  TabIndex        =   188
+                  TabIndex        =   187
                   Top             =   2760
                   Width           =   750
                End
@@ -3150,7 +3172,7 @@ Begin VB.Form STD010
                   Caption         =   "지원대학"
                   Height          =   225
                   Left            =   2970
-                  TabIndex        =   187
+                  TabIndex        =   186
                   Top             =   2760
                   Width           =   810
                End
@@ -3160,7 +3182,7 @@ Begin VB.Form STD010
                   Caption         =   "등급"
                   Height          =   210
                   Left            =   2520
-                  TabIndex        =   164
+                  TabIndex        =   163
                   Top             =   105
                   Width           =   1185
                End
@@ -3170,7 +3192,7 @@ Begin VB.Form STD010
                   Caption         =   "수리점수구분"
                   Height          =   210
                   Left            =   5550
-                  TabIndex        =   163
+                  TabIndex        =   162
                   Top             =   105
                   Width           =   1185
                End
@@ -3181,7 +3203,7 @@ Begin VB.Form STD010
                   ForeColor       =   &H00C000C0&
                   Height          =   180
                   Left            =   2310
-                  TabIndex        =   151
+                  TabIndex        =   150
                   Top             =   3090
                   Width           =   1365
                End
@@ -3363,32 +3385,11 @@ Begin VB.Form STD010
             EndProperty
             Height          =   210
             Left            =   3870
-            TabIndex        =   153
+            TabIndex        =   152
             Top             =   10650
             Width           =   4365
          End
       End
-   End
-   Begin FPSpread.vaSpread sprStdData 
-      Height          =   165
-      Left            =   8430
-      TabIndex        =   150
-      Top             =   9300
-      Width           =   2595
-      _Version        =   393216
-      _ExtentX        =   4577
-      _ExtentY        =   291
-      _StockProps     =   64
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "MS Sans Serif"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-      SpreadDesigner  =   "STD010.frx":D40E
    End
 End
 Attribute VB_Name = "STD010"
@@ -5348,7 +5349,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             sStr = sStr & "     AND (ACID  = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "          OR ACID = 'K')"
         Case Else
-            sStr = sStr & "     AND ACID  = '" & Trim(basModule.SchCD) & "'"
+            'sStr = sStr & "     AND ACID  = '" & Trim(basModule.SchCD) & "'"
     End Select
     
     Set DBCmd = New ADODB.Command
@@ -8081,6 +8082,7 @@ Private Sub imgExcel_Click()
     '> 초기화
     sprStdData.MaxRows = 0
     
+    
     On Error GoTo ErrStmt1
     
     With dlgFile
@@ -8113,7 +8115,7 @@ Private Sub imgExcel_Click()
     '>>>> 학생 엑셀 저장 쿼리문
     sStr = basCommonSTD.Get_StdExcuteSqlToExcel(cboKaeyol_F.Text)
     
-    
+    Text1.Text = sStr
         
     Set DBCmd = New ADODB.Command
     Set DBRec = New ADODB.Recordset
@@ -8177,7 +8179,7 @@ Private Sub imgExcel_Click()
             .MoveFirst
             For ni = 0 To .Fields.count - 1 Step 1
                 sprStdData.Col = ni + 1
-                sTmp = " ":     If IsNull(.Fields(ni).Name) = False Then sTmp = Trim(.Fields(ni).Name)
+                sTmp = " ":     If IsNull(.Fields(ni).Name) = False Then sTmp = Replace(Trim(.Fields(ni).Name), " ", "")
                     Call basFunction.Set_SprType_Text(sprStdData, "center", "left", basFunction.LenKor(sTmp), sTmp)
             Next ni
             
@@ -8202,6 +8204,7 @@ Private Sub imgExcel_Click()
     End With
     '전체학생자료
     nRet = sprStdData.ExportToExcel(sExcelFileName, "Sheet1", sExcelLogFile)
+    
     MsgBox "엑셀자료 작성완료하였습니다.", vbInformation + vbOKOnly, "전체학생 조회"
     
     Set DBCmd = Nothing

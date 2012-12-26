@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
 Begin VB.Form LSN002 
    Caption         =   "시간표 만들기 >> 이동반 정보 등록"
    ClientHeight    =   9675
@@ -250,7 +250,7 @@ Begin VB.Form LSN002
          Begin VB.Label lblLsnColor 
             BackColor       =   &H00FFFFFF&
             BorderStyle     =   1  '단일 고정
-            Caption         =   $"LSN002.frx":19B3
+            Caption         =   $"LSN002.frx":19EB
             Height          =   675
             Left            =   6750
             TabIndex        =   8
@@ -535,7 +535,7 @@ Begin VB.Form LSN002
          Begin VB.Label lblUpLsnColor 
             BackColor       =   &H00FFFFFF&
             BorderStyle     =   1  '단일 고정
-            Caption         =   $"LSN002.frx":19C9
+            Caption         =   $"LSN002.frx":1A01
             Height          =   675
             Left            =   1200
             TabIndex        =   17
