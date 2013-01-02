@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form EXM100 
    Caption         =   "학생성적등록"
    ClientHeight    =   11640
@@ -366,7 +366,7 @@ Begin VB.Form EXM100
             EndProperty
             MaxCols         =   5
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "EXM100.frx":192C
+            SpreadDesigner  =   "EXM100.frx":0342
          End
          Begin VB.CommandButton cmdAllSaves 
             Caption         =   "등록하기"
@@ -705,7 +705,7 @@ Begin VB.Form EXM100
             EndProperty
             MaxCols         =   40
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "EXM100.frx":3230
+            SpreadDesigner  =   "EXM100.frx":065C
          End
          Begin MSComctlLib.ProgressBar progDisp 
             Height          =   135
@@ -1314,9 +1314,9 @@ Private Sub Form_Load()
     txtStdCD.Text = ""
     txtStdNM.Text = ""
     
-    fpK_Num.Value = 0
-    fpM_Num.Value = 0
-    fpE_Num.Value = 0
+    fpK_Num.value = 0
+    fpM_Num.value = 0
+    fpE_Num.value = 0
     
     fpExmYM.Text = Format(Now, "yyyy-mm")
         
@@ -1405,7 +1405,7 @@ Private Sub Form_Load()
         End With
     
     sprAllSaves.MaxRows = 0
-    fpAllSaves.Value = 0
+    fpAllSaves.value = 0
     
     fraAllJumsuin.ZOrder 0
     fraAllJumsuin.Top = 780
@@ -1415,7 +1415,7 @@ Private Sub Form_Load()
     
     progAllSaves.Max = 100
     progAllSaves.Min = 0
-    progAllSaves.Value = 0
+    progAllSaves.value = 0
     progAllSaves.Visible = False
     
     
@@ -1431,11 +1431,11 @@ Private Sub Form_Load()
     
     progStdin.Max = 100
     progStdin.Min = 0
-    progStdin.Value = 0
+    progStdin.value = 0
     progStdin.Visible = False
     
     sprStdin.MaxRows = 0
-    fpStdinRow.Value = 0
+    fpStdinRow.value = 0
     
     
     fraStdin.ZOrder 0
@@ -1450,7 +1450,7 @@ Private Sub Form_Load()
     
     progDisp.Min = 0
     progDisp.Max = 100
-    progDisp.Value = 0
+    progDisp.value = 0
     progDisp.Visible = False
     
 End Sub
@@ -1506,7 +1506,7 @@ Private Sub cboKaeyol_Click()
     sStr = ""
     sStr = sStr & "  SELECT BAN"
     sStr = sStr & "    FROM SDEXM10TB "
-    sStr = sStr & "   WHERE ACID   = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "   WHERE ACID   = '" & Trim(basModule.schcd) & "'"
     If Trim(Right(cboKaeyol.Text, 10)) <> "ALL" Then
         sStr = sStr & " AND GAEYOL = '" & Trim(Right(cboKaeyol.Text, 10)) & "'"
     End If
@@ -1669,7 +1669,7 @@ Private Sub cmdStdin_Click()
     sStr = ""
     sStr = sStr & " INSERT INTO SDEXM10TB (ACID, STDCD, STDNM, GAEYOL, BAN, REGDAY)"
     sStr = sStr & "                VALUES ("
-    sStr = sStr & "                       '" & Trim(basModule.SchCD) & "',"
+    sStr = sStr & "                       '" & Trim(basModule.schcd) & "',"
     sStr = sStr & "                       '" & Format(CLng(txtStdCDin.Text), "0000") & "',"
     sStr = sStr & "                       '" & Trim(txtStdNMin.Text) & "',"
     sStr = sStr & "                       '" & Format(CInt(Right(cboGaeyol.Text, 10)), "00") & "',"
@@ -1688,7 +1688,7 @@ Private Sub cmdStdin_Click()
         sStr = sStr & "        GAEYOL = '" & Format(CInt(Right(cboGaeyol.Text, 10)), "00") & "',"
         sStr = sStr & "        BAN    = '" & Trim(txtBan.Text) & "',"
         sStr = sStr & "        REGDAY = SYSDATE "
-        sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.SchCD) & "'"
+        sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.schcd) & "'"
         sStr = sStr & "    AND STDCD  = '" & Format(CLng(txtStdCDin.Text), "0000") & "'"
         
         DBCmd.CommandType = adCmdText
@@ -1737,7 +1737,7 @@ Private Sub cmdStdDel_Click()
     sStr = ""
     sStr = sStr & " DELETE "
     sStr = sStr & "   FROM SDEXM10TB "
-    sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.schcd) & "'"
     sStr = sStr & "    AND STDCD  = '" & Format(CLng(txtStdCDin.Text), "0000") & "'"
         
     DBCmd.CommandType = adCmdText
@@ -1777,13 +1777,13 @@ End Sub
 
 Private Sub fpStdinRow_KeyUp(KeyCode As Integer, Shift As Integer)
     If KeyCode = vbKeyReturn Or KeyCode = vbKeyTab Then
-        sprStdin.MaxRows = fpStdinRow.Value
+        sprStdin.MaxRows = fpStdinRow.value
         
     End If
 End Sub
 
 Private Sub fpStdinRow_LostFocus()
-    sprStdin.MaxRows = fpStdinRow.Value
+    sprStdin.MaxRows = fpStdinRow.value
     
 End Sub
 
@@ -1810,7 +1810,7 @@ Private Sub cmdAllSTD_Click()
         Exit Sub
     End If
     
-    progStdin.Value = 0
+    progStdin.value = 0
     progStdin.Visible = True
     
     
@@ -1823,7 +1823,7 @@ Private Sub cmdAllSTD_Click()
     
     For nRow = 1 To sprStdin.MaxRows Step 1
     
-        progStdin.Value = Format(nRow / sprStdin.MaxRows * 100, "##0")
+        progStdin.value = Format(nRow / sprStdin.MaxRows * 100, "##0")
         
         sStdCD = ""
         sStdNM = ""
@@ -1840,7 +1840,7 @@ Private Sub cmdAllSTD_Click()
             sStr = ""
             sStr = sStr & " INSERT INTO SDEXM10TB (ACID, STDCD, STDNM, GAEYOL, BAN, REGDAY)"
             sStr = sStr & "                VALUES ("
-            sStr = sStr & "                       '" & Trim(basModule.SchCD) & "',"
+            sStr = sStr & "                       '" & Trim(basModule.schcd) & "',"
             sStr = sStr & "                       '" & sStdCD & "',"
             sStr = sStr & "                       '" & sStdNM & "',"
             sStr = sStr & "                       '" & sGaeyol & "',"
@@ -1859,7 +1859,7 @@ Private Sub cmdAllSTD_Click()
                 sStr = sStr & "        GAEYOL = '" & sGaeyol & "',"
                 sStr = sStr & "        BAN    = '" & sBan & "',"
                 sStr = sStr & "        REGDAY = SYSDATE "
-                sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.SchCD) & "'"
+                sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.schcd) & "'"
                 sStr = sStr & "    AND STDCD  = '" & sStdCD & "'"
                 
                 DBCmd.CommandType = adCmdText
@@ -1916,13 +1916,13 @@ End Sub
 
 Private Sub fpAllSaves_KeyUp(KeyCode As Integer, Shift As Integer)
     If KeyCode = vbKeyReturn Or KeyCode = vbKeyTab Then
-        sprAllSaves.MaxRows = fpAllSaves.Value
+        sprAllSaves.MaxRows = fpAllSaves.value
         
     End If
 End Sub
 
 Private Sub fpAllSaves_LostFocus()
-    sprAllSaves.MaxRows = fpAllSaves.Value
+    sprAllSaves.MaxRows = fpAllSaves.value
 End Sub
 
 
@@ -1960,7 +1960,7 @@ Private Function Find_StdCD(ByVal aStdNM As String, ByRef aObj As Object) As Str
     sStr = ""
     sStr = sStr & "  SELECT STDCD, STDNM "
     sStr = sStr & "    FROM SDEXM10TB"
-    sStr = sStr & "   WHERE ACID  = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "   WHERE ACID  = '" & Trim(basModule.schcd) & "'"
     sStr = sStr & "     AND STDNM LIKE '%" & Trim(aStdNM) & "%'"
     
     Set DBCmd = New ADODB.Command
@@ -2026,7 +2026,7 @@ Private Function Find_StdNM(ByVal aStdCD As String) As String
     sStr = ""
     sStr = sStr & "  SELECT STDNM"
     sStr = sStr & "    FROM SDEXM10TB"
-    sStr = sStr & "   WHERE ACID  = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "   WHERE ACID  = '" & Trim(basModule.schcd) & "'"
     sStr = sStr & "     AND STDCD = '" & Trim(sStdCD) & "'"
     
     Set DBCmd = New ADODB.Command
@@ -2097,19 +2097,19 @@ Private Sub cmdSave_Click()
     End If
     
     If fpK_Num.Text = "" Then
-        fpK_Num.Value = 0
+        fpK_Num.value = 0
     End If
-    nKnum = fpK_Num.Value
+    nKnum = fpK_Num.value
     
     If fpM_Num.Text = "" Then
-        fpM_Num.Value = 0
+        fpM_Num.value = 0
     End If
-    nMnum = fpM_Num.Value
+    nMnum = fpM_Num.value
     
     If fpE_Num.Text = "" Then
-        fpE_Num.Value = 0
+        fpE_Num.value = 0
     End If
-    nEnum = fpE_Num.Value
+    nEnum = fpE_Num.value
     
     
     On Error Resume Next
@@ -2120,7 +2120,7 @@ Private Sub cmdSave_Click()
     sStr = ""
     sStr = sStr & " INSERT INTO SDEXM11TB (ACID, STDCD, EXMDAY, K_NUM, M_NUM, E_NUM, REGDAY)"
     sStr = sStr & "                VALUES ("
-    sStr = sStr & "                       '" & Trim(basModule.SchCD) & "',"
+    sStr = sStr & "                       '" & Trim(basModule.schcd) & "',"
     sStr = sStr & "                       '" & Format(CLng(txtStdCD.Text), "0000") & "',"
     sStr = sStr & "                       '" & Left(fpExmDay.UnFmtText, 8) & "',"
     sStr = sStr & "                        " & CStr(nKnum) & ","
@@ -2140,7 +2140,7 @@ Private Sub cmdSave_Click()
         sStr = sStr & "        M_NUM  =  " & CStr(nMnum) & ","
         sStr = sStr & "        E_NUM  =  " & CStr(nEnum) & ","
         sStr = sStr & "        REGDAY = SYSDATE "
-        sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.SchCD) & "'"
+        sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.schcd) & "'"
         sStr = sStr & "    AND STDCD  = '" & Format(CLng(txtStdCD.Text), "0000") & "'"
         sStr = sStr & "    AND EXMDAY = '" & Left(fpExmDay.UnFmtText, 8) & "'"
         
@@ -2185,7 +2185,7 @@ Private Sub cmdAllSaves_Click()
         Exit Sub
     End If
     
-    progAllSaves.Value = 0
+    progAllSaves.value = 0
     progAllSaves.Visible = True
     
     On Error Resume Next
@@ -2197,7 +2197,7 @@ Private Sub cmdAllSaves_Click()
     
     For nRow = 1 To sprAllSaves.MaxRows Step 1
     
-        progAllSaves.Value = Format(nRow / sprAllSaves.MaxRows * 100, "##0")
+        progAllSaves.value = Format(nRow / sprAllSaves.MaxRows * 100, "##0")
         
         sStdCD = ""
         sStdNM = ""
@@ -2221,7 +2221,7 @@ Private Sub cmdAllSaves_Click()
             'sStr = sStr & "                        K_NUM, M_NUM, "
             sStr = sStr & "                        E_NUM, REGDAY)"
             sStr = sStr & "                VALUES ("
-            sStr = sStr & "                       '" & Trim(basModule.SchCD) & "',"
+            sStr = sStr & "                       '" & Trim(basModule.schcd) & "',"
             sStr = sStr & "                       '" & sStdCD & "',"
             sStr = sStr & "                       '" & sExmDay & "',"
             'sStr = sStr & "                        " & CStr(sKnum) & ","
@@ -2242,7 +2242,7 @@ Private Sub cmdAllSaves_Click()
                 'sStr = sStr & "        M_NUM  =  " & CStr(sMnum) & ","
                 sStr = sStr & "        E_NUM  =  " & CStr(sEnum) & ","
                 sStr = sStr & "        REGDAY = SYSDATE "
-                sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.SchCD) & "'"
+                sStr = sStr & "  WHERE ACID   = '" & Trim(basModule.schcd) & "'"
                 sStr = sStr & "    AND STDCD  = '" & sStdCD & "'"
                 sStr = sStr & "    AND EXMDAY = '" & sExmDay & "'"
                 
@@ -2347,7 +2347,7 @@ Private Sub cmdFind_Click()
     
         For nRec = 1 To .RecordCount Step 1
         
-            progDisp.Value = Format(nRec / .RecordCount * 100, "##0")
+            progDisp.value = Format(nRec / .RecordCount * 100, "##0")
         
             sprSTD.MaxRows = sprSTD.MaxRows + 1
             sprSTD.Row = sprSTD.MaxRows

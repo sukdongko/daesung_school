@@ -11,6 +11,8 @@ Public CLINIC_L_COUNT
 Public CLINIC_M_COUNT
 Public CLINIC_E_COUNT
 
+
+
 '>> 등급 이다..
 Public Const CLINIC_L_CLASS = 101
 Public Const CLINIC_M_CLASS = 111
@@ -22,11 +24,20 @@ Public Const ENG2_CLASS = 50
 Public Const MATH2_CLASS = 80
 Public Const TAMGOO_CLASS = 90
 
+
+
 Public constSatams() As String
 Public constGwatams() As String
 Public constEng2s() As String
 Public constMaths() As String
 Public constTamgoos() As String
+
+Public g_sClinic_Ls() As String
+Public g_sClinic_Ms() As String
+Public g_sClinic_Es() As String
+
+Public g_Card()        As String
+
 
 Public constSatamCodes() As String
 Public constGwatamCodes() As String
@@ -34,16 +45,19 @@ Public constEng2Codes() As String
 Public constMathCodes() As String
 Public constTamgooCodes() As String
 
-
 Public g_sClinic_LCodes() As String
 Public g_sClinic_MCodes() As String
 Public g_sClinic_ECodes() As String
 
-Public g_sClinic_Ls() As String
-Public g_sClinic_Ms() As String
-Public g_sClinic_Es() As String
+Public g_CardCodes()   As String
+
+
+
+
 
 Public Const TGANG_CODE = "95"
+
+
 
 
 
@@ -180,7 +194,7 @@ Function setConstant()
 
     SATAM_COUNT = 10
     GWATAM_COUNT = 8
-    ENG2_COUNT = 12
+    ENG2_COUNT = 13
     MATH2_COUNT = 4
     TAMGOO_COUNT = 3
     CLINIC_L_COUNT = 4
@@ -267,6 +281,7 @@ Function setConstant()
     constEng2s(9) = "세계사"
     constEng2s(10) = "세계지리"
     constEng2s(11) = "아랍어"
+    constEng2s(12) = "베트남어"
     
      
     constEng2Codes(0) = "31"
@@ -281,6 +296,7 @@ Function setConstant()
     constEng2Codes(9) = "40"
     constEng2Codes(10) = "41"
     constEng2Codes(11) = "42"
+    constEng2Codes(12) = "44"
     
     '탐구선택
     constMaths(0) = "미적분"
@@ -302,6 +318,9 @@ Function setConstant()
     constTamgooCodes(0) = "91"
     constTamgooCodes(1) = "92"
     constTamgooCodes(2) = "93"
+    
+    
+    
     
     
 

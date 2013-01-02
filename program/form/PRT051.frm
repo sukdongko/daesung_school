@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
-Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form PRT051 
    Caption         =   "시간표 출력 >> 빈 양식지 출력 - CP"
    ClientHeight    =   10695
@@ -7166,7 +7166,7 @@ Begin VB.Form PRT051
       MaxRows         =   12
       ProcessTab      =   -1  'True
       ScrollBars      =   0
-      SpreadDesigner  =   "PRT051.frx":1841
+      SpreadDesigner  =   "PRT051.frx":02B4
    End
    Begin FPSpread.vaSpread sprTime 
       Height          =   5535
@@ -7192,7 +7192,7 @@ Begin VB.Form PRT051
       MaxRows         =   22
       ProcessTab      =   -1  'True
       ScrollBars      =   0
-      SpreadDesigner  =   "PRT051.frx":1D26
+      SpreadDesigner  =   "PRT051.frx":0704
    End
 End
 Attribute VB_Name = "PRT051"
@@ -7932,7 +7932,7 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                                               SUBSTR(SUBSTR(TRXNM,LENGTH(TRXNM)-5+1, LENGTH(TRXNM)),1,2) AS CUTA,"
     sStr = sStr & "                                               NVL(SUBSTR(SUBSTR(TRXNM,LENGTH(TRXNM)-5+1, LENGTH(TRXNM)),4,2),'AA') AS CUTB"
     sStr = sStr & "                                          FROM SDTRX01TB"
-    sStr = sStr & "                                         WHERE ACID = '" & basModule.SchCD & "'"
+    sStr = sStr & "                                         WHERE ACID = '" & basModule.schcd & "'"
     sStr = sStr & "                                           AND TRXCD LIKE 'P%'"
     sStr = sStr & "                                       )"
     sStr = sStr & "                                 WHERE LTRIM(CUTA,'0123456789') IS NOT NULL"
@@ -7948,7 +7948,7 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                                               SUBSTR(SUBSTR(TRXNM,LENGTH(TRXNM)-5+1, LENGTH(TRXNM)),1,2) AS CUTA,"
     sStr = sStr & "                                               SUBSTR(SUBSTR(TRXNM,LENGTH(TRXNM)-5+1, LENGTH(TRXNM)),4,2) AS CUTB"
     sStr = sStr & "                                          FROM SDTRX01TB"
-    sStr = sStr & "                                         WHERE ACID = '" & basModule.SchCD & "'"
+    sStr = sStr & "                                         WHERE ACID = '" & basModule.schcd & "'"
     sStr = sStr & "                                           AND TRXCD LIKE 'P%'"
     sStr = sStr & "                                       )"
     sStr = sStr & "                                 WHERE LTRIM(CUTA,'0123456789') IS NULL"
@@ -7959,7 +7959,7 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                        ) A,"
     sStr = sStr & "                       (SELECT ACID, TRXCD, KAEYOL, LESSON, WEEKS"
     sStr = sStr & "                          FROM SDTRX11TB"
-    sStr = sStr & "                         WHERE ACID  = '" & basModule.SchCD & "'"
+    sStr = sStr & "                         WHERE ACID  = '" & basModule.schcd & "'"
     sStr = sStr & "                           AND TRXCD LIKE 'P%'"
     sStr = sStr & "                        ) B"
     sStr = sStr & "                 WHERE A.ACID   = B.ACID"
@@ -7985,12 +7985,12 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                                           AND A.TCRCD  = B.TCRCD"
     sStr = sStr & "                                           AND A.SUBJCD = B.SUBJCD"
     sStr = sStr & "                                           AND A.YM     = '" & Trim(fpYM.UnFmtText) & "'"
-    sStr = sStr & "                                           AND A.ACID   = '" & basModule.SchCD & "'"
+    sStr = sStr & "                                           AND A.ACID   = '" & basModule.schcd & "'"
     sStr = sStr & "                                        ) A,"
     sStr = sStr & "                                       SDLSN01TB B"
     sStr = sStr & "                                 WHERE A.ACID  = B.ACID"
     sStr = sStr & "                                   AND A.LSNCD = B.LSNCD"
-    sStr = sStr & "                                   AND A.ACID  = '" & basModule.SchCD & "'"
+    sStr = sStr & "                                   AND A.ACID  = '" & basModule.schcd & "'"
     sStr = sStr & "                                UNION ALL"
     sStr = sStr & "                                SELECT A.LSNCD, A.LSNNM,"
     sStr = sStr & "                                       B.KAEYOL,"
@@ -8006,12 +8006,12 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                                           AND A.TCRCD  = B.TCRCD"
     sStr = sStr & "                                           AND A.SUBJCD = B.SUBJCD"
     sStr = sStr & "                                           AND A.YM     = '" & Trim(fpYM.UnFmtText) & "'"
-    sStr = sStr & "                                           AND A.ACID   = '" & basModule.SchCD & "'"
+    sStr = sStr & "                                           AND A.ACID   = '" & basModule.schcd & "'"
     sStr = sStr & "                                        ) A,"
     sStr = sStr & "                                       SDLSN02TB B"
     sStr = sStr & "                                 WHERE A.ACID  = B.ACID"
     sStr = sStr & "                                   AND A.LSNCD = B.LSNCD"
-    sStr = sStr & "                                   AND A.ACID  = '" & basModule.SchCD & "'"
+    sStr = sStr & "                                   AND A.ACID  = '" & basModule.schcd & "'"
     sStr = sStr & "                                UNION ALL"
     sStr = sStr & "                                SELECT '00000' AS LSNCD, PRT_LSNNM AS LSNNM,"
     sStr = sStr & "                                       DECODE(LENGTH(PRT_KAEYOL),1,'0'||PRT_KAEYOL, PRT_KAEYOL) AS KAEYOL,"
@@ -8025,7 +8025,7 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                                   AND A.TCRCD  = B.TCRCD"
     sStr = sStr & "                                   AND A.SUBJCD = B.SUBJCD"
     sStr = sStr & "                                   AND A.YM     = '" & Trim(fpYM.UnFmtText) & "'"
-    sStr = sStr & "                                   AND A.ACID   = '" & basModule.SchCD & "'"
+    sStr = sStr & "                                   AND A.ACID   = '" & basModule.schcd & "'"
     sStr = sStr & "                                   AND A.LSNCD  = '00000'"
     sStr = sStr & "                               )"
     sStr = sStr & "                       )"
@@ -8064,12 +8064,12 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                           AND A.TCRCD  = B.TCRCD"
     sStr = sStr & "                           AND A.SUBJCD = B.SUBJCD"
     sStr = sStr & "                           AND A.YM     = '" & Trim(fpYM.UnFmtText) & "'"
-    sStr = sStr & "                           AND A.ACID   = '" & basModule.SchCD & "'"
+    sStr = sStr & "                           AND A.ACID   = '" & basModule.schcd & "'"
     sStr = sStr & "                        ) A,"
     sStr = sStr & "                       SDLSN01TB B"
     sStr = sStr & "                 WHERE A.ACID  = B.ACID"
     sStr = sStr & "                   AND A.LSNCD = B.LSNCD"
-    sStr = sStr & "                   AND A.ACID  = '" & basModule.SchCD & "'"
+    sStr = sStr & "                   AND A.ACID  = '" & basModule.schcd & "'"
     sStr = sStr & "                UNION ALL"
     sStr = sStr & "                SELECT A.LSNCD, A.LSNNM,"
     sStr = sStr & "                       B.KAEYOL,"
@@ -8086,12 +8086,12 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                           AND A.TCRCD  = B.TCRCD"
     sStr = sStr & "                           AND A.SUBJCD = B.SUBJCD"
     sStr = sStr & "                           AND A.YM     = '" & Trim(fpYM.UnFmtText) & "'"
-    sStr = sStr & "                           AND A.ACID   = '" & basModule.SchCD & "'"
+    sStr = sStr & "                           AND A.ACID   = '" & basModule.schcd & "'"
     sStr = sStr & "                        ) A,"
     sStr = sStr & "                       SDLSN02TB B"
     sStr = sStr & "                 WHERE A.ACID  = B.ACID"
     sStr = sStr & "                   AND A.LSNCD = B.LSNCD"
-    sStr = sStr & "                   AND A.ACID  = '" & basModule.SchCD & "'"
+    sStr = sStr & "                   AND A.ACID  = '" & basModule.schcd & "'"
     sStr = sStr & "                UNION ALL"
     sStr = sStr & "                SELECT '00000' AS LSNCD, PRT_LSNNM AS LSNNM,"
     sStr = sStr & "                       DECODE(LENGTH(PRT_KAEYOL),1,'0'||PRT_KAEYOL, PRT_KAEYOL) AS KAEYOL,"
@@ -8106,7 +8106,7 @@ Private Sub Get_TimeTable_Data()
     sStr = sStr & "                   AND A.TCRCD  = B.TCRCD"
     sStr = sStr & "                   AND A.SUBJCD = B.SUBJCD"
     sStr = sStr & "                   AND A.YM     = '" & Trim(fpYM.UnFmtText) & "'"
-    sStr = sStr & "                   AND A.ACID   = '" & basModule.SchCD & "'"
+    sStr = sStr & "                   AND A.ACID   = '" & basModule.schcd & "'"
     sStr = sStr & "                   AND A.LSNCD  = '00000'"
     sStr = sStr & "               )"
     sStr = sStr & "         WHERE IDX > ' ' "
@@ -8419,7 +8419,7 @@ Private Sub Find_LsnData()
     sStr = ""
     sStr = sStr & "      SELECT LSNCD, LSNNM"
     sStr = sStr & "        From SDLSN01TB"
-    sStr = sStr & "       WHERE ACID = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "       WHERE ACID = '" & Trim(basModule.schcd) & "'"
     If Trim(txtLsn(0).Text) = "" Then
         sStr = sStr & "     AND LSNNM LIKE '%" & Trim(txtLsn(0).Text) & "%'"
     End If

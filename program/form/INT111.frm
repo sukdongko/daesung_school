@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form INT111 
    Caption         =   "입학사정 >> 입학원서 출력 >> 종합 입학원서 출력 (강남)"
@@ -10,7 +10,6 @@ Begin VB.Form INT111
    ClientTop       =   2970
    ClientWidth     =   15240
    LinkTopic       =   "Form2"
-   LockControls    =   -1  'True
    MDIChild        =   -1  'True
    ScaleHeight     =   11010
    ScaleWidth      =   15240
@@ -1915,7 +1914,7 @@ Begin VB.Form INT111
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "과학탐구"
+            Caption         =   "과학탐구     (택2)"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -1930,11 +1929,11 @@ Begin VB.Form INT111
             Left            =   1650
             TabIndex        =   96
             Top             =   7470
-            Width           =   1125
+            Width           =   1635
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "제2외국어"
+            Caption         =   "제2외국어    (택1)"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -1949,11 +1948,11 @@ Begin VB.Form INT111
             Left            =   1650
             TabIndex        =   95
             Top             =   6870
-            Width           =   1155
+            Width           =   1635
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "사회탐구"
+            Caption         =   "사회탐구     (택2)"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -2890,7 +2889,6 @@ Begin VB.Form INT111
          Begin VB.Label OPTIONS 
             BackColor       =   &H00E0E0E0&
             BackStyle       =   0  '투명
-            Caption         =   "▶자연계 학생 중 수리(나)형을 지원하는 학생은 별도 표기"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -5342,6 +5340,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = "세계지리"
                     Case "42"
                         sTmp = "아랍어"
+                    Case "44"
+                        sTmp = "베트남어"
                 End Select
             Case "SEL3"
                 Select Case sTmp

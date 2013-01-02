@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form INT110 
    Caption         =   "입학사정 >> 입학원서 출력 >> 종합 입학원서 출력 2012년도 (부산)"
@@ -3862,7 +3862,7 @@ Private Sub Form_Load()
         
         OPTIONS(11).Caption = "수능"
         OPTIONS(4).Caption = "등급"
-        Select Case Trim(basModule.SchCD)
+        Select Case Trim(basModule.schcd)
             Case "K", "W", "Q", "J"
                 OPTIONS(11).Caption = "수능"
                 OPTIONS(4).Caption = "표준"
@@ -3882,7 +3882,7 @@ Private Sub Form_Load()
             .AddItem "인문" & Space(30) & "01"
             .AddItem "자연" & Space(30) & "02"
         '<< 계열 >> : 2008.01.09
-            If Trim(basModule.SchCD) = "N" Then             '< 노량진
+            If Trim(basModule.schcd) = "N" Then             '< 노량진
                 .AddItem "서울대인문" & Space(30) & "21"
                 .AddItem "서울대자연" & Space(30) & "22"
                 .AddItem "예체" & Space(30) & "03"
@@ -3903,7 +3903,7 @@ Private Sub Form_Load()
                 .AddItem "편)자연수능" & Space(30) & "16"
             End If
         '<< 계열 >> : 2008.01.10
-            If Trim(basModule.SchCD) = "K" Then             '< 강남
+            If Trim(basModule.schcd) = "K" Then             '< 강남
                 .AddItem "주말법대" & Space(30) & "04"
                 .AddItem "주말의대" & Space(30) & "05"
             
@@ -3918,7 +3918,7 @@ Private Sub Form_Load()
                 
             End If
         '<< 계열 >> : 2009.01.08
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "P"
 ''                    .AddItem "예체능" & Space(30) & "03"
 ''
@@ -3953,7 +3953,7 @@ Private Sub Form_Load()
                     
             End Select
             
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "J"
                     .AddItem "예체능" & Space(30) & "03"
                     
@@ -3966,7 +3966,7 @@ Private Sub Form_Load()
             End Select
             
         '<< 계열 >> : 2009.01.09
-            If Trim(basModule.SchCD) = "B" Then             '< 부산
+            If Trim(basModule.schcd) = "B" Then             '< 부산
                 
                 .AddItem "인문 PS반" & Space(30) & "23"
                 .AddItem "자연 PM반" & Space(30) & "24"
@@ -4044,7 +4044,7 @@ Private Sub Clear_Form_Control()
     
     
 '>> 학년별 내역
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
     
         Case "N"
         
@@ -4350,7 +4350,7 @@ Private Sub Get_STD_Data()
     sStr = sStr & "         PRNT_TEL   , PRNT_CEL   , PRNT_JOB   , PRNT_W_TEL ,"
     sStr = sStr & "         PHOTO_PATH , DECODE(R_WAY,'1','','2','-int','3','') AS R_WAY, PTS_SEL, ORD_NO, "
     sStr = sStr & "         ACID||EXMID AS IMAGE_FILE, "
-    sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.SchCD) & "','',ACID) AS WANT_ACID, "
+    sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.schcd) & "','',ACID) AS WANT_ACID, "
     
     
     sStr = sStr & "         DECODE(GR,'1','수능등급','2','6월 평가원','3','9월 평가원','4','6월 평가원','5','9월 평가원','6') AS GR, "            '<< 2009년 바뀐내용
@@ -4367,7 +4367,7 @@ Private Sub Get_STD_Data()
     'sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.SchCD) & "','" & Trim(basModule.SchCD) & "',ACID) AS WANT_ACID "       '< TEST
     
     '****************************** < IMAGE 저장 디렉토리 > **********************************************
-    Select Case basModule.SchCD
+    Select Case basModule.schcd
         Case "N"                '< 노량진
             sStr = sStr & "'" & Noryangjin & "'||"
         Case "K", "W", "Q"      '< 강남
@@ -4456,7 +4456,7 @@ Private Sub Get_STD_Data()
             '---------------------------------------------------------------------------- 전체학생 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            FROM CLSTD01TB"
-            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.schcd) & "'"
             '>> 수험번호
             If Trim(fpExmID_S.UnFmtText) > " " And Trim(fpExmID_E.UnFmtText) > " " Then
                 sStr = sStr & "         AND EXMID BETWEEN '" & Trim(fpExmID_S.UnFmtText) & "' AND '" & Trim(fpExmID_E.UnFmtText) & "'"
@@ -4475,7 +4475,7 @@ Private Sub Get_STD_Data()
             End If
             
             '>> 계열
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "K", "S", "P"
                     If Trim(Right(cboKaeyol.Text, 30)) <> "XX" Then
                         sStr = sStr & "     AND KAEYOL  = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
@@ -4512,10 +4512,10 @@ Private Sub Get_STD_Data()
             '---------------------------------------------------------------------------- 합격자 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            From CLSTD01TB"
-            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
+            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
             sStr = sStr & "             AND EXMID > ' ' "
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -4524,7 +4524,7 @@ Private Sub Get_STD_Data()
                 sStr = sStr & "         AND EXMTYPE = '1'"
             End If
             '>> 계열
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "K", "S", "P"
                     If Trim(Right(cboKaeyol.Text, 30)) <> "XX" Then
                         sStr = sStr & "     AND KAEYOL  = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
@@ -4726,7 +4726,7 @@ Private Sub Get_STD_Data()
                     uSTD(nRec).SEL2_SCH = sTmp
                     
                     '<< 2008.01.10 : 노량진 - 수능 전문반 >>
-                    If Trim(basModule.SchCD) = "N" Then
+                    If Trim(basModule.schcd) = "N" Then
                         Select Case uSTD(nRec).kaeyol
                             Case "05"
                                 uSTD(nRec).SEL2_SCH = "인문"
@@ -4890,7 +4890,7 @@ Private Sub Get_STD_Data()
                 
                 If uSTD(nRec).ORD_NO = "" Then          '< 학원접수생인 경우 : 사진 업로드
                     sFilePath = ""
-                    Select Case Trim(basModule.SchCD)
+                    Select Case Trim(basModule.schcd)
                         Case "N"
                             sFilePath = "NDOC/dshw/noryangjin/register/ACC/"
                         Case "K", "W", "Q"
@@ -4907,7 +4907,7 @@ Private Sub Get_STD_Data()
                             sFilePath = "NDOC/dshw/busan/register/ACC/"
                     End Select
                     
-                    sFilePath = sFilePath & Trim(basModule.SchCD) & uSTD(nRec).EXMID & ".jpg"       '< image 경로 : ORDNO 가 없는 경우
+                    sFilePath = sFilePath & Trim(basModule.schcd) & uSTD(nRec).EXMID & ".jpg"       '< image 경로 : ORDNO 가 없는 경우
                 
                     uSTD(nRec).IMAGE_DIR = sFilePath
                 Else
@@ -4985,7 +4985,7 @@ Private Sub Std_Data_Show(Index As Long)
                         접수계열2.Text = "인    문"
             Case "02":  접수계열.Text = "자 연 계"
                         접수계열2.Text = "자    연"
-            Case "03":  Select Case Trim(basModule.SchCD)
+            Case "03":  Select Case Trim(basModule.schcd)
                                Case "N"
                                     접수계열.Text = "예.체능계"
                                     접수계열2.Text = "예.체능계"
@@ -4999,7 +4999,7 @@ Private Sub Std_Data_Show(Index As Long)
                                     접수계열.Text = ""
                                     접수계열2.Text = ""
                         End Select
-            Case "04":  Select Case Trim(basModule.SchCD)
+            Case "04":  Select Case Trim(basModule.schcd)
                                Case "N"
                                     접수계열.Text = "수리(나) 자연"
                                     접수계열2.Text = "수 리 나"
@@ -5016,7 +5016,7 @@ Private Sub Std_Data_Show(Index As Long)
                                     접수계열.Text = ""
                                     접수계열2.Text = ""
                         End Select
-            Case "05":  Select Case Trim(basModule.SchCD)
+            Case "05":  Select Case Trim(basModule.schcd)
                                Case "N"
                                     접수계열.Text = "수능 인문"
                                     접수계열2.Text = "수능전문"
@@ -5033,7 +5033,7 @@ Private Sub Std_Data_Show(Index As Long)
                                     접수계열.Text = ""
                                     접수계열2.Text = ""
                         End Select
-            Case "06":  Select Case Trim(basModule.SchCD)
+            Case "06":  Select Case Trim(basModule.schcd)
                                Case "N"
                                     접수계열.Text = "수능 자연"
                                     접수계열2.Text = "수능전문"
@@ -5053,7 +5053,7 @@ Private Sub Std_Data_Show(Index As Long)
                                     접수계열.Text = ""
                                     접수계열2.Text = ""
                         End Select
-            Case "07":  Select Case Trim(basModule.SchCD)
+            Case "07":  Select Case Trim(basModule.schcd)
                                Case "K"
                                     접수계열.Text = "야간서울대반"
                                     접수계열2.Text = "자 연"
@@ -5069,7 +5069,7 @@ Private Sub Std_Data_Show(Index As Long)
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "08":  Select Case Trim(basModule.SchCD)
+            Case "08":  Select Case Trim(basModule.schcd)
                                Case "N":  접수계열.Text = "신설자연"
                                           접수계열2.Text = "신설자연"
                                Case "S":  접수계열.Text = "수리나형"
@@ -5081,7 +5081,7 @@ Private Sub Std_Data_Show(Index As Long)
                                           접수계열2.Text = ""
                         End Select
                         
-            Case "09":  Select Case Trim(basModule.SchCD)
+            Case "09":  Select Case Trim(basModule.schcd)
                                Case "N":  접수계열.Text = "신설수능"
                                           접수계열2.Text = "인  문"
                                Case "B"
@@ -5090,7 +5090,7 @@ Private Sub Std_Data_Show(Index As Long)
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "10":  Select Case Trim(basModule.SchCD)
+            Case "10":  Select Case Trim(basModule.schcd)
                                Case "N":  접수계열.Text = "신설수능"
                                           접수계열2.Text = "자  연"
                                Case "B"
@@ -5101,7 +5101,7 @@ Private Sub Std_Data_Show(Index As Long)
                         End Select
                         
                         
-            Case "11", "16":  Select Case Trim(basModule.SchCD)
+            Case "11", "16":  Select Case Trim(basModule.schcd)
                                      Case "N":  접수계열.Text = "편)인문"
                                                 접수계열2.Text = "인    문"
                                      Case "K":  접수계열.Text = "선착순인문"
@@ -5117,7 +5117,7 @@ Private Sub Std_Data_Show(Index As Long)
                                      Case Else: 접수계열.Text = ""
                                                 접수계열2.Text = ""
                               End Select
-            Case "12", "17":  Select Case Trim(basModule.SchCD)
+            Case "12", "17":  Select Case Trim(basModule.schcd)
                                      Case "N":  접수계열.Text = "편)자연"
                                                 접수계열2.Text = "자    연"
                                      Case "K":  접수계열.Text = "선착순자연"
@@ -5134,57 +5134,57 @@ Private Sub Std_Data_Show(Index As Long)
                                                 접수계열2.Text = ""
                               End Select
                               
-            Case "13":        Select Case Trim(basModule.SchCD)
+            Case "13":        Select Case Trim(basModule.schcd)
                                      Case "N":  접수계열.Text = "편)예체능"
                                                 접수계열2.Text = "예체능"
                               End Select
-            Case "14":        Select Case Trim(basModule.SchCD)
+            Case "14":        Select Case Trim(basModule.schcd)
                                      Case "N":  접수계열.Text = "편)수리(나)"
                                                 접수계열2.Text = "자    연"
                               End Select
-            Case "15":        Select Case Trim(basModule.SchCD)
+            Case "15":        Select Case Trim(basModule.schcd)
                                      Case "N":  접수계열.Text = "편)인문수능"
                                                 접수계열2.Text = "인    문"
                               End Select
-            Case "16":        Select Case Trim(basModule.SchCD)
+            Case "16":        Select Case Trim(basModule.schcd)
                                      Case "N":  접수계열.Text = "편)자연수능"
                                                 접수계열2.Text = "자    연"
                               End Select
                               
                               
-            Case "18":        Select Case Trim(basModule.SchCD)
+            Case "18":        Select Case Trim(basModule.schcd)
                                      Case "S":  접수계열.Text = "인문프리미엄"
                                                 접수계열2.Text = "인문프리미엄"
                                      Case "J":  접수계열.Text = "인문프리미엄"
                                                 접수계열2.Text = "인문프리미엄"
                               End Select
                               
-            Case "19":        Select Case Trim(basModule.SchCD)
+            Case "19":        Select Case Trim(basModule.schcd)
                                      Case "S":  접수계열.Text = "자연프리미엄"
                                                 접수계열2.Text = "자연프리미엄"
                                      Case "J":  접수계열.Text = "자연프리미엄"
                                                 접수계열2.Text = "자연프리미엄"
                               End Select
                               
-            Case "21":        Select Case Trim(basModule.SchCD)
+            Case "21":        Select Case Trim(basModule.schcd)
                                      Case "N":  접수계열.Text = "서울대특별"
                                                 접수계열2.Text = "인    문"
                                      Case "S":   접수계열.Text = "서울인문"
                                                 접수계열2.Text = "서울인문"
                               End Select
-            Case "22":        Select Case Trim(basModule.SchCD)
+            Case "22":        Select Case Trim(basModule.schcd)
                                      Case "N":  접수계열.Text = "서울대특별"
                                                 접수계열2.Text = "자    연"
                                      Case "S":   접수계열.Text = "서울자연"
                                      접수계열2.Text = "서울자연"
                               End Select
-            Case "23":        Select Case Trim(basModule.SchCD)
+            Case "23":        Select Case Trim(basModule.schcd)
                                      Case "B":  접수계열.Text = "인문 PS"
                                                 접수계열2.Text = "인    문"
                                      Case "S":   접수계열.Text = "야간서울대반"
                                      접수계열2.Text = "인문"
                               End Select
-            Case "24":        Select Case Trim(basModule.SchCD)
+            Case "24":        Select Case Trim(basModule.schcd)
                                      Case "B":  접수계열.Text = "자연 PM"
                                                 접수계열2.Text = "자    연"
                                      Case "S":   접수계열.Text = "야간서울대반"
@@ -5259,7 +5259,7 @@ Private Sub Std_Data_Show(Index As Long)
         '2011-01-11 김한욱 언수외 및 총 합 전부 double 처리(노량진영향)
         Select Case Trim(.EXMTYPE)
             Case "0":
-                Select Case Trim(basModule.SchCD)
+                Select Case Trim(basModule.schcd)
                     Case "N":
                         Select Case Trim(.GR)
                             Case "6":
@@ -5330,7 +5330,7 @@ Private Sub Std_Data_Show(Index As Long)
         
         '>> 인문계 나형, 자연계 가형
         
-        Select Case Trim(basModule.SchCD)
+        Select Case Trim(basModule.schcd)
             Case "K", "W", "Q"
                 Select Case Trim(.kaeyol)
                     Case "01", "04", "06", "11", "16"
@@ -5465,7 +5465,7 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = "언어"
                         
                     Case "38"
-                        Select Case Trim(basModule.SchCD)
+                        Select Case Trim(basModule.schcd)
                             Case "S"
                                 sTmp = "논술"
                             Case Else
@@ -5480,6 +5480,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = "세계지리"
                     Case "42"
                         sTmp = "아랍어"
+                    Case "44"
+                        sTmp = "베트남어"
                 End Select
             Case "SEL3"
                 Select Case sTmp
@@ -5520,7 +5522,7 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
 '                    Case "93"
 '                        sTmp = "외국어"         '< 변경
                     Case "92"
-                        Select Case Trim(basModule.SchCD)
+                        Select Case Trim(basModule.schcd)
                             Case "S"
                                 sTmp = "언수외"
                             Case Else
@@ -5528,7 +5530,7 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         End Select
                         
                     Case "93"
-                        Select Case Trim(basModule.SchCD)
+                        Select Case Trim(basModule.schcd)
                             Case "S"
                                 sTmp = "논술"
                             Case Else
@@ -5624,7 +5626,7 @@ Private Sub Get_STD_image()
         
         If Dir(sLocalFile) = "" Then                                        '<< 학생 이미지 없는 것만 받음
         
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "B"        '<< 부산직영
                     sSourceUrl = "http://www.dsbusan.com" & uSTD(nRec).PHOTO_PATH           '<< 서버의 이미지 경로
                 Case Else
@@ -5942,7 +5944,7 @@ Private Function Make_image_Path(ByVal aSchNO As String, ByVal aExmID As String,
     Dim MaxSize         As Long
     
     sFilePath = ""
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
         Case "N"
             sFilePath = "/NDOC/dshw/noryangjin/register/ACC/"
         Case "K", "W", "Q"
@@ -5959,7 +5961,7 @@ Private Function Make_image_Path(ByVal aSchNO As String, ByVal aExmID As String,
             sFilePath = "/NDOC/dshw/busan/register/ACC/"
     End Select
     
-    sFilePath = sFilePath & Trim(basModule.SchCD) & aExmID & ".jpg"
+    sFilePath = sFilePath & Trim(basModule.schcd) & aExmID & ".jpg"
     
     On Error GoTo ErrStmt
     

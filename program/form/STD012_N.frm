@@ -1622,7 +1622,7 @@ Begin VB.Form STD012_N
          End
          Begin VB.Label Label30 
             BackStyle       =   0  '투명
-            Caption         =   $"STD012_N.frx":92D2
+            Caption         =   $"STD012_N.frx":7C12
             Height          =   615
             Left            =   240
             TabIndex        =   26
@@ -1861,7 +1861,7 @@ Begin VB.Form STD012_N
             EndProperty
             MaxCols         =   38
             RetainSelBlock  =   0   'False
-            SpreadDesigner  =   "STD012_N.frx":9369
+            SpreadDesigner  =   "STD012_N.frx":7CA9
          End
          Begin EditLib.fpMask fpExmID_F 
             Height          =   345
@@ -2695,7 +2695,7 @@ Begin VB.Form STD012_N
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      SpreadDesigner  =   "STD012_N.frx":B4DE
+      SpreadDesigner  =   "STD012_N.frx":8581
    End
 End
 Attribute VB_Name = "STD012_N"
@@ -2906,7 +2906,7 @@ Private Sub Form_Load()
         .AddItem "자연" & Space(30) & "02"
         
     '<< 계열 >> : 2008.01.09
-        If Trim(basModule.SchCD) = "N" Then             '< 노량진
+        If Trim(basModule.schcd) = "N" Then             '< 노량진
             .AddItem "예체" & Space(30) & "03"
             .AddItem "수리(나)" & Space(30) & "04"
             .AddItem "인문수능" & Space(30) & "05"
@@ -2925,7 +2925,7 @@ Private Sub Form_Load()
             .AddItem "편)자연수능" & Space(30) & "16"
         End If
     '<< 계열 >> : 2008.01.10
-        If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then           '< 강남 2008.03.24
+        If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then           '< 강남 2008.03.24
             .AddItem "주말법대" & Space(30) & "04"
             .AddItem "주말의대" & Space(30) & "05"
             
@@ -2940,7 +2940,7 @@ Private Sub Form_Load()
             
         End If
     '<< 계열 >> : 2008.02.15
-        If Trim(basModule.SchCD) = "S" Then             '< 송파
+        If Trim(basModule.schcd) = "S" Then             '< 송파
 ''            .AddItem "예체능" & Space(30) & "03"
 ''
 ''            .AddItem "인문수능" & Space(30) & "05"
@@ -2959,12 +2959,12 @@ Private Sub Form_Load()
 
         End If
     '<< 계열 >> : 2008.02.15
-        If Trim(basModule.SchCD) = "P" Then             '< 마송
+        If Trim(basModule.schcd) = "P" Then             '< 마송
             .AddItem "특별인문" & Space(30) & "03"
             .AddItem "특별자연" & Space(30) & "04"
         End If
         
-        If Trim(basModule.SchCD) = "J" Then             '< 양재
+        If Trim(basModule.schcd) = "J" Then             '< 양재
             .AddItem "신설인문" & Space(30) & "11"
             .AddItem "신설자연" & Space(30) & "12"
             
@@ -2973,7 +2973,7 @@ Private Sub Form_Load()
         End If
     
     '<< 계열 >> : 2009.01.09
-        If Trim(basModule.SchCD) = "B" Then             '< 부산
+        If Trim(basModule.schcd) = "B" Then             '< 부산
             .AddItem "선행인문" & Space(30) & "05"
             .AddItem "선행자연" & Space(30) & "06"
             
@@ -3243,7 +3243,7 @@ Private Sub init_Form()
     fpSunHang.value = 0
     fpSuNung.value = 0
     
-    If Trim(basModule.SchCD) = "P" Then
+    If Trim(basModule.schcd) = "P" Then
         fpSunHang.Visible = True
         fpSuNung.Visible = True
         
@@ -3306,7 +3306,7 @@ Private Sub cmdFind_Click()
     sStr = sStr & "         EXMID, STDNM, SEL1_SCH , SEL2_SCH, SUBSTR(REPLACE(Birth_ymd,'-',''),1,4)||'-'||SUBSTR(REPLACE(Birth_ymd,'-',''),5,2) ||'-'||SUBSTR(REPLACE(Birth_ymd,'-',''),7,2)AS Birth_ymd,"
     
     '<< 계열 >> : 2008.01.09
-    If Trim(basModule.SchCD) = "N" Then
+    If Trim(basModule.schcd) = "N" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','예체',"
@@ -3327,7 +3327,7 @@ Private Sub cmdFind_Click()
         sStr = sStr & "                   '16','편)자연수능'"
         sStr = sStr & "            ) AS GAEYUL,"
     '<< 계열 >> : 2008.01.10
-    ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then       '< 2008.03.24
+    ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then       '< 2008.03.24
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         
@@ -3343,7 +3343,7 @@ Private Sub cmdFind_Click()
         sStr = sStr & "                   '17','선착순자연17'"
         sStr = sStr & "            ) AS GAEYUL,"
     '<< 계열 >> : 2008.02.15
-    ElseIf Trim(basModule.SchCD) = "S" Then
+    ElseIf Trim(basModule.schcd) = "S" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','예체능',"
@@ -3361,14 +3361,14 @@ Private Sub cmdFind_Click()
         
         sStr = sStr & "            ) AS GAEYUL,"
     '<< 계열 >> : 2008.02.15
-    ElseIf Trim(basModule.SchCD) = "P" Then
+    ElseIf Trim(basModule.schcd) = "P" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '03','특별인문',"
         sStr = sStr & "                   '04','특별자연'"
         sStr = sStr & "            ) AS GAEYUL,"
     
-    ElseIf Trim(basModule.SchCD) = "J" Then
+    ElseIf Trim(basModule.schcd) = "J" Then
         sStr = sStr & "     DECODE(KAEYOL,'01','인문',"
         sStr = sStr & "                   '02','자연',"
         sStr = sStr & "                   '11','신설인문',"
@@ -3504,9 +3504,9 @@ Private Sub cmdFind_Click()
     
 ' 1차지망 이후 처리 : 강제로 코딩합니다. 2007.12.26 ############################################################################################
 ' 지속적으로 변경해 주어야 함.
-    sStr = sStr & "         GET_INTERNET_TCNT_STD_CHASU('" & Trim(basModule.SchCD) & "') AS PAYTOT, "       '< 차수에 대한 집계
-    sStr = sStr & "         GET_SUNHANG_P_STD_CHASU('" & Trim(basModule.SchCD) & "') AS SUNHANG, "          '< 차수에 대한 수능
-    sStr = sStr & "         GET_SUNUNG_P_STD_CHASU('" & Trim(basModule.SchCD) & "') AS SUNUNG, "            '< 차수에 대한 수능
+    sStr = sStr & "         GET_INTERNET_TCNT_STD_CHASU('" & Trim(basModule.schcd) & "') AS PAYTOT, "       '< 차수에 대한 집계
+    sStr = sStr & "         GET_SUNHANG_P_STD_CHASU('" & Trim(basModule.schcd) & "') AS SUNHANG, "          '< 차수에 대한 수능
+    sStr = sStr & "         GET_SUNUNG_P_STD_CHASU('" & Trim(basModule.schcd) & "') AS SUNUNG, "            '< 차수에 대한 수능
 '###############################################################################################################################################
     'sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "        '< 전체집계 하는 함수
     
@@ -3514,7 +3514,7 @@ Private Sub cmdFind_Click()
     sStr = sStr & "         ZIP, ADDR1, ADDR2, TEL, CEL, "
     sStr = sStr & "         REGDATE, PAYGBN, IPHAKWONSER, "
     
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
         Case "S"
             sStr = sStr & " DECODE(PTS_SEL,'1','가형','2','나형','') AS PTS_SEL, "
         Case "P"
@@ -3660,7 +3660,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                                      END PAYNOT"
             sStr = sStr & "                                 FROM CLSTD01TB "
             
-            sStr = sStr & "                                WHERE ACID = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "                                WHERE ACID = '" & Trim(basModule.schcd) & "'"
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
                 sStr = sStr & "                              AND EXMTYPE = '0'"
@@ -3716,7 +3716,7 @@ Private Sub cmdFind_Click()
             'MSGBOX
 ' 1차지망 이후 처리 : 강제로 코딩합니다. 2007.12.26 ############################################################################################
 ' 지속적으로 변경해 주어야 함.
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "N", "S", "P", "J", "B"
                     sStr = sStr & "                          AND TO_CHAR(REGDATE,'YYYYMMDDHH24') >= '" & sChasuTimes & "' "
                 Case "K", "W", "Q"
@@ -3733,7 +3733,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                         GROUP BY ACID"
             sStr = sStr & "                      ) B"
             sStr = sStr & "                WHERE A.ACID = B.ACID"
-            sStr = sStr & "                  AND A.ACID = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "                  AND A.ACID = '" & Trim(basModule.schcd) & "'"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -3758,7 +3758,7 @@ Private Sub cmdFind_Click()
 
 ' 1차지망 이후 처리 : 강제로 코딩합니다. 2007.12.26 ############################################################################################
 ' 지속적으로 변경해 주어야 함.
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "N", "S", "P", "J", "B"
                     sStr = sStr & "          AND TO_CHAR(REGDATE,'YYYYMMDDHH24') >= '" & sChasuTimes & "' "
                 Case "K", "W", "Q"
@@ -3779,10 +3779,10 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                      SUBSTR(ZIP,1,3)||'-'||SUBSTR(ZIP,4,3) AS ZIP, ADDR1, ADDR2, TEL, CEL, "
             sStr = sStr & "                      TO_CHAR(REGDATE,'YYYY-MM-DD') AS REGDATE, GET_PAYGUBN(ORD_NO) AS PAYGBN, DECODE(PTS_SEL,'7','모의고사','8','수능','') AS IPHAKWONSER, PTS_SEL, MU_TYPE "
             sStr = sStr & "                 From CLSTD01TB"
-            sStr = sStr & "                WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                       PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                       PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                       PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
+            sStr = sStr & "                WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                       PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                       PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                       PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -3808,7 +3808,7 @@ Private Sub cmdFind_Click()
             
 ' 1차지망 이후 처리 : 강제로 코딩합니다. 2007.12.26 ############################################################################################
 ' 지속적으로 변경해 주어야 함.
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "N", "S", "P", "J", "B"
                     sStr = sStr & "          AND TO_CHAR(REGDATE,'YYYYMMDDHH24') >= '" & sChasuTimes & "' "
                 Case "K", "W", "Q"
@@ -3891,13 +3891,13 @@ Private Sub cmdFind_Click()
             sStr = sStr & "              KAEYOL,"
             sStr = sStr & "              SEL1 , SEL2, SEL3, SEL4, SEL5, CL_CLOSE, "
             sStr = sStr & "              0 AS PAYOK , 0 AS PAYNOT, "
-            sStr = sStr & "              GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "           '< 전체집계 하는 함수
+            sStr = sStr & "              GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT, "           '< 전체집계 하는 함수
             sStr = sStr & "              TO_CHAR(REGDATE,'YYYY-MM-DD') AS REGDATE, GET_PAYGUBN(ORD_NO) AS PAYGBN, "
             sStr = sStr & "              ZIP, ADDR1, ADDR2, CEL, TEL, "
             sStr = sStr & "              NVL(K_NUM,0) AS K_NUM, NVL(M_NUM,0) AS M_NUM, NVL(E_NUM,0) AS E_NUM, NVL(T_NUM,0) AS T_NUM,"
             sStr = sStr & "              (NVL(K_NUM,0)+NVL(M_NUM,0)+NVL(E_NUM,0)) AS TOT_NUM , MU_TYPE, DECODE(PTS_SEL,'7','모의고사','8','수능','') AS IPHAKWONSER"
             sStr = sStr & "         From CLSTD01TB"
-            sStr = sStr & "        WHERE PASS" & Trim(Right(cboPassCN, 30)) & " = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "        WHERE PASS" & Trim(Right(cboPassCN, 30)) & " = '" & Trim(basModule.schcd) & "'"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -3923,7 +3923,7 @@ Private Sub cmdFind_Click()
             
 ' 1차지망 이후 처리 : 강제로 코딩합니다. 2007.12.26 ############################################################################################
 ' 지속적으로 변경해 주어야 함.
-            Select Case Trim(basModule.SchCD)
+            Select Case Trim(basModule.schcd)
                 Case "N", "S", "P", "J", "B"
                     sStr = sStr & "  AND TO_CHAR(REGDATE,'YYYYMMDDHH24') >= '" & sChasuTimes & "' "
                 Case "K", "W", "Q"
@@ -4359,6 +4359,7 @@ Private Sub cmdFind_Click()
                             Case "40":  sTmp = "세계사"
                             Case "41":  sTmp = "세계지리"
                             Case "42":  sTmp = "아랍어"
+                            Case "44":  sTmp = "베트남어"
                             
                             Case "81":  sTmp = "미적분"
                             Case "82":  sTmp = "이산수학"
@@ -4728,7 +4729,7 @@ Private Sub Get_Excel_Data()
         uExcel_StdData.EXMTYPE = sTmp
     '계열
         sTmp = "01"
-        If Trim(basModule.SchCD) = "N" Then             '< 계열 : 2008.01.09 - 노량진
+        If Trim(basModule.schcd) = "N" Then             '< 계열 : 2008.01.09 - 노량진
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4775,7 +4776,7 @@ Private Sub Get_Excel_Data()
                         sTmp = "01"
                 End Select
             End If
-        ElseIf Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then        '< 계열 : 2008.01.10 - 강남, 2008.03.24
+        ElseIf Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then        '< 계열 : 2008.01.10 - 강남, 2008.03.24
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4810,7 +4811,7 @@ Private Sub Get_Excel_Data()
                         sTmp = "01"
                 End Select
             End If
-        ElseIf Trim(basModule.SchCD) = "S" Then             '< 계열 : 2008.02.15 - 송파
+        ElseIf Trim(basModule.schcd) = "S" Then             '< 계열 : 2008.02.15 - 송파
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4852,7 +4853,7 @@ Private Sub Get_Excel_Data()
                         sTmp = "01"
                 End Select
             End If
-        ElseIf Trim(basModule.SchCD) = "P" Then             '< 계열 : 2008.02.15 - 마송
+        ElseIf Trim(basModule.schcd) = "P" Then             '< 계열 : 2008.02.15 - 마송
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4873,7 +4874,7 @@ Private Sub Get_Excel_Data()
                 End Select
             End If
         
-        ElseIf Trim(basModule.SchCD) = "J" Then             '< 양재
+        ElseIf Trim(basModule.schcd) = "J" Then             '< 양재
             If IsNull(DBExRec.Fields(5)) = False Then
                 sTmp = UCase(Trim(DBExRec.Fields(5)))
                 Select Case sTmp
@@ -4919,7 +4920,7 @@ Private Sub Get_Excel_Data()
         uExcel_StdData.kaeyol = sTmp
         
     '1 지망학원
-        sTmp = Trim(basModule.SchCD)
+        sTmp = Trim(basModule.schcd)
         If IsNull(DBExRec.Fields(6)) = False Then
             sTmp = UCase(Trim(DBExRec.Fields(6)))
             Select Case sTmp
@@ -4947,13 +4948,13 @@ Private Sub Get_Excel_Data()
                     sTmp = "B"
                 
                 Case Else
-                    sTmp = Trim(basModule.SchCD)
+                    sTmp = Trim(basModule.schcd)
             End Select
         End If
         uExcel_StdData.WANT_ACID1 = sTmp
         
     '2 지망학원
-        sTmp = Trim(basModule.SchCD)
+        sTmp = Trim(basModule.schcd)
         If IsNull(DBExRec.Fields(7)) = False Then
             sTmp = UCase(Trim(DBExRec.Fields(7)))
             Select Case sTmp
@@ -4981,7 +4982,7 @@ Private Sub Get_Excel_Data()
                     sTmp = "B"
                     
                 Case Else
-                    sTmp = Trim(basModule.SchCD)
+                    sTmp = Trim(basModule.schcd)
             End Select
         End If
         uExcel_StdData.WANT_ACID2 = sTmp
@@ -5077,6 +5078,8 @@ Private Sub Get_Excel_Data()
                     uExcel_StdData.ENG2 = "41|"
                 Case "아랍어"
                     uExcel_StdData.ENG2 = "42|"
+                Case "베트남어"
+                    uExcel_StdData.ENG2 = "44|"
                     
             End Select
     '과탐
@@ -5665,7 +5668,7 @@ Private Sub cmdAllStdData_Click()
     sStr = sStr & "         DECODE(KAEYOL,'01','인문',"
     sStr = sStr & "                       '02','자연',"
 '<< 계열 >> : 2008.01.09
-    If Trim(basModule.SchCD) = "N" Then
+    If Trim(basModule.schcd) = "N" Then
         sStr = sStr & "                   '03','예체',"
         sStr = sStr & "                   '04','수리(나)',"
         sStr = sStr & "                   '05','인문수능',"
@@ -5684,7 +5687,7 @@ Private Sub cmdAllStdData_Click()
         sStr = sStr & "                   '16','편)자연수능',"
     End If
 '<< 계열 >> : 2008.01.09
-    If Trim(basModule.SchCD) = "K" Or Trim(basModule.SchCD) = "W" Or Trim(basModule.SchCD) = "Q" Then
+    If Trim(basModule.schcd) = "K" Or Trim(basModule.schcd) = "W" Or Trim(basModule.schcd) = "Q" Then
         sStr = sStr & "                   '04','주말법대',"
         sStr = sStr & "                   '05','주말의대',"
         sStr = sStr & "                   '06','야간법대',"
@@ -5698,7 +5701,7 @@ Private Sub cmdAllStdData_Click()
         
     End If
 '<< 계열 >> : 2008.02.15
-    If Trim(basModule.SchCD) = "S" Then
+    If Trim(basModule.schcd) = "S" Then
         sStr = sStr & "                   '03','예체능',"
         
         sStr = sStr & "                   '05','수능인문',"
@@ -5714,12 +5717,12 @@ Private Sub cmdAllStdData_Click()
     
     End If
 '<< 계열 >> : 2008.02.15
-    If Trim(basModule.SchCD) = "P" Then
+    If Trim(basModule.schcd) = "P" Then
         sStr = sStr & "                   '03','특별인문',"
         sStr = sStr & "                   '04','특별자연',"
     End If
     
-    If Trim(basModule.SchCD) = "J" Then
+    If Trim(basModule.schcd) = "J" Then
         sStr = sStr & "                   '11','신설인문',"
         sStr = sStr & "                   '12','신설자연',"
         
@@ -5894,7 +5897,7 @@ Private Sub cmdAllStdData_Click()
     sStr = sStr & "         ACID||EXMID AS 이미지파일명, "
     'sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.SchCD) & "','',ACID) AS WANT_ACID "
     'sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.SchCD) & "','" & Trim(basModule.SchCD) & "',ACID) AS WANT_ACID, "       '< TEST
-    Select Case Trim(basModule.SchCD)
+    Select Case Trim(basModule.schcd)
         Case "S"
             'sStr = sStr & " DECODE(PTS_SEL,'1','수능','2','6월 평가원','3','9월 평가원','4','6월 평가원','5','9월 평가원','수능') AS 구분, "
             sStr = sStr & " DECODE(PTS_SEL,'1','가형','2','나형') AS 구분, "
@@ -6037,7 +6040,7 @@ Private Sub cmdAllStdData_Click()
             '---------------------------------------------------------------------------- 전체학생 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            FROM CLSTD01TB"
-            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.SchCD) & "'"
+            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.schcd) & "'"
             sStr = sStr & "             AND EXMID > ' ' "
             sStr = sStr & "             AND BIGO2 IS NULL "
 ' 1차지망 이후 처리 : 강제로 코딩합니다. 2007.12.26 ############################################################################################
@@ -6050,10 +6053,10 @@ Private Sub cmdAllStdData_Click()
             '---------------------------------------------------------------------------- 합격자 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            From CLSTD01TB"
-            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
-            sStr = sStr & "                  PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
+            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
+            sStr = sStr & "                  PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
             sStr = sStr & "             AND EXMID > ' ' "
             sStr = sStr & "             AND BIGO2 IS NULL "
 ' 1차지망 이후 처리 : 강제로 코딩합니다. 2007.12.26 ############################################################################################

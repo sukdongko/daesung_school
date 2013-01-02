@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Begin VB.Form EXM110 
    Caption         =   "학생관리"
    ClientHeight    =   10950
@@ -7607,7 +7607,7 @@ Private Sub Form_Load()
     
     progDisp.Max = 100
     progDisp.Min = 0
-    progDisp.Value = 0
+    progDisp.value = 0
     progDisp.Visible = False
     
     VScroll1.Min = 1
@@ -7671,7 +7671,7 @@ Private Sub cboKaeyol_Click()
     sStr = ""
     sStr = sStr & "  SELECT BAN"
     sStr = sStr & "    FROM SDEXM10TB "
-    sStr = sStr & "   WHERE ACID   = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "   WHERE ACID   = '" & Trim(basModule.schcd) & "'"
     If Trim(Right(cboKaeyol.Text, 10)) <> "ALL" Then
         sStr = sStr & " AND GAEYOL = '" & Trim(Right(cboKaeyol.Text, 10)) & "'"
     End If
@@ -7765,7 +7765,7 @@ Private Function Find_StdCD(ByVal aStdNM As String, ByRef aObj As Object) As Str
     sStr = ""
     sStr = sStr & "  SELECT STDCD, STDNM "
     sStr = sStr & "    FROM SDEXM10TB"
-    sStr = sStr & "   WHERE ACID  = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "   WHERE ACID  = '" & Trim(basModule.schcd) & "'"
     sStr = sStr & "     AND STDNM LIKE '%" & Trim(aStdNM) & "%'"
     
     Set DBCmd = New ADODB.Command
@@ -7831,7 +7831,7 @@ Private Function Find_StdNM(ByVal aStdCD As String) As String
     sStr = ""
     sStr = sStr & "  SELECT STDNM"
     sStr = sStr & "    FROM SDEXM10TB"
-    sStr = sStr & "   WHERE ACID  = '" & Trim(basModule.SchCD) & "'"
+    sStr = sStr & "   WHERE ACID  = '" & Trim(basModule.schcd) & "'"
     sStr = sStr & "     AND STDCD = '" & Trim(sStdCD) & "'"
     
     Set DBCmd = New ADODB.Command
@@ -7906,9 +7906,9 @@ Private Sub cmdShiftLeft_Click()
         nE = CLng(sDiv(1))
         
         If (nS - 1) >= 1 Then
-            VScroll1.Value = nS - 1
+            VScroll1.value = nS - 1
             VScroll1.Enabled = False
-                Call Disp_STD_JumsuData(VScroll1.Value)
+                Call Disp_STD_JumsuData(VScroll1.value)
             VScroll1.Enabled = True
         End If
     End If
@@ -7928,9 +7928,9 @@ Private Sub cmdShiftRight_Click()
         nE = CLng(sDiv(1))
         
         If (nS + 1) <= nE Then
-            VScroll1.Value = nS + 1
+            VScroll1.value = nS + 1
             VScroll1.Enabled = False
-                Call Disp_STD_JumsuData(VScroll1.Value)
+                Call Disp_STD_JumsuData(VScroll1.value)
             VScroll1.Enabled = True
         End If
     End If
@@ -7941,8 +7941,8 @@ Private Sub VScroll1_Change()
     If Me.Tag = "LOAD" Then Exit Sub
     
     VScroll1.Enabled = False
-        Call Disp_STD_JumsuData(VScroll1.Value)
-        txtPage.Text = Trim(CStr(VScroll1.Value)) & "/" & Trim(CStr(nTotRec))
+        Call Disp_STD_JumsuData(VScroll1.value)
+        txtPage.Text = Trim(CStr(VScroll1.value)) & "/" & Trim(CStr(nTotRec))
     VScroll1.Enabled = True
 End Sub
 
@@ -8245,7 +8245,7 @@ Private Sub Find_Monthly()
             
             VScroll1.Max = .RecordCount
             VScroll1.Enabled = True
-            VScroll1.Value = 1
+            VScroll1.value = 1
             
             txtPage.Text = "1/" & Trim(CStr(nTotRec))
             
@@ -8253,7 +8253,7 @@ Private Sub Find_Monthly()
 
         For nRec = 1 To .RecordCount Step 1
 
-            progDisp.Value = Format(nRec / .RecordCount * 100, "##0")
+            progDisp.value = Format(nRec / .RecordCount * 100, "##0")
 
             sTmp = "":      If IsNull(.Fields("ACID")) = False Then sTmp = Trim(.Fields("ACID")):                   uSTD(nRec).ACID = sTmp
             sTmp = "":      If IsNull(.Fields("STDCD")) = False Then sTmp = Trim(.Fields("STDCD")):                 uSTD(nRec).STDCD = sTmp
@@ -8462,7 +8462,7 @@ ErrPrint:
         
         Call Disp_STD_JumsuData(nRec)                           '<< 학생자료 화면 보이기
         Me.Tag = "LOAD"
-            VScroll1.Value = nRec
+            VScroll1.value = nRec
             Call CmdPrint_Click:        DoEvents                '<< 1명 출력
             
         Me.Tag = ""

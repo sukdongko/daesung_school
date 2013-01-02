@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form INT014 
    Caption         =   "입학사정 >> 입학원서 출력 >> 선행 입학원서 출력(양재)"
@@ -4614,6 +4614,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = "세계지리"
                     Case "42"
                         sTmp = "아랍어"
+                    Case "44"
+                        sTmp = "베트남어"
                 End Select
             Case "SEL3"
                 Select Case sTmp

@@ -1,8 +1,11 @@
 Attribute VB_Name = "basCommonSTD"
-    Option Explicit
+Option Explicit
+
+
+
+
     
     
-    Dim g_
 
 
 Function Set_Spread_Design1(ByRef sprControl As Object)
@@ -591,11 +594,161 @@ Function Init_PTS_Sel(ByRef cboControl As Object)
     End With
 End Function
 
-'카드
-Function Init_Card(ByRef cboControl As Object)
+Function Get_CodeCardBySchool(SchCD As String) As String
+    Select Case SchCD
+        Case "N"
+            Get_CodeCardBySchool = "NR"
+        Case "K"
+            Get_CodeCardBySchool = "KN"
+        Case "W" '강남의 반인데 계열로 추가
+            Get_CodeCardBySchool = "KN"
+        Case "Q" '강남의 반인데 계열로 추가
+            Get_CodeCardBySchool = "KN"
+        Case "S"
+            Get_CodeCardBySchool = "SP"
+        Case "M"
+            Get_CodeCardBySchool = "MK"
+        Case "P"
+            Get_CodeCardBySchool = "PM"
+        Case "J"
+            Get_CodeCardBySchool = "HM"
+        Case "B"
+            Get_CodeCardBySchool = "BS"
+    End Select
+End Function
+
+Function Set_Card(ByRef cboControl As Object, payPath As String, payCode As String)
+
     With cboControl
-        Select Case Trim(basModule.SchCD)
-            Case "N", "K", "W", "Q", "S"
+        Select Case payPath
+            Case "NR", "KN", "SP"
+                Select Case payCode
+                    Case "AMX"
+                        .ListIndex = 0
+                    Case "CBB"
+                        .ListIndex = 1
+                    Case "DIN"
+                        .ListIndex = 2
+                    Case "KAB"
+                        .ListIndex = 3
+                    Case "KWB"
+                        .ListIndex = 4
+                    Case "NLC"
+                        .ListIndex = 5
+                    Case "SIN"
+                        .ListIndex = 6
+                    Case "BCC"
+                        .ListIndex = 7
+                    Case "CJB"
+                        .ListIndex = 8
+                    Case "HNB"
+                        .ListIndex = 9
+                    Case "KEB"
+                        .ListIndex = 10
+                    Case "LGC"
+                        .ListIndex = 11
+                    Case "PHB"
+                        .ListIndex = 12
+                    Case "WIN"
+                        .ListIndex = 13
+                    Case "BRD"
+                        .ListIndex = 14
+                    Case "CNB"
+                        .ListIndex = 15
+                    Case "JCB"
+                        .ListIndex = 16
+                    Case "KJB"
+                        .ListIndex = 17
+                    Case "NFF"
+                        .ListIndex = 18
+                    Case "SHB"
+                        .ListIndex = 19
+                    Case Else
+                        .ListIndex = 20
+                End Select
+            Case "MK", "PM", "HM", "BS"
+                Select Case payCode
+                    Case "CCKM"
+                        .ListIndex = 0
+                    Case "CCNH"
+                        .ListIndex = 1
+                    Case "CCSG"
+                        .ListIndex = 2
+                    Case "CCCT"
+                        .ListIndex = 3
+                    Case "CCHM"
+                        .ListIndex = 4
+                    Case "CVSF"
+                        .ListIndex = 5
+                    Case "CCAM"
+                        .ListIndex = 6
+                    Case "CCLO"
+                        .ListIndex = 7
+                    Case "CAMF"
+                        .ListIndex = 8
+                    Case "CCBC"
+                        .ListIndex = 9
+                    Case "CCPH"
+                        .ListIndex = 10
+                    Case "CCHN"
+                        .ListIndex = 11
+                    Case "CCSS"
+                        .ListIndex = 12
+                    Case "CCKJ"
+                        .ListIndex = 13
+                    Case "CCSU"
+                        .ListIndex = 14
+                    Case "CCCU"
+                        .ListIndex = 15
+                    Case "CCSH"
+                        .ListIndex = 16
+                    Case "CCJB"
+                        .ListIndex = 17
+                    Case "CCCJ"
+                        .ListIndex = 18
+                    Case "CCLG"
+                        .ListIndex = 19
+                    Case "CMCF"
+                        .ListIndex = 20
+                    Case "CJCF"
+                        .ListIndex = 21
+                    Case "CCKE"
+                        .ListIndex = 22
+                    Case "CCDI"
+                        .ListIndex = 23
+                    Case "CCSB"
+                        .ListIndex = 24
+                    Case "CCKD"
+                        .ListIndex = 25
+                    Case "CCUF"
+                        .ListIndex = 26
+                    Case Else
+                        .ListIndex = 27
+                End Select
+            End Select
+    End With
+    
+End Function
+
+'카드
+Function Init_Card(ByRef cboControl As Object, payPath As String)
+'    학원에 따른 지급결재 방법
+'    DAEPYO  :노량진 강남 송파  (PAYZONE)
+'    SEPCARD:       마강 마송(KCP)
+
+    'paypath 구분자
+    'MK:      마강
+    'SP:      송파
+    'NR:      노량진
+    'KN:      강남
+    'PM:      마송
+    'HM:      광화문
+    'BS       부산
+
+    With cboControl
+        Select Case Trim(payPath)
+            'Case "N", "K", "W", "Q", "S"
+            Case "NR", "KN", "SP"
                 .AddItem "아멕스카드               AMX"
                 .AddItem "전북은행카드             CBB"
                 .AddItem "다이너스카드             DIN"
@@ -616,37 +769,40 @@ Function Init_Card(ByRef cboControl As Object)
                 .AddItem "광주은행카드             KJB"
                 .AddItem "수협카드                 NFF"
                 .AddItem "신한은행카드             SHB"
-                
-            Case "M", "P", "J", "B"
+                .AddItem "판별불능                 XXX"
+                .ListIndex = 0
+            'Case "M", "P", "J", "B"
+            Case "MK", "PM", "HM", "BS"
     
                 '20121221
-                .AddItem "KB국민카드        CCKM"
-                .AddItem "NH채움카드        CCNH"
-                .AddItem "신세계한미        CCSG"
-                .AddItem "씨티카드          CCCT"
-                .AddItem "한미카드          CCHM"
-                .AddItem "해외비자          CVSF"
-                .AddItem "국내아멕스        CCAM"
-                .AddItem "롯데카드          CCLO"
-                .AddItem "해외아멕스        CAMF"
-                .AddItem "BC카드            CCBC"
-                .AddItem "우리카드          CCPH"
-                .AddItem "하나SK카드        CCHN"
-                .AddItem "삼성카드          CCSS"
-                .AddItem "광주카드          CCKJ"
-                .AddItem "수협카드          CCSU"
-                .AddItem "신협카드          CCCU"
-                .AddItem "신한카드          CCSH"
-                .AddItem "전북카드          CCJB"
-                .AddItem "제주카드          CCCJ"
-                .AddItem "신한카드          CCLG"
-                .AddItem "해외마스터        CMCF"
-                .AddItem "해외JCB           CJCF"
-                .AddItem "외환카드          CCKE"
-                .AddItem "현대카드          CCDI"
-                .AddItem "저축카드          CCSB"
-                .AddItem "산은카드          CCKD"
-                .AddItem "은련카드          CCUF"
+                .AddItem "KB국민카드            CCKM"
+                .AddItem "NH채움카드            CCNH"
+                .AddItem "신세계한미            CCSG"
+                .AddItem "씨티카드              CCCT"
+                .AddItem "한미카드              CCHM"
+                .AddItem "해외비자              CVSF"
+                .AddItem "국내아멕스            CCAM"
+                .AddItem "롯데카드              CCLO"
+                .AddItem "해외아멕스            CAMF"
+                .AddItem "BC카드                CCBC"
+                .AddItem "우리카드              CCPH"
+                .AddItem "하나SK카드            CCHN"
+                .AddItem "삼성카드              CCSS"
+                .AddItem "광주카드              CCKJ"
+                .AddItem "수협카드              CCSU"
+                .AddItem "신협카드              CCCU"
+                .AddItem "신한카드              CCSH"
+                .AddItem "전북카드              CCJB"
+                .AddItem "제주카드              CCCJ"
+                .AddItem "신한카드              CCLG"
+                .AddItem "해외마스터            CMCF"
+                .AddItem "해외JCB               CJCF"
+                .AddItem "외환카드              CCKE"
+                .AddItem "현대카드              CCDI"
+                .AddItem "저축카드              CCSB"
+                .AddItem "산은카드              CCKD"
+                .AddItem "은련카드              CCUF"
+                .AddItem "판별불능              XXX"
 '                .AddItem "BC카드                      CCBC"
 '                .AddItem "국민카드                    CCKM"
 '                .AddItem "LG카드                      CCLG"
@@ -671,11 +827,12 @@ Function Init_Card(ByRef cboControl As Object)
 '                .AddItem "해외마스타카드              CMCF"
 '                .AddItem "해외JCB카드                 CJCF"
 '                .AddItem "롯데카드                    CCLO"
+                .ListIndex = 0
                 
         End Select
-        .ListIndex = 0
     End With
 
+    
 End Function
 
 '클리닉 콤보 초기화
@@ -831,10 +988,9 @@ Public Function Get_StrGongji() As String()
             strReturn(3) = "● 인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
            
         Case "K", "W", "Q"
-            ReDim strReturn(2)
-            strReturn(0) = "▶인문계 사회탐구 중 법과 정치, 세계사, 세계지리, 동아시아사, 윤리와 사상, 생활과 윤리 및 제2외국어는 정규반에서 선택하여 수강할 수 있습니다."
-            strReturn(1) = "▶자연계 과학탐구 중 물리Ⅱ, 화학Ⅱ, 생명과학Ⅱ, 지구과학Ⅱ는 정규반에서 선택하여 수강할 수 있습니다."
-            strReturn(2) = "▶인문계(국어B, 수학A, 영어B형)/자연계(국어A, 수학B, 영어B형)으로 수업합니다."
+            ReDim strReturn(1)
+            strReturn(0) = "▶인문계 제2외국어를 선택하지 않은 학생은 동시간대에 국어, 수학, 영어를 수강할 수 있습니다."
+            strReturn(1) = "▶인문계(국어B, 수학A, 영어B형)/자연계(국어A, 수학B, 영어B형)으로 수업합니다."
             
         Case "S"
             ReDim strReturn(3)
@@ -889,10 +1045,9 @@ Public Function Get_StrGongjiJonghab() As String()
             strReturn(3) = "● 인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
            
         Case "K", "W", "Q"
-            ReDim strReturn(2)
-            strReturn(0) = "▶인문계 사회탐구 중 법과 정치, 세계사, 세계지리, 동아시아사, 윤리와 사상, 생활과 윤리 및 제2외국어는 정규반에서 선택하여 수강할 수 있습니다."
-            strReturn(1) = "▶자연계 과학탐구 중 물리Ⅱ, 화학Ⅱ, 생명과학Ⅱ, 지구과학Ⅱ는 정규반에서 선택하여 수강할 수 있습니다."
-            strReturn(2) = "▶인문계(국어B, 수학A, 영어B형)/자연계(국어A, 수학B, 영어B형)으로 수업합니다."
+            ReDim strReturn(1)
+            strReturn(0) = "▶인문계 제2외국어를 선택하지 않은 학생은 동시간대에 국어, 수학, 영어를 수강할 수 있습니다."
+            strReturn(1) = "▶인문계(국어B, 수학A, 영어B형)/자연계(국어A, 수학B, 영어B형)으로 수업합니다."
             
             
         Case "S"
@@ -1254,6 +1409,7 @@ Public Function Get_StdExcuteSqlToExcel_N(kaeyol As String, Optional day1 As Str
     sStr = sStr & "         ELSE CASE WHEN SEL1 > ' ' AND INSTR(SEL2,'40|') > 0 THEN '세계사'"
     sStr = sStr & "         ELSE CASE WHEN SEL1 > ' ' AND INSTR(SEL2,'41|') > 0 THEN '세지'"
     sStr = sStr & "         ELSE CASE WHEN SEL1 > ' ' AND INSTR(SEL2,'42|') > 0 THEN '아랍어'"
+    sStr = sStr & "         ELSE CASE WHEN SEL1 > ' ' AND INSTR(SEL2,'44|') > 0 THEN '베트남어'"
     
     sStr = sStr & "         ELSE CASE WHEN SEL3 > ' ' AND INSTR(SEL4,'81|') > 0 THEN '미적'"
     sStr = sStr & "         ELSE CASE WHEN SEL3 > ' ' AND INSTR(SEL4,'82|') > 0 THEN '이산'"
@@ -1404,6 +1560,8 @@ Public Function Get_StdExcuteSqlToExcel_N(kaeyol As String, Optional day1 As Str
         sStr = sStr & "        K20 AS 한문_백       ,"
         sStr = sStr & "        J21 AS 아랍어        ,"
         sStr = sStr & "        K21 AS 아랍어_백     ,"
+        sStr = sStr & "        J21 AS 베트남어        ,"
+        sStr = sStr & "        K21 AS 베트남어_백     ,"
         
         ' 노량진 요청에 의한 지원단대... 그러나 한욱씨께서 위에다 추가해놓으셨다.. 그래서 엑셀이 안되었었다.
         ' 밑에다가로.. 변경..
@@ -1610,7 +1768,9 @@ Public Function Get_StdExcuteSqlToExcel_N(kaeyol As String, Optional day1 As Str
                 sStr = sStr & "                DECODE(TRIM(SUB_ID), '36', DECODE(SUB_NUM,'X',0, SUB_NUM), 0)    AS J20,    /* 한문                  */"
                 sStr = sStr & "                DECODE(TRIM(SUB_ID), '36', DECODE(SUB_BAK,'X',0, SUB_BAK), 0)    AS K20,    /* 백분위  한문          */"
                 sStr = sStr & "                DECODE(TRIM(SUB_ID), '42', DECODE(SUB_NUM,'X',0, SUB_NUM), 0)    AS J21,    /* 아랍어                */"
-                sStr = sStr & "                DECODE(TRIM(SUB_ID), '42', DECODE(SUB_BAK,'X',0, SUB_BAK), 0)    AS K21     /* 백분위  아랍어        */"
+                sStr = sStr & "                DECODE(TRIM(SUB_ID), '42', DECODE(SUB_BAK,'X',0, SUB_BAK), 0)    AS K21,     /* 백분위  아랍어        */"
+                sStr = sStr & "                DECODE(TRIM(SUB_ID), '44', DECODE(SUB_NUM,'X',0, SUB_NUM), 0)    AS J22,    /* 베트남어                */"
+                sStr = sStr & "                DECODE(TRIM(SUB_ID), '44', DECODE(SUB_BAK,'X',0, SUB_BAK), 0)    AS K22     /* 백분위  베트남어        */"
                 sStr = sStr & "           FROM CLSTD03TB"
         
         sStr = sStr & "                ) B"
@@ -1719,6 +1879,7 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
     
     sStr = sStr & "                       '','기타') AS 계열,"
     
+    '탐구1~ 갯수만큼
     sStr = sStr & "     /* 사탐, 과탐 분리 */"
     For ni = 0 To SATAM_COUNT - 1
         sStr = sStr & "         CASE WHEN SEL1 > ' ' AND INSTR(SEL1,'" & constSatamCodes(ni) & "|') > 0 THEN          /* 사탐-" & constSatams(ni) & " */"
@@ -1739,6 +1900,7 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
     Next ni
     
     
+    '탐구 양재일경우 특강추가.
     If basModule.SchCD = "J" Then
         sStr = sStr & "         CASE WHEN SEL1 > ' ' AND INSTR(SEL1,'" & TGANG_CODE & "|') > 0 THEN          /* 사탐-특강 */"
         sStr = sStr & "             '특강'"
@@ -1768,6 +1930,7 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
     sStr = sStr & "         ELSE CASE WHEN SEL1 > ' ' AND INSTR(SEL2,'40|') > 0 THEN '세계사'"
     sStr = sStr & "         ELSE CASE WHEN SEL1 > ' ' AND INSTR(SEL2,'41|') > 0 THEN '세지'"
     sStr = sStr & "         ELSE CASE WHEN SEL1 > ' ' AND INSTR(SEL2,'42|') > 0 THEN '아랍어'"
+    sStr = sStr & "         ELSE CASE WHEN SEL1 > ' ' AND INSTR(SEL2,'44|') > 0 THEN '베트남어'"
     
     sStr = sStr & "         ELSE CASE WHEN SEL3 > ' ' AND INSTR(SEL4,'81|') > 0 THEN '미적'"
     sStr = sStr & "         ELSE CASE WHEN SEL3 > ' ' AND INSTR(SEL4,'82|') > 0 THEN '이산'"
@@ -1906,6 +2069,8 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
         sStr = sStr & "        K20 AS 한문_백       ,"
         sStr = sStr & "        J21 AS 아랍어        ,"
         sStr = sStr & "        K21 AS 아랍어_백     ,"
+        sStr = sStr & "        J22 AS 베트남어        ,"
+        sStr = sStr & "        K22 AS 베트남어_백     ,"
         
         ' 노량진 요청에 의한 지원단대... 그러나 한욱씨께서 위에다 추가해놓으셨다.. 그래서 엑셀이 안되었었다.
         ' 밑에다가로.. 변경..
@@ -2094,7 +2259,9 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
                 sStr = sStr & "                DECODE(TRIM(SUB_ID), '36', DECODE(SUB_NUM,'X',0, SUB_NUM), 0)    AS J20,    /* 한문                  */"
                 sStr = sStr & "                DECODE(TRIM(SUB_ID), '36', DECODE(SUB_BAK,'X',0, SUB_BAK), 0)    AS K20,    /* 백분위  한문          */"
                 sStr = sStr & "                DECODE(TRIM(SUB_ID), '42', DECODE(SUB_NUM,'X',0, SUB_NUM), 0)    AS J21,    /* 아랍어                */"
-                sStr = sStr & "                DECODE(TRIM(SUB_ID), '42', DECODE(SUB_BAK,'X',0, SUB_BAK), 0)    AS K21     /* 백분위  아랍어        */"
+                sStr = sStr & "                DECODE(TRIM(SUB_ID), '42', DECODE(SUB_BAK,'X',0, SUB_BAK), 0)    AS K21,     /* 백분위  아랍어        */"
+                sStr = sStr & "                DECODE(TRIM(SUB_ID), '44', DECODE(SUB_NUM,'X',0, SUB_NUM), 0)    AS J22,    /* 베트남어                */"
+                sStr = sStr & "                DECODE(TRIM(SUB_ID), '44', DECODE(SUB_BAK,'X',0, SUB_BAK), 0)    AS K22     /* 백분위  베트남어        */"
                 sStr = sStr & "           FROM CLSTD03TB"
         
         sStr = sStr & "                ) B"
