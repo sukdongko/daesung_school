@@ -1,0 +1,11 @@
+===== FarPoint Technologies, Inc =====
+===== Begin of Excel Export =====
+1/5/2013 - 00:24
+
+Col	Row	Information
+___	___	___________
+		Export Excel File: \\tsclient\D\GitHub\daesung_school\program\11.XLS
+-	-	102:Excel reads the AllowDragDrop, AutoClipboard, and EditEnterAction properties from the registry. If you modify these properties in Spread, the changes are not saved at export.
+
+===== End of Excel Export =====
+===== FarPoint Technologies, Inc =====

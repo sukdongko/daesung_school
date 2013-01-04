@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form INT011 
    Caption         =   "입학사정 >> 입학원서 출력 >> 선행 입학원서 출력(노량진, 송파)"
@@ -49,24 +49,6 @@ Begin VB.Form INT011
          TabIndex        =   18
          Top             =   30
          Width           =   14175
-         Begin VB.TextBox 합계 
-            BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Left            =   10485
-            TabIndex        =   131
-            Text            =   "100"
-            Top             =   9405
-            Width           =   315
-         End
          Begin VB.TextBox test4 
             BorderStyle     =   0  '없음
             BeginProperty Font 
@@ -80,10 +62,28 @@ Begin VB.Form INT011
             EndProperty
             Height          =   255
             Left            =   4050
-            TabIndex        =   128
-            Text            =   "한국사, 한국지리"
+            TabIndex        =   140
+            Text            =   "(심화) 고난도 구문&독해"
             Top             =   7620
             Width           =   4005
+         End
+         Begin VB.TextBox 합계 
+            BorderStyle     =   0  '없음
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Left            =   10485
+            TabIndex        =   129
+            Text            =   "100"
+            Top             =   9405
+            Width           =   315
          End
          Begin VB.TextBox test3 
             BorderStyle     =   0  '없음
@@ -764,6 +764,26 @@ Begin VB.Form INT011
             Top             =   9480
             Width           =   375
          End
+         Begin VB.Label OPTIONS 
+            BackColor       =   &H00E0E0E0&
+            BackStyle       =   0  '투명
+            Caption         =   "▶ 여유"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   8.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   165
+            Index           =   3
+            Left            =   5190
+            TabIndex        =   139
+            Top             =   8400
+            Width           =   6555
+         End
          Begin VB.Line Line4 
             BorderColor     =   &H00FF0000&
             X1              =   2275
@@ -777,7 +797,7 @@ Begin VB.Form INT011
             Height          =   315
             Index           =   0
             Left            =   2700
-            TabIndex        =   140
+            TabIndex        =   138
             Top             =   4530
             Width           =   795
          End
@@ -787,7 +807,7 @@ Begin VB.Form INT011
             Height          =   315
             Index           =   0
             Left            =   3600
-            TabIndex        =   139
+            TabIndex        =   137
             Top             =   4530
             Width           =   1095
          End
@@ -796,7 +816,7 @@ Begin VB.Form INT011
             Caption         =   "경북대학 111"
             Height          =   315
             Left            =   5400
-            TabIndex        =   138
+            TabIndex        =   136
             Top             =   4530
             Width           =   945
          End
@@ -805,7 +825,7 @@ Begin VB.Form INT011
             Caption         =   "사회복지학과"
             Height          =   315
             Left            =   6450
-            TabIndex        =   137
+            TabIndex        =   135
             Top             =   4530
             Width           =   1095
          End
@@ -856,7 +876,7 @@ Begin VB.Form INT011
             Height          =   405
             Index           =   22
             Left            =   600
-            TabIndex        =   136
+            TabIndex        =   134
             Top             =   7050
             Width           =   1425
          End
@@ -875,7 +895,7 @@ Begin VB.Form INT011
             Height          =   165
             Index           =   23
             Left            =   2730
-            TabIndex        =   135
+            TabIndex        =   133
             Top             =   6480
             Width           =   555
          End
@@ -894,7 +914,7 @@ Begin VB.Form INT011
             Height          =   165
             Index           =   6
             Left            =   2730
-            TabIndex        =   134
+            TabIndex        =   132
             Top             =   6870
             Width           =   555
          End
@@ -913,7 +933,7 @@ Begin VB.Form INT011
             Height          =   165
             Index           =   8
             Left            =   2730
-            TabIndex        =   133
+            TabIndex        =   131
             Top             =   7260
             Width           =   555
          End
@@ -932,7 +952,7 @@ Begin VB.Form INT011
             Height          =   165
             Index           =   9
             Left            =   2130
-            TabIndex        =   132
+            TabIndex        =   130
             Top             =   7650
             Width           =   1665
          End
@@ -975,7 +995,7 @@ Begin VB.Form INT011
             EndProperty
             Height          =   165
             Left            =   10425
-            TabIndex        =   130
+            TabIndex        =   128
             Top             =   9000
             Width           =   345
          End
@@ -992,26 +1012,6 @@ Begin VB.Form INT011
             X2              =   0
             Y1              =   0
             Y2              =   810
-         End
-         Begin VB.Label OPTIONS 
-            BackColor       =   &H00E0E0E0&
-            BackStyle       =   0  '투명
-            Caption         =   "▶ 여유"
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   8.25
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   165
-            Index           =   3
-            Left            =   5100
-            TabIndex        =   129
-            Top             =   8400
-            Width           =   6555
          End
          Begin VB.Line Line1 
             X1              =   4710
@@ -3991,8 +3991,6 @@ Private Sub Get_STD_Data()
                 uSTD(nRec).MAJORCD1 = sTmp
                 sTmp = "":      If IsNull(.Fields("MAJORCD2")) = False Then sTmp = .Fields("MAJORCD2")
                 uSTD(nRec).MAJORCD2 = sTmp
-                sTmp = "":      If IsNull(.Fields("MU_TYPE")) = False Then sTmp = .Fields("MU_TYPE")
-                uSTD(nRec).MU_TYPE = sTmp
                     
                 sTmp = "":      If IsNull(.Fields("IMAGE_FILE")) = False Then sTmp = .Fields("IMAGE_FILE")
                     uSTD(nRec).IMAGE_FILE = sTmp
@@ -4190,7 +4188,6 @@ Private Sub Std_Data_Show(Index As Long)
         유시험_수학.Text = ""
         유시험_영어.Text = ""
         유시험_총점.Text = ""
-        
         Select Case Trim(.EXMTYPE)
             Case "0"
                 언어.Text = .K_NUM

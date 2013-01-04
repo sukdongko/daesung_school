@@ -11,13 +11,13 @@ Begin VB.MDIForm MDI001
    Begin VB.Menu mnu100 
       Caption         =   "입학사정"
       Begin VB.Menu mnuSTD010_N 
-         Caption         =   "학생등록(노량진,송파)"
+         Caption         =   "학생등록(노량진)"
       End
       Begin VB.Menu mnuSTD010 
-         Caption         =   "학생 등록"
+         Caption         =   "학생 등록 (강남,양재,마강,송파,부산)"
       End
       Begin VB.Menu mnuSTD011_N 
-         Caption         =   "학생전체 조회(노량진,송파)"
+         Caption         =   "학생전체 조회(노량진)"
       End
       Begin VB.Menu mnuSTD011 
          Caption         =   "학생전체 조회"
@@ -54,13 +54,13 @@ Begin VB.MDIForm MDI001
             Visible         =   0   'False
          End
          Begin VB.Menu mnuINT110 
-            Caption         =   "종합 입학원서 출력 2012"
+            Caption         =   "종합 입학원서 출력 2012 (부산)"
          End
          Begin VB.Menu mnuINT112 
             Caption         =   "종합 입학원서 출력 2012 (마강)"
          End
          Begin VB.Menu mnuINT113 
-            Caption         =   "종합 입학원서 출력 2012 (양재)"
+            Caption         =   "종합 입학원서 출력 2012 (양재,송파)"
          End
          Begin VB.Menu mnuINT111 
             Caption         =   "종합 입학원서 출력 2012 (강남)"
@@ -285,7 +285,7 @@ Private Sub MenuYN()
     
     '노량진만 메뉴를 제어한다. 다른 학원들은 모든 메뉴 보임.
     
-    If basModule.schcd = "N" Then
+    If basModule.SchCD = "N" Then
         Select Case basModule.RegID
             Case "10000", "00002", "10003", "00001" '김영덕과장 (10000), 노량진(00002), 김병철(10003), ADMIN(00001)
                 mnu100.Visible = True
@@ -365,7 +365,7 @@ Private Sub MDIForm_Load()
     Dim sAcID               As String
     Dim sConnections        As String
     
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N"
             sAcID = "노량진"
         Case "K"

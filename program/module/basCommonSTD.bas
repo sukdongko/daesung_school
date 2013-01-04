@@ -193,11 +193,10 @@ Function Init_CboKaeyolDefault(ByRef cboControl As Object)
 '                .AddItem "인문프리미엄" & Space(30) & "18"
 '                .AddItem "자연프리미엄" & Space(30) & "19"
 
-                .AddItem "서울대특별인문" & Space(30) & "21"
-                .AddItem "서울대특별자연" & Space(30) & "22"
-                
-                .AddItem "야간서울대인문" & Space(30) & "21"
-                .AddItem "야간서울대자연" & Space(30) & "22"
+                .AddItem "서울대특별 인문(성적순)" & Space(30) & "21"
+                .AddItem "서울대특별 자연(성적순)" & Space(30) & "22"
+                .AddItem "서울대특별 인문(선착순)" & Space(30) & "25"
+                .AddItem "서울대특별 자연(선착순)" & Space(30) & "26"
                 
         End Select
         
@@ -208,8 +207,10 @@ Function Init_CboKaeyolDefault(ByRef cboControl As Object)
                 .AddItem "신설자연" & Space(30) & "12"
                 .AddItem "인문프리미엄" & Space(30) & "18"
                 .AddItem "자연프리미엄" & Space(30) & "19"
-                .AddItem "서울대특별인문" & Space(30) & "21"
-                .AddItem "서울대특별자연" & Space(30) & "22"
+                .AddItem "서울대특별 인문(성적순)" & Space(30) & "21"
+                .AddItem "서울대특별 자연(성적순)" & Space(30) & "22"
+                .AddItem "서울대특별 인문(선착순)" & Space(30) & "25"
+                .AddItem "서울대특별 자연(선착순)" & Space(30) & "26"
         End Select
         
     '<< 계열 >> : 2009.01.09
@@ -389,10 +390,18 @@ Function Set_CboKaeyol(ByRef cboControl As Object, ByVal SchCD As String, ByVal 
         '                            cboControl.ListIndex = 2
         '                        Case "19"
         '                            cboControl.ListIndex = 3
-                Case "21"
+                Case "11"
                     cboControl.ListIndex = 2
-                Case "22"
+                Case "12"
                     cboControl.ListIndex = 3
+                Case "21"
+                    cboControl.ListIndex = 4
+                Case "22"
+                    cboControl.ListIndex = 5
+                Case "25"
+                    cboControl.ListIndex = 6
+                Case "26"
+                    cboControl.ListIndex = 7
                     
                     
             End Select
@@ -429,6 +438,16 @@ Function Set_CboKaeyol(ByRef cboControl As Object, ByVal SchCD As String, ByVal 
                     cboControl.ListIndex = 4
                 Case "19"
                     cboControl.ListIndex = 5
+                    
+                Case "21"
+                    cboControl.ListIndex = 6
+                Case "22"
+                    cboControl.ListIndex = 7
+                Case "25"
+                    cboControl.ListIndex = 8
+                Case "26"
+                    cboControl.ListIndex = 9
+                
                     
             End Select
         End If
@@ -967,6 +986,8 @@ Public Function Get_StrMuType(ByVal value)
             Get_StrMuType = "9월 모평"
         Case "9"
             Get_StrMuType = "내신등급"
+        Case Else
+            Get_StrMuType = ""
     End Select
 End Function
 
@@ -1038,11 +1059,10 @@ Public Function Get_StrGongjiJonghab() As String()
     Select Case Trim(basModule.SchCD)
     
         Case "N"
-            ReDim strReturn(3)
-            strReturn(0) = "● 국어, 수학, 영어, 과목 중 (심화)또는(기본) 수업 1과목을 선택해야 하며, 탐구과목 4과목 중 1과목을 선택할 수 있습니다."
-            strReturn(1) = "● 인문계는 생활과 윤리, 윤리와 사상, 세계지리, 동아시아사, 세계사, 경제, 제2외국어, 자연계는 과학Ⅱ(4과목)는 재수 정규반부터 수업합니다."
-            strReturn(2) = "● 반당 수강생 수 증감에 따라 분반 또는 합반할 수 있습니다."
-            strReturn(3) = "● 인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
+            ReDim strReturn(2)
+            strReturn(0) = "▶ 제2외국어를 선택 하지 않은 학생은 동시간대에 국어·수학·영어를 수강할 수 있습니다."
+            strReturn(1) = "▶ 인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
+            strReturn(2) = "▶ 반당 수강생 수 증감에 따라 분반 또는 합반할 수 있습니다."
            
         Case "K", "W", "Q"
             ReDim strReturn(1)
@@ -1051,11 +1071,9 @@ Public Function Get_StrGongjiJonghab() As String()
             
             
         Case "S"
-            ReDim strReturn(3)
-            strReturn(0) = "● 국어, 수학, 영어, 과목 중 (심화)또는(기본) 수업 2과목을 선택해야 하며, 탐구과목중 1과목을 선택할 수 있습니다."
-            strReturn(1) = "● 인문계는 생활과 윤리, 윤리와 사상, 세계지리, 동아시아사, 세계사, 경제, 제2외국어, 자연계는 과학Ⅱ(4과목)는 재수 정규반부터 수업합니다."
-            strReturn(2) = "● 반당 수강생 수 증감에 따라 분반 또는 합반할 수 있습니다."
-            strReturn(3) = "● 인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
+            ReDim strReturn(1)
+            strReturn(0) = "▶인문계 제2외국어를 선택하지 않은 학생은 동시간대에 국어, 수학, 영어특강을 수강할 수 있습니다."
+            strReturn(1) = "▶인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
                   
         Case "P"
             ReDim strReturn(1)
@@ -1063,18 +1081,16 @@ Public Function Get_StrGongjiJonghab() As String()
             strReturn(1) = ""
                              
          Case "M"
-            ReDim strReturn(2)
-            strReturn(0) = "▶인문계 사회탐구 중 세계사, 세계지리, 동아시아사, 생활과 윤리 및 제2외국어는 정규반에서 선택하여 수강할 수 있습니다."
+            ReDim strReturn(1)
+            strReturn(0) = "▶인문계 제2외국어를 선택하지 않은 학생은 동시간대에 국어, 수학, 영어를 수강할 수 있습니다."
             strReturn(1) = "▶인문계(국어B, 수학A, 영어B형)/자연계(국어A, 수학B, 영어B형)으로 수업합니다."
-            strReturn(2) = ""
             
 '
         Case "J"        '> 양재
-            ReDim strReturn(3)
-            strReturn(0) = "▶인문계(국어B, 수학A, 영어B형)/자연계(국어A, 수학B, 영어B형)으로 수업합니다."
-            strReturn(1) = "▶인문계 사회탐구 중 세계사, 세계지리, 동아시아사, 생활과 윤리 및 제2외국어는 정규반에서 선택하여 수강할 수 있습니다."
-            strReturn(2) = "▶자연계 과학탐구 중 물리Ⅱ, 지구과학Ⅱ는 정규반에서 선택하여 수강할 수 있습니다."
-            strReturn(3) = "▶선택과목의 신청자 수가 극소수일 경우 개설되지 않을 수도 있습니다. "
+            ReDim strReturn(1)
+            strReturn(0) = "▶인문계 제2외국어를 선택하지 않은 학생은 동시간대에 국어, 수학, 영어특강을 수강할 수 있습니다."
+            strReturn(1) = "▶인문계는(국어B, 수학A, 영어B) / 자연계(국어A, 수학B, 영어B형)으로 수업합니다."
+            
             
         Case "B"        '> 부산
             ReDim strReturn(2)
@@ -1091,7 +1107,6 @@ End Function
 '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 '엑셀 저장 SQL문
 '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 Function Get_SqlKaeyolDecode()
     Dim sStr    As String
     
@@ -1900,17 +1915,17 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
     Next ni
     
     
-    '탐구 양재일경우 특강추가.
-    If basModule.SchCD = "J" Then
+    '탐구 양재,송파일경우 특강추가.
+    If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
         sStr = sStr & "         CASE WHEN SEL1 > ' ' AND INSTR(SEL1,'" & TGANG_CODE & "|') > 0 THEN          /* 사탐-특강 */"
-        sStr = sStr & "             '특강'"
+        sStr = sStr & "             '사탐-특강'"
         sStr = sStr & "         ELSE "
         sStr = sStr & "             CASE WHEN SEL3 > ' ' AND INSTR(SEL3,'" & TGANG_CODE & "|') > 0 THEN     /* 과탐-특강*/"
-        sStr = sStr & "                '특강'"
+        sStr = sStr & "                '과탐-특강'"
         sStr = sStr & "             ELSE"
         sStr = sStr & "                 ' '"
         sStr = sStr & "             END "
-        sStr = sStr & "         END AS 탐구11, "
+        sStr = sStr & "         END AS 탐구특강, "
     End If
     
 
@@ -1938,7 +1953,17 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
     sStr = sStr & "         ELSE CASE WHEN SEL3 > ' ' AND INSTR(SEL4,'84|') > 0 THEN '나형'"
     sStr = sStr & "         ELSE"
     sStr = sStr & "             ' '"
-    sStr = sStr & "         END END END END END END END END END END END END END END END END 제2선택,"
+    sStr = sStr & "         END END END END END END END END END END END END END END END END END 제2선택,"
+    
+    '탐구 양재,송파일경우 특강추가.
+    If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
+        sStr = sStr & "         CASE WHEN SEL2 > ' ' AND INSTR(SEL2,'" & TGANG_ENG2_CODE & "|') > 0 THEN          /* 제2외국어-특강 */"
+        sStr = sStr & "             '특강'"
+        sStr = sStr & "         ELSE "
+        sStr = sStr & "                 ' '"
+        sStr = sStr & "         END AS 제2외국어특강, "
+    End If
+
     sStr = sStr & "  "
     sStr = sStr & "      /* 논술 */"
     sStr = sStr & "         CASE WHEN INSTR(SEL5,'91|') > 0 THEN         /* 언어 */"
@@ -2151,7 +2176,9 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
                     sStr = sStr & "        SUM(J20) AS J20,"
                     sStr = sStr & "        SUM(K20) AS K20,"
                     sStr = sStr & "        SUM(J21) AS J21,"
-                    sStr = sStr & "        SUM(K21) AS K21"
+                    sStr = sStr & "        SUM(K21) AS K21,"
+                    sStr = sStr & "        SUM(J22) AS J22,"
+                    sStr = sStr & "        SUM(K22) AS K22"
             
             sStr = sStr & "    FROM ("
             '---------------------------------------------------------------------------- 전체학생 조회 START
@@ -2274,6 +2301,115 @@ Public Function Get_StdExcuteSqlToExcel(kaeyol As String, Optional day1 As Strin
     sStr = sStr & " ORDER BY EXMID "
     
     Get_StdExcuteSqlToExcel = sStr
+End Function
+
+'////////////////////////////////////////////////////////////////////////////////////
+'                  과목들의  체크박스 인덱스
+'////////////////////////////////////////////////////////////////////////////////////
+Function Get_IndexChkEng2(code As String) As Integer
+
+End Function
+Function Get_IndexChkSatam(code As String) As Integer
+
+'    ' 사회탐구
+'    constSatams(0) = "생활과윤리"
+'    constSatams(1) = "윤리사상"
+'    constSatams(2) = "한국사"
+'    constSatams(3) = "한국지리"
+'    constSatams(4) = "세계지리"
+'    constSatams(5) = "동아시아사"
+'    constSatams(6) = "세계사"
+'    constSatams(7) = "법과정치"
+'    constSatams(8) = "경제"
+'    constSatams(9) = "사회문화"
+'
+'
+'    constSatamCodes(0) = "26"
+'    constSatamCodes(1) = "27"
+'    constSatamCodes(2) = "21"
+'    constSatamCodes(3) = "24"
+'    constSatamCodes(4) = "25"
+'    constSatamCodes(5) = "23"
+'    constSatamCodes(6) = "22"
+'    constSatamCodes(7) = "28"
+'    constSatamCodes(8) = "29"
+'    constSatamCodes(9) = "30"
+
+    Select Case basModule.SchCD
+    Case "N"
+        Select Case code
+        Case constSatamCodes(0)
+            Get_IndexChkSatam = 1
+        Case constSatamCodes(1)
+            Get_IndexChkSatam = 2
+        Case constSatamCodes(2)
+            Get_IndexChkSatam = 3
+        Case constSatamCodes(3)
+            Get_IndexChkSatam = 4
+        Case constSatamCodes(4)
+            Get_IndexChkSatam = 5
+        Case constSatamCodes(5)
+            Get_IndexChkSatam = 6
+        Case constSatamCodes(6)
+            Get_IndexChkSatam = 7
+        Case constSatamCodes(7)
+            Get_IndexChkSatam = 8
+        Case constSatamCodes(8)
+            Get_IndexChkSatam = 9
+        Case constSatamCodes(9)
+            Get_IndexChkSatam = 10
+        Case TGANG_CODE
+            Get_IndexChkSatam = 11
+        End Select
+    Case Else
+        Select Case code
+        Case constSatamCodes(0)
+            Get_IndexChkSatam = 1
+        Case constSatamCodes(1)
+            Get_IndexChkSatam = 2
+        Case constSatamCodes(2)
+            Get_IndexChkSatam = 3
+        Case constSatamCodes(3)
+            Get_IndexChkSatam = 4
+        Case constSatamCodes(4)
+            Get_IndexChkSatam = 5
+        Case constSatamCodes(5)
+            Get_IndexChkSatam = 6
+        Case constSatamCodes(6)
+            Get_IndexChkSatam = 7
+        Case constSatamCodes(7)
+            Get_IndexChkSatam = 8
+        Case constSatamCodes(8)
+            Get_IndexChkSatam = 9
+        Case constSatamCodes(9)
+            Get_IndexChkSatam = 10
+        Case TGANG_CODE
+            Get_IndexChkSatam = 11
+        End Select
+    End Select
+End Function
+
+Function Set_ChkBoxSatam(ByRef cboControl As Object, sDiv() As String) As String()
+    Dim ni          As Integer
+    Dim arrIdx      As Integer
+    Dim arrReturn() As String
+
+
+    For ni = 0 To UBound(sDiv) - 1 Step 1
+        '노량진 요청
+        If sDiv(ni) = TGANG_CODE Then
+            cboControl(11).value = 1  '양재떄문에 95는 특강.
+        Else
+            '현재 사탐의 코드 영역은 21~30까지. arrIdx = CInt(21) - (21-1)   , arrIdx = 1
+            arrIdx = CInt(sDiv(ni)) - SATAM_CLASS
+            If arrIdx > 0 And arrIdx <= cboControl.UBound Then
+                cboControl(arrIdx).value = 1
+            Else
+                MsgBox "DB의 사탐과목코드 값이 올바르지 않습니다. 다시 설정해주세요."
+            End If
+        End If
+
+    Next ni
 End Function
 
 

@@ -2,7 +2,7 @@ VERSION 5.00
 Object = "{FDAC2480-F4ED-4632-AA78-DCA210A74E49}#6.0#0"; "SPR32X60.ocx"
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form STD200 
    Caption         =   "입학사정 >> 윈터 & 수학클리닉 등록 및 조회"
@@ -80,7 +80,7 @@ Begin VB.Form STD200
                Strikethrough   =   0   'False
             EndProperty
             MaxCols         =   3
-            SpreadDesigner  =   "STD200.frx":01D4
+            SpreadDesigner  =   "STD200.frx":01DC
          End
          Begin VB.Label lblHakClose 
             Alignment       =   2  '가운데 맞춤
@@ -158,7 +158,7 @@ Begin VB.Form STD200
                Strikethrough   =   0   'False
             EndProperty
             MaxCols         =   3
-            SpreadDesigner  =   "STD200.frx":19E1
+            SpreadDesigner  =   "STD200.frx":043C
          End
          Begin VB.Label Label29 
             Alignment       =   1  '오른쪽 맞춤
@@ -1923,7 +1923,7 @@ Begin VB.Form STD200
             EndProperty
             MaxCols         =   9
             ProcessTab      =   -1  'True
-            SpreadDesigner  =   "STD200.frx":3211
+            SpreadDesigner  =   "STD200.frx":06B9
          End
          Begin VB.Frame Frame6 
             BackColor       =   &H00D2EAF5&
@@ -2082,7 +2082,7 @@ Begin VB.Form STD200
          Begin VB.Image imgExcel 
             Height          =   420
             Left            =   6030
-            Picture         =   "STD200.frx":4C56
+            Picture         =   "STD200.frx":0AD2
             Stretch         =   -1  'True
             Top             =   930
             Width           =   390
@@ -2117,7 +2117,7 @@ Begin VB.Form STD200
          Begin VB.Image Image1 
             Height          =   4080
             Left            =   30
-            Picture         =   "STD200.frx":5097
+            Picture         =   "STD200.frx":0F13
             Top             =   60
             Width           =   8730
          End
@@ -2136,7 +2136,7 @@ Begin VB.Form STD200
       BeginProperty Images {2C247F25-8591-11D1-B16A-00C0F0283628} 
          NumListImages   =   1
          BeginProperty ListImage1 {2C247F27-8591-11D1-B16A-00C0F0283628} 
-            Picture         =   "STD200.frx":C761
+            Picture         =   "STD200.frx":85DD
             Key             =   ""
          EndProperty
       EndProperty
@@ -2368,7 +2368,7 @@ Private Sub Form_Load()
         .ListIndex = 0
     End With
     
-    Select Case Trim(schcd)
+    Select Case Trim(SchCD)
         Case "S"
             With cbo_gbn
                 .Enabled = True
@@ -2401,7 +2401,7 @@ Private Sub Form_Load()
         .AddItem "9월 평가원" & Space(30) & "3"
         .AddItem "고2 대성모의고사" & Space(30) & "4"
         .AddItem "고2 교육청모의고사" & Space(30) & "5"
-        If basModule.schcd = "N" Then .AddItem "내신등급" & Space(30) & "9"
+        If basModule.SchCD = "N" Then .AddItem "내신등급" & Space(30) & "9"
         .AddItem "없음" & Space(30) & "X"
         
         .Enabled = True
@@ -2792,7 +2792,7 @@ Private Function Save_Stdin() As Boolean
     sStr = sStr & "        ETC1        = '" & sTmp & "'"
 
     sStr = sStr & "  WHERE ORD_NO      = '" & Trim(txtOrd_No.Text) & "'"
-    sStr = sStr & "    AND ACACD       = '" & Trim(basModule.schcd) & "'"
+    sStr = sStr & "    AND ACACD       = '" & Trim(basModule.SchCD) & "'"
     
     nExe = 0
 
@@ -2876,9 +2876,9 @@ Private Function Save_Stdin() As Boolean
             sStr = sStr & " ) VALUES ("
             sStr = sStr & "                 " & sOrd_No & ","
             
-            sStr = sStr & "                 '" & Trim(basModule.schcd) & "',"
+            sStr = sStr & "                 '" & Trim(basModule.SchCD) & "',"
             
-            Select Case Trim(schcd)
+            Select Case Trim(SchCD)
                 Case "N"
                     sStr = sStr & "         'NR081126E" & sExmRoundX & "',"
                 Case "K"
@@ -3202,9 +3202,9 @@ Private Sub cmdFind_Click()
     sStr = sStr & "        SUBSTR(Birth,1,4)||'-'||SUBSTR(Birth,5,2) ||'-'|| SUBSTR(Birth,7,2) AS Birth,"
     sStr = sStr & "        GRADE_KOR KOR, GRADE_MAT MAT, GRADE_ENG ENG"
     sStr = sStr & "   From HWSIN01TB_WINTER"
-    sStr = sStr & "  WHERE ACACD = '" & Trim(basModule.schcd) & "'"
+    sStr = sStr & "  WHERE ACACD = '" & Trim(basModule.SchCD) & "'"
     sStr = sStr & "    AND EXMROUND LIKE "
-        Select Case Trim(schcd)
+        Select Case Trim(SchCD)
         Case "N"
             sStr = sStr & "           'NR081126%' "
         Case "K"
@@ -3500,7 +3500,7 @@ Private Sub Show_Select_STD(ByVal aOrdNO As String)
         sStr = sStr & "     AMNT        , ETC1       "
     sStr = sStr & "    From HWSIN01TB_WINTER "
     sStr = sStr & "   WHERE EXMROUND LIKE "
-    Select Case Trim(schcd)
+    Select Case Trim(SchCD)
         Case "N"
             sStr = sStr & "            'NR081126%' "
         Case "K"
@@ -3527,7 +3527,7 @@ Private Sub Show_Select_STD(ByVal aOrdNO As String)
     End Select
             
     sStr = sStr & "     AND ORD_NO = '" & Trim(aOrdNO) & "'"
-    sStr = sStr & "     AND ACACD  = '" & Trim(basModule.schcd) & "'"
+    sStr = sStr & "     AND ACACD  = '" & Trim(basModule.SchCD) & "'"
     
     Set DBCmd = New ADODB.Command
     Set DBRec = New ADODB.Recordset
@@ -3708,7 +3708,7 @@ Private Sub Show_Select_STD(ByVal aOrdNO As String)
             ElseIf Trim(txtPhoto.Text) > " " Then
                 
                 '2010.12.20 노량진,송파,양재의 경우에만 사진 파일이 수험번호로 지정, 그 외에는 주문 번호로 저장. 김한욱
-                Select Case Trim(schcd)
+                Select Case Trim(SchCD)
                     Case "N" '노량진
                         Call Get_STD_image(txtSu_No.Text, txtPhoto.Text)               '<< 이미지 자료 가져오기
                         
@@ -3917,7 +3917,7 @@ Private Sub Get_Excel_Data()
     sStr = sStr & "  SELECT "
         
         '2010.12.20 노량진 양재 송파 경우 엑셀 파일 No를 수험번호로 저장
-        Select Case Trim(schcd)
+        Select Case Trim(SchCD)
             Case "N"
                 sStr = sStr & "     SU_NO AS NO     , "
             Case "J"
@@ -4030,7 +4030,7 @@ Private Sub Get_Excel_Data()
         
     sStr = sStr & "    From HWSIN01TB_WINTER "
     sStr = sStr & "   WHERE EXMROUND LIKE "
-    Select Case Trim(schcd)
+    Select Case Trim(SchCD)
         Case "N"
             sStr = sStr & "            'NR081126E%' "
         Case "K"
@@ -4056,7 +4056,7 @@ Private Sub Get_Excel_Data()
             sStr = sStr & "            'BS081126E%' "
     End Select
     
-    sStr = sStr & "     AND ACACD  = '" & Trim(basModule.schcd) & "'"
+    sStr = sStr & "     AND ACACD  = '" & Trim(basModule.SchCD) & "'"
     
     Set DBCmd = New ADODB.Command
     Set DBRec = New ADODB.Recordset

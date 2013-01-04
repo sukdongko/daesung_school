@@ -4,23 +4,22 @@ Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form INT113 
-   Caption         =   "입학사정 >> 입학원서 출력 >> 종합 입학원서 출력 (양재)"
-   ClientHeight    =   11265
+   Caption         =   "입학사정 >> 입학원서 출력 >> 종합 입학원서 출력 (양재,송파)"
+   ClientHeight    =   10800
    ClientLeft      =   555
    ClientTop       =   2970
-   ClientWidth     =   15810
+   ClientWidth     =   15240
    LinkTopic       =   "Form2"
-   LockControls    =   -1  'True
    MDIChild        =   -1  'True
-   ScaleHeight     =   11265
-   ScaleWidth      =   15810
+   ScaleHeight     =   10800
+   ScaleWidth      =   15240
    Begin VB.Frame Frame2 
       BackColor       =   &H0082C8E8&
       BorderStyle     =   0  '없음
       Caption         =   "Frame2"
       Height          =   495
       Left            =   30
-      TabIndex        =   136
+      TabIndex        =   124
       Top             =   0
       Width           =   14445
       Begin VB.Frame Frame1 
@@ -29,14 +28,14 @@ Begin VB.Form INT113
          Caption         =   "Frame1"
          Height          =   435
          Left            =   30
-         TabIndex        =   137
+         TabIndex        =   125
          Top             =   30
          Width           =   14385
          Begin VB.ComboBox cboSel 
             Height          =   300
             Left            =   720
             Style           =   2  '드롭다운 목록
-            TabIndex        =   139
+            TabIndex        =   136
             Top             =   -30
             Visible         =   0   'False
             Width           =   1095
@@ -45,7 +44,7 @@ Begin VB.Form INT113
             Height          =   300
             Left            =   9240
             Style           =   2  '드롭다운 목록
-            TabIndex        =   6
+            TabIndex        =   135
             Top             =   90
             Width           =   885
          End
@@ -53,7 +52,7 @@ Begin VB.Form INT113
             Height          =   300
             Left            =   4710
             Style           =   2  '드롭다운 목록
-            TabIndex        =   3
+            TabIndex        =   134
             Top             =   90
             Width           =   855
          End
@@ -61,7 +60,7 @@ Begin VB.Form INT113
             Enabled         =   0   'False
             Height          =   375
             Left            =   13410
-            TabIndex        =   138
+            TabIndex        =   133
             Text            =   "txtPage"
             Top             =   30
             Width           =   615
@@ -70,7 +69,7 @@ Begin VB.Form INT113
             Caption         =   "◀"
             Height          =   375
             Left            =   13020
-            TabIndex        =   9
+            TabIndex        =   132
             Top             =   30
             Width           =   345
          End
@@ -78,7 +77,7 @@ Begin VB.Form INT113
             Caption         =   "▶"
             Height          =   375
             Left            =   14040
-            TabIndex        =   10
+            TabIndex        =   131
             Top             =   30
             Width           =   345
          End
@@ -86,7 +85,7 @@ Begin VB.Form INT113
             Caption         =   "전체page출력"
             Height          =   375
             Left            =   11580
-            TabIndex        =   8
+            TabIndex        =   130
             Top             =   30
             Width           =   1365
          End
@@ -94,7 +93,7 @@ Begin VB.Form INT113
             Caption         =   "현재page출력"
             Height          =   375
             Left            =   10140
-            TabIndex        =   7
+            TabIndex        =   129
             Top             =   30
             Width           =   1365
          End
@@ -102,7 +101,7 @@ Begin VB.Form INT113
             Height          =   300
             Left            =   6000
             Style           =   2  '드롭다운 목록
-            TabIndex        =   4
+            TabIndex        =   128
             Top             =   90
             Width           =   915
          End
@@ -110,14 +109,14 @@ Begin VB.Form INT113
             Caption         =   "학생조회(&F)"
             Height          =   375
             Left            =   30
-            TabIndex        =   0
+            TabIndex        =   127
             Top             =   30
             Width           =   1215
          End
          Begin VB.TextBox txtStdNM 
             Height          =   285
             Left            =   7380
-            TabIndex        =   5
+            TabIndex        =   126
             Text            =   "txtStdNM"
             Top             =   98
             Width           =   855
@@ -125,7 +124,7 @@ Begin VB.Form INT113
          Begin EditLib.fpMask fpExmID_S 
             Height          =   285
             Left            =   2040
-            TabIndex        =   1
+            TabIndex        =   137
             Top             =   60
             Width           =   735
             _Version        =   196608
@@ -217,7 +216,7 @@ Begin VB.Form INT113
          Begin EditLib.fpMask fpExmID_E 
             Height          =   285
             Left            =   3150
-            TabIndex        =   2
+            TabIndex        =   138
             Top             =   75
             Width           =   735
             _Version        =   196608
@@ -313,7 +312,7 @@ Begin VB.Form INT113
             Height          =   210
             Index           =   5
             Left            =   8130
-            TabIndex        =   145
+            TabIndex        =   144
             Top             =   135
             Width           =   1095
          End
@@ -324,7 +323,7 @@ Begin VB.Form INT113
             Height          =   210
             Index           =   4
             Left            =   3720
-            TabIndex        =   144
+            TabIndex        =   143
             Top             =   135
             Width           =   975
          End
@@ -343,7 +342,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   3
             Left            =   5640
-            TabIndex        =   143
+            TabIndex        =   142
             Top             =   150
             Width           =   945
          End
@@ -362,7 +361,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   2
             Left            =   30
-            TabIndex        =   142
+            TabIndex        =   141
             Top             =   30
             Visible         =   0   'False
             Width           =   945
@@ -382,7 +381,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   1
             Left            =   1320
-            TabIndex        =   141
+            TabIndex        =   140
             Top             =   120
             Width           =   2355
          End
@@ -401,7 +400,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   0
             Left            =   6990
-            TabIndex        =   140
+            TabIndex        =   139
             Top             =   150
             Width           =   945
          End
@@ -412,7 +411,7 @@ Begin VB.Form INT113
       Left            =   0
       ScaleHeight     =   9795
       ScaleWidth      =   14415
-      TabIndex        =   11
+      TabIndex        =   0
       Top             =   510
       Width           =   14475
       Begin VB.PictureBox pReportViewer 
@@ -421,53 +420,45 @@ Begin VB.Form INT113
          BorderStyle     =   0  '없음
          ForeColor       =   &H80000008&
          Height          =   9825
-         Left            =   -15
+         Left            =   0
          ScaleHeight     =   9825
          ScaleWidth      =   14175
-         TabIndex        =   13
-         Top             =   -45
+         TabIndex        =   2
+         Top             =   0
          Width           =   14175
          Begin VB.TextBox 선택_수리영역 
             Appearance      =   0  '평면
             BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   195
-            Left            =   8220
+            Left            =   8070
             TabIndex        =   148
             Text            =   "미적분,확율통계,이산수학"
-            Top             =   7230
+            Top             =   7410
             Width           =   2745
-         End
-         Begin VB.TextBox 선택_사회논술 
-            Appearance      =   0  '평면
-            BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Left            =   7500
-            TabIndex        =   147
-            Text            =   "사회논술"
-            Top             =   6480
-            Width           =   2925
          End
          Begin VB.TextBox 선택_자연논술 
             Appearance      =   0  '평면
             BorderStyle     =   0  '없음
+            Height          =   195
+            Left            =   7620
+            TabIndex        =   150
+            Text            =   "자연논술"
+            Top             =   7410
+            Width           =   2535
+         End
+         Begin VB.TextBox 선택_사회논술 
+            Appearance      =   0  '평면
+            BorderStyle     =   0  '없음
+            Height          =   195
+            Left            =   7650
+            TabIndex        =   149
+            Text            =   "사회논술"
+            Top             =   6450
+            Width           =   2925
+         End
+         Begin VB.TextBox 내신등급 
+            Appearance      =   0  '평면
+            BorderStyle     =   0  '없음
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   9.75
@@ -478,11 +469,11 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   7500
-            TabIndex        =   146
-            Text            =   "자연논술"
-            Top             =   7230
-            Width           =   2925
+            Left            =   11100
+            TabIndex        =   147
+            Text            =   "1"
+            Top             =   9300
+            Width           =   375
          End
          Begin VB.TextBox 언수외합 
             Appearance      =   0  '평면
@@ -497,10 +488,10 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   10425
-            TabIndex        =   53
+            Left            =   10230
+            TabIndex        =   43
             Text            =   "100"
-            Top             =   9225
+            Top             =   9210
             Width           =   375
          End
          Begin VB.TextBox 접수계열2 
@@ -518,7 +509,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   390
             Left            =   645
-            TabIndex        =   52
+            TabIndex        =   42
             Text            =   "수능대비"
             Top             =   2370
             Width           =   1515
@@ -536,10 +527,10 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   7800
-            TabIndex        =   51
+            Left            =   7650
+            TabIndex        =   41
             Text            =   "100"
-            Top             =   9225
+            Top             =   9210
             Width           =   375
          End
          Begin VB.TextBox 접수계열 
@@ -556,10 +547,10 @@ Begin VB.Form INT113
             EndProperty
             Height          =   315
             Left            =   11400
-            TabIndex        =   50
+            TabIndex        =   40
             Text            =   "예.체능계"
             Top             =   540
-            Width           =   1980
+            Width           =   2055
          End
          Begin VB.TextBox 영어 
             Appearance      =   0  '평면
@@ -574,10 +565,10 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   9360
-            TabIndex        =   49
+            Left            =   9240
+            TabIndex        =   39
             Text            =   "100"
-            Top             =   9225
+            Top             =   9210
             Width           =   375
          End
          Begin VB.TextBox 수리 
@@ -593,10 +584,10 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   8490
-            TabIndex        =   48
+            Left            =   8370
+            TabIndex        =   38
             Text            =   "100"
-            Top             =   9225
+            Top             =   9210
             Width           =   375
          End
          Begin VB.TextBox 수험번호 
@@ -613,7 +604,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   315
             Left            =   11730
-            TabIndex        =   47
+            TabIndex        =   37
             Text            =   "N12501"
             Top             =   930
             Width           =   1035
@@ -631,7 +622,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   46
+            TabIndex        =   36
             Text            =   "9999-99-99"
             Top             =   3135
             Width           =   2955
@@ -650,7 +641,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   6300
-            TabIndex        =   45
+            TabIndex        =   35
             Text            =   "남자"
             Top             =   3135
             Width           =   645
@@ -669,7 +660,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2220
-            TabIndex        =   44
+            TabIndex        =   34
             Text            =   "홍길동"
             Top             =   3135
             Width           =   1545
@@ -688,7 +679,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   43
+            TabIndex        =   33
             Text            =   "53-21 쌍용빌라 나동 201호 "
             Top             =   4095
             Width           =   5055
@@ -707,7 +698,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   42
+            TabIndex        =   32
             Text            =   "011-9490-8607"
             Top             =   4095
             Width           =   2955
@@ -726,7 +717,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   41
+            TabIndex        =   31
             Text            =   "02-2104-8600"
             Top             =   3615
             Width           =   2955
@@ -745,7 +736,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   40
+            TabIndex        =   30
             Text            =   "iiiboss_12345@mail.naver.com"
             Top             =   4545
             Width           =   2955
@@ -764,7 +755,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   5400
-            TabIndex        =   39
+            TabIndex        =   29
             Text            =   "2005"
             Top             =   4545
             Width           =   495
@@ -783,7 +774,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   38
+            TabIndex        =   28
             Text            =   "학생출신고"
             Top             =   4545
             Width           =   1995
@@ -802,7 +793,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   37
+            TabIndex        =   27
             Text            =   "서울 송파구 삼전동"
             Top             =   3705
             Width           =   5055
@@ -821,9 +812,9 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   36
+            TabIndex        =   26
             Text            =   "서울 중구 신당동 떡복이집..................."
-            Top             =   6015
+            Top             =   6030
             Width           =   5055
          End
          Begin VB.TextBox 보호자연락처_직장 
@@ -840,7 +831,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   35
+            TabIndex        =   25
             Text            =   "02-2104-8600"
             Top             =   6000
             Width           =   1395
@@ -859,7 +850,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   10200
-            TabIndex        =   34
+            TabIndex        =   24
             Text            =   "011-9490-8607"
             Top             =   6000
             Width           =   1425
@@ -878,7 +869,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   33
+            TabIndex        =   23
             Text            =   "삼호물산주식회사"
             Top             =   5535
             Width           =   2955
@@ -897,7 +888,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   32
+            TabIndex        =   22
             Text            =   "서울 중구 신당동 떡복이집..................."
             Top             =   5625
             Width           =   5055
@@ -916,7 +907,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   6660
-            TabIndex        =   31
+            TabIndex        =   21
             Text            =   "부모"
             Top             =   5040
             Width           =   555
@@ -935,7 +926,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   30
+            TabIndex        =   20
             Text            =   "홍길동"
             Top             =   5055
             Width           =   1545
@@ -943,59 +934,32 @@ Begin VB.Form INT113
          Begin VB.TextBox 선택_과학탐구 
             Appearance      =   0  '평면
             BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   195
-            Left            =   3390
-            TabIndex        =   29
+            Left            =   3420
+            TabIndex        =   19
             Text            =   "물리II,생물II,지학II"
-            Top             =   7230
+            Top             =   7410
             Width           =   4095
          End
          Begin VB.TextBox 선택_외국어 
             Appearance      =   0  '평면
             BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   195
-            Left            =   3390
-            TabIndex        =   28
+            Left            =   3420
+            TabIndex        =   18
             Text            =   "독어,불어,일어"
-            Top             =   6840
-            Width           =   4395
+            Top             =   7080
+            Width           =   7845
          End
          Begin VB.TextBox 선택_사회탐구 
             Appearance      =   0  '평면
             BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
             Height          =   195
-            Left            =   3390
-            TabIndex        =   27
+            Left            =   3420
+            TabIndex        =   17
             Text            =   "현대사,세계사,경제"
-            Top             =   6480
-            Width           =   4095
+            Top             =   6450
+            Width           =   7995
          End
          Begin VB.TextBox 보호자우편번호 
             Appearance      =   0  '평면
@@ -1011,7 +975,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   26
+            TabIndex        =   16
             Text            =   "(100-100)"
             Top             =   5430
             Width           =   1005
@@ -1030,10 +994,30 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   25
+            TabIndex        =   15
             Text            =   "(100-100)"
             Top             =   3510
             Width           =   1005
+         End
+         Begin VB.TextBox 제2지망 
+            Alignment       =   2  '가운데 맞춤
+            Appearance      =   0  '평면
+            BorderStyle     =   0  '없음
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Left            =   11670
+            TabIndex        =   14
+            Text            =   "노량진"
+            Top             =   2430
+            Width           =   1500
          End
          Begin VB.TextBox 유시험_영어 
             Appearance      =   0  '평면
@@ -1049,7 +1033,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   12810
-            TabIndex        =   24
+            TabIndex        =   13
             Text            =   "100"
             Top             =   8910
             Width           =   375
@@ -1068,7 +1052,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   12810
-            TabIndex        =   23
+            TabIndex        =   12
             Text            =   "100"
             Top             =   9210
             Width           =   375
@@ -1087,9 +1071,9 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   12810
-            TabIndex        =   22
+            TabIndex        =   11
             Text            =   "100"
-            Top             =   9480
+            Top             =   9450
             Width           =   375
          End
          Begin VB.TextBox 학원접수 
@@ -1106,7 +1090,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   285
             Left            =   12780
-            TabIndex        =   21
+            TabIndex        =   10
             Text            =   "-int"
             Top             =   930
             Width           =   675
@@ -1125,7 +1109,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   315
             Left            =   11430
-            TabIndex        =   20
+            TabIndex        =   9
             Text            =   "K"
             Top             =   930
             Width           =   315
@@ -1144,7 +1128,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   19
+            TabIndex        =   8
             Text            =   "011-9490-8607"
             Top             =   5040
             Width           =   1485
@@ -1163,7 +1147,7 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Left            =   11310
-            TabIndex        =   18
+            TabIndex        =   7
             Text            =   "등급"
             Top             =   240
             Width           =   2175
@@ -1181,11 +1165,11 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   10515
-            TabIndex        =   17
+            Left            =   10230
+            TabIndex        =   6
             Text            =   "100"
             Top             =   9450
-            Width           =   375
+            Width           =   585
          End
          Begin VB.TextBox 언어2 
             Appearance      =   0  '평면
@@ -1200,11 +1184,11 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   7860
-            TabIndex        =   16
+            Left            =   7650
+            TabIndex        =   5
             Text            =   "100"
             Top             =   9450
-            Width           =   375
+            Width           =   435
          End
          Begin VB.TextBox 영어2 
             Appearance      =   0  '평면
@@ -1219,8 +1203,8 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   9420
-            TabIndex        =   15
+            Left            =   9270
+            TabIndex        =   4
             Text            =   "100"
             Top             =   9450
             Width           =   375
@@ -1238,54 +1222,11 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   8550
-            TabIndex        =   14
+            Left            =   8370
+            TabIndex        =   3
             Text            =   "100"
             Top             =   9450
-            Width           =   375
-         End
-         Begin VB.Label Label1 
-            BackStyle       =   0  '투명
-            Caption         =   "언.수.외총점"
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   8.25
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Left            =   10080
-            TabIndex        =   135
-            Top             =   8940
-            Width           =   945
-         End
-         Begin VB.Line Lines 
-            BorderColor     =   &H00FF0000&
-            Index           =   24
-            X1              =   8250
-            X2              =   8250
-            Y1              =   8880
-            Y2              =   9690
-         End
-         Begin VB.Line Lines 
-            BorderColor     =   &H00FF0000&
-            BorderWidth     =   2
-            Index           =   1
-            X1              =   11730
-            X2              =   11730
-            Y1              =   2970
-            Y2              =   7920
-         End
-         Begin VB.Line Lines 
-            BorderColor     =   &H00FF0000&
-            Index           =   53
-            X1              =   6585
-            X2              =   6585
-            Y1              =   8880
-            Y2              =   9690
+            Width           =   495
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
@@ -1300,16 +1241,91 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   165
-            Index           =   41
-            Left            =   6240
-            TabIndex        =   134
+            Index           =   0
+            Left            =   6270
+            TabIndex        =   146
             Top             =   9015
             Width           =   195
+         End
+         Begin VB.Line Line1 
+            BorderColor     =   &H00FF0000&
+            X1              =   7470
+            X2              =   7470
+            Y1              =   8850
+            Y2              =   9660
+         End
+         Begin VB.Line Lines 
+            BorderColor     =   &H00FF0000&
+            Index           =   40
+            X1              =   3330
+            X2              =   11730
+            Y1              =   6690
+            Y2              =   6690
+         End
+         Begin VB.Label 사탐비고 
+            BackStyle       =   0  '투명
+            Caption         =   "사탐비고"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   8.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   225
+            Left            =   3420
+            TabIndex        =   145
+            Top             =   6750
+            Width           =   3765
+         End
+         Begin VB.Label Label1 
+            BackStyle       =   0  '투명
+            Caption         =   "언.수.외총점"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   8.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Left            =   9930
+            TabIndex        =   123
+            Top             =   8940
+            Width           =   945
+         End
+         Begin VB.Line Lines 
+            BorderColor     =   &H00FF0000&
+            Index           =   24
+            X1              =   8130
+            X2              =   8130
+            Y1              =   8850
+            Y2              =   9660
+         End
+         Begin VB.Line Lines 
+            BorderColor     =   &H00FF0000&
+            BorderWidth     =   2
+            Index           =   1
+            X1              =   11730
+            X2              =   11730
+            Y1              =   2970
+            Y2              =   7920
+         End
+         Begin VB.Line Lines 
+            BorderColor     =   &H00FF0000&
+            Index           =   53
+            X1              =   6615
+            X2              =   6615
+            Y1              =   8850
+            Y2              =   9660
          End
          Begin VB.Label OPTIONS 
             BackColor       =   &H00E0E0E0&
             BackStyle       =   0  '투명
-            Caption         =   "▶자연계 학생 중 수리(나)형을 지원하는 학생은 별도 표기"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -1322,9 +1338,9 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   2
             Left            =   510
-            TabIndex        =   133
+            TabIndex        =   122
             Top             =   8400
-            Width           =   7395
+            Width           =   8835
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
@@ -1340,8 +1356,8 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Index           =   42
-            Left            =   7740
-            TabIndex        =   132
+            Left            =   7650
+            TabIndex        =   121
             Top             =   8940
             Width           =   375
          End
@@ -1360,7 +1376,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   86
             Left            =   11670
-            TabIndex        =   131
+            TabIndex        =   120
             Top             =   8985
             Width           =   225
          End
@@ -1379,7 +1395,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   83
             Left            =   11670
-            TabIndex        =   130
+            TabIndex        =   119
             Top             =   9195
             Width           =   225
          End
@@ -1398,7 +1414,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   82
             Left            =   11670
-            TabIndex        =   129
+            TabIndex        =   118
             Top             =   9405
             Width           =   225
          End
@@ -1429,10 +1445,19 @@ Begin VB.Form INT113
          End
          Begin VB.Shape Boxs 
             BorderColor     =   &H00FF0000&
+            BorderWidth     =   2
+            Height          =   585
+            Index           =   4
+            Left            =   9960
+            Top             =   2250
+            Width           =   3555
+         End
+         Begin VB.Shape Boxs 
+            BorderColor     =   &H00FF0000&
             Height          =   825
             Index           =   5
             Left            =   510
-            Top             =   8865
+            Top             =   8850
             Width           =   13005
          End
          Begin VB.Line Lines 
@@ -1516,24 +1541,24 @@ Begin VB.Form INT113
             Index           =   9
             X1              =   1560
             X2              =   11730
-            Y1              =   6750
-            Y2              =   6750
+            Y1              =   6960
+            Y2              =   6960
          End
          Begin VB.Line Lines 
             BorderColor     =   &H00FF0000&
             Index           =   10
             X1              =   1080
             X2              =   11730
-            Y1              =   7140
-            Y2              =   7140
+            Y1              =   7320
+            Y2              =   7320
          End
          Begin VB.Line Lines 
             BorderColor     =   &H00FF0000&
             Index           =   11
             X1              =   3330
             X2              =   11730
-            Y1              =   7500
-            Y2              =   7500
+            Y1              =   7650
+            Y2              =   7650
          End
          Begin VB.Line Lines 
             BorderColor     =   &H00FF0000&
@@ -1633,6 +1658,14 @@ Begin VB.Form INT113
          End
          Begin VB.Line Lines 
             BorderColor     =   &H00FF0000&
+            Index           =   25
+            X1              =   11280
+            X2              =   11280
+            Y1              =   2250
+            Y2              =   2820
+         End
+         Begin VB.Line Lines 
+            BorderColor     =   &H00FF0000&
             BorderWidth     =   2
             Index           =   26
             X1              =   11730
@@ -1653,7 +1686,7 @@ Begin VB.Form INT113
             BorderColor     =   &H00FF0000&
             Index           =   29
             X1              =   510
-            X2              =   6600
+            X2              =   6630
             Y1              =   9270
             Y2              =   9270
          End
@@ -1739,35 +1772,27 @@ Begin VB.Form INT113
          End
          Begin VB.Line Lines 
             BorderColor     =   &H00FF0000&
-            Index           =   41
-            X1              =   6105
-            X2              =   6105
-            Y1              =   8865
-            Y2              =   9675
-         End
-         Begin VB.Line Lines 
-            BorderColor     =   &H00FF0000&
             Index           =   42
-            X1              =   10020
-            X2              =   10020
-            Y1              =   8865
-            Y2              =   9675
+            X1              =   9870
+            X2              =   9870
+            Y1              =   8850
+            Y2              =   9660
          End
          Begin VB.Line Lines 
             BorderColor     =   &H00FF0000&
             Index           =   43
-            X1              =   8970
-            X2              =   8970
+            X1              =   8880
+            X2              =   8880
             Y1              =   8865
             Y2              =   9675
          End
          Begin VB.Line Lines_opt 
             BorderColor     =   &H00FF0000&
             Index           =   2
-            X1              =   11055
-            X2              =   11055
-            Y1              =   8865
-            Y2              =   9675
+            X1              =   10860
+            X2              =   10860
+            Y1              =   8850
+            Y2              =   9660
          End
          Begin VB.Line Lines 
             BorderColor     =   &H00FF0000&
@@ -1796,7 +1821,7 @@ Begin VB.Form INT113
          Begin VB.Line Lines_opt 
             BorderColor     =   &H00FF0000&
             Index           =   1
-            X1              =   6600
+            X1              =   6630
             X2              =   11550
             Y1              =   9150
             Y2              =   9150
@@ -1833,7 +1858,7 @@ Begin VB.Form INT113
             Height          =   315
             Index           =   7
             Left            =   2430
-            TabIndex        =   128
+            TabIndex        =   117
             Top             =   2460
             Width           =   750
          End
@@ -1861,7 +1886,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   2
             Left            =   9930
-            TabIndex        =   127
+            TabIndex        =   116
             Top             =   1560
             Width           =   3735
          End
@@ -1880,7 +1905,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   13
             Left            =   750
-            TabIndex        =   126
+            TabIndex        =   115
             Top             =   3330
             Width           =   195
          End
@@ -1899,7 +1924,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   14
             Left            =   750
-            TabIndex        =   125
+            TabIndex        =   114
             Top             =   4290
             Width           =   195
          End
@@ -1918,7 +1943,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   3
             Left            =   750
-            TabIndex        =   124
+            TabIndex        =   113
             Top             =   5040
             Width           =   195
          End
@@ -1937,7 +1962,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   4
             Left            =   750
-            TabIndex        =   123
+            TabIndex        =   112
             Top             =   5910
             Width           =   195
          End
@@ -1956,7 +1981,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   5
             Left            =   750
-            TabIndex        =   122
+            TabIndex        =   111
             Top             =   5475
             Width           =   195
          End
@@ -1975,7 +2000,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   6
             Left            =   750
-            TabIndex        =   121
+            TabIndex        =   110
             Top             =   6510
             Width           =   195
          End
@@ -1994,7 +2019,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   8
             Left            =   750
-            TabIndex        =   120
+            TabIndex        =   109
             Top             =   7185
             Width           =   195
          End
@@ -2013,7 +2038,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   9
             Left            =   750
-            TabIndex        =   119
+            TabIndex        =   108
             Top             =   6855
             Width           =   195
          End
@@ -2032,7 +2057,7 @@ Begin VB.Form INT113
             Height          =   195
             Index           =   10
             Left            =   750
-            TabIndex        =   118
+            TabIndex        =   107
             Top             =   7530
             Width           =   195
          End
@@ -2051,7 +2076,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   11
             Left            =   1260
-            TabIndex        =   117
+            TabIndex        =   106
             Top             =   3150
             Width           =   675
          End
@@ -2070,7 +2095,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   12
             Left            =   1260
-            TabIndex        =   116
+            TabIndex        =   105
             Top             =   3840
             Width           =   675
          End
@@ -2089,7 +2114,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   15
             Left            =   1260
-            TabIndex        =   115
+            TabIndex        =   104
             Top             =   5070
             Width           =   675
          End
@@ -2108,7 +2133,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   16
             Left            =   1260
-            TabIndex        =   114
+            TabIndex        =   103
             Top             =   5760
             Width           =   675
          End
@@ -2127,8 +2152,8 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   17
             Left            =   1230
-            TabIndex        =   113
-            Top             =   6450
+            TabIndex        =   102
+            Top             =   6510
             Width           =   195
          End
          Begin VB.Label Labels 
@@ -2146,8 +2171,8 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   18
             Left            =   1230
-            TabIndex        =   112
-            Top             =   6690
+            TabIndex        =   101
+            Top             =   6750
             Width           =   195
          End
          Begin VB.Label Labels 
@@ -2165,8 +2190,8 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   19
             Left            =   1230
-            TabIndex        =   111
-            Top             =   6930
+            TabIndex        =   100
+            Top             =   6990
             Width           =   195
          End
          Begin VB.Label Labels 
@@ -2184,8 +2209,8 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   20
             Left            =   1230
-            TabIndex        =   110
-            Top             =   7200
+            TabIndex        =   99
+            Top             =   7350
             Width           =   195
          End
          Begin VB.Label Labels 
@@ -2203,8 +2228,8 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   21
             Left            =   1230
-            TabIndex        =   109
-            Top             =   7440
+            TabIndex        =   98
+            Top             =   7530
             Width           =   195
          End
          Begin VB.Label Labels 
@@ -2222,13 +2247,13 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   22
             Left            =   1230
-            TabIndex        =   108
-            Top             =   7680
+            TabIndex        =   97
+            Top             =   7740
             Width           =   195
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "사회탐구[택2 또는 3]"
+            Caption         =   "사회탐구     (택2)"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -2240,14 +2265,14 @@ Begin VB.Form INT113
             EndProperty
             Height          =   165
             Index           =   23
-            Left            =   1650
-            TabIndex        =   107
-            Top             =   6480
+            Left            =   1680
+            TabIndex        =   96
+            Top             =   6600
             Width           =   1635
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "제2외국어[택1]"
+            Caption         =   "제2외국어    (택1)"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -2259,14 +2284,14 @@ Begin VB.Form INT113
             EndProperty
             Height          =   165
             Index           =   24
-            Left            =   1650
-            TabIndex        =   106
-            Top             =   6870
-            Width           =   1155
+            Left            =   1680
+            TabIndex        =   95
+            Top             =   7080
+            Width           =   1635
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
-            Caption         =   "과학탐구[택3]"
+            Caption         =   "과학탐구     (택2)"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -2278,10 +2303,10 @@ Begin VB.Form INT113
             EndProperty
             Height          =   165
             Index           =   26
-            Left            =   1650
-            TabIndex        =   105
-            Top             =   7470
-            Width           =   1125
+            Left            =   1680
+            TabIndex        =   94
+            Top             =   7560
+            Width           =   1635
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
@@ -2298,7 +2323,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   27
             Left            =   720
-            TabIndex        =   104
+            TabIndex        =   93
             Top             =   9015
             Width           =   315
          End
@@ -2317,7 +2342,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   28
             Left            =   720
-            TabIndex        =   103
+            TabIndex        =   92
             Top             =   9405
             Width           =   315
          End
@@ -2336,7 +2361,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   30
             Left            =   1215
-            TabIndex        =   102
+            TabIndex        =   91
             Top             =   9015
             Width           =   195
          End
@@ -2355,7 +2380,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   31
             Left            =   1710
-            TabIndex        =   101
+            TabIndex        =   90
             Top             =   9015
             Width           =   195
          End
@@ -2374,7 +2399,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   32
             Left            =   2220
-            TabIndex        =   100
+            TabIndex        =   89
             Top             =   9015
             Width           =   195
          End
@@ -2393,7 +2418,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   33
             Left            =   2715
-            TabIndex        =   99
+            TabIndex        =   88
             Top             =   9015
             Width           =   195
          End
@@ -2412,7 +2437,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   34
             Left            =   3225
-            TabIndex        =   98
+            TabIndex        =   87
             Top             =   9015
             Width           =   195
          End
@@ -2431,7 +2456,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   35
             Left            =   3750
-            TabIndex        =   97
+            TabIndex        =   86
             Top             =   9015
             Width           =   195
          End
@@ -2450,7 +2475,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   36
             Left            =   4260
-            TabIndex        =   96
+            TabIndex        =   85
             Top             =   9015
             Width           =   195
          End
@@ -2469,7 +2494,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   37
             Left            =   4755
-            TabIndex        =   95
+            TabIndex        =   84
             Top             =   9015
             Width           =   195
          End
@@ -2488,7 +2513,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   38
             Left            =   5235
-            TabIndex        =   94
+            TabIndex        =   83
             Top             =   9015
             Width           =   195
          End
@@ -2507,14 +2532,13 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   39
             Left            =   5730
-            TabIndex        =   93
+            TabIndex        =   82
             Top             =   9015
             Width           =   195
          End
          Begin VB.Label 수리선택 
-            Alignment       =   2  '가운데 맞춤
             BackStyle       =   0  '투명
-            Caption         =   "수리"
+            Caption         =   "수리[나]"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -2525,8 +2549,8 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   8310
-            TabIndex        =   92
+            Left            =   8220
+            TabIndex        =   81
             Top             =   8940
             Width           =   675
          End
@@ -2542,50 +2566,12 @@ Begin VB.Form INT113
                Italic          =   0   'False
                Strikethrough   =   0   'False
             EndProperty
-            Height          =   165
+            Height          =   225
             Index           =   44
-            Left            =   9045
-            TabIndex        =   91
+            Left            =   8910
+            TabIndex        =   80
             Top             =   8940
             Width           =   975
-         End
-         Begin VB.Label OPTIONS 
-            BackStyle       =   0  '투명
-            Caption         =   "확 인"
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   8.25
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   165
-            Index           =   13
-            Left            =   11115
-            TabIndex        =   90
-            Top             =   8955
-            Width           =   465
-         End
-         Begin VB.Label OPTIONS 
-            BackStyle       =   0  '투명
-            Caption         =   "(인)"
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   8.25
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   165
-            Index           =   14
-            Left            =   11160
-            TabIndex        =   89
-            Top             =   9330
-            Width           =   285
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
@@ -2602,7 +2588,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   47
             Left            =   12090
-            TabIndex        =   88
+            TabIndex        =   79
             Top             =   9225
             Width           =   405
          End
@@ -2621,7 +2607,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   48
             Left            =   12090
-            TabIndex        =   87
+            TabIndex        =   78
             Top             =   8925
             Width           =   405
          End
@@ -2640,7 +2626,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   49
             Left            =   12090
-            TabIndex        =   86
+            TabIndex        =   77
             Top             =   9495
             Width           =   405
          End
@@ -2659,7 +2645,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   50
             Left            =   13230
-            TabIndex        =   85
+            TabIndex        =   76
             Top             =   8925
             Width           =   165
          End
@@ -2678,7 +2664,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   51
             Left            =   13230
-            TabIndex        =   84
+            TabIndex        =   75
             Top             =   9225
             Width           =   165
          End
@@ -2697,7 +2683,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   52
             Left            =   13230
-            TabIndex        =   83
+            TabIndex        =   74
             Top             =   9495
             Width           =   165
          End
@@ -2716,7 +2702,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   53
             Left            =   7770
-            TabIndex        =   82
+            TabIndex        =   73
             Top             =   3150
             Width           =   675
          End
@@ -2735,7 +2721,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   54
             Left            =   7770
-            TabIndex        =   81
+            TabIndex        =   72
             Top             =   3630
             Width           =   675
          End
@@ -2754,7 +2740,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   55
             Left            =   7770
-            TabIndex        =   80
+            TabIndex        =   71
             Top             =   4110
             Width           =   675
          End
@@ -2773,7 +2759,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   56
             Left            =   7770
-            TabIndex        =   79
+            TabIndex        =   70
             Top             =   4560
             Width           =   675
          End
@@ -2792,7 +2778,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   57
             Left            =   7680
-            TabIndex        =   78
+            TabIndex        =   69
             Top             =   5070
             Width           =   975
          End
@@ -2811,7 +2797,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   58
             Left            =   7680
-            TabIndex        =   77
+            TabIndex        =   68
             Top             =   5550
             Width           =   975
          End
@@ -2830,7 +2816,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   59
             Left            =   7710
-            TabIndex        =   76
+            TabIndex        =   67
             Top             =   6030
             Width           =   855
          End
@@ -2849,7 +2835,7 @@ Begin VB.Form INT113
             Height          =   405
             Index           =   60
             Left            =   1590
-            TabIndex        =   75
+            TabIndex        =   66
             Top             =   750
             Width           =   3585
          End
@@ -2869,7 +2855,7 @@ Begin VB.Form INT113
             Height          =   285
             Index           =   62
             Left            =   480
-            TabIndex        =   74
+            TabIndex        =   65
             Top             =   840
             Width           =   825
          End
@@ -2888,7 +2874,7 @@ Begin VB.Form INT113
             Height          =   240
             Index           =   61
             Left            =   9990
-            TabIndex        =   73
+            TabIndex        =   64
             Top             =   780
             Width           =   1275
          End
@@ -2914,7 +2900,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   63
             Left            =   1260
-            TabIndex        =   72
+            TabIndex        =   63
             Top             =   4560
             Width           =   675
          End
@@ -2933,7 +2919,7 @@ Begin VB.Form INT113
             Height          =   465
             Index           =   64
             Left            =   510
-            TabIndex        =   71
+            TabIndex        =   62
             Top             =   1620
             Width           =   4065
          End
@@ -2952,7 +2938,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   65
             Left            =   4890
-            TabIndex        =   70
+            TabIndex        =   61
             Top             =   3150
             Width           =   675
          End
@@ -2971,9 +2957,47 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   66
             Left            =   4890
-            TabIndex        =   69
+            TabIndex        =   60
             Top             =   5070
             Width           =   675
+         End
+         Begin VB.Label lbl_2Sel 
+            BackStyle       =   0  '투명
+            Caption         =   "2 지망"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   225
+            Index           =   0
+            Left            =   10260
+            TabIndex        =   59
+            Top             =   2340
+            Width           =   825
+         End
+         Begin VB.Label lbl_2Sel 
+            BackStyle       =   0  '투명
+            Caption         =   "선   택"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   225
+            Index           =   1
+            Left            =   10230
+            TabIndex        =   58
+            Top             =   2550
+            Width           =   795
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
@@ -2990,7 +3014,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   72
             Left            =   12270
-            TabIndex        =   68
+            TabIndex        =   57
             Top             =   5310
             Width           =   675
          End
@@ -3010,7 +3034,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   0
             Left            =   510
-            TabIndex        =   67
+            TabIndex        =   56
             Top             =   8010
             Width           =   15000
          End
@@ -3030,9 +3054,9 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   1
             Left            =   510
-            TabIndex        =   66
+            TabIndex        =   55
             Top             =   8190
-            Width           =   7395
+            Width           =   10185
          End
          Begin VB.Label Labels 
             BackColor       =   &H00E0E0E0&
@@ -3050,7 +3074,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   78
             Left            =   10080
-            TabIndex        =   65
+            TabIndex        =   54
             Top             =   1800
             Width           =   2535
          End
@@ -3069,7 +3093,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   79
             Left            =   4230
-            TabIndex        =   64
+            TabIndex        =   53
             Top             =   4560
             Width           =   675
          End
@@ -3088,7 +3112,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   80
             Left            =   6000
-            TabIndex        =   63
+            TabIndex        =   52
             Top             =   4560
             Width           =   1365
          End
@@ -3107,28 +3131,9 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   81
             Left            =   5850
-            TabIndex        =   62
+            TabIndex        =   51
             Top             =   5070
             Width           =   585
-         End
-         Begin VB.Label OPTIONS 
-            BackStyle       =   0  '투명
-            Caption         =   "※ 제2외국어를 선택하지 않은 학생은 국어, 수학,"
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   8.25
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   225
-            Index           =   3
-            Left            =   7980
-            TabIndex        =   61
-            Top             =   6780
-            Width           =   3765
          End
          Begin VB.Label OPTIONS 
             BackStyle       =   0  '투명
@@ -3144,9 +3149,9 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Index           =   4
-            Left            =   6810
-            TabIndex        =   60
-            Top             =   9495
+            Left            =   6750
+            TabIndex        =   50
+            Top             =   9480
             Width           =   735
          End
          Begin VB.Label OPTIONS 
@@ -3163,37 +3168,18 @@ Begin VB.Form INT113
             EndProperty
             Height          =   195
             Index           =   11
-            Left            =   6780
-            TabIndex        =   59
-            Top             =   9225
+            Left            =   6720
+            TabIndex        =   49
+            Top             =   9210
             Width           =   705
-         End
-         Begin VB.Label Labels 
-            BackStyle       =   0  '투명
-            Caption         =   "수능.평가원"
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   8.25
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   165
-            Index           =   46
-            Left            =   6660
-            TabIndex        =   58
-            Top             =   8940
-            Width           =   915
          End
          Begin VB.Line Lines 
             BorderColor     =   &H00FF0000&
             Index           =   44
-            X1              =   7590
-            X2              =   7590
-            Y1              =   8880
-            Y2              =   9690
+            X1              =   6120
+            X2              =   6120
+            Y1              =   8850
+            Y2              =   9660
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
@@ -3210,7 +3196,7 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   67
             Left            =   5730
-            TabIndex        =   57
+            TabIndex        =   48
             Top             =   8625
             Width           =   2055
          End
@@ -3220,20 +3206,20 @@ Begin VB.Form INT113
             Index           =   45
             X1              =   7800
             X2              =   14160
-            Y1              =   8685
-            Y2              =   8685
+            Y1              =   8700
+            Y2              =   8700
          End
          Begin VB.Line Lines_opt 
             BorderColor     =   &H00FF0000&
             Index           =   4
-            X1              =   6600
-            X2              =   11070
+            X1              =   6630
+            X2              =   10860
             Y1              =   9420
             Y2              =   9420
          End
-         Begin VB.Label OPTIONS 
+         Begin VB.Label 과탐비고 
             BackStyle       =   0  '투명
-            Caption         =   "※ 자연계 과학선택은 2학기부터 과학선택 3과목, 국.수.영 중 1과목으로 변경될 수 있습니다."
+            Caption         =   "과탐비고"
             BeginProperty Font 
                Name            =   "굴림"
                Size            =   8.25
@@ -3244,30 +3230,10 @@ Begin VB.Form INT113
                Strikethrough   =   0   'False
             EndProperty
             Height          =   225
-            Index           =   21
-            Left            =   3540
-            TabIndex        =   56
-            Top             =   7620
+            Left            =   3420
+            TabIndex        =   47
+            Top             =   7710
             Width           =   7365
-         End
-         Begin VB.Label OPTIONS 
-            BackStyle       =   0  '투명
-            Caption         =   "영어(6주 단위 수업)을 수강할 수 있습니다."
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   8.25
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   225
-            Index           =   5
-            Left            =   8190
-            TabIndex        =   55
-            Top             =   6960
-            Width           =   3315
          End
          Begin VB.Label Labels 
             BackColor       =   &H00E0E0E0&
@@ -3285,19 +3251,77 @@ Begin VB.Form INT113
             Height          =   165
             Index           =   1
             Left            =   10140
-            TabIndex        =   54
+            TabIndex        =   46
             Top             =   2010
             Width           =   2535
+         End
+         Begin VB.Label txtMu_Type 
+            Alignment       =   2  '가운데 맞춤
+            BackStyle       =   0  '투명
+            Caption         =   "2013 수능"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   8.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   165
+            Left            =   6630
+            TabIndex        =   45
+            Top             =   8940
+            Width           =   855
+         End
+         Begin VB.Label OPTIONS 
+            BackStyle       =   0  '투명
+            Caption         =   "내신등급"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   8.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   13
+            Left            =   10890
+            TabIndex        =   44
+            Top             =   8940
+            Width           =   675
          End
          Begin VB.Shape FillBOXs 
             BackColor       =   &H00E0E0E0&
             BackStyle       =   1  '투명하지 않음
             BorderStyle     =   0  '투명
-            Height          =   3375
-            Index           =   0
-            Left            =   1080
-            Top             =   2970
-            Width           =   990
+            Height          =   825
+            Index           =   10
+            Left            =   6630
+            Top             =   8850
+            Width           =   840
+         End
+         Begin VB.Shape FillBOXs 
+            BackColor       =   &H00E0E0E0&
+            BackStyle       =   1  '투명하지 않음
+            BorderStyle     =   0  '투명
+            Height          =   825
+            Index           =   9
+            Left            =   510
+            Top             =   8880
+            Width           =   540
+         End
+         Begin VB.Shape FillBOXs 
+            BackColor       =   &H00E0E0E0&
+            BackStyle       =   1  '투명하지 않음
+            BorderStyle     =   0  '투명
+            Height          =   825
+            Index           =   11
+            Left            =   11550
+            Top             =   8865
+            Width           =   420
          End
          Begin VB.Shape FillBOXs 
             BackColor       =   &H00E0E0E0&
@@ -3343,41 +3367,21 @@ Begin VB.Form INT113
             BackColor       =   &H00E0E0E0&
             BackStyle       =   1  '투명하지 않음
             BorderStyle     =   0  '투명
-            Height          =   825
-            Index           =   10
-            Left            =   6600
-            Top             =   8865
-            Width           =   1020
-         End
-         Begin VB.Shape FillBOXs 
-            BackColor       =   &H00E0E0E0&
-            BackStyle       =   1  '투명하지 않음
-            BorderStyle     =   0  '투명
-            Height          =   825
-            Index           =   9
-            Left            =   510
-            Top             =   8880
-            Width           =   540
-         End
-         Begin VB.Shape FillBOXs 
-            BackColor       =   &H00E0E0E0&
-            BackStyle       =   1  '투명하지 않음
-            BorderStyle     =   0  '투명
-            Height          =   825
-            Index           =   11
-            Left            =   11550
-            Top             =   8865
-            Width           =   420
-         End
-         Begin VB.Shape FillBOXs 
-            BackColor       =   &H00E0E0E0&
-            BackStyle       =   1  '투명하지 않음
-            BorderStyle     =   0  '투명
             Height          =   360
             Index           =   4
             Left            =   11730
             Top             =   5190
             Width           =   1785
+         End
+         Begin VB.Shape FillBOXs 
+            BackColor       =   &H00E0E0E0&
+            BackStyle       =   1  '투명하지 않음
+            BorderStyle     =   0  '투명
+            Height          =   585
+            Index           =   3
+            Left            =   9960
+            Top             =   2250
+            Width           =   1320
          End
          Begin VB.Shape FillBOXs 
             BackColor       =   &H00E0E0E0&
@@ -3389,11 +3393,21 @@ Begin VB.Form INT113
             Top             =   480
             Width           =   1320
          End
+         Begin VB.Shape FillBOXs 
+            BackColor       =   &H00E0E0E0&
+            BackStyle       =   1  '투명하지 않음
+            BorderStyle     =   0  '투명
+            Height          =   3375
+            Index           =   0
+            Left            =   1080
+            Top             =   2970
+            Width           =   990
+         End
       End
       Begin VB.VScrollBar VScroll1 
          Height          =   9765
          Left            =   14190
-         TabIndex        =   12
+         TabIndex        =   1
          Top             =   0
          Width           =   225
       End
@@ -3439,7 +3453,7 @@ Attribute VB_Exposed = False
 '################################################################################################################
 '   시 스 템  명 : 대성학원 입학사정, 반배정 & 시간표 프로그램
 '   서브시스템명 :
-'   모   듈   명 : INT110
+'   모   듈   명 : INT111
 '   모 듈  목 적 : 입학원서 출력
 '
 '   작   성   일 : 2007/08/31
@@ -3451,7 +3465,9 @@ Attribute VB_Exposed = False
 '   1. 수정일 : 2007.12.11
 '   2. 내  용 : 출력물 변경
 '   1. 수정일 : 2009.11.05
-'   2. 내  용 : 마강 입학원서 1차선행으로 변경
+'   2. 내  용 : 강남 입학원서 1차선행으로 변경
+'   1. 수정일 : 2013.01.03
+'   2. 내  용 : 양재 종합 입학원서로 변경
 '################################################################################################################
 
 Option Explicit
@@ -3476,6 +3492,7 @@ Private Type tSTD
     M_NUM       As Long
     E_NUM       As Long
     TOT_NUM     As Long
+    N_NUM       As Single
     
     JK_NUM      As Long
     JM_NUM      As Long
@@ -3555,6 +3572,7 @@ Private Type tSTD
     WANT_ACID   As String
     IMAGE_DIR   As String
     GR          As String
+    MU_TYPE     As String
 End Type
 Private uSTD() As tSTD
 
@@ -3595,147 +3613,37 @@ Private Sub Form_Load()
         
         fpExmID_S.Text = ""
         fpExmID_E.Text = ""
-        
-        '>> 무/유시험
-        With cboExmType
-            .Clear
-            .AddItem "전체" & Space(30) & "XX"
-            .AddItem "유시험" & Space(30) & "1"
-            .AddItem "무시험" & Space(30) & "0"
-            
-            .ListIndex = 0
-        End With
-        
-        OPTIONS(11).Caption = "표준점수"
-        
-        '2011-01-10 김한욱 강남 황혜영 과장 요청
-        
-        Select Case Trim(basModule.schcd)
-            Case "K", "W", "Q"
-                OPTIONS(4).Caption = "백 분 위"
-            Case Else
-                OPTIONS(4).Caption = "등   급"
-        End Select
-        
-'        Select Case Trim(basModule.SchCD)
-'            Case "K", "W", "Q", "J"
-'                OPTIONS(11).Caption = "수능"
-'                OPTIONS(4).Caption = "표준"
-'            Case "M"
-'                OPTIONS(11).Caption = "표준점수"
-'                OPTIONS(4).Caption = "등   급"
-'            Case Else
-'                'NO ACTION
-'        End Select
-        
-        
-        '>> 계열
-        With cboKaeyol
-            .Clear
-            .AddItem "전체" & Space(30) & "XX"
-            
-            .AddItem "인문" & Space(30) & "01"
-            .AddItem "자연" & Space(30) & "02"
-        '<< 계열 >> : 2008.01.09
-            If Trim(basModule.schcd) = "N" Then             '< 노량진
-                .AddItem "예체" & Space(30) & "03"
-                .AddItem "수리(나)" & Space(30) & "04"
-                .AddItem "인문수능" & Space(30) & "05"
-                .AddItem "자연수능" & Space(30) & "06"
-                
-                .AddItem "인문-신" & Space(30) & "07"
-                .AddItem "자연-신" & Space(30) & "08"
-                '.AddItem "수능인문-신" & Space(30) & "09"
-                '.AddItem "수능자연-신" & Space(30) & "10"
-                
-                .AddItem "편)인문" & Space(30) & "11"
-                .AddItem "편)자연" & Space(30) & "12"
-                .AddItem "편)예체" & Space(30) & "13"
-                .AddItem "편)수리(나)" & Space(30) & "14"
-                .AddItem "편)인문수능" & Space(30) & "15"
-                .AddItem "편)자연수능" & Space(30) & "16"
-            End If
-        '<< 계열 >> : 2008.01.10
-            If Trim(basModule.schcd) = "K" Then             '< 강남
-                .AddItem "주말법대" & Space(30) & "04"
-                .AddItem "주말의대" & Space(30) & "05"
-            
-                .AddItem "야간법대" & Space(30) & "06"
-                .AddItem "야간의대" & Space(30) & "07"
-            
-                .AddItem "선착순인문" & Space(30) & "11"
-                .AddItem "선착순자연" & Space(30) & "12"
-                
-                .AddItem "선착순인문16" & Space(30) & "16"
-                .AddItem "선착순자연17" & Space(30) & "17"
-                
-            End If
-        '<< 계열 >> : 2009.01.08
-            Select Case Trim(basModule.schcd)
-                Case "S", "P"
-'                    .AddItem "예체능" & Space(30) & "03"
-'
-'                    .AddItem "수능인문" & Space(30) & "05"
-'                    .AddItem "수능자연" & Space(30) & "06"
-                    
-                    .AddItem "인문프리미엄" & Space(30) & "18"
-                    .AddItem "자연프리미엄" & Space(30) & "19"
-                    
-            End Select
-            
-            Select Case Trim(basModule.schcd)
-                Case "J"
-                    .AddItem "예체능" & Space(30) & "03"
-                    
-                    .AddItem "신설인문" & Space(30) & "11"
-                    .AddItem "신설자연" & Space(30) & "12"
-                    
-                    .AddItem "인문프리미엄" & Space(30) & "18"
-                    .AddItem "자연프리미엄" & Space(30) & "19"
-                    
-            End Select
-            
-        '<< 계열 >> : 2009.01.09
-            If Trim(basModule.schcd) = "B" Then             '< 부산
-                
-                .AddItem "선행인문" & Space(30) & "05"
-                .AddItem "선행자연" & Space(30) & "06"
-                
-                .AddItem "연.고대인문" & Space(30) & "07"
-                .AddItem "연.고대자연" & Space(30) & "08"
-                
-                .AddItem "심화인문" & Space(30) & "09"
-                .AddItem "심화자연" & Space(30) & "10"
-                
-            End If
-            
-            .ListIndex = 0
-        End With
-        
         txtStdNM.Text = ""
         
-        '>> 인터넷/학원 구분
-        With cboinGbn
-            .Clear
-            .AddItem "전체" & Space(30) & "ALL"
-            .AddItem "인터넷" & Space(30) & "INT"
-            .AddItem "학원" & Space(30) & "HAK"
-            
-            .ListIndex = 0
-        End With
         
-        '>> 선행반/ 종합반 구분
-        With cboSel
-            .Clear
-            '.AddItem "선행" & Space(30) & "01"
-            .AddItem "종합" & Space(30) & "02"
-            
-            .ListIndex = 0
-        End With
+        Call basCommonSTD.Init_ExmType(cboExmType)       '조회 유무험시험
+        Call basCommonSTD.Init_InGbn(cboinGbn)           '조회 인터넷/학원
+        Call basCommonSTD.Init_CboKaeyolDefault(cboKaeyol)      '계열
+        cboKaeyol.AddItem "전체" & Space(30) & "ALL", 0
+        cboKaeyol.ListIndex = 0
+        
+        
+        사탐비고.Caption = "※ 서울대 지망학생은 한국사 필수"
+        과탐비고.Caption = "※ 서울대 지망학생은 서로 다른 과목의 (Ⅰ + Ⅱ) 또는 (Ⅱ+Ⅱ) 선택"
+        
+        
+'        '>> 선행반/ 종합반 구분
+'        With cboSel
+'            .Clear
+'            '.AddItem "선행" & Space(30) & "01"
+'            .AddItem "종합" & Space(30) & "02"
+'
+'            .ListIndex = 0
+'        End With
         
         ReDim uSTD(0) As tSTD
         
     Me.Tag = ""
+    
+    txtMu_Type.Caption = "2013 수능"
+    
+    과탐비고.Visible = False
+    사탐비고.Visible = False
     
 End Sub
 
@@ -3749,150 +3657,60 @@ Private Sub Clear_Form_Control()
         End With
     Next
     
-    학생성명.Tag = ""
-    수험번호.Tag = ""
-    
-    유시험_영어.Text = ""
-    유시험_수학.Text = ""
-    유시험_총점.Text = ""
-    
     'Height = 3990
     'Width = 4890   ' 높이와 너비를 설정합니다.
     Set Photo.Picture = imgList.ListImages.Item(1).Picture
     
-    OPTIONS(3).Visible = False
-    OPTIONS(5).Visible = False
+    
+    학생성명.Tag = ""
+    수험번호.Tag = ""
+    
+    제2지망.Text = ""
+    유시험_영어.Text = ""
+    유시험_수학.Text = ""
+    유시험_총점.Text = ""
     
     
-'>> 학년별 내역
-    Select Case Trim(basModule.schcd)
+    Labels(2).Caption = "◎ 굵은선 안에만 기재하시오."
+    Labels(78).Caption = "▼유시험 응시자중 응시학원 외에 다른 학원에서"
+    Labels(1).Caption = "  수강을 원할 경우 2지망을 표기하시오."
     
-        Case "N"
-            OPTIONS(0) = "▶인문계 학생들은 사회탐구 11과목 중 4과목까지 선택할 수 있으며, 제2외국어는 6과목 중 1과목을 선택할 수 있습니다."
-            OPTIONS(1) = "▶자연계 학생들은 수리영역에서 1과목, 과학탐구에서는 4과목까지 선택할 수 있습니다."
-            OPTIONS(2) = "▶자연계 학생 중 수리(나)형을 지원하는 학생은 별도 표기"
-            
-            Labels(2).Caption = "◎ 굵은선 안에만 기재하시오."
-            Labels(78).Caption = "▼수능 전문반은 신청자가 적을 경우"
-            Labels(1).Caption = "반을 구성하지 못할 수도 있습니다."
-            
-           
-            
-            OPTIONS(3).Visible = False
-'            FillBOXs_opt(0).Visible = False
-'            Lines_opt(3).Visible = False
-            'Lines_opt(0).Visible = False
-            
-            OPTIONS(21).Visible = False
-'            FillBOXs_opt(21).Visible = False
-            'Lines_opt(21).Visible = False
-            'Lines_opt(22).Visible = False
-        
-        Case "K"
-            OPTIONS(0) = "▶인문계 사회탐구 선택 중 택2학생과 제2외국어를 선택하지 않은 학생은 국어, 수학, 영어(5주 단위 수업)을 수강할 수 있습니다."
-            OPTIONS(1) = ""
-            OPTIONS(2) = ""
-            
-            Labels(2).Caption = "◎ 굵은선 안에만 기재하시오."
-            Labels(78).Caption = "▼유시험 응시자중 응시학원 외에 다른 학원에서"
-            Labels(1).Caption = "  수강을 원할 경우 2지망을 표기하시오."
-            
-           
-            
-            Labels(46).Caption = "2012 수능"
-            
-'            OPTIONS(21).Visible = False
-            
+    lbl_2Sel(0).Caption = "2지망"
+    lbl_2Sel(1).Caption = "선   택"
+    'Labels(46).Caption = "2013 수능"
+    
+    'OPTIONS(21).Visible = False
+    'OPTIONS(3).Visible = False
+    OPTIONS(11).Caption = "표준점수"
+    '2011-01-10 김한욱 강남 황혜영 과장 요청
+    Select Case Trim(basModule.SchCD)
         Case "W", "Q"
-            OPTIONS(0) = "▶인문계 사회탐구 선택 중 택2학생과 제2외국어를 선택하지 않은 학생은 국어, 수학, 영어(5주 단위 수업)을 수강할 수 있습니다."
-            OPTIONS(1) = ""
-            OPTIONS(2) = ""
-            OPTIONS(21) = ""
-            
-            Labels(2).Caption = "◎ 굵은선 안에만 기재하시오."
-            Labels(78).Caption = "▼유시험 응시자중 응시학원 외에 다른 학원에서"
-            Labels(1).Caption = "  수강을 원할 경우 2지망을 표기하시오."
-            
-            
-        
-        Case "J", "B"
-            OPTIONS(0) = ""
-            OPTIONS(1) = ""
-            OPTIONS(2) = ""
-            OPTIONS(21) = "※서울대 지망학생은 I에서 2과목, I에서 선택한 과목 외 II 1과목 선택"
-            Labels(2).Caption = "◎ 굵은선 안에만 기재하시오.(*는 필수정보이고 그 외에는 선택정보입니다."
-            Labels(78).Caption = ""
-            Labels(1).Caption = ""
-            
-            
-            
-'            OPTIONS(3).Visible = False
-'            FillBOXs_opt(0).Visible = False
-            'Lines_opt(3).Visible = False
-            'Lines_opt(0).Visible = False
-            
-            'OPTIONS(21).Visible = False
-'            FillBOXs_opt(21).Visible = False
-            'Lines_opt(21).Visible = False
-            'Lines_opt(22).Visible = False
-            
-            'Boxs(4).Visible = False
-            'FillBOXs(3).Visible = False
-            'Lines(25).Visible = False
-            
-        Case "S"
-            OPTIONS(0) = "▶인문계 학생들은 사회탐구에서는 4과목을 선택하여야 합니다."
-            OPTIONS(1) = "▶제2외국어 시간에 제2외국어를 하지 않는 학생들을 위해 수리, 세계사, 세계지리를 동시간대에 편성하니 1과목을 선택하시기 바랍니다."
-            OPTIONS(2) = "▶자연계 학생들은 과목Ⅰ에서는 3과목, 과학 Ⅱ에서는 1과목을 선택해야 합니다."
-            
-            Labels(2).Caption = "◎ 굵은선 안에만 기재하시오."
-            Labels(78).Caption = ""
-            Labels(1).Caption = ""
-            
-            
-'            OPTIONS(3).Visible = False
-'            FillBOXs_opt(0).Visible = False
-            'Lines_opt(3).Visible = False
-            'Lines_opt(0).Visible = False
-            
-            'OPTIONS(21).Visible = False
-'            FillBOXs_opt(21).Visible = False
-            'Lines_opt(21).Visible = False
-            'Lines_opt(22).Visible = False
-            
-            'Boxs(4).Visible = False
-            'FillBOXs(3).Visible = False
-            'Lines(25).Visible = False
-            
-        Case "P"
-            OPTIONS(0) = "▶인문계 학생들은 사회탐구에서는 4과목을 선택하여야 합니다."
-            OPTIONS(1) = "▶자연계 학생들은 과목Ⅰ에서는 3과목, 과학 Ⅱ에서는 1과목을 선택해야 합니다."
-            OPTIONS(2) = ""
-            
-            Labels(2).Caption = ""
-            Labels(78).Caption = ""
-            Labels(1).Caption = ""
-            
-'            Boxs(4).Visible = False
-'
-'            Labels(2).Visible = False
-'            Labels(78).Visible = False
-'            Labels(1).Visible = False
-'
-'            FillBOXs(3).Visible = False
-'            Lines(25).Visible = False
-            
-        Case "M"
-            OPTIONS(21) = "※I에서 3과목 선택 또는 I에서 2과목, II에서 1과목 선택"
-            OPTIONS(0) = "▶인문계 사회탐구 선택 중 택2 학생과, 제2외국어를 선택하지 않은 학생은 동시간대에 언어, 수리, 외국어(영어)를 수강할 수 있습니다."
-            OPTIONS(1) = ""
-            OPTIONS(2) = ""
-            
-            Labels(2).Caption = ""
-            Labels(78).Caption = ""
-            Labels(1).Caption = ""
-            
+            OPTIONS(4).Caption = "백 분 위"
+        Case Else
+            OPTIONS(4).Caption = "등   급"
     End Select
+        
+'        Select Case Trim(basModule.SchCD)
+'            Case "K", "W", "Q", "J"
+'                OPTIONS(11).Caption = "수능"
+'                OPTIONS(4).Caption = "표준"
+'            Case "M"
+'                OPTIONS(11).Caption = "표준점수"
+'                OPTIONS(4).Caption = "등   급"
+'            Case Else
+'                'NO ACTION
+'        End Select
+
+    
+    '>> 학원별 공지사항 세팅.
+    Dim arrGongji()       As String
+    Dim ni                As Long
+    
+    arrGongji = Get_StrGongjiJonghab
+    For ni = 0 To UBound(arrGongji)
+        OPTIONS(ni) = arrGongji(ni)
+    Next ni
+    
     
 End Sub
 
@@ -3976,7 +3794,7 @@ Private Sub Get_STD_Data()
     Dim nRec        As Long
     
     Dim sTmp        As String
-    Dim nTmp        As Long
+    Dim nTmp        As Single
     
     Dim sFilePath   As String
     
@@ -3985,10 +3803,11 @@ Private Sub Get_STD_Data()
     
     sStr = ""
     sStr = sStr & "  SELECT ROWNUM AS ID, "
-    sStr = sStr & "         SCHNO      , ACID       , EXMID      , STDNM      , SUBSTR(Birth_ymd,1,4)||'-'||SUBSTR(Birth_ymd,5,2) ||'-'||SUBSTR(Birth_ymd,7,2) AS Birth_ymd,"
+    sStr = sStr & "         SCHNO      , ACID       , EXMID      , STDNM      , SUBSTR(Birth_ymd,1,4)||'-'||SUBSTR(Birth_ymd,5,2) ||'-'||SUBSTR(Birth_ymd,7,2)  AS Birth_ymd,"
+    sStr = sStr & "         decode(SEL2_SCH,'E','강남기숙이천', 'Y','강남양재', 'M','강남M' ,'S','송파', 'N','노량진','해당학원없음') AS SEL2_SCH_NM   , "
     sStr = sStr & "         EXMTYPE    , KAEYOL     ,"
     sStr = sStr & "         SEL1       , SEL2       , SEL3       , SEL4       , SEL5       ,"
-    sStr = sStr & "         K_NUM      , M_NUM      , E_NUM      , TOT_NUM    ,"
+    sStr = sStr & "         K_NUM      , M_NUM      , E_NUM      , TOT_NUM    , N_NUM      ,"
     sStr = sStr & "         SEL1_SCH   , SEL2_SCH   ,"
     sStr = sStr & "         PASS1      , PASS2      , PASS3      , PASS4      , CL_CLOSE   ,"
     sStr = sStr & "         CY_ACNT    , TOT_AMT    ,"
@@ -4004,8 +3823,8 @@ Private Sub Get_STD_Data()
     sStr = sStr & "         SUBSTR(PRNT_ZIP,1,3)||'-'||SUBSTR(PRNT_ZIP,4,3) AS PRNT_ZIP, PRNT_ADDR1 , PRNT_ADDR2 ,"
     sStr = sStr & "         PRNT_TEL   , PRNT_CEL   , PRNT_JOB   , PRNT_W_TEL ,"
     sStr = sStr & "         PHOTO_PATH , DECODE(R_WAY,'1','','2','-int','3','') AS R_WAY, PTS_SEL, ORD_NO, "
-    sStr = sStr & "         ACID||EXMID AS IMAGE_FILE, "
-    sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.schcd) & "','',ACID) AS WANT_ACID, "
+    sStr = sStr & "         ACID||EXMID AS IMAGE_FILE, MU_TYPE, "
+    sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.SchCD) & "','',ACID) AS WANT_ACID, "
     
     
     sStr = sStr & "         DECODE(GR,'1','수능등급','2','6월 평가원','3','9월 평가원','4','6월 평가원','5','9월 평가원','') AS GR, "            '<< 2009년 바뀐내용
@@ -4021,7 +3840,7 @@ Private Sub Get_STD_Data()
     'sStr = sStr & "         DECODE(ACID,'" & Trim(basModule.SchCD) & "','" & Trim(basModule.SchCD) & "',ACID) AS WANT_ACID "       '< TEST
     
     '****************************** < IMAGE 저장 디렉토리 > **********************************************
-    Select Case basModule.schcd
+    Select Case basModule.SchCD
         Case "N"                '< 노량진
             sStr = sStr & "'" & Noryangjin & "'||"
         Case "K", "W", "Q"      '< 강남
@@ -4137,7 +3956,7 @@ Private Sub Get_STD_Data()
             sStr = sStr & "         MAX(Birth_ymd     ) AS Birth_ymd      ,"
             sStr = sStr & "         MAX(EXMTYPE   ) AS EXMTYPE    , MAX(KAEYOL    ) AS KAEYOL     ,"
             sStr = sStr & "         MAX(SEL1      ) AS SEL1       , MAX(SEL2      ) AS SEL2       , MAX(SEL3      ) AS SEL3      , MAX(SEL4      ) AS SEL4      , MAX(SEL5      ) AS  SEL5      ,"
-            sStr = sStr & "         MAX(K_NUM     ) AS K_NUM      , MAX(M_NUM     ) AS M_NUM      , MAX(E_NUM     ) AS E_NUM     , MAX(TOT_NUM   ) AS TOT_NUM   ,"
+            sStr = sStr & "         MAX(K_NUM     ) AS K_NUM      , MAX(M_NUM     ) AS M_NUM      , MAX(E_NUM     ) AS E_NUM     , MAX(TOT_NUM   ) AS TOT_NUM   , MAX(N_NUM   ) AS N_NUM    ,"
             sStr = sStr & "         MAX(SEL1_SCH  ) AS SEL1_SCH   , MAX(SEL2_SCH  ) AS SEL2_SCH   ,"
             sStr = sStr & "         MAX(PASS1     ) AS PASS1      , MAX(PASS2     ) AS PASS2      , MAX(PASS3     ) AS PASS3     , MAX(PASS4     ) AS PASS4     , MAX(CL_CLOSE  ) AS  CL_CLOSE  ,"
             sStr = sStr & "         MAX(CY_ACNT   ) AS CY_ACNT    , MAX(TOT_AMT   ) AS TOT_AMT    ,"
@@ -4152,7 +3971,7 @@ Private Sub Get_STD_Data()
             sStr = sStr & "         MAX(PRNT_NM   ) AS PRNT_NM    , MAX(PRNT_RLTN ) AS PRNT_RLTN  ,"
             sStr = sStr & "         MAX(PRNT_ZIP  ) AS PRNT_ZIP   , MAX(PRNT_ADDR1) AS PRNT_ADDR1 , MAX(PRNT_ADDR2) AS PRNT_ADDR2,"
             sStr = sStr & "         MAX(PRNT_TEL  ) AS PRNT_TEL   , MAX(PRNT_CEL  ) AS PRNT_CEL   , MAX(PRNT_JOB  ) AS PRNT_JOB  , MAX(PRNT_W_TEL) AS PRNT_W_TEL,"
-            sStr = sStr & "         MAX(PHOTO_PATH) AS PHOTO_PATH , MAX(R_WAY     ) AS R_WAY      , MAX(PTS_SEL   ) AS PTS_SEL   , MAX(ORD_NO    ) AS ORD_NO    , MAX(MU_TYPE) AS GR "
+            sStr = sStr & "         MAX(PHOTO_PATH) AS PHOTO_PATH , MAX(R_WAY     ) AS R_WAY      , MAX(PTS_SEL   ) AS PTS_SEL   , MAX(ORD_NO    ) AS ORD_NO    , MAX(MU_TYPE) AS GR, MAX(MU_TYPE) AS MU_TYPE"
             
                     '2010.12.14 값이 double처리 되서 MAX로 변경 김한욱
                     
@@ -4208,7 +4027,7 @@ Private Sub Get_STD_Data()
             '---------------------------------------------------------------------------- 전체학생 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            FROM CLSTD01TB"
-            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "           WHERE ACID = '" & Trim(basModule.SchCD) & "'"
             '>> 수험번호
             If Trim(fpExmID_S.UnFmtText) > " " And Trim(fpExmID_E.UnFmtText) > " " Then
                 sStr = sStr & "         AND EXMID BETWEEN '" & Trim(fpExmID_S.UnFmtText) & "' AND '" & Trim(fpExmID_E.UnFmtText) & "'"
@@ -4228,23 +4047,26 @@ Private Sub Get_STD_Data()
             End If
             
             '>> 계열
-            Select Case Trim(basModule.schcd)
-                Case "K", "S", "P"
-                    If Trim(Right(cboKaeyol.Text, 30)) <> "XX" Then
-                        sStr = sStr & "     AND KAEYOL  = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
-                    End If
-                Case Else
-                    Select Case Trim(Right(cboKaeyol, 30))
-                        Case "XX"
-                            ' no action
-                        Case "01", "03", "11", "13"
-                            sStr = sStr & "     AND SEL1 > ' ' "
-                        Case "02", "12"
-                            sStr = sStr & "     AND SEL3 > ' ' "
-                        Case "04", "05", "06", "07", "08", "09", "10", "14", "15", "16"
-                            sStr = sStr & "     AND KAEYOL = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
-                    End Select
-            End Select
+            If Trim(Right(cboKaeyol.Text, 30)) <> "ALL" Then
+                sStr = sStr & "     AND KAEYOL  = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
+            End If
+'            Select Case Trim(basModule.schcd)
+'                Case "K", "S", "P"
+'                    If Trim(Right(cboKaeyol.Text, 30)) <> "ALL" Then
+'                        sStr = sStr & "     AND KAEYOL  = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
+'                    End If
+'                Case Else
+'                    Select Case Trim(Right(cboKaeyol, 30))
+'                        Case "ALL"
+'                            ' no action
+'                        Case "01", "03", "11", "13"
+'                            sStr = sStr & "     AND SEL1 > ' ' "
+'                        Case "02", "12"
+'                            sStr = sStr & "     AND SEL3 > ' ' "
+'                        Case "04", "05", "06", "07", "08", "09", "10", "14", "15", "16", "19", "20"
+'                            sStr = sStr & "     AND KAEYOL = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
+'                    End Select
+'            End Select
             
             '>> 학생명
             If Trim(txtStdNM.Text) > " " Then
@@ -4265,10 +4087,10 @@ Private Sub Get_STD_Data()
             '---------------------------------------------------------------------------- 합격자 조회 START
             sStr = sStr & "          SELECT *"
             sStr = sStr & "            From CLSTD01TB"
-            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                  PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                  PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                  PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
+            sStr = sStr & "           WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                  PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                  PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                  PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
             sStr = sStr & "             AND EXMID > ' ' "
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -4277,23 +4099,26 @@ Private Sub Get_STD_Data()
                 sStr = sStr & "         AND EXMTYPE = '1'"
             End If
             '>> 계열
-            Select Case Trim(basModule.schcd)
-                Case "K", "S", "P"
-                    If Trim(Right(cboKaeyol.Text, 30)) <> "XX" Then
-                        sStr = sStr & "     AND KAEYOL  = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
-                    End If
-                Case Else
-                    Select Case Trim(Right(cboKaeyol, 30))
-                        Case "XX"
-                            ' no action
-                        Case "01", "03", "11", "13"
-                            sStr = sStr & "     AND SEL1 > ' ' "
-                        Case "02", "12"
-                            sStr = sStr & "     AND SEL3 > ' ' "
-                        Case "04", "05", "06", "07", "08", "09", "10", "14", "15", "16"
-                            sStr = sStr & "     AND KAEYOL = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
-                    End Select
-            End Select
+            If Trim(Right(cboKaeyol.Text, 30)) <> "ALL" Then
+                sStr = sStr & "     AND KAEYOL  = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
+            End If
+'            Select Case Trim(basModule.schcd)
+'                Case "K", "S", "P"
+'                    If Trim(Right(cboKaeyol.Text, 30)) <> "ALL" Then
+'                        sStr = sStr & "     AND KAEYOL  = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
+'                    End If
+'                Case Else
+'                    Select Case Trim(Right(cboKaeyol, 30))
+'                        Case "ALL"
+'                            ' no action
+'                        Case "01", "03", "11", "13"
+'                            sStr = sStr & "     AND SEL1 > ' ' "
+'                        Case "02", "12"
+'                            sStr = sStr & "     AND SEL3 > ' ' "
+'                        Case "04", "05", "06", "07", "08", "09", "10", "14", "15", "16", "19", "20"
+'                            sStr = sStr & "     AND KAEYOL = '" & Trim(Right(cboKaeyol.Text, 30)) & "'"
+'                    End Select
+'            End Select
             
             '>> 학생명
             If Trim(txtStdNM.Text) > " " Then
@@ -4397,9 +4222,8 @@ Private Sub Get_STD_Data()
     DBCmd.CommandText = sStr
     DBCmd.CommandType = adCmdText
     DBCmd.CommandTimeout = 30
-    
-    
-    
+
+
 ''>> 분원
 '        sTmp = Trim(basModule.SchCD)
 '        nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
@@ -4502,75 +4326,14 @@ Private Sub Get_STD_Data()
                     uSTD(nRec).E_NUM = nTmp
                 nTmp = 0:      If IsNumeric(.Fields("TOT_NUM")) = True Then nTmp = .Fields("TOT_NUM")
                     uSTD(nRec).TOT_NUM = nTmp
+                nTmp = 0:      If IsNumeric(.Fields("N_NUM")) = True Then nTmp = .Fields("N_NUM")
+                    uSTD(nRec).N_NUM = nTmp
                 
                 
-                sTmp = "":      If IsNull(.Fields("SEL1_SCH")) = False Then sTmp = .Fields("SEL1_SCH")
+                sTmp = " ":     If IsNull(.Fields("SEL1_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL1_SCH")))
                     uSTD(nRec).SEL1_SCH = sTmp
-                    
-                    Select Case uSTD(nRec).SEL1_SCH
-                        Case "N"
-                            uSTD(nRec).SEL1_SCH = "노량진"
-                        Case "K"
-                            uSTD(nRec).SEL1_SCH = "강남"
-                        Case "S"
-                            uSTD(nRec).SEL1_SCH = "송파"
-                        Case "P"
-                            uSTD(nRec).SEL1_SCH = "송파 M"
-                        Case "M"
-                            uSTD(nRec).SEL1_SCH = "강남 M"
-                            
-                        Case "W"
-                            uSTD(nRec).SEL1_SCH = "주말법의대"
-                        Case "Q"
-                            uSTD(nRec).SEL1_SCH = "야간법의대"
-                        
-                        Case "J"
-                            uSTD(nRec).SEL1_SCH = "양재"
-                        Case "B"
-                            uSTD(nRec).SEL1_SCH = "부산"
-                            
-                    End Select
-                
-                
-                sTmp = "":      If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = .Fields("SEL2_SCH")
+                sTmp = " ":     If IsNull(.Fields("SEL2_SCH")) = False Then sTmp = basCommonSTD.Get_SchName(Trim(.Fields("SEL2_SCH")))
                     uSTD(nRec).SEL2_SCH = sTmp
-                    
-                    '<< 2008.01.10 : 노량진 - 수능 전문반 >>
-                    If Trim(basModule.schcd) = "N" Then
-                        Select Case uSTD(nRec).kaeyol
-                            Case "05"
-                                uSTD(nRec).SEL2_SCH = "인문"
-                            Case "06"
-                                uSTD(nRec).SEL2_SCH = "자연"
-                            
-                            Case Else
-                                uSTD(nRec).SEL2_SCH = ""
-                        End Select
-                    Else
-                        Select Case uSTD(nRec).SEL2_SCH
-                            Case "N"
-                                uSTD(nRec).SEL2_SCH = "노량진"
-                            Case "K"
-                                uSTD(nRec).SEL2_SCH = "강남"
-                            Case "S"
-                                uSTD(nRec).SEL2_SCH = "송파"
-                            Case "P"
-                                uSTD(nRec).SEL2_SCH = "송파 M"
-                            Case "M"
-                                uSTD(nRec).SEL2_SCH = "강남 M"
-                                
-                            Case "W"
-                                uSTD(nRec).SEL2_SCH = "주말법의대"
-                            Case "Q"
-                                uSTD(nRec).SEL2_SCH = "야간법의대"
-                                
-                            Case "J"
-                                uSTD(nRec).SEL2_SCH = "양재"
-                            Case "B"
-                                uSTD(nRec).SEL2_SCH = "부산"
-                                
-                        End Select
-                    End If
                 
                 sTmp = "":      If IsNull(.Fields("PASS1")) = False Then sTmp = .Fields("PASS1")
                     uSTD(nRec).PASS1 = sTmp
@@ -4688,9 +4451,11 @@ Private Sub Get_STD_Data()
                 sTmp = "":      If IsNull(.Fields("PTS_SEL")) = False Then sTmp = .Fields("PTS_SEL")
                     uSTD(nRec).PTS_SEL = sTmp
                     
-                
                 sTmp = "":      If IsNull(.Fields("ORD_NO")) = False Then sTmp = .Fields("ORD_NO")
                     uSTD(nRec).ORD_NO = sTmp
+                    
+                sTmp = "":      If IsNull(.Fields("MU_TYPE")) = False Then sTmp = .Fields("MU_TYPE")
+                uSTD(nRec).MU_TYPE = Get_StrMuType(sTmp)
                     
                 sTmp = "":      If IsNull(.Fields("IMAGE_FILE")) = False Then sTmp = .Fields("IMAGE_FILE")
                     uSTD(nRec).IMAGE_FILE = sTmp
@@ -4700,7 +4465,7 @@ Private Sub Get_STD_Data()
                 
                 If uSTD(nRec).ORD_NO = "" Then          '< 학원접수생인 경우 : 사진 업로드
                     sFilePath = ""
-                    Select Case Trim(basModule.schcd)
+                    Select Case Trim(basModule.SchCD)
                         Case "N"
                             sFilePath = "NDOC/dshw/noryangjin/register/ACC/"
                         Case "K", "W", "Q"
@@ -4717,7 +4482,7 @@ Private Sub Get_STD_Data()
                             sFilePath = "NDOC/dshw/busan/register/ACC/"
                     End Select
                     
-                    sFilePath = sFilePath & Trim(basModule.schcd) & uSTD(nRec).EXMID & ".jpg"       '< image 경로 : ORDNO 가 없는 경우
+                    sFilePath = sFilePath & Trim(basModule.SchCD) & uSTD(nRec).EXMID & ".jpg"       '< image 경로 : ORDNO 가 없는 경우
                 
                     uSTD(nRec).IMAGE_DIR = sFilePath
                 Else
@@ -4745,10 +4510,10 @@ Private Sub Get_STD_Data()
                 uSTD(nRec).JTOT_NUM = 0
                 uSTD(nRec).KTOT_NUM = 0
                     
-                Select Case Trim(basModule.schcd)
+                Select Case Trim(basModule.SchCD)
                     Case "K", "W", "Q", "M"
                         Select Case uSTD(nRec).kaeyol
-                            Case "01", "04", "06", "11", "16"
+                            Case "01", "04", "06", "11", "16", "19"
                                 If uSTD(nRec).PTS_SEL = "1" Then '수리가형
                                 
                                     '// 언어
@@ -4768,6 +4533,7 @@ Private Sub Get_STD_Data()
                                         uSTD(nRec).JE_NUM = nTmp
                                     nTmp = 0:      If IsNumeric(.Fields("K03")) = True Then nTmp = .Fields("K03")
                                         uSTD(nRec).KE_NUM = nTmp
+                                    
                                     
                                 ElseIf uSTD(nRec).PTS_SEL = "2" Then '수리나형
                                 
@@ -4835,7 +4601,7 @@ Private Sub Get_STD_Data()
                                         uSTD(nRec).KE_NUM = nTmp
                                     
                                 End If
-                            Case "02", "05", "07", "12", "17"
+                            Case "02", "05", "07", "12", "17", "20"
                                 If uSTD(nRec).PTS_SEL = "2" Then
                                 
                                     '// 언어
@@ -4943,8 +4709,6 @@ Private Sub Get_STD_Data()
                 '-------------------------------------------------------------------------------
                 
                 
-                
-                
                 .MoveNext
                 
             Next nRec
@@ -4998,6 +4762,7 @@ End Sub
 Private Sub Std_Data_Show(Index As Long)
     
     Dim nKME_Sum        As Integer
+    Dim nKME_Sum2        As Integer
     
     If Me.Tag = "LOAD" Then Exit Sub
     
@@ -5011,7 +4776,7 @@ Private Sub Std_Data_Show(Index As Long)
                         접수계열2.Text = "인    문"
             Case "02":  접수계열.Text = "자 연 계"
                         접수계열2.Text = "자    연"
-            Case "03":  Select Case Trim(basModule.schcd)
+            Case "03":  Select Case Trim(basModule.SchCD)
                                Case "N"
                                     접수계열.Text = "예.체능계"
                                     접수계열2.Text = "예.체능계"
@@ -5022,7 +4787,7 @@ Private Sub Std_Data_Show(Index As Long)
                                     접수계열.Text = ""
                                     접수계열2.Text = ""
                         End Select
-            Case "04":  Select Case Trim(basModule.schcd)
+            Case "04":  Select Case Trim(basModule.SchCD)
                                Case "N"
                                     접수계열.Text = "수리(나) 자연"
                                     접수계열2.Text = "수 리 나"
@@ -5036,7 +4801,7 @@ Private Sub Std_Data_Show(Index As Long)
                                     접수계열.Text = ""
                                     접수계열2.Text = ""
                         End Select
-            Case "05":  Select Case Trim(basModule.schcd)
+            Case "05":  Select Case Trim(basModule.SchCD)
                                Case "N"
                                     접수계열.Text = "수능 인문"
                                     접수계열2.Text = "수능전문"
@@ -5053,7 +4818,7 @@ Private Sub Std_Data_Show(Index As Long)
                                     접수계열.Text = ""
                                     접수계열2.Text = ""
                         End Select
-            Case "06":  Select Case Trim(basModule.schcd)
+            Case "06":  Select Case Trim(basModule.SchCD)
                                Case "N"
                                     접수계열.Text = "수능 자연"
                                     접수계열2.Text = "수능전문"
@@ -5073,7 +4838,7 @@ Private Sub Std_Data_Show(Index As Long)
                                     접수계열.Text = ""
                                     접수계열2.Text = ""
                         End Select
-            Case "07":  Select Case Trim(basModule.schcd)
+            Case "07":  Select Case Trim(basModule.SchCD)
                                Case "K"
                                     접수계열.Text = "야간서울대반"
                                     접수계열2.Text = "자 연"
@@ -5089,7 +4854,7 @@ Private Sub Std_Data_Show(Index As Long)
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "08":  Select Case Trim(basModule.schcd)
+            Case "08":  Select Case Trim(basModule.SchCD)
                                Case "N":  접수계열.Text = "신설자연"
                                           접수계열2.Text = "신설자연"
                                Case "S":  접수계열.Text = "수리나형"
@@ -5101,7 +4866,7 @@ Private Sub Std_Data_Show(Index As Long)
                                           접수계열2.Text = ""
                         End Select
                         
-            Case "09":  Select Case Trim(basModule.schcd)
+            Case "09":  Select Case Trim(basModule.SchCD)
                                Case "N":  접수계열.Text = "신설수능"
                                           접수계열2.Text = "인  문"
                                Case "B"
@@ -5110,7 +4875,7 @@ Private Sub Std_Data_Show(Index As Long)
                                Case Else: 접수계열.Text = ""
                                           접수계열2.Text = ""
                         End Select
-            Case "10":  Select Case Trim(basModule.schcd)
+            Case "10":  Select Case Trim(basModule.SchCD)
                                Case "N":  접수계열.Text = "신설수능"
                                           접수계열2.Text = "자  연"
                                Case "B"
@@ -5121,7 +4886,7 @@ Private Sub Std_Data_Show(Index As Long)
                         End Select
                         
                         
-            Case "11", "16":  Select Case Trim(basModule.schcd)
+            Case "11", "16":  Select Case Trim(basModule.SchCD)
                                      Case "N":  접수계열.Text = "편)인문"
                                                 접수계열2.Text = "인    문"
                                      Case "K":  접수계열.Text = "선착순인문"
@@ -5137,7 +4902,7 @@ Private Sub Std_Data_Show(Index As Long)
                                      Case Else: 접수계열.Text = ""
                                                 접수계열2.Text = ""
                               End Select
-            Case "12", "17":  Select Case Trim(basModule.schcd)
+            Case "12", "17":  Select Case Trim(basModule.SchCD)
                                      Case "N":  접수계열.Text = "편)자연"
                                                 접수계열2.Text = "자    연"
                                      Case "K":  접수계열.Text = "선착순자연"
@@ -5154,41 +4919,49 @@ Private Sub Std_Data_Show(Index As Long)
                                                 접수계열2.Text = ""
                               End Select
                               
-            Case "13":        Select Case Trim(basModule.schcd)
+            Case "13":        Select Case Trim(basModule.SchCD)
                                      Case "N":  접수계열.Text = "편)예체능"
                                                 접수계열2.Text = "예체능"
                               End Select
-            Case "14":        Select Case Trim(basModule.schcd)
+            Case "14":        Select Case Trim(basModule.SchCD)
                                      Case "N":  접수계열.Text = "편)수리(나)"
                                                 접수계열2.Text = "자    연"
                               End Select
-            Case "15":        Select Case Trim(basModule.schcd)
+            Case "15":        Select Case Trim(basModule.SchCD)
                                      Case "N":  접수계열.Text = "편)인문수능"
                                                 접수계열2.Text = "인    문"
                               End Select
-            Case "16":        Select Case Trim(basModule.schcd)
+            Case "16":        Select Case Trim(basModule.SchCD)
                                      Case "N":  접수계열.Text = "편)자연수능"
                                                 접수계열2.Text = "자    연"
                               End Select
                          
-            Case "18":        Select Case Trim(basModule.schcd)
+            Case "18":        Select Case Trim(basModule.SchCD)
                                      Case "S":  접수계열.Text = "인문프리미엄"
                                                 접수계열2.Text = "인문프리미엄"
                                      Case "J":  접수계열.Text = "인문프리미엄"
                                                 접수계열2.Text = "인문프리미엄"
                               End Select
                               
-            Case "19":        Select Case Trim(basModule.schcd)
+            Case "19":        Select Case Trim(basModule.SchCD)
                                      Case "S":  접수계열.Text = "자연프리미엄"
                                                 접수계열2.Text = "자연프리미엄"
-                                     Case "J":  접수계열.Text = "자연프리미엄"
-                                                접수계열2.Text = "자연프리미엄"
+                                     Case "J":  접수계열.Text = "인 문 계"
+                                                접수계열2.Text = "인    문"
+                                     Case "K":    접수계열.Text = "내신우수자인문"
+                                                접수계열2.Text = "내신우수자인문"
                               End Select
-                              
+            Case "20":        Select Case Trim(basModule.SchCD)
+                                     Case "K": 접수계열.Text = "내신우수자자연"
+                                               접수계열2.Text = "내신우수자자연"
+                                     Case "J":  접수계열.Text = "자 연 계"
+                                                접수계열2.Text = "자    연"
+                                     
+                              End Select
             Case Else:  접수계열.Text = ""
         End Select
         
-        
+        제2지망.Text = .SEL2_SCH
         
         수험번호.Text = .EXMID
         학생성명.Text = .STDNM:                 등급.Text = .GR
@@ -5216,27 +4989,33 @@ Private Sub Std_Data_Show(Index As Long)
         보호자직업.Text = .PRNT_JOB
         보호자연락처_직장.Text = .PRNT_W_TEL
                              
+        
         선택_사회탐구.Text = " "
         선택_외국어.Text = " "
-        선택_수리영역.Text = " "
+'        선택_수리영역.Text = " "
         선택_과학탐구.Text = " "
         
         선택_사회탐구.Text = Div_Gwamok_NM("SEL1", .SEL1)
         선택_외국어.Text = Div_Gwamok_NM("SEL2", .SEL2)
         
-        Select Case Trim(basModule.schcd)
-            Case "W":
-                       선택_과학탐구.Text = ""
-                       선택_수리영역.Text = ""
-            
-            Case "Q":
-                       선택_과학탐구.Text = ""
-                       선택_수리영역.Text = ""
-            Case Else
-                       선택_과학탐구.Text = Div_Gwamok_NM("SEL3", .SEL3)
-                       선택_수리영역.Text = Div_Gwamok_NM("SEL4", .SEL4)
-            End Select
-            
+        Select Case Trim(basModule.SchCD)
+        Case "W":
+                   선택_과학탐구.Text = ""
+                   '선택_수리영역.Text = ""
+        
+        Case "Q":
+                   선택_과학탐구.Text = ""
+                   '선택_수리영역.Text = ""
+        Case Else
+                   선택_과학탐구.Text = Div_Gwamok_NM("SEL3", .SEL3)
+                   '선택_수리영역.Text = Div_Gwamok_NM("SEL4", .SEL4)
+        End Select
+        
+        사탐비고.Visible = False: 과탐비고.Visible = False
+        If 선택_사회탐구.Text <> "" Then: 사탐비고.Visible = True
+        If 선택_과학탐구.Text <> "" Then: 과탐비고.Visible = True
+        
+        
         선택_사회논술.Text = ""
         선택_자연논술.Text = ""
         If Trim(.SEL1) > " " Then                                   '<<- 사회논술
@@ -5244,6 +5023,9 @@ Private Sub Std_Data_Show(Index As Long)
         ElseIf Trim(.SEL3) > " " Then                               '<<- 자연논술
             선택_자연논술.Text = Div_Gwamok_NM("SEL5", .SEL5)
         End If
+        
+        '등급
+        txtMu_Type.Caption = IIf(.MU_TYPE = "", "수능등급", .MU_TYPE)
         
         언어.Text = ""
         수리.Text = ""
@@ -5261,6 +5043,11 @@ Private Sub Std_Data_Show(Index As Long)
         유시험_영어.Text = ""
         유시험_총점.Text = ""
         
+        '내신등급
+        If .N_NUM <> "0" Then
+            내신등급.Text = .N_NUM
+        End If
+        
         Select Case Trim(.EXMTYPE)
             Case "0"
                 
@@ -5269,12 +5056,25 @@ Private Sub Std_Data_Show(Index As Long)
                 If IsNumeric(Trim(.M_NUM)) = True Then nKME_Sum = nKME_Sum + CInt(.M_NUM)
                 If IsNumeric(Trim(.E_NUM)) = True Then nKME_Sum = nKME_Sum + CInt(.E_NUM)
                 
+                
                 If nKME_Sum > 100 Then      '표준점수
                     언어.Text = .K_NUM
                     수리.Text = .M_NUM
                     영어.Text = .E_NUM
-                    
                     언수외합.Text = Format(nKME_Sum, "##0")
+                    
+                    '강남 백분위도 표시
+                    If basModule.SchCD = "K" Then
+                        언어2.Text = .KK_NUM
+                        수리2.Text = .KM_NUM
+                        영어2.Text = .KE_NUM
+                        
+                        nKME_Sum2 = 0
+                        If IsNumeric(Trim(.K_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CInt(.KK_NUM)
+                        If IsNumeric(Trim(.M_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CInt(.KM_NUM)
+                        If IsNumeric(Trim(.E_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CInt(.KE_NUM)
+                        언수외합2.Text = Format(nKME_Sum2, "##0")
+                    End If
                 Else                        '등급
                     언어2.Text = .K_NUM
                     수리2.Text = .M_NUM
@@ -5284,33 +5084,33 @@ Private Sub Std_Data_Show(Index As Long)
                 End If
                 
                 
-                Select Case Trim(basModule.schcd)
-                    Case "M"
-                        
-                        '## 표준점수 찍히는 부분이 틀려짐.
-                        언어.Text = .JK_NUM
-                        수리.Text = .JM_NUM
-                        영어.Text = .JE_NUM
-                        
-                        언수외합.Text = .JK_NUM + .JM_NUM + .JE_NUM
-                        
-                        '> 등급만 찍힘
-                        언어2.Text = .K_NUM
-                        수리2.Text = .M_NUM
-                        영어2.Text = .E_NUM
-                        
-                        언수외합2.Text = Format(nKME_Sum, "##0")
-                    Case "K", "W", "Q"
-                        '2010.12.13 김한욱 등급 찍히게 수정
-                        '2011-01-10 김한욱 황혜영 과장 요청으로 백분위 들어감 CLSTD03TB
-                            언어2.Text = .KK_NUM
-                            수리2.Text = .KM_NUM
-                            영어2.Text = .KE_NUM
-                End Select
+'                Select Case Trim(basModule.SchCD)
+'                    Case "M"
+'
+'                        '## 표준점수 찍히는 부분이 틀려짐.
+'                        언어.Text = .JK_NUM
+'                        수리.Text = .JM_NUM
+'                        영어.Text = .JE_NUM
+'
+'                        언수외합.Text = .JK_NUM + .JM_NUM + .JE_NUM
+'
+'                        '> 등급만 찍힘
+'                        언어2.Text = .K_NUM
+'                        수리2.Text = .M_NUM
+'                        영어2.Text = .E_NUM
+'
+'                        언수외합2.Text = Format(nKME_Sum, "##0")
+'                    Case "K", "W", "Q"
+'                        '2010.12.13 김한욱 등급 찍히게 수정
+'                        '2011-01-10 김한욱 황혜영 과장 요청으로 백분위 들어감 CLSTD03TB
+'                            언어2.Text = .KK_NUM
+'                            수리2.Text = .KM_NUM
+'                            영어2.Text = .KE_NUM
+'                End Select
                 
             Case "1"
             
-                Select Case Trim(basModule.schcd)
+                Select Case Trim(basModule.SchCD)
                     Case "M"
                         유시험_수학.Text = .M_NUM
                         유시험_영어.Text = .E_NUM
@@ -5394,10 +5194,10 @@ Private Sub Std_Data_Show(Index As Long)
         
         '>> 인문계 나형, 자연계 가형
         
-        Select Case Trim(basModule.schcd)
+        Select Case Trim(basModule.SchCD)
             Case "K", "W", "Q"
                 Select Case Trim(.kaeyol)
-                    Case "01", "04", "06", "11", "16"
+                    Case "01", "04", "06", "11", "16", "19"
                         If Trim(.PTS_SEL) = "1" Then
                             수리선택.Caption = "수리[가]"
                         ElseIf Trim(.PTS_SEL) = "2" Then
@@ -5405,16 +5205,16 @@ Private Sub Std_Data_Show(Index As Long)
                         Else
                             수리선택.Caption = IIf(Trim(.SEL4) > " ", "수리[가]", "수리[나]")
                         End If
-                    Case "02", "05", "07", "12", "17"
-                        If Trim(.PTS_SEL) = "2" Then
-                            수리선택.Caption = "수리[나]"
-                        ElseIf Trim(.PTS_SEL) = "1" Then
+                    Case "02", "05", "07", "12", "17", "20"
+                        If Trim(.PTS_SEL) = "1" Then
                             수리선택.Caption = "수리[가]"
+                        ElseIf Trim(.PTS_SEL) = "2" Then
+                            수리선택.Caption = "수리[나]"
                         Else
                             수리선택.Caption = IIf(Trim(.SEL4) > " ", "수리[가]", "수리[나]")
                         End If
                     Case Else
-                        수리선택.Caption = ""
+                        수리선택.Caption = "수리"
                 End Select
             Case "S", "P"               '< 2009.01.12 : 송파/ 마송
                 Select Case Trim(.kaeyol)
@@ -5424,6 +5224,19 @@ Private Sub Std_Data_Show(Index As Long)
                         수리선택.Caption = "수리[가]"
                     Case Else
                         수리선택.Caption = ""
+                End Select
+            Case "J"
+                Select Case Trim(.kaeyol)
+                    Case "01", "02", "04", "05", "06", "07", "08", "09", "10", "11", "12", "14", "15", "16", "19", "20"
+                        '2011-01-10 김한욱 수리 구분 PTS_SEL 1:가형 2:나형
+                        '수리선택.Caption = IIf(Trim(.SEL4) > " ", "수리[가]", "수리[나]")
+                        If Trim(.PTS_SEL) = "1" Then
+                            수리선택.Caption = "수리[가]"
+                        ElseIf Trim(.PTS_SEL) = "2" Then
+                           수리선택.Caption = "수리[나]"
+                        End If
+                    Case Else
+                        수리선택.Caption = "수리"
                 End Select
             Case Else
                 Select Case Trim(.kaeyol)
@@ -5496,6 +5309,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = constSatams(9)
 '                    Case "11"
 '                        sTmp = "세계지리"
+                    Case TGANG_CODE
+                        sTmp = "특강"
                 End Select
             Case "SEL2"
                 Select Case sTmp
@@ -5526,6 +5341,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = "아랍어"
                     Case "44"
                         sTmp = "베트남어"
+                    Case TGANG_ENG2_CODE
+                        sTmp = "특강"
                 End Select
             Case "SEL3"
                 Select Case sTmp
@@ -5545,6 +5362,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = "생명과학2"
                     Case "58"
                         sTmp = "지구과학2"
+                    Case TGANG_CODE
+                        sTmp = "특강"
                 End Select
             Case "SEL4"
                 Select Case sTmp
@@ -5656,7 +5475,7 @@ Private Sub Get_STD_image()
         
         If Dir(sLocalFile) = "" Then                                        '<< 학생 이미지 없는 것만 받음
         
-            Select Case Trim(basModule.schcd)
+            Select Case Trim(basModule.SchCD)
                 Case "B"        '<< 부산직영
                     sSourceUrl = "http://www.dsbusan.com" & uSTD(nRec).PHOTO_PATH           '<< 서버의 이미지 경로
                 Case Else
@@ -5974,7 +5793,7 @@ Private Function Make_image_Path(ByVal aSchNO As String, ByVal aExmID As String,
     Dim MaxSize         As Long
     
     sFilePath = ""
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N"
             sFilePath = "/NDOC/dshw/noryangjin/register/ACC/"
         Case "K", "W", "Q"
@@ -5991,7 +5810,7 @@ Private Function Make_image_Path(ByVal aSchNO As String, ByVal aExmID As String,
             sFilePath = "/NDOC/dshw/busan/register/ACC/"
     End Select
     
-    sFilePath = sFilePath & Trim(basModule.schcd) & aExmID & ".jpg"
+    sFilePath = sFilePath & Trim(basModule.SchCD) & aExmID & ".jpg"
     
     On Error GoTo ErrStmt
     
@@ -6001,8 +5820,8 @@ Private Function Make_image_Path(ByVal aSchNO As String, ByVal aExmID As String,
     Set DBParam = New ADODB.Parameter
     
     DBCmd.ActiveConnection = basDataBase.DBConn             '<< DB connection
-    
-    
+
+
     
     '<< UPDATE
     sStr = ""
@@ -6058,6 +5877,8 @@ ErrStmt:
     
     Make_image_Path = ""
 End Function
+
+
 
 
 

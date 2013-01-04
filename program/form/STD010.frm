@@ -4,13 +4,14 @@ Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
 Begin VB.Form STD010 
    Caption         =   "입학사정 >> 학생등록"
-   ClientHeight    =   11010
+   ClientHeight    =   10800
    ClientLeft      =   -240
    ClientTop       =   -2400
    ClientWidth     =   15240
    LinkTopic       =   "Form1"
+   LockControls    =   -1  'True
    MDIChild        =   -1  'True
-   ScaleHeight     =   17480.11
+   ScaleHeight     =   17146.7
    ScaleMode       =   0  '사용자
    ScaleWidth      =   20302.67
    Begin FPSpread.vaSpread sprStdData 
@@ -69,9 +70,9 @@ Begin VB.Form STD010
       BackColor       =   &H00808080&
       BorderStyle     =   0  '없음
       Height          =   2295
-      Left            =   14760
+      Left            =   14910
       TabIndex        =   172
-      Top             =   720
+      Top             =   900
       Width           =   5625
       Begin VB.Frame Frame7 
          BackColor       =   &H00FFFFFF&
@@ -1920,12 +1921,22 @@ Begin VB.Form STD010
                Width           =   8175
                Begin VB.CheckBox chkEng2 
                   BackColor       =   &H00F7EFE7&
+                  Caption         =   "특강"
+                  Height          =   345
+                  Index           =   14
+                  Left            =   5820
+                  TabIndex        =   211
+                  Top             =   -30
+                  Width           =   1245
+               End
+               Begin VB.CheckBox chkEng2 
+                  BackColor       =   &H00F7EFE7&
                   Caption         =   "베트남어"
-                  Height          =   225
+                  Height          =   345
                   Index           =   13
                   Left            =   7140
                   TabIndex        =   210
-                  Top             =   0
+                  Top             =   -30
                   Width           =   1245
                End
                Begin VB.CheckBox chkEng2 
@@ -2099,7 +2110,7 @@ Begin VB.Form STD010
                End
                Begin VB.CheckBox chkSatam 
                   BackColor       =   &H00F7EFE7&
-                  Caption         =   "한국사"
+                  Caption         =   "생활과윤리"
                   Height          =   345
                   Index           =   1
                   Left            =   240
@@ -2109,7 +2120,7 @@ Begin VB.Form STD010
                End
                Begin VB.CheckBox chkSatam 
                   BackColor       =   &H00F7EFE7&
-                  Caption         =   "세계사"
+                  Caption         =   "윤리와사상"
                   Height          =   345
                   Index           =   2
                   Left            =   1620
@@ -2752,7 +2763,7 @@ Begin VB.Form STD010
                End
                Begin VB.TextBox txt_MAJOR 
                   Height          =   285
-                  Left            =   6345
+                  Left            =   6540
                   TabIndex        =   17
                   Text            =   "Text1"
                   Top             =   2715
@@ -3527,11 +3538,17 @@ Private Sub Form_Load()
     Call basCommonSTD.Init_CboSch(cboPass4)      '4지망 합격 학원
     Call basCommonSTD.Init_Mu_type(cboMu_type)       '등급
     Call basCommonSTD.Init_PTS_Sel(cboPTS_Sel)       '수리점수구분
-    Call basCommonSTD.Init_Card(cboCard, Get_CodeCardBySchool(basModule.schcd))             '카드
+    Call basCommonSTD.Init_Card(cboCard, Get_CodeCardBySchool(basModule.SchCD))             '카드
 '    Call basCommonSTD.Init_Clinic(cbo_Clinic_L, cbo_Clinic_M, cbo_Clinic_E)     '클리닉
     
     
     '>>>>>>>>>>>> 조회 폼 초기화 <<<<<<<<<<<<<<
+    '사탐 체크박스 초기화.
+    Dim ni As Integer
+    For ni = 0 To UBound(constSatams)
+        chkSatam(ni + 1).Caption = constSatams(ni)
+    Next ni
+    
     fpExmID_F.Text = ""
     fpExmID_E.Text = ""
     
@@ -3586,22 +3603,23 @@ Private Sub Form_Load()
     
     
     '>>>>>>>>>>>> 학원에 따른 폼 설정 <<<<<<<<<<<<<<
-    Dim ni As Integer
     
     '>> 양재일경우 특강 표시
     chkGwatam(9).Visible = False
     chkSatam(11).Visible = False
-    If basModule.schcd = "J" Then
+    chkEng2(14).Visible = False
+    If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
         chkGwatam(9).Visible = True
         chkSatam(11).Visible = True
+        chkEng2(14).Visible = True
     End If
     
     '>> 1지망 학원
-    Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.schcd)
+    Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.SchCD)
     
     
     '>> 학원
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N"        '노량진
             For ni = 7 To 9 Step 1
                 chkEng2(ni).Visible = True
@@ -3737,7 +3755,7 @@ Private Sub cmdNew_Click()
     Next ni
 
     '>> 1지망 학원
-    Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.schcd)
+    Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.SchCD)
     
     '>> 2지명 학원
     cboSel2_Sch.ListIndex = 0
@@ -3762,7 +3780,7 @@ Private Sub changeEnableGwamoks(bSatam As Boolean, bEng2 As Boolean, bGwatam As 
         End If
     Next ni
 
-    For ni = 1 To ENG2_COUNT Step 1                 '< 제2외국어
+    For ni = 1 To 14 Step 1                 '< 제2외국어
         If True = bEng2 Then
             chkEng2(ni).Enabled = True
         Else
@@ -3802,7 +3820,7 @@ Private Sub cboKaeyol_Click()
 
     If Me.Tag = "LOAD" Then Exit Sub
     
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N", "B"
             Select Case Trim(Right(cboKaeyol.Text, 30))
                 Case "01", "03", "07", "09", "11", "13", "21"
@@ -3819,10 +3837,10 @@ Private Sub cboKaeyol_Click()
             End Select
          Case "S", "P", "J"
             Select Case Trim(Right(cboKaeyol.Text, 30))
-                Case "01", "03", "05", "11", "18", "21"                                                   '< 2008.02.15 : 계열 - 송파, 마송, 양재      2009.06.02 : 계열추가
+                Case "01", "03", "05", "11", "18", "21", "25"                                                   '< 2008.02.15 : 계열 - 송파, 마송, 양재      2009.06.02 : 계열추가
                     Call changeEnableGwamoks(True, True, False, False, True)
                     
-                Case "02", "04", "06", "08", "12", "19", "22"                                             '< 2008.02.15 : 계열 - 송파, 마송, 양재      2009.06.02 : 계열추가
+                Case "02", "04", "06", "08", "12", "19", "22", "26"                                             '< 2008.02.15 : 계열 - 송파, 마송, 양재      2009.06.02 : 계열추가
                     Call changeEnableGwamoks(False, False, True, True, True)
             End Select
         Case Else
@@ -3939,7 +3957,7 @@ Private Function Save_Stdin() As Boolean
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
             Set DBParam = DBCmd.CreateParameter("V_SCHNO", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
     '>> 학원코드
-        sTmp = basModule.schcd
+        sTmp = basModule.SchCD
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
             Set DBParam = DBCmd.CreateParameter("V_ACID", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
     '>> 수험번호
@@ -3976,12 +3994,15 @@ Private Function Save_Stdin() As Boolean
         sTmp = ""
         For ni = 1 To SATAM_COUNT Step 1
             If chkSatam(ni).value = 1 Then
-                sTmp = sTmp & Format(SATAM_CLASS + ni, "00") & "|"
+                sTmp = sTmp & constSatamCodes(ni - 1) & "|"
+                
+'                sTmp = sTmp & Format(SATAM_CLASS + ni, "00") & "|"
             End If
         Next ni
         
-        If basModule.schcd = "J" Then
-            If chkSatam(11).value = 1 Then: sTmp = sTmp & TGANG_CODE & "|"  '특강 양재만
+        '특강
+        If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
+            If chkSatam(11).value = 1 Then: sTmp = sTmp & TGANG_CODE & "|"  '특강 양재,송파
         End If
         
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
@@ -3998,6 +4019,12 @@ Private Function Save_Stdin() As Boolean
                 End If
             End If
         Next ni
+        
+        '특강
+        If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
+            If chkEng2(14).value = 1 Then: sTmp = sTmp & TGANG_ENG2_CODE & "|"  '특강 양재,송파
+        End If
+        
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
             Set DBParam = DBCmd.CreateParameter("V_SEL2", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
 
@@ -4009,7 +4036,7 @@ Private Function Save_Stdin() As Boolean
             End If
         Next ni
         
-        If basModule.schcd = "J" Then
+        If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
             If chkGwatam(9).value = 1 Then: sTmp = sTmp & TGANG_CODE & "|"   '특강 양재만
         End If
         
@@ -4112,7 +4139,7 @@ Private Function Save_Stdin() As Boolean
         If Trim(Right(cboPTS_Sel.Text, 30)) <> "X" Then sTmp = Trim(Right(cboPTS_Sel.Text, 30))
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
             Set DBParam = DBCmd.CreateParameter("V_PTS", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
-    '>> 등급
+    '>> 등급 '없음일경우 빈칸으로.
         sTmp = ""
         If Trim(Right(cboMu_type.Text, 30)) <> "X" Then sTmp = Trim(Right(cboMu_type.Text, 30))
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
@@ -4259,7 +4286,7 @@ Private Function Delete_StdOut() As Boolean
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
             Set DBParam = DBCmd.CreateParameter("V_SCHNO", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
     '>> 학원코드
-        sTmp = basModule.schcd
+        sTmp = basModule.SchCD
         nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
             Set DBParam = DBCmd.CreateParameter("V_ACID", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
     
@@ -4379,7 +4406,7 @@ Private Function Cancel_StdOut() As Boolean
         nExe = 0
         
         '-----------------------------------------------------------------------------------------------------
-        Select Case Trim(basModule.schcd)
+        Select Case Trim(basModule.SchCD)
             Case "S"
                 sStr = ""
                 sStr = sStr & " UPDATE CLSTD01TB "
@@ -4418,7 +4445,7 @@ Private Function Cancel_StdOut() As Boolean
             sStr = sStr & " INSERT INTO CLSTD92TB (SCHNO, ACID, EXMID, TIMESTAMP) "
             sStr = sStr & " VALUES( "
             sStr = sStr & "         '" & Trim(txtSchNo.Text) & "',"
-            sStr = sStr & "         '" & Trim(basModule.schcd) & "',"
+            sStr = sStr & "         '" & Trim(basModule.SchCD) & "',"
             sStr = sStr & "         '" & Trim(fpExmID.UnFmtText) & "',"
             sStr = sStr & "         SYSDATE"
             sStr = sStr & "       ) "
@@ -4444,7 +4471,7 @@ Private Function Cancel_StdOut() As Boolean
                 
                 sStr = ""
                 sStr = sStr & " UPDATE CLSTD92TB "
-                sStr = sStr & "    SET ACID  = '" & Trim(basModule.schcd) & "',"
+                sStr = sStr & "    SET ACID  = '" & Trim(basModule.SchCD) & "',"
                 sStr = sStr & "        EXMID = '" & Trim(fpExmID.UnFmtText) & "',"
                 sStr = sStr & "        TIMESTAMP = SYSDATE "
                 sStr = sStr & "  WHERE SCHNO = '" & Trim(txtSchNo.Text) & "'"
@@ -4668,7 +4695,7 @@ Private Sub cmdFind_Click()
     sStr = sStr & "             '00'"
     sStr = sStr & "         END SEL_N4, "
     sStr = sStr & "         PAYOK, PAYNOT, "
-    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT, "        '< 전체집계 하는 함수
+    sStr = sStr & "         GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT, "        '< 전체집계 하는 함수
     sStr = sStr & "         K_NUM, M_NUM, E_NUM, TOT_NUM, N_NUM, "
     sStr = sStr & "         ZIP, ADDR1, ADDR2, TEL, CEL, "
     sStr = sStr & "         REGDATE, PAYGBN, CASH_BILL_NUM, D_UNIVCD, D_MAJORCD, PRNT_TEL "
@@ -4712,7 +4739,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                                      END PAYNOT"
             sStr = sStr & "                                 FROM CLSTD01TB "
             
-            sStr = sStr & "                                WHERE ACID = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "                                WHERE ACID = '" & Trim(basModule.SchCD) & "'"
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
                 sStr = sStr & "                              AND EXMTYPE = '0'"
@@ -4772,7 +4799,7 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                         GROUP BY ACID"
             sStr = sStr & "                      ) B"
             sStr = sStr & "                WHERE A.ACID = B.ACID"
-            sStr = sStr & "                  AND A.ACID = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "                  AND A.ACID = '" & Trim(basModule.SchCD) & "'"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -4807,10 +4834,10 @@ Private Sub cmdFind_Click()
             sStr = sStr & "                      SUBSTR(ZIP,1,3)||'-'||SUBSTR(ZIP,4,3) AS ZIP, ADDR1, ADDR2, TEL, CEL, "
             sStr = sStr & "                      TO_CHAR(REGDATE,'YYYY-MM-DD HH24:MI') AS REGDATE, GET_PAYGUBN(ORD_NO) AS PAYGBN, CASH_BILL_NUM, PRNT_TEL AS PRNT_TEL "
             sStr = sStr & "                 From CLSTD01TB"
-            sStr = sStr & "                WHERE (PASS1 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                       PASS2 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                       PASS3 = '" & Trim(basModule.schcd) & "'" & " OR"
-            sStr = sStr & "                       PASS4 = '" & Trim(basModule.schcd) & "'" & " )"
+            sStr = sStr & "                WHERE (PASS1 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                       PASS2 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                       PASS3 = '" & Trim(basModule.SchCD) & "'" & " OR"
+            sStr = sStr & "                       PASS4 = '" & Trim(basModule.SchCD) & "'" & " )"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -4848,9 +4875,9 @@ Private Sub cmdFind_Click()
             sStr = sStr & "              KAEYOL,"
             sStr = sStr & "              SEL1 , SEL2, SEL3, SEL4, SEL5, CL_CLOSE, "
             sStr = sStr & "              0 AS PAYOK , 0 AS PAYNOT, "
-            sStr = sStr & "              GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.schcd) & "') AS PAYTOT"     '< 전체집계 하는 함수
+            sStr = sStr & "              GET_INTERNET_TOT_STD_INWON('" & Trim(basModule.SchCD) & "') AS PAYTOT"     '< 전체집계 하는 함수
             sStr = sStr & "         From CLSTD01TB"
-            sStr = sStr & "        WHERE PASS" & Trim(Right(cboPassCN, 30)) & " = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "        WHERE PASS" & Trim(Right(cboPassCN, 30)) & " = '" & Trim(basModule.SchCD) & "'"
             
             '>> 유/무시험 체크
             If Trim(Right(cboExmType.Text, 30)) = "0" Then
@@ -4923,7 +4950,7 @@ Private Sub cmdFind_Click()
     sStr = sStr & "     AND CL_CLOSE IS NULL "
     
     sStr = sStr & "   ORDER BY EXMID "
-    
+    Clipboard.SetText (sStr)
     Text1.Text = sStr
     Set DBCmd = New ADODB.Command
     Set DBRec = New ADODB.Recordset
@@ -5360,9 +5387,9 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
     
     
     'W,Q는 강남의 새로운 계열 (반인데 계열로 추가)
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "W", "Q"
-            sStr = sStr & "     AND (ACID  = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "     AND (ACID  = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "          OR ACID = 'K')"
         Case Else
             'sStr = sStr & "     AND ACID  = '" & Trim(basModule.SchCD) & "'"
@@ -5456,7 +5483,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             
             '>> 계열
             cboKaeyol.ListIndex = 0
-            Call basCommonSTD.Set_CboKaeyol(cboKaeyol, basModule.schcd, Trim(.Fields("KAEYOL")))
+            Call basCommonSTD.Set_CboKaeyol(cboKaeyol, basModule.SchCD, Trim(.Fields("KAEYOL")))
             
             
             
@@ -5502,10 +5529,15 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             fpN_Num.value = 0:  If IsNull(.Fields("N_NUM")) = False Then fpN_Num.value = CDbl(.Fields("N_NUM"))
             
             
+        '/////////////////////////////////////////////////////////////////////
+        '           선택과목
+        '/////////////////////////////////////////////////////////////////////
+        
         '## 선택과목
             '>> 사탐
             '2011-05-17 김한욱 사회 부분 한과목 더 추가로 인한 수정 야간법의
-            If (Trim(basModule.schcd) = "Q") Then
+            '초기화
+            If (Trim(basModule.SchCD) = "Q") Then
                 For ni = 1 To 11 + 1 Step 1
                     chkSatam(ni).value = 0
                 Next ni
@@ -5515,28 +5547,34 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
                 Next ni
             End If
             
+            
             If IsNull(.Fields("SEL1")) = False Then
                 sTmp = Trim(.Fields("SEL1"))
                 sDiv = Split(sTmp, "|", -1, vbTextCompare)
                 
-                '2011-05-17 김한욱  사회 부분 한과목 더 추가로 인한 수정 야간법의
-                Dim arrIdx As Integer
-                For ni = 0 To UBound(sDiv) - 1 Step 1
+                Dim arrIdx      As Long
+                 For ni = 0 To UBound(sDiv) - 1 Step 1
+                 
+                    On Error GoTo ErrStmt1
+                    '과목코드에 해당하는 체크박스의 인덱스 값을 가져와서 값을 1로 바꿔준다.
+                    chkSatam(Get_IndexChkSatam(sDiv(ni))).value = 1
                     
-                    '노량진 요청
-                    If sDiv(ni) = TGANG_CODE Then
-                        chkSatam(11).value = 1  '양재떄문에 95는 특강.
-                    Else
-                        '현재 사탐의 코드 영역은 21~30까지. arrIdx = CInt(21) - (21-1)   , arrIdx = 1
-                        arrIdx = CInt(sDiv(ni)) - SATAM_CLASS
-                        If arrIdx > 0 And arrIdx <= chkSatam.UBound Then
-                            chkSatam(arrIdx).value = 1
-                        Else
-                            MsgBox "DB의 사탐과목코드 값이 올바르지 않습니다. 다시 설정해주세요."
-                        End If
-                    End If
-                        
+                    On Error GoTo ErrStmt
+'
+'                    If sDiv(ni) = TGANG_CODE Then
+'                        chkSatam(11).value = 1  '양재떄문에 95는 특강.
+'                    Else
+'                        '현재 사탐의 코드 영역은 21~30까지. arrIdx = CInt(21) - (21-1)   , arrIdx = 1
+'                        arrIdx = CInt(sDiv(ni)) - SATAM_CLASS
+'                        If arrIdx > 0 And arrIdx <= chkSatam.UBound Then
+'                            chkSatam(arrIdx).value = 1
+'                        Else
+'                            MsgBox "DB의 사탐과목코드 값이 올바르지 않습니다. 다시 설정해주세요."
+'                        End If
+'                    End If
+            
                 Next ni
+                
             End If
             
             '>> 제2외국어
@@ -5550,6 +5588,8 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
                 For ni = 0 To UBound(sDiv) - 1 Step 1
                     If sDiv(ni) = "44" Then '베트남어 코드구함 :   베트남어코드:44 수리나형:43 이라서 +1해줌
                         chkEng2(CInt(sDiv(ni)) - 31).value = 1
+                    ElseIf sDiv(ni) = "45" Then
+                        chkEng2(14).value = 1
                     Else
                         chkEng2(CInt(sDiv(ni)) - 30).value = 1
                     End If
@@ -5600,7 +5640,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             
             
             '수리가/나 : 송파/ 송파마이맥
-            Select Case Trim(basModule.schcd)
+            Select Case Trim(basModule.SchCD)
                 Case "S", "N", "K"
                     If IsNull(.Fields("PTS_SEL")) = True Then
                         cboPTS_Sel.ListIndex = 2
@@ -5635,7 +5675,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             
             '수능등급
             If IsNull(.Fields("MU_TYPE")) = True Then
-                cboMu_type.ListIndex = 0
+                cboMu_type.ListIndex = cboMu_type.ListCount - 1
             Else
                 Call Set_Mu_type(cboMu_type, .Fields("MU_TYPE"))
             End If
@@ -5646,8 +5686,12 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
     
     Set DBCmd = Nothing
     Set DBRec = Nothing
-    
     Exit Sub
+    
+ErrStmt1:
+    
+    MsgBox "DB의 사탐과목코드 값이 올바르지 않습니다. 다시 설정해주세요.", vbCritical + vbOKOnly, "학생점수 등록"
+    
 ErrStmt:
     Set DBCmd = Nothing
     Set DBRec = Nothing
@@ -7377,7 +7421,7 @@ Private Sub sprPoint_ButtonClicked(ByVal Col As Long, ByVal Row As Long, ByVal B
     sStr = ""
     
     '김한욱 강남 요청 사항 강남의
-    If Trim(basModule.schcd) = "K" Then
+    If Trim(basModule.SchCD) = "K" Then
         sStr = sStr & " SELECT NVL(TO_CHAR(BAK_J),0) AS BAK_NUM"
     Else
         sStr = sStr & " SELECT NVL(TO_CHAR(DNG_J),0) AS BAK_NUM"
@@ -7494,7 +7538,7 @@ Private Sub cmdAddPointRow_Click()
     
         sGbn = "CULT"
         
-            Select Case Trim(basModule.schcd)
+            Select Case Trim(basModule.SchCD)
                 Case "N", "B"
                     Select Case Trim(Right(cboKaeyol.Text, 30))
                         Case "01", "03", "07", "09", "11", "13"
@@ -8352,11 +8396,11 @@ Private Sub cmdPaySave_Click()
     sSql = ""
     sSql = sSql & " UPDATE CLSTD02TB "
     sSql = sSql & "    SET NOW_NUM = NOW_NUM + 1"
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "K", "W", "Q"
             sSql = sSql & "  WHERE ACSID   = 'K'"
         Case Else
-            sSql = sSql & "  WHERE ACSID   = '" & Trim(basModule.schcd) & "'"
+            sSql = sSql & "  WHERE ACSID   = '" & Trim(basModule.SchCD) & "'"
     End Select
     If optExmY.value = True Then
         sSql = sSql & " AND MU_YU = '1'"
@@ -8420,11 +8464,11 @@ Private Sub cmdPaySave_Click()
         sSql = ""
         sSql = sSql & " SELECT TO_NUMBER(NOW_NUM)-1 AS TN"
         sSql = sSql & "   FROM CLSTD02TB"
-        Select Case Trim(basModule.schcd)
+        Select Case Trim(basModule.SchCD)
             Case "K", "W", "Q"
                 sSql = sSql & "  WHERE ACSID   = 'K'"
             Case Else
-                sSql = sSql & "  WHERE ACSID   = '" & Trim(basModule.schcd) & "'"
+                sSql = sSql & "  WHERE ACSID   = '" & Trim(basModule.SchCD) & "'"
         End Select
         If optExmY.value = True Then
             sSql = sSql & " AND MU_YU = '1'"

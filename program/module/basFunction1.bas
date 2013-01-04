@@ -56,6 +56,7 @@ Public g_CardCodes()   As String
 
 
 Public Const TGANG_CODE = "95"
+Public Const TGANG_ENG2_CODE = "45"
 
 
 
@@ -226,25 +227,38 @@ Function setConstant()
 
 
     ' 사회탐구
-    constSatams(0) = "한국사"
-    constSatams(1) = "세계사"
-    constSatams(2) = "동아시아사"
+
+    constSatams(0) = "생활과윤리"
+    constSatams(1) = "윤리사상"
+    constSatams(2) = "한국사"
     constSatams(3) = "한국지리"
     constSatams(4) = "세계지리"
-    constSatams(5) = "생활과윤리"
-    constSatams(6) = "윤리사상"
+    constSatams(5) = "동아시아사"
+    constSatams(6) = "세계사"
     constSatams(7) = "법과정치"
     constSatams(8) = "경제"
     constSatams(9) = "사회문화"
+
+'    생활과윤리
+'    윤리와 사상
+'    한국사
+'    한국지리
+'    세계지리
+'    동아시아사
+'    세계사
+'    법과정치
+'    경제
+'    사회문화
+
     
     
-    constSatamCodes(0) = "21"
-    constSatamCodes(1) = "22"
-    constSatamCodes(2) = "23"
+    constSatamCodes(0) = "26"
+    constSatamCodes(1) = "27"
+    constSatamCodes(2) = "21"
     constSatamCodes(3) = "24"
     constSatamCodes(4) = "25"
-    constSatamCodes(5) = "26"
-    constSatamCodes(6) = "27"
+    constSatamCodes(5) = "23"
+    constSatamCodes(6) = "22"
     constSatamCodes(7) = "28"
     constSatamCodes(8) = "29"
     constSatamCodes(9) = "30"
@@ -327,7 +341,7 @@ Function setConstant()
     
     
     '위의 코드들이 기본이고 나머지 바뀌는것들은 아래의 학원별 설정 함수에서 세팅함.
-    Select Case basModule.schcd
+    Select Case basModule.SchCD
         Case "M":   Call setConstant_M
         Case "P":   Call setConstant_P
         Case "B":   Call setConstant_B

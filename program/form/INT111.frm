@@ -5,13 +5,13 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form INT111 
    Caption         =   "입학사정 >> 입학원서 출력 >> 종합 입학원서 출력 (강남)"
-   ClientHeight    =   11010
+   ClientHeight    =   10800
    ClientLeft      =   555
    ClientTop       =   2970
    ClientWidth     =   15240
    LinkTopic       =   "Form2"
    MDIChild        =   -1  'True
-   ScaleHeight     =   11010
+   ScaleHeight     =   10800
    ScaleWidth      =   15240
    Begin VB.PictureBox pReportControl 
       Height          =   9855
@@ -24,7 +24,7 @@ Begin VB.Form INT111
       Begin VB.VScrollBar VScroll1 
          Height          =   9765
          Left            =   14190
-         TabIndex        =   148
+         TabIndex        =   139
          Top             =   0
          Width           =   225
       End
@@ -40,17 +40,26 @@ Begin VB.Form INT111
          TabIndex        =   22
          Top             =   -45
          Width           =   14175
-         Begin VB.TextBox 내신등급 
-            Alignment       =   2  '가운데 맞춤
+         Begin VB.TextBox 언수외합 
+            Appearance      =   0  '평면
             BorderStyle     =   0  '없음
-            Height          =   345
-            Left            =   10800
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Left            =   9930
             TabIndex        =   150
             Text            =   "100"
-            Top             =   9270
-            Width           =   585
+            Top             =   9210
+            Width           =   495
          End
-         Begin VB.TextBox 수리2 
+         Begin VB.TextBox 언어 
             Appearance      =   0  '평면
             BorderStyle     =   0  '없음
             BeginProperty Font 
@@ -63,13 +72,13 @@ Begin VB.Form INT111
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   8070
-            TabIndex        =   66
+            Left            =   7320
+            TabIndex        =   149
             Text            =   "100"
-            Top             =   9450
-            Width           =   375
+            Top             =   9210
+            Width           =   495
          End
-         Begin VB.TextBox 영어2 
+         Begin VB.TextBox 영어 
             Appearance      =   0  '평면
             BorderStyle     =   0  '없음
             BeginProperty Font 
@@ -82,13 +91,13 @@ Begin VB.Form INT111
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   9000
-            TabIndex        =   65
+            Left            =   8910
+            TabIndex        =   148
             Text            =   "100"
-            Top             =   9450
-            Width           =   375
+            Top             =   9210
+            Width           =   495
          End
-         Begin VB.TextBox 언어2 
+         Begin VB.TextBox 수리 
             Appearance      =   0  '평면
             BorderStyle     =   0  '없음
             BeginProperty Font 
@@ -101,11 +110,11 @@ Begin VB.Form INT111
                Strikethrough   =   0   'False
             EndProperty
             Height          =   195
-            Left            =   7350
-            TabIndex        =   64
+            Left            =   8040
+            TabIndex        =   147
             Text            =   "100"
-            Top             =   9450
-            Width           =   375
+            Top             =   9210
+            Width           =   495
          End
          Begin VB.TextBox 언수외합2 
             Appearance      =   0  '평면
@@ -121,10 +130,67 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   9990
-            TabIndex        =   63
+            TabIndex        =   146
             Text            =   "100"
             Top             =   9450
-            Width           =   375
+            Width           =   495
+         End
+         Begin VB.TextBox 언어2 
+            Appearance      =   0  '평면
+            BorderStyle     =   0  '없음
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Left            =   7350
+            TabIndex        =   145
+            Text            =   "100"
+            Top             =   9450
+            Width           =   495
+         End
+         Begin VB.TextBox 영어2 
+            Appearance      =   0  '평면
+            BorderStyle     =   0  '없음
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Left            =   9000
+            TabIndex        =   144
+            Text            =   "100"
+            Top             =   9450
+            Width           =   495
+         End
+         Begin VB.TextBox 수리2 
+            Appearance      =   0  '평면
+            BorderStyle     =   0  '없음
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   9.75
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Left            =   8070
+            TabIndex        =   143
+            Text            =   "100"
+            Top             =   9450
+            Width           =   495
          End
          Begin VB.TextBox 등급 
             Appearance      =   0  '평면
@@ -140,7 +206,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   11310
-            TabIndex        =   62
+            TabIndex        =   58
             Text            =   "등급"
             Top             =   240
             Width           =   2175
@@ -159,7 +225,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   61
+            TabIndex        =   57
             Text            =   "011-9490-8607"
             Top             =   5040
             Width           =   1485
@@ -178,7 +244,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   315
             Left            =   11430
-            TabIndex        =   60
+            TabIndex        =   56
             Text            =   "K"
             Top             =   930
             Width           =   315
@@ -197,7 +263,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   285
             Left            =   12780
-            TabIndex        =   59
+            TabIndex        =   55
             Text            =   "-int"
             Top             =   930
             Width           =   675
@@ -216,7 +282,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   12810
-            TabIndex        =   58
+            TabIndex        =   54
             Text            =   "100"
             Top             =   9450
             Width           =   375
@@ -235,7 +301,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   12810
-            TabIndex        =   57
+            TabIndex        =   53
             Text            =   "100"
             Top             =   9210
             Width           =   375
@@ -254,7 +320,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   12810
-            TabIndex        =   56
+            TabIndex        =   52
             Text            =   "100"
             Top             =   8910
             Width           =   375
@@ -274,7 +340,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   11670
-            TabIndex        =   55
+            TabIndex        =   51
             Text            =   "노량진"
             Top             =   2430
             Width           =   1500
@@ -293,7 +359,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   54
+            TabIndex        =   50
             Text            =   "(100-100)"
             Top             =   3510
             Width           =   1005
@@ -312,7 +378,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   53
+            TabIndex        =   49
             Text            =   "(100-100)"
             Top             =   5430
             Width           =   1005
@@ -331,7 +397,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   3390
-            TabIndex        =   52
+            TabIndex        =   48
             Text            =   "현대사,세계사,경제"
             Top             =   6480
             Width           =   4095
@@ -350,7 +416,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   3390
-            TabIndex        =   51
+            TabIndex        =   47
             Text            =   "독어,불어,일어"
             Top             =   6840
             Width           =   4395
@@ -369,7 +435,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   3390
-            TabIndex        =   50
+            TabIndex        =   46
             Text            =   "물리II,생물II,지학II"
             Top             =   7230
             Width           =   4095
@@ -388,7 +454,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   49
+            TabIndex        =   45
             Text            =   "홍길동"
             Top             =   5055
             Width           =   1545
@@ -407,7 +473,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   6660
-            TabIndex        =   48
+            TabIndex        =   44
             Text            =   "부모"
             Top             =   5040
             Width           =   555
@@ -426,7 +492,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   47
+            TabIndex        =   43
             Text            =   "서울 중구 신당동 떡복이집..................."
             Top             =   5625
             Width           =   5055
@@ -445,7 +511,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   46
+            TabIndex        =   42
             Text            =   "삼호물산주식회사"
             Top             =   5535
             Width           =   2955
@@ -464,7 +530,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   10200
-            TabIndex        =   45
+            TabIndex        =   41
             Text            =   "011-9490-8607"
             Top             =   6000
             Width           =   1425
@@ -483,7 +549,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   44
+            TabIndex        =   40
             Text            =   "02-2104-8600"
             Top             =   6000
             Width           =   1395
@@ -502,7 +568,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   43
+            TabIndex        =   39
             Text            =   "서울 중구 신당동 떡복이집..................."
             Top             =   6015
             Width           =   5055
@@ -521,7 +587,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   42
+            TabIndex        =   38
             Text            =   "서울 송파구 삼전동"
             Top             =   3705
             Width           =   5055
@@ -540,7 +606,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   41
+            TabIndex        =   37
             Text            =   "학생출신고"
             Top             =   4545
             Width           =   1995
@@ -559,7 +625,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   5400
-            TabIndex        =   40
+            TabIndex        =   36
             Text            =   "2005"
             Top             =   4545
             Width           =   495
@@ -578,7 +644,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   39
+            TabIndex        =   35
             Text            =   "iiiboss_12345@mail.naver.com"
             Top             =   4545
             Width           =   2955
@@ -597,7 +663,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   38
+            TabIndex        =   34
             Text            =   "02-2104-8600"
             Top             =   3615
             Width           =   2955
@@ -616,7 +682,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   37
+            TabIndex        =   33
             Text            =   "011-9490-8607"
             Top             =   4095
             Width           =   2955
@@ -635,7 +701,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2190
-            TabIndex        =   36
+            TabIndex        =   32
             Text            =   "53-21 쌍용빌라 나동 201호 "
             Top             =   4095
             Width           =   5055
@@ -654,7 +720,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   2220
-            TabIndex        =   35
+            TabIndex        =   31
             Text            =   "홍길동"
             Top             =   3135
             Width           =   1545
@@ -673,7 +739,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   6300
-            TabIndex        =   34
+            TabIndex        =   30
             Text            =   "남자"
             Top             =   3135
             Width           =   645
@@ -691,7 +757,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   8730
-            TabIndex        =   33
+            TabIndex        =   29
             Text            =   "9999-99-99"
             Top             =   3135
             Width           =   2955
@@ -710,48 +776,10 @@ Begin VB.Form INT111
             EndProperty
             Height          =   315
             Left            =   11730
-            TabIndex        =   32
+            TabIndex        =   28
             Text            =   "N12501"
             Top             =   930
             Width           =   1035
-         End
-         Begin VB.TextBox 수리 
-            Appearance      =   0  '평면
-            BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Left            =   8040
-            TabIndex        =   31
-            Text            =   "100"
-            Top             =   9210
-            Width           =   375
-         End
-         Begin VB.TextBox 영어 
-            Appearance      =   0  '평면
-            BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Left            =   8910
-            TabIndex        =   30
-            Text            =   "100"
-            Top             =   9210
-            Width           =   375
          End
          Begin VB.TextBox 접수계열 
             Appearance      =   0  '평면
@@ -767,29 +795,10 @@ Begin VB.Form INT111
             EndProperty
             Height          =   315
             Left            =   11400
-            TabIndex        =   29
+            TabIndex        =   27
             Text            =   "예.체능계"
             Top             =   540
             Width           =   2055
-         End
-         Begin VB.TextBox 언어 
-            Appearance      =   0  '평면
-            BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Left            =   7320
-            TabIndex        =   28
-            Text            =   "100"
-            Top             =   9210
-            Width           =   375
          End
          Begin VB.TextBox 접수계열2 
             Alignment       =   2  '가운데 맞춤
@@ -806,29 +815,10 @@ Begin VB.Form INT111
             EndProperty
             Height          =   390
             Left            =   645
-            TabIndex        =   27
+            TabIndex        =   26
             Text            =   "수능대비"
             Top             =   2370
             Width           =   1515
-         End
-         Begin VB.TextBox 언수외합 
-            Appearance      =   0  '평면
-            BorderStyle     =   0  '없음
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   9.75
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   195
-            Left            =   9930
-            TabIndex        =   26
-            Text            =   "100"
-            Top             =   9210
-            Width           =   375
          End
          Begin VB.TextBox 선택_자연논술 
             Appearance      =   0  '평면
@@ -888,6 +878,44 @@ Begin VB.Form INT111
             Width           =   2745
          End
          Begin VB.Label OPTIONS 
+            BackStyle       =   0  '투명
+            Caption         =   "확 인"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   8.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   13
+            Left            =   10890
+            TabIndex        =   142
+            Top             =   8940
+            Width           =   465
+         End
+         Begin VB.Label OPTIONS 
+            BackStyle       =   0  '투명
+            Caption         =   "(인)"
+            BeginProperty Font 
+               Name            =   "굴림"
+               Size            =   8.25
+               Charset         =   129
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   165
+            Index           =   14
+            Left            =   10950
+            TabIndex        =   141
+            Top             =   9330
+            Width           =   285
+         End
+         Begin VB.Label OPTIONS 
             Alignment       =   2  '가운데 맞춤
             BackStyle       =   0  '투명
             Caption         =   "2013 수능"
@@ -903,7 +931,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   6
             Left            =   6120
-            TabIndex        =   149
+            TabIndex        =   140
             Top             =   8910
             Width           =   1005
          End
@@ -923,7 +951,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   1
             Left            =   10140
-            TabIndex        =   147
+            TabIndex        =   138
             Top             =   2010
             Width           =   2535
          End
@@ -942,7 +970,7 @@ Begin VB.Form INT111
             Height          =   225
             Index           =   5
             Left            =   8190
-            TabIndex        =   146
+            TabIndex        =   137
             Top             =   6960
             Width           =   3315
          End
@@ -961,7 +989,7 @@ Begin VB.Form INT111
             Height          =   225
             Index           =   21
             Left            =   3540
-            TabIndex        =   145
+            TabIndex        =   136
             Top             =   7620
             Width           =   7365
          End
@@ -997,7 +1025,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   67
             Left            =   5730
-            TabIndex        =   144
+            TabIndex        =   135
             Top             =   8625
             Width           =   2055
          End
@@ -1024,7 +1052,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   11
             Left            =   6300
-            TabIndex        =   143
+            TabIndex        =   134
             Top             =   9195
             Width           =   705
          End
@@ -1043,7 +1071,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   4
             Left            =   6330
-            TabIndex        =   142
+            TabIndex        =   133
             Top             =   9465
             Width           =   735
          End
@@ -1062,7 +1090,7 @@ Begin VB.Form INT111
             Height          =   225
             Index           =   3
             Left            =   7980
-            TabIndex        =   141
+            TabIndex        =   132
             Top             =   6780
             Width           =   3765
          End
@@ -1081,7 +1109,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   81
             Left            =   5850
-            TabIndex        =   140
+            TabIndex        =   131
             Top             =   5070
             Width           =   585
          End
@@ -1100,7 +1128,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   80
             Left            =   6000
-            TabIndex        =   139
+            TabIndex        =   130
             Top             =   4560
             Width           =   1365
          End
@@ -1119,7 +1147,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   79
             Left            =   4230
-            TabIndex        =   138
+            TabIndex        =   129
             Top             =   4560
             Width           =   675
          End
@@ -1139,7 +1167,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   78
             Left            =   10080
-            TabIndex        =   137
+            TabIndex        =   128
             Top             =   1800
             Width           =   2535
          End
@@ -1159,7 +1187,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   1
             Left            =   510
-            TabIndex        =   136
+            TabIndex        =   127
             Top             =   8190
             Width           =   10185
          End
@@ -1179,7 +1207,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   0
             Left            =   510
-            TabIndex        =   135
+            TabIndex        =   126
             Top             =   8010
             Width           =   15000
          End
@@ -1198,7 +1226,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   72
             Left            =   12270
-            TabIndex        =   134
+            TabIndex        =   125
             Top             =   5310
             Width           =   675
          End
@@ -1217,7 +1245,7 @@ Begin VB.Form INT111
             Height          =   225
             Index           =   1
             Left            =   10230
-            TabIndex        =   133
+            TabIndex        =   124
             Top             =   2550
             Width           =   795
          End
@@ -1236,7 +1264,7 @@ Begin VB.Form INT111
             Height          =   225
             Index           =   0
             Left            =   10260
-            TabIndex        =   132
+            TabIndex        =   123
             Top             =   2340
             Width           =   825
          End
@@ -1255,7 +1283,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   66
             Left            =   4890
-            TabIndex        =   131
+            TabIndex        =   122
             Top             =   5070
             Width           =   675
          End
@@ -1274,7 +1302,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   65
             Left            =   4890
-            TabIndex        =   130
+            TabIndex        =   121
             Top             =   3150
             Width           =   675
          End
@@ -1293,7 +1321,7 @@ Begin VB.Form INT111
             Height          =   465
             Index           =   64
             Left            =   510
-            TabIndex        =   129
+            TabIndex        =   120
             Top             =   1620
             Width           =   4065
          End
@@ -1312,7 +1340,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   63
             Left            =   1260
-            TabIndex        =   128
+            TabIndex        =   119
             Top             =   4560
             Width           =   675
          End
@@ -1338,7 +1366,7 @@ Begin VB.Form INT111
             Height          =   240
             Index           =   61
             Left            =   9990
-            TabIndex        =   127
+            TabIndex        =   118
             Top             =   780
             Width           =   1275
          End
@@ -1358,7 +1386,7 @@ Begin VB.Form INT111
             Height          =   285
             Index           =   62
             Left            =   480
-            TabIndex        =   126
+            TabIndex        =   117
             Top             =   840
             Width           =   825
          End
@@ -1377,7 +1405,7 @@ Begin VB.Form INT111
             Height          =   405
             Index           =   60
             Left            =   1590
-            TabIndex        =   125
+            TabIndex        =   116
             Top             =   750
             Width           =   3585
          End
@@ -1396,7 +1424,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   59
             Left            =   7710
-            TabIndex        =   124
+            TabIndex        =   115
             Top             =   6030
             Width           =   855
          End
@@ -1415,7 +1443,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   58
             Left            =   7680
-            TabIndex        =   123
+            TabIndex        =   114
             Top             =   5550
             Width           =   975
          End
@@ -1434,7 +1462,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   57
             Left            =   7680
-            TabIndex        =   122
+            TabIndex        =   113
             Top             =   5070
             Width           =   975
          End
@@ -1453,7 +1481,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   56
             Left            =   7770
-            TabIndex        =   121
+            TabIndex        =   112
             Top             =   4560
             Width           =   675
          End
@@ -1472,7 +1500,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   55
             Left            =   7770
-            TabIndex        =   120
+            TabIndex        =   111
             Top             =   4110
             Width           =   675
          End
@@ -1491,7 +1519,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   54
             Left            =   7770
-            TabIndex        =   119
+            TabIndex        =   110
             Top             =   3630
             Width           =   675
          End
@@ -1510,7 +1538,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   53
             Left            =   7770
-            TabIndex        =   118
+            TabIndex        =   109
             Top             =   3150
             Width           =   675
          End
@@ -1529,7 +1557,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   52
             Left            =   13230
-            TabIndex        =   117
+            TabIndex        =   108
             Top             =   9495
             Width           =   165
          End
@@ -1548,7 +1576,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   51
             Left            =   13230
-            TabIndex        =   116
+            TabIndex        =   107
             Top             =   9225
             Width           =   165
          End
@@ -1567,7 +1595,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   50
             Left            =   13230
-            TabIndex        =   115
+            TabIndex        =   106
             Top             =   8925
             Width           =   165
          End
@@ -1586,7 +1614,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   49
             Left            =   12090
-            TabIndex        =   114
+            TabIndex        =   105
             Top             =   9495
             Width           =   405
          End
@@ -1605,7 +1633,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   48
             Left            =   12090
-            TabIndex        =   113
+            TabIndex        =   104
             Top             =   8925
             Width           =   405
          End
@@ -1624,28 +1652,9 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   47
             Left            =   12090
-            TabIndex        =   112
+            TabIndex        =   103
             Top             =   9225
             Width           =   405
-         End
-         Begin VB.Label OPTIONS 
-            BackStyle       =   0  '투명
-            Caption         =   "내신등급"
-            BeginProperty Font 
-               Name            =   "굴림"
-               Size            =   8.25
-               Charset         =   129
-               Weight          =   400
-               Underline       =   0   'False
-               Italic          =   0   'False
-               Strikethrough   =   0   'False
-            EndProperty
-            Height          =   165
-            Index           =   13
-            Left            =   10770
-            TabIndex        =   111
-            Top             =   8955
-            Width           =   675
          End
          Begin VB.Label Labels 
             BackStyle       =   0  '투명
@@ -1662,7 +1671,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   44
             Left            =   8670
-            TabIndex        =   110
+            TabIndex        =   102
             Top             =   8940
             Width           =   975
          End
@@ -1680,7 +1689,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   7920
-            TabIndex        =   109
+            TabIndex        =   101
             Top             =   8940
             Width           =   675
          End
@@ -1699,7 +1708,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   39
             Left            =   5730
-            TabIndex        =   108
+            TabIndex        =   100
             Top             =   9015
             Width           =   195
          End
@@ -1718,7 +1727,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   38
             Left            =   5235
-            TabIndex        =   107
+            TabIndex        =   99
             Top             =   9015
             Width           =   195
          End
@@ -1737,7 +1746,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   37
             Left            =   4755
-            TabIndex        =   106
+            TabIndex        =   98
             Top             =   9015
             Width           =   195
          End
@@ -1756,7 +1765,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   36
             Left            =   4260
-            TabIndex        =   105
+            TabIndex        =   97
             Top             =   9015
             Width           =   195
          End
@@ -1775,7 +1784,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   35
             Left            =   3750
-            TabIndex        =   104
+            TabIndex        =   96
             Top             =   9015
             Width           =   195
          End
@@ -1794,7 +1803,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   34
             Left            =   3225
-            TabIndex        =   103
+            TabIndex        =   95
             Top             =   9015
             Width           =   195
          End
@@ -1813,7 +1822,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   33
             Left            =   2715
-            TabIndex        =   102
+            TabIndex        =   94
             Top             =   9015
             Width           =   195
          End
@@ -1832,7 +1841,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   32
             Left            =   2220
-            TabIndex        =   101
+            TabIndex        =   93
             Top             =   9015
             Width           =   195
          End
@@ -1851,7 +1860,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   31
             Left            =   1710
-            TabIndex        =   100
+            TabIndex        =   92
             Top             =   9015
             Width           =   195
          End
@@ -1870,7 +1879,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   30
             Left            =   1215
-            TabIndex        =   99
+            TabIndex        =   91
             Top             =   9015
             Width           =   195
          End
@@ -1889,7 +1898,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   28
             Left            =   720
-            TabIndex        =   98
+            TabIndex        =   90
             Top             =   9405
             Width           =   315
          End
@@ -1908,7 +1917,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   27
             Left            =   720
-            TabIndex        =   97
+            TabIndex        =   89
             Top             =   9015
             Width           =   315
          End
@@ -1927,7 +1936,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   26
             Left            =   1650
-            TabIndex        =   96
+            TabIndex        =   88
             Top             =   7470
             Width           =   1635
          End
@@ -1946,7 +1955,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   24
             Left            =   1650
-            TabIndex        =   95
+            TabIndex        =   87
             Top             =   6870
             Width           =   1635
          End
@@ -1965,7 +1974,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   23
             Left            =   1650
-            TabIndex        =   94
+            TabIndex        =   86
             Top             =   6480
             Width           =   1635
          End
@@ -1984,7 +1993,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   22
             Left            =   1230
-            TabIndex        =   93
+            TabIndex        =   85
             Top             =   7680
             Width           =   195
          End
@@ -2003,7 +2012,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   21
             Left            =   1230
-            TabIndex        =   92
+            TabIndex        =   84
             Top             =   7440
             Width           =   195
          End
@@ -2022,7 +2031,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   20
             Left            =   1230
-            TabIndex        =   91
+            TabIndex        =   83
             Top             =   7200
             Width           =   195
          End
@@ -2041,7 +2050,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   19
             Left            =   1230
-            TabIndex        =   90
+            TabIndex        =   82
             Top             =   6930
             Width           =   195
          End
@@ -2060,7 +2069,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   18
             Left            =   1230
-            TabIndex        =   89
+            TabIndex        =   81
             Top             =   6690
             Width           =   195
          End
@@ -2079,7 +2088,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   17
             Left            =   1230
-            TabIndex        =   88
+            TabIndex        =   80
             Top             =   6450
             Width           =   195
          End
@@ -2098,7 +2107,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   16
             Left            =   1260
-            TabIndex        =   87
+            TabIndex        =   79
             Top             =   5760
             Width           =   675
          End
@@ -2117,7 +2126,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   15
             Left            =   1260
-            TabIndex        =   86
+            TabIndex        =   78
             Top             =   5070
             Width           =   675
          End
@@ -2136,7 +2145,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   12
             Left            =   1260
-            TabIndex        =   85
+            TabIndex        =   77
             Top             =   3840
             Width           =   675
          End
@@ -2155,7 +2164,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   11
             Left            =   1260
-            TabIndex        =   84
+            TabIndex        =   76
             Top             =   3150
             Width           =   675
          End
@@ -2174,7 +2183,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   10
             Left            =   750
-            TabIndex        =   83
+            TabIndex        =   75
             Top             =   7530
             Width           =   195
          End
@@ -2193,7 +2202,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   9
             Left            =   750
-            TabIndex        =   82
+            TabIndex        =   74
             Top             =   6855
             Width           =   195
          End
@@ -2212,7 +2221,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   8
             Left            =   750
-            TabIndex        =   81
+            TabIndex        =   73
             Top             =   7185
             Width           =   195
          End
@@ -2231,7 +2240,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   6
             Left            =   750
-            TabIndex        =   80
+            TabIndex        =   72
             Top             =   6510
             Width           =   195
          End
@@ -2250,7 +2259,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   5
             Left            =   750
-            TabIndex        =   79
+            TabIndex        =   71
             Top             =   5475
             Width           =   195
          End
@@ -2269,7 +2278,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   4
             Left            =   750
-            TabIndex        =   78
+            TabIndex        =   70
             Top             =   5910
             Width           =   195
          End
@@ -2288,7 +2297,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   3
             Left            =   750
-            TabIndex        =   77
+            TabIndex        =   69
             Top             =   5040
             Width           =   195
          End
@@ -2307,7 +2316,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   14
             Left            =   750
-            TabIndex        =   76
+            TabIndex        =   68
             Top             =   4290
             Width           =   195
          End
@@ -2326,7 +2335,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   13
             Left            =   750
-            TabIndex        =   75
+            TabIndex        =   67
             Top             =   3330
             Width           =   195
          End
@@ -2346,7 +2355,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   2
             Left            =   9930
-            TabIndex        =   74
+            TabIndex        =   66
             Top             =   1560
             Width           =   3735
          End
@@ -2374,7 +2383,7 @@ Begin VB.Form INT111
             Height          =   315
             Index           =   7
             Left            =   2430
-            TabIndex        =   73
+            TabIndex        =   65
             Top             =   2460
             Width           =   750
          End
@@ -2825,7 +2834,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   82
             Left            =   11670
-            TabIndex        =   72
+            TabIndex        =   64
             Top             =   9405
             Width           =   225
          End
@@ -2844,7 +2853,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   83
             Left            =   11670
-            TabIndex        =   71
+            TabIndex        =   63
             Top             =   9195
             Width           =   225
          End
@@ -2863,7 +2872,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   86
             Left            =   11670
-            TabIndex        =   70
+            TabIndex        =   62
             Top             =   8985
             Width           =   225
          End
@@ -2882,7 +2891,7 @@ Begin VB.Form INT111
             Height          =   195
             Index           =   42
             Left            =   7290
-            TabIndex        =   69
+            TabIndex        =   61
             Top             =   8940
             Width           =   375
          End
@@ -2901,7 +2910,7 @@ Begin VB.Form INT111
             Height          =   165
             Index           =   2
             Left            =   510
-            TabIndex        =   68
+            TabIndex        =   60
             Top             =   8400
             Width           =   8835
          End
@@ -2944,7 +2953,7 @@ Begin VB.Form INT111
             EndProperty
             Height          =   195
             Left            =   9690
-            TabIndex        =   67
+            TabIndex        =   59
             Top             =   8940
             Width           =   945
          End
@@ -3527,21 +3536,21 @@ Private Type tSTD
     SEL4        As String
     SEL5        As String
     
-    K_NUM       As Long
-    M_NUM       As Long
-    E_NUM       As Long
-    TOT_NUM     As Long
+    K_NUM       As Single
+    M_NUM       As Single
+    E_NUM       As Single
+    TOT_NUM     As Single
     N_NUM       As Single
     
-    JK_NUM      As Long
-    JM_NUM      As Long
-    JE_NUM      As Long
-    JTOT_NUM    As Long
+    JK_NUM      As Single
+    JM_NUM      As Single
+    JE_NUM      As Single
+    JTOT_NUM    As Single
     
-    KK_NUM      As Long
-    KM_NUM      As Long
-    KE_NUM      As Long
-    KTOT_NUM    As Long
+    KK_NUM      As Single
+    KM_NUM      As Single
+    KE_NUM      As Single
+    KTOT_NUM    As Single
     
     
     SEL1_SCH    As String
@@ -4791,8 +4800,8 @@ End Sub
 
 Private Sub Std_Data_Show(Index As Long)
     
-    Dim nKME_Sum        As Integer
-    Dim nKME_Sum2        As Integer
+    Dim nKME_Sum        As Single
+    Dim nKME_Sum2        As Single
     
     If Me.Tag = "LOAD" Then Exit Sub
     
@@ -5028,10 +5037,14 @@ Private Sub Std_Data_Show(Index As Long)
             Case "W":
                        선택_과학탐구.Text = ""
                        선택_수리영역.Text = ""
+                       선택_과학탐구.Text = Div_Gwamok_NM("SEL3", .SEL3)
+                       선택_수리영역.Text = Div_Gwamok_NM("SEL4", .SEL4)
             
             Case "Q":
                        선택_과학탐구.Text = ""
                        선택_수리영역.Text = ""
+                       선택_과학탐구.Text = Div_Gwamok_NM("SEL3", .SEL3)
+                       선택_수리영역.Text = Div_Gwamok_NM("SEL4", .SEL4)
             Case Else
                        선택_과학탐구.Text = Div_Gwamok_NM("SEL3", .SEL3)
                        선택_수리영역.Text = Div_Gwamok_NM("SEL4", .SEL4)
@@ -5062,22 +5075,22 @@ Private Sub Std_Data_Show(Index As Long)
         유시험_총점.Text = ""
         
         '내신등급
-        내신등급.Text = .N_NUM
+        '내신등급.Text = .N_NUM
         
-        Select Case Trim(.EXMTYPE)
+         Select Case Trim(.EXMTYPE)
             Case "0"
                 
                 nKME_Sum = 0
-                If IsNumeric(Trim(.K_NUM)) = True Then nKME_Sum = nKME_Sum + CInt(.K_NUM)
-                If IsNumeric(Trim(.M_NUM)) = True Then nKME_Sum = nKME_Sum + CInt(.M_NUM)
-                If IsNumeric(Trim(.E_NUM)) = True Then nKME_Sum = nKME_Sum + CInt(.E_NUM)
+                If IsNumeric(Trim(.K_NUM)) = True Then nKME_Sum = nKME_Sum + CSng(.K_NUM)
+                If IsNumeric(Trim(.M_NUM)) = True Then nKME_Sum = nKME_Sum + CSng(.M_NUM)
+                If IsNumeric(Trim(.E_NUM)) = True Then nKME_Sum = nKME_Sum + CSng(.E_NUM)
                 
                 
                 If nKME_Sum > 100 Then      '표준점수
                     언어.Text = .K_NUM
                     수리.Text = .M_NUM
                     영어.Text = .E_NUM
-                    언수외합.Text = Format(nKME_Sum, "##0")
+                    언수외합.Text = nKME_Sum 'Format(nKME_Sum, "##0")
                     
                     '강남 백분위도 표시
                     If basModule.SchCD = "K" Then
@@ -5086,17 +5099,17 @@ Private Sub Std_Data_Show(Index As Long)
                         영어2.Text = .KE_NUM
                         
                         nKME_Sum2 = 0
-                        If IsNumeric(Trim(.K_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CInt(.KK_NUM)
-                        If IsNumeric(Trim(.M_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CInt(.KM_NUM)
-                        If IsNumeric(Trim(.E_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CInt(.KE_NUM)
-                        언수외합2.Text = Format(nKME_Sum2, "##0")
+                        If IsNumeric(Trim(.K_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CSng(.KK_NUM)
+                        If IsNumeric(Trim(.M_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CSng(.KM_NUM)
+                        If IsNumeric(Trim(.E_NUM)) = True Then nKME_Sum2 = nKME_Sum2 + CSng(.KE_NUM)
+                        언수외합2.Text = nKME_Sum2 'Format(nKME_Sum2, "##0")
                     End If
                 Else                        '등급
                     언어2.Text = .K_NUM
                     수리2.Text = .M_NUM
                     영어2.Text = .E_NUM
                     
-                    언수외합2.Text = Format(nKME_Sum, "##0")
+                    언수외합2.Text = nKME_Sum 'Format(nKME_Sum, "##0")
                 End If
                 
                 
