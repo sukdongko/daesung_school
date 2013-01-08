@@ -47,39 +47,39 @@ Begin VB.MDIForm MDI001
       Begin VB.Menu mnuINT 
          Caption         =   "입학원서 출력"
          Begin VB.Menu mnuINT010_N 
-            Caption         =   "종합 입학원서 출력(노량진)"
+            Caption         =   "종합 입학원서 출력 (노량진)"
          End
          Begin VB.Menu mnuINT010 
             Caption         =   "종합 입학원서 출력"
             Visible         =   0   'False
          End
          Begin VB.Menu mnuINT110 
-            Caption         =   "종합 입학원서 출력 2012 (부산)"
+            Caption         =   "종합 입학원서 출력 (부산)"
          End
          Begin VB.Menu mnuINT112 
-            Caption         =   "종합 입학원서 출력 2012 (마강)"
+            Caption         =   "종합 입학원서 출력 (마강)"
          End
          Begin VB.Menu mnuINT113 
-            Caption         =   "종합 입학원서 출력 2012 (양재,송파)"
+            Caption         =   "종합 입학원서 출력 (양재,송파)"
          End
          Begin VB.Menu mnuINT111 
-            Caption         =   "종합 입학원서 출력 2012 (강남)"
+            Caption         =   "종합 입학원서 출력 (강남)"
          End
          Begin VB.Menu mnu100_Line12 
             Caption         =   "-"
          End
          Begin VB.Menu mnuINT011 
-            Caption         =   "선행 입학원서 출력(노량진, 송파)"
+            Caption         =   "선행 입학원서 출력 (노량진, 송파)"
          End
          Begin VB.Menu mnuINT012 
             Caption         =   "선행 입학원서 출력"
             Visible         =   0   'False
          End
          Begin VB.Menu mnuINT013 
-            Caption         =   "선행 입학원서 출력(마이맥)"
+            Caption         =   "선행 입학원서 출력 (마이맥)"
          End
          Begin VB.Menu mnuINT014 
-            Caption         =   "선행 입학원서 출력(양재)"
+            Caption         =   "선행 입학원서 출력 (양재)"
          End
          Begin VB.Menu mnu100_Line05 
             Caption         =   "-"

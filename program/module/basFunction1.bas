@@ -356,6 +356,9 @@ Function setConstant()
     
 End Function
 
+'Private Function Div_Gwamok_NM(aGwamok As String, split as String, ) As String
+
+
 '과목명 - > 과목코드
 Function Get_GwaMokCodeByName(subject As String) As String
     
@@ -414,7 +417,7 @@ Function Get_GwaMokCodes(fieldName As String) As String()
 
 End Function
 
-'필드에 해당하는 과목코드목록들을 리턴해준다.
+'필드에 해당하는 과목목록들을 리턴해준다.
 Function Get_GwaMokNames(fieldName As String) As String()
 
     Select Case fieldName
@@ -441,7 +444,7 @@ Function Get_StrGwaMokRange(codes As String, rangeStart As Long, rangeEnd As Lon
     
     sReturnVal = ""
     
-    arrTmp = Split(Trim(codes), "|", -1, vbTextCompare)
+    arrTmp = split(Trim(codes), "|", -1, vbTextCompare)
     count = UBound(arrTmp)
     For i = 0 To count - 1
     

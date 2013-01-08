@@ -2364,7 +2364,7 @@ Private Sub cmdFindStd_Click()
     
     sStr = sStr & "     AND A.SCHNO > ' ' "
     
-    sStr = sStr & "     AND A.ACID = '" & Trim(basModule.schcd) & "'"
+    sStr = sStr & "     AND A.ACID = '" & Trim(basModule.SchCD) & "'"
     
 '>> 계열
     Select Case Trim(Right(cboKaeyol.Text, 30))
@@ -2448,7 +2448,7 @@ Private Sub cmdFindStd_Click()
 '>> 완료여부 : 저장되면 YYMM값이 들어감.
     sStr = sStr & "     AND A.CL_CLOSE IS NULL "
     
-    If Trim(basModule.schcd) = "N" Then
+    If Trim(basModule.SchCD) = "N" Then
         sStr = sStr & "     AND BIGO1 > 17"                     '< 2009.01.
     Else
         sStr = sStr & "     AND BIGO2 IS NULL"                  '< 2008.12. 수능본 학생은 년도가 들어가고 아니면 NULL
@@ -3039,7 +3039,7 @@ Private Sub Find_Kaeyol_to_Class(ByVal aKaeyol As String)
             
             sStr = sStr & "   FROM (SELECT ACID, LSNCD, LSNNM, LSNCDNM, LSNCAPA, SEL_OK /*, (LSNCAPA-SEL_OK) AS PROC_NO*/"
             sStr = sStr & "           FROM SDLSN01TB"
-            sStr = sStr & "          WHERE ACID    = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "          WHERE ACID    = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "            AND KAEYOL  = '" & aKaeyol & "'"
             sStr = sStr & "         ) A,"
             sStr = sStr & "        (SELECT ACID, SEL_CLASS, SCHNO,"
@@ -3191,7 +3191,7 @@ Private Sub Find_Kaeyol_to_Class(ByVal aKaeyol As String)
             sStr = sStr & "                        END SEL_N4 "
             
             sStr = sStr & "                   FROM CLTTL01TB"
-            sStr = sStr & "                  WHERE ACID = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "                  WHERE ACID = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "                    AND SEL_CLASS"
             sStr = sStr & "                     IN (SELECT LSNCD"
             sStr = sStr & "                           FROM SDLSN01TB"
@@ -3207,7 +3207,7 @@ Private Sub Find_Kaeyol_to_Class(ByVal aKaeyol As String)
             
             sStr = sStr & "             )"
             sStr = sStr & "       ) B"
-            sStr = sStr & "  WHERE A.ACID  = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "  WHERE A.ACID  = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "    AND A.ACID  = B.ACID(+)"
             sStr = sStr & "    AND A.LSNCD = B.SEL_CLASS(+)"
             sStr = sStr & "  GROUP BY A.ACID, A.LSNCD"
@@ -4394,7 +4394,7 @@ Private Function input_Class_Data(ByRef ainClass() As Long) As Boolean
         sStr = sStr & " UPDATE CLTTL01TB"
         sStr = sStr & "    SET SEL_CLASS = '" & sClassCD & "'"
         sStr = sStr & "  WHERE SCHNO = '" & sSchNO & "'"
-        sStr = sStr & "    AND ACID  = '" & Trim(basModule.schcd) & "'"
+        sStr = sStr & "    AND ACID  = '" & Trim(basModule.SchCD) & "'"
 
   
 
@@ -4436,7 +4436,7 @@ Private Function input_Class_Data(ByRef ainClass() As Long) As Boolean
  
 
             '>> 학원코드
-            sTmp = Trim(basModule.schcd)
+            sTmp = Trim(basModule.SchCD)
             nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
                 Set DBParam = DBCmd.CreateParameter("V_ACID", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
 
@@ -4584,7 +4584,7 @@ Private Sub cmdDeleteClass_Click()
             sStr = ""
             sStr = sStr & " UPDATE CLTTL01TB"
             sStr = sStr & "    SET SEL_CLASS = ''   "       '<< class 없앰
-            sStr = sStr & "  WHERE ACID  = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "  WHERE ACID  = '" & Trim(basModule.SchCD) & "'"
             sStr = sStr & "    AND SEL_CLASS = '" & sClassCD & "'"
 
 
@@ -4627,7 +4627,7 @@ Private Sub cmdDeleteClass_Click()
 
 
                 '>> 학원코드
-                sTmp = Trim(basModule.schcd)
+                sTmp = Trim(basModule.SchCD)
                 nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
                     Set DBParam = DBCmd.CreateParameter("V_ACID", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
 
@@ -4725,7 +4725,7 @@ Private Sub cmdDelStdClass_Click()
             sStr = sStr & " UPDATE CLTTL01TB"
             sStr = sStr & "    SET SEL_CLASS = ''   "       '<< class 없앰
             sStr = sStr & "  WHERE SCHNO = '" & sSchNO & "'"
-            sStr = sStr & "    AND ACID  = '" & Trim(basModule.schcd) & "'"
+            sStr = sStr & "    AND ACID  = '" & Trim(basModule.SchCD) & "'"
 
 
 
@@ -4769,7 +4769,7 @@ Private Sub cmdDelStdClass_Click()
 
 
                 '>> 학원코드
-                sTmp = Trim(basModule.schcd)
+                sTmp = Trim(basModule.SchCD)
                 nLength = LenB(StrConv(sTmp, vbFromUnicode)):   If nLength < 1 Then nLength = 1
                     Set DBParam = DBCmd.CreateParameter("V_ACID", adVarChar, adParamInput, nLength, Trim(sTmp)):   DBCmd.Parameters.Append DBParam
 

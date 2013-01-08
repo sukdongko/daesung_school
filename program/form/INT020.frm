@@ -2048,7 +2048,7 @@ Private Sub cmdShiftLeft_Click()
     If Me.Tag = "LOAD" Then Exit Sub
     
     If Trim(txtPage) > " " Then
-        sDiv = Split(txtPage.Text, "/", -1, vbTextCompare)
+        sDiv = split(txtPage.Text, "/", -1, vbTextCompare)
         
         nS = CLng(sDiv(0))
         nE = CLng(sDiv(1))
@@ -2070,7 +2070,7 @@ Private Sub cmdShiftRight_Click()
     If Me.Tag = "LOAD" Then Exit Sub
     
     If Trim(txtPage) > " " Then
-        sDiv = Split(txtPage.Text, "/", -1, vbTextCompare)
+        sDiv = split(txtPage.Text, "/", -1, vbTextCompare)
         
         nS = CLng(sDiv(0))
         nE = CLng(sDiv(1))
@@ -2472,7 +2472,7 @@ Private Sub Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String)
     
     On Error Resume Next
     
-    sDiv = Split(aGwamok, "|", -1, vbTextCompare)
+    sDiv = split(aGwamok, "|", -1, vbTextCompare)
     
     For ni = 0 To 1 Step 1
         

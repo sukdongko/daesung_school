@@ -3658,7 +3658,7 @@ Private Sub cmdShiftLeft_Click()
     If Me.Tag = "LOAD" Then Exit Sub
     
     If Trim(txtPage) > " " Then
-        sDiv = Split(txtPage.Text, "/", -1, vbTextCompare)
+        sDiv = split(txtPage.Text, "/", -1, vbTextCompare)
         
         nS = CLng(sDiv(0))
         nE = CLng(sDiv(1))
@@ -3680,7 +3680,7 @@ Private Sub cmdShiftRight_Click()
     If Me.Tag = "LOAD" Then Exit Sub
     
     If Trim(txtPage) > " " Then
-        sDiv = Split(txtPage.Text, "/", -1, vbTextCompare)
+        sDiv = split(txtPage.Text, "/", -1, vbTextCompare)
         
         nS = CLng(sDiv(0))
         nE = CLng(sDiv(1))
@@ -5189,7 +5189,7 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
     
     Dim sGwamok     As String
     
-    sDiv = Split(aGwamok, "|", -1, vbTextCompare)
+    sDiv = split(aGwamok, "|", -1, vbTextCompare)
     
     sTmp = "":  sGwamok = ""
     For ni = 0 To UBound(sDiv) - 1 Step 1
@@ -5219,6 +5219,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = constSatams(8)
                     Case constSatamCodes(9)
                         sTmp = constSatams(9)
+                    Case TGANG_CODE
+                        sTmp = "특강"
 '                    Case "11"
 '                        sTmp = "세계지리"
                 End Select
@@ -5251,6 +5253,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = "아랍어"
                     Case "44"
                         sTmp = "베트남어"
+                    Case TGANG_ENG2_CODE
+                        sTmp = "특강"
                 End Select
             Case "SEL3"
                 Select Case sTmp
@@ -5270,6 +5274,8 @@ Private Function Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String) As
                         sTmp = "생명과학2"
                     Case "58"
                         sTmp = "지구과학2"
+                    Case TGANG_CODE
+                        sTmp = "특강"
                 End Select
             Case "SEL4"
                 Select Case sTmp
@@ -5667,7 +5673,7 @@ Private Sub Photo_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
     
     '<< 파일 지우기 >>
     If Trim(txtPage) > " " Then
-        sDiv = Split(txtPage.Text, "/", -1, vbTextCompare)
+        sDiv = split(txtPage.Text, "/", -1, vbTextCompare)
         
         nS = CLng(sDiv(0))
         sLocalFile = sSavePath & "\" & uSTD(nS).IMAGE_FILE & ".jpg"       '<< unique key : 학원+수험번호

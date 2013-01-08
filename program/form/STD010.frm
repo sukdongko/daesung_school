@@ -3498,7 +3498,9 @@ Private Sub Form_Load()
     fraGwamok.Visible = False '폼 아래 과목코드 프레임
 
 
-    '>>>>>>>>>>>>등록 폼 초기화 <<<<<<<<<<<<<<
+    '//////////////////////////////////////////////////////////
+    '           등록 폼 초기화
+    '//////////////////////////////////////////////////////////
     txtSchNo.Text = ""
     fpExmID.Text = ""
     txtStdNM.Text = ""
@@ -3511,7 +3513,6 @@ Private Sub Form_Load()
     txtRegDate.Text = ""
     txtOrdNo.Text = ""
     txtPayGbn.Text = ""
-
     txtCancel.Text = ""
 
     optExmY.value = True
@@ -3542,7 +3543,9 @@ Private Sub Form_Load()
 '    Call basCommonSTD.Init_Clinic(cbo_Clinic_L, cbo_Clinic_M, cbo_Clinic_E)     '클리닉
     
     
-    '>>>>>>>>>>>> 조회 폼 초기화 <<<<<<<<<<<<<<
+    '//////////////////////////////////////////////////////////
+    '           조회 폼 초기화
+    '//////////////////////////////////////////////////////////
     '사탐 체크박스 초기화.
     Dim ni As Integer
     For ni = 0 To UBound(constSatams)
@@ -3577,7 +3580,9 @@ Private Sub Form_Load()
     Call basCommonSTD.Set_Spread_Design1(sprSTD_F)              '학생조회 시트
     Call basCommonSTD.Set_Spread_Design1(sprExcel_STD_Data)     '엑셀가져오기 시트
     
-    '>>>>>>>>>>>> 작은창들 위치세팅. <<<<<<<<<<<<<<
+    '//////////////////////////////////////////////////////////
+    '           작은창들 위치세팅
+    '//////////////////////////////////////////////////////////
     With fraAddr        '< 학생 상세내역 등록 : 2008.01.10
         .Top = 3420
         .Left = 6540
@@ -3602,13 +3607,14 @@ Private Sub Form_Load()
     End With
     
     
-    '>>>>>>>>>>>> 학원에 따른 폼 설정 <<<<<<<<<<<<<<
-    
-    '>> 양재일경우 특강 표시
+    '//////////////////////////////////////////////////////////
+    '           학원에 따른 폼 상태 변경
+    '//////////////////////////////////////////////////////////
+    '>> 특강 표시
     chkGwatam(9).Visible = False
     chkSatam(11).Visible = False
     chkEng2(14).Visible = False
-    If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
+    If basModule.SchCD = "J" Or basModule.SchCD = "S" Or basModule.SchCD = "M" Then
         chkGwatam(9).Visible = True
         chkSatam(11).Visible = True
         chkEng2(14).Visible = True
@@ -3618,7 +3624,7 @@ Private Sub Form_Load()
     Call basCommonSTD.Set_CboSch(cboSel1_Sch, basModule.SchCD)
     
     
-    '>> 학원
+    '>> 학원에 따른 선택과목 표시 여부
     Select Case Trim(basModule.SchCD)
         Case "N"        '노량진
             For ni = 7 To 9 Step 1
@@ -3699,10 +3705,10 @@ Private Sub cmdNew_Click()
     txtSchNo.Text = ""
     fpExmID.Text = ""
     txtStdNM.Text = ""
-    fpBirth_ymd.Text = ""   '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 고동석 수정
-    txt_P_Phone = ""    '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 고동석 수정
-    txt_UNI.Text = ""   '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 고동석 수정
-    txt_MAJOR.Text = ""   '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 고동석 수정
+    fpBirth_ymd.Text = ""
+    txt_P_Phone = ""
+    txt_UNI.Text = ""
+    txt_MAJOR.Text = ""
     txtTel.Text = ""
     txtCel.Text = ""
     txtRegDate.Text = ""
@@ -3771,7 +3777,7 @@ Private Sub changeEnableGwamoks(bSatam As Boolean, bEng2 As Boolean, bGwatam As 
 
     Dim ni      As Integer
     
-    ' 미선택떄문에 +1
+    
     For ni = 1 To 12 Step 1    '< 사탐
         If True = bSatam Then
             chkSatam(ni).Enabled = True
@@ -4001,7 +4007,7 @@ Private Function Save_Stdin() As Boolean
         Next ni
         
         '특강
-        If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
+        If basModule.SchCD = "J" Or basModule.SchCD = "S" Or basModule.SchCD = "M" Then
             If chkSatam(11).value = 1 Then: sTmp = sTmp & TGANG_CODE & "|"  '특강 양재,송파
         End If
         
@@ -4021,7 +4027,7 @@ Private Function Save_Stdin() As Boolean
         Next ni
         
         '특강
-        If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
+        If basModule.SchCD = "J" Or basModule.SchCD = "S" Or basModule.SchCD = "M" Then
             If chkEng2(14).value = 1 Then: sTmp = sTmp & TGANG_ENG2_CODE & "|"  '특강 양재,송파
         End If
         
@@ -4036,7 +4042,7 @@ Private Function Save_Stdin() As Boolean
             End If
         Next ni
         
-        If basModule.SchCD = "J" Or basModule.SchCD = "S" Then
+        If basModule.SchCD = "J" Or basModule.SchCD = "S" Or basModule.SchCD = "M" Then
             If chkGwatam(9).value = 1 Then: sTmp = sTmp & TGANG_CODE & "|"   '특강 양재만
         End If
         
@@ -5550,7 +5556,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             
             If IsNull(.Fields("SEL1")) = False Then
                 sTmp = Trim(.Fields("SEL1"))
-                sDiv = Split(sTmp, "|", -1, vbTextCompare)
+                sDiv = split(sTmp, "|", -1, vbTextCompare)
                 
                 Dim arrIdx      As Long
                  For ni = 0 To UBound(sDiv) - 1 Step 1
@@ -5583,7 +5589,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             Next ni
             If IsNull(.Fields("SEL2")) = False Then
                 sTmp = Trim(.Fields("SEL2"))
-                sDiv = Split(sTmp, "|", -1, vbTextCompare)
+                sDiv = split(sTmp, "|", -1, vbTextCompare)
                 
                 For ni = 0 To UBound(sDiv) - 1 Step 1
                     If sDiv(ni) = "44" Then '베트남어 코드구함 :   베트남어코드:44 수리나형:43 이라서 +1해줌
@@ -5603,7 +5609,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             Next ni
             If IsNull(.Fields("SEL3")) = False Then
                 sTmp = Trim(.Fields("SEL3"))
-                sDiv = Split(sTmp, "|", -1, vbTextCompare)
+                sDiv = split(sTmp, "|", -1, vbTextCompare)
                 
                 For ni = 0 To UBound(sDiv) - 1 Step 1
                     If sDiv(ni) = TGANG_CODE Then
@@ -5619,7 +5625,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             Next ni
             If IsNull(.Fields("SEL4")) = False Then
                 sTmp = Trim(.Fields("SEL4"))
-                sDiv = Split(sTmp, "|", -1, vbTextCompare)
+                sDiv = split(sTmp, "|", -1, vbTextCompare)
                 
                 For ni = 0 To UBound(sDiv) - 1 Step 1
                     chkMath(CInt(sDiv(ni)) - 80).value = 1
@@ -5631,7 +5637,7 @@ Private Sub Show_Select_STD(ByVal aSchNO As String)
             Next ni
             If IsNull(.Fields("SEL5")) = False Then
                 sTmp = Trim(.Fields("SEL5"))
-                sDiv = Split(sTmp, "|", -1, vbTextCompare)
+                sDiv = split(sTmp, "|", -1, vbTextCompare)
                 
                 For ni = 0 To UBound(sDiv) - 1 Step 1
                     chkNonsul(CInt(sDiv(ni)) - 90).value = 1

@@ -1,7 +1,7 @@
 VERSION 5.00
 Object = "{CDF3B183-D408-11CE-AE2C-0080C786E37D}#3.0#0"; "Edt32x30.ocx"
 Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "COMDLG32.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomctl.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
 Object = "{48E59290-9880-11CF-9754-00AA00C00908}#1.0#0"; "MSINET.OCX"
 Begin VB.Form MAT011_J 
    Caption         =   "입학사정 >> 입학원서 출력 >> 수학 집중 클리닉 (양재)"
@@ -1898,7 +1898,7 @@ Private Sub cmdShiftLeft_Click()
     If Me.Tag = "LOAD" Then Exit Sub
     
     If Trim(txtPage) > " " Then
-        sDiv = Split(txtPage.Text, "/", -1, vbTextCompare)
+        sDiv = split(txtPage.Text, "/", -1, vbTextCompare)
         
         nS = CLng(sDiv(0))
         nE = CLng(sDiv(1))
@@ -1920,7 +1920,7 @@ Private Sub cmdShiftRight_Click()
     If Me.Tag = "LOAD" Then Exit Sub
     
     If Trim(txtPage) > " " Then
-        sDiv = Split(txtPage.Text, "/", -1, vbTextCompare)
+        sDiv = split(txtPage.Text, "/", -1, vbTextCompare)
         
         nS = CLng(sDiv(0))
         nE = CLng(sDiv(1))
@@ -2016,7 +2016,7 @@ Private Sub Get_STD_Data()
     sStr = sStr & "            FROM HWSIN01TB_WINTER"
     sStr = sStr & "           WHERE EXMROUND LIKE "
     
-    Select Case Trim(schcd)
+    Select Case Trim(SchCD)
         Case "N"
             sStr = sStr & "         'NR081126%'"
         Case "K"
@@ -2278,7 +2278,7 @@ Private Sub Get_STD_image()
     
         '2010.12.20 김한욱 노량진,송파,양재 경우 사진파일이 수험번호로 저장
         
-        Select Case Trim(schcd)
+        Select Case Trim(SchCD)
             Case "N"
                 sLocalFile = sSavePath & "\" & uSTD(nRec).SU_NO & ".jpg"                    '수험번호
             Case "S"
@@ -2293,7 +2293,7 @@ Private Sub Get_STD_image()
             If uSTD(nRec).PHOTO_PATH > " " Then
             
             
-                Select Case Trim(basModule.schcd)
+                Select Case Trim(basModule.SchCD)
                     Case "B"
                         sSourceUrl = "http://www.dsnschool.net" & uSTD(nRec).PHOTO_PATH        '<< 서버의 이미지 경로
                         
@@ -2491,7 +2491,7 @@ Private Sub Std_Data_Show(Index As Long)
         '제2지망.Text = .SEL2_SCH
         
         '2010.12.20 김한욱 노량진,송파,양재의 경우 수험번호로 된 사진 표시
-        Select Case Trim(schcd)
+        Select Case Trim(SchCD)
             Case "N"
                 Set Photo.Picture = CheckJPG(sSavePath & "\" & .SU_NO & ".jpg")
             Case "S"
@@ -2515,7 +2515,7 @@ Private Sub Div_Gwamok_NM(ByVal aGbn As String, ByVal aGwamok As String)
     
     On Error Resume Next
     
-    sDiv = Split(aGwamok, "|", -1, vbTextCompare)
+    sDiv = split(aGwamok, "|", -1, vbTextCompare)
     
     For ni = 0 To UBound(sDiv) Step 1
         
@@ -2890,7 +2890,7 @@ Private Sub Photo_MouseDown(Button As Integer, Shift As Integer, X As Single, Y 
     
     '<< 파일 지우기 >>
     If Trim(txtPage) > " " Then
-        sDiv = Split(txtPage.Text, "/", -1, vbTextCompare)
+        sDiv = split(txtPage.Text, "/", -1, vbTextCompare)
         
         nS = CLng(sDiv(0))
         sLocalFile = sSavePath & "\" & uSTD(nS).ORD_NO & ".jpg"       '<< unique key : ord_no
@@ -2922,7 +2922,7 @@ Private Function Make_image_Path(ByVal aOrdNO As String, ByVal aExmID As String,
     Dim MaxSize         As Long
     
     sFilePath = ""
-    Select Case Trim(basModule.schcd)
+    Select Case Trim(basModule.SchCD)
         Case "N"
             sFilePath = "/NDOC/dshw/noryangjin/register/ETC/"
         Case "K", "W", "Q"
