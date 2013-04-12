@@ -1,23 +1,23 @@
 Attribute VB_Name = "basDataBase"
 '################################################################################################################
-'   ½Ã ½º ÅÛ  ¸í : ´ë¼ºÇÐ¿ø ÀÔÇÐ»çÁ¤, ¹Ý¹èÁ¤ & ½Ã°£Ç¥ ÇÁ·Î±×·¥
-' 5  ¼­ºê½Ã½ºÅÛ¸í :
-'   ¸ð   µâ   ¸í : BASDATABASE
-'   ¸ð µâ  ¸ñ Àû : µ¥ÀÌÅÍº£ÀÌ½º Á¢¼Ó
+'   ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½  ï¿½ï¿½ : ï¿½ë¼ºï¿½Ð¿ï¿½ ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½, ï¿½Ý¹ï¿½ï¿½ï¿½ & ï¿½Ã°ï¿½Ç¥ ï¿½ï¿½ï¿½Î±×·ï¿½
+' 5  ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½Û¸ï¿½ :
+'   ï¿½ï¿½   ï¿½ï¿½   ï¿½ï¿½ : BASDATABASE
+'   ï¿½ï¿½ ï¿½ï¿½  ï¿½ï¿½ ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½
 '
-'   ÀÛ   ¼º   ÀÏ : 2007/08/20
-'   ÀÛ   ¼º   ÀÚ : À¯ÇÏ±Õ
+'   ï¿½ï¿½   ï¿½ï¿½   ï¿½ï¿½ : 2007/08/20
+'   ï¿½ï¿½   ï¿½ï¿½   ï¿½ï¿½ : ï¿½ï¿½ï¿½Ï±ï¿½
 ' --------------------------------------------------------------------------------------------------------------
 ' --------------------------------------------------------------------------------------------------------------
-'                 ¼ö     Á¤     ³»     ¿ë
+'                 ï¿½ï¿½     ï¿½ï¿½     ï¿½ï¿½     ï¿½ï¿½
 ' --------------------------------------------------------------------------------------------------------------
-'   1. ¼öÁ¤ÀÏ :
-'   2. ³»  ¿ë :
+'   1. ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ :
+'   2. ï¿½ï¿½  ï¿½ï¿½ :
 '################################################################################################################
 
 Option Explicit
 
-'>> ODBC API ¼³Á¤
+'>> ODBC API ï¿½ï¿½ï¿½ï¿½
     Private Declare Function SQLConfigDataSource Lib "ODBCCP32.DLL" _
                    (ByVal hwndParent As Long, _
                     ByVal fRequest As Long, _
@@ -31,16 +31,16 @@ Option Explicit
     Private Const vbAPINull As Long = 0&    ' NULL Pointer
 
     Private Const ODBCDrv = "Oracle ODBC Driver"
-    Private Const ODBCDrv92 = "Oracle in OraHome92"             ' ³ë·®Áø
+    Private Const ODBCDrv92 = "Oracle in OraHome92"             ' ï¿½ë·®ï¿½ï¿½
     Private Const ODBCDrv11g = "{Microsoft ODBC for Oracle}"    ' 11g
     
-    Private OracleVer       As String                           ' ¿À¶óÅ¬ ¹öÁ¯
+    Private OracleVer       As String                           ' ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½ï¿½
     
     
     Public DBConn As ADODB.Connection
     
     
-'>> REGISTRY ¿¡ °ü¿©ÇÏ´Â DECLARE STATEMENT
+'>> REGISTRY ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ DECLARE STATEMENT
     Public Declare Function RegCloseKey Lib "advapi32.dll" (ByVal hKey As Long) As Long
     Public Declare Function RegOpenKeyEx Lib "advapi32.dll" Alias "RegOpenKeyExA" (ByVal hKey As Long, ByVal lpSubKey As String, ByVal ulOptions As Long, ByVal samDesired As Long, phkResult As Long) As Long
     Public Declare Function RegQueryValueEx Lib "advapi32.dll" Alias "RegQueryValueExA" (ByVal hKey As Long, ByVal lpValueName As String, ByVal lpReserved As Long, lpType As Long, lpData As Any, lpcbData As Long) As Long         ' Note that if you declare the lpData parameter as String, you must pass it By Value.
@@ -51,24 +51,24 @@ Option Explicit
     Public Declare Function RegDeleteValue Lib "advapi32.dll" Alias "RegDeleteValueA" (ByVal hKey As Long, ByVal lpValueName As String) As Long
     Public Declare Function RegDeleteKey Lib "advapi32.dll" Alias "RegDeleteKeyA" (ByVal hKey As Long, ByVal lpSubKey As String) As Long
 
-    ' ROOT Å°¸¦ Ã³¸®
+    ' ROOT Å°ï¿½ï¿½ Ã³ï¿½ï¿½
     Public Const ERROR_SUCCESS = 0&
     
-    Public Const REG_OPTION_BACKUP_RESTORE = 4                      '¹é¾÷ÀÌ³ª º¹±¸¸¦ À§ÇØ ÇÊ¿äÇÑ ¿¢¼¼½º·Î ¿­¸°´Ù.
-    Public Const REG_OPTION_VOLATILE = 1                            'ÈÖ¹ß¼º µ¥ÀÌÅÍ°¡ ¾Æ´Ï¹Ç·Î ½Ã½ºÅÛ Àç½Ãµ¿½Ã ¼Õ½ÇµÇÁö ¾Ê´Â´Ù.
-    Public Const REG_OPTION_NON_VOLATILE = &O0                      'µ¥ÀÌÅÍ´Â ¸Þ¸ð¸®¿¡¸¸ ¾²¿©Áö°í, µð½ºÅ© »ó¿¡´Â ±â·ÏµÇÁö ¾Ê´Â´Ù.
+    Public Const REG_OPTION_BACKUP_RESTORE = 4                      'ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+    Public Const REG_OPTION_VOLATILE = 1                            'ï¿½Ö¹ß¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½Æ´Ï¹Ç·ï¿½ ï¿½Ã½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ ï¿½Õ½Çµï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
+    Public Const REG_OPTION_NON_VOLATILE = &O0                      'ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ ï¿½Þ¸ð¸®¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½Å© ï¿½ó¿¡´ï¿½ ï¿½ï¿½ï¿½Ïµï¿½ï¿½ï¿½ ï¿½Ê´Â´ï¿½.
     
-    Public Const REG_BINARY = 3                                     'ÀÌÁøµ¥ÀÌÅÍ
+    Public Const REG_BINARY = 3                                     'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     Public Const REG_DWORD = 4                                      '32 BIT NUMBER
-    Public Const REG_DWORD_LITTLE_ENDIAN = 4                        '32 BIT NUMBER ÃÖ»óÀ§ ¹ÙÀÌÆ®°¡ ÇÏÀ§¹ÙÀÌÆ®
-    Public Const REG_DWORD_BIG_ENDIAN = 5                           '32 BIT NUMBER ÃÖ»óÀ§ ¹ÙÀÌÆ®°¡ »óÀ§¹ÙÀÌÆ®
-    Public Const REG_EXPAND_SZ = 2                                  'È¯°æº¯¼ö¿¡ ´ëÇØ È®Àå µÇÁö ¾ÊÀº ÂüÁ¶ÇüÅÂÀÇ ¹®ÀÚ¿­ (EX : %PATH%)
+    Public Const REG_DWORD_LITTLE_ENDIAN = 4                        '32 BIT NUMBER ï¿½Ö»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    Public Const REG_DWORD_BIG_ENDIAN = 5                           '32 BIT NUMBER ï¿½Ö»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    Public Const REG_EXPAND_SZ = 2                                  'È¯ï¿½æº¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ (EX : %PATH%)
     
-    Public Const REG_LINK = 6                                       'À¯´ÏÄÚµå ½Éº¼¸¯ ¿¬°á
-    Public Const REG_MULTI_SZ = 7                                   '³Î·Î ³¡³ª´Â ¹®ÀÚ¿­ÀÇ ¸®½ºÆ®
-    Public Const REG_NONE = 0                                       'Á¤ÀÇµÇÁö ¾ÊÀº À¯Çü
-    Public Const REG_RESOURCE_LIST = 8                              'µð¹ÙÀÌ½º µå¶óÀÌ¹ö ÀÚ¿ø ¸ñ·Ï
-    Public Const REG_SZ = 1                                         'NULL·Î ³¡³ª´Â ¹®ÀÚ¿­
+    Public Const REG_LINK = 6                                       'ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ ï¿½Éºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    Public Const REG_MULTI_SZ = 7                                   'ï¿½Î·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+    Public Const REG_NONE = 0                                       'ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    Public Const REG_RESOURCE_LIST = 8                              'ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½
+    Public Const REG_SZ = 1                                         'NULLï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½
     
     Public Const HKEY_CLASSES_ROOT = &H80000000
     Public Const HKEY_CURRENT_USER = &H80000001
@@ -123,7 +123,7 @@ Option Explicit
         Dacl                    As ACL
     End Type
     
-'>> SERVER ¼³Á¤
+'>> SERVER ï¿½ï¿½ï¿½ï¿½
     Public Const PORT = "15800"
     Public Const Dev_LoginHost = "dmdev.mimacstudy.com"
     Public Const Mimac_LoginHost = "ms.mimacstudy.com"
@@ -150,9 +150,9 @@ Public Function DataBase_Connection() As Boolean
     Dim DB_Name As String
     Dim tns_Path As String
     
-    On Error GoTo Error1                     'error Ã³¸®
+    On Error GoTo Error1                     'error Ã³ï¿½ï¿½
     
-    '>>>>>>>>>> tnsnames.oraÆÄÀÏ °æ·Î °¡Á®¿À±â
+    '>>>>>>>>>> tnsnames.oraï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     tns_Path = Get_TNSNames_Path()
     If "" = tns_Path Then
         DataBase_Connection = False
@@ -160,8 +160,8 @@ Public Function DataBase_Connection() As Boolean
     End If
     
     
-    '>>>>>>>>>>> tnsnames.oraÆÄÀÏ¿¡ DBÁ¢¼ÓÁ¤º¸ ¼¼ÆÃ.
-    'tnsname.oraÆÄÀÏ¿¡ Ãß°¡ÇÒ DBÁ¢¼ÓÁ¤º¸
+    '>>>>>>>>>>> tnsnames.oraï¿½ï¿½ï¿½Ï¿ï¿½ DBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+    'tnsname.oraï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     Select Case UCase(Trim(basModule.connDB))
         Case "MIMAC"
             sTns = "MI2_CLASS= (DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = ms.mimacstudy.com)(PORT = 30022)))(CONNECT_DATA = (SERVICE_NAME = DS)(INSTANCE_NAME = DS2)))"
@@ -175,11 +175,11 @@ Public Function DataBase_Connection() As Boolean
     
     
     
-    '>>>>>>>>>> DB Á¢¼Ó
+    '>>>>>>>>>> DB ï¿½ï¿½ï¿½ï¿½
     If bSuccess Then
-        DataBase_Connection = connectionOledb()           '<< ÃÖÁ¾ DBÁ¢¼Ó
+        DataBase_Connection = connectionOledb()           '<< ï¿½ï¿½ï¿½ï¿½ DBï¿½ï¿½ï¿½ï¿½
     Else
-        MsgBox "tnsnames.oraÆÄÀÏ¿¡ DBÁ¢¼ÓÁ¤º¸ ¼¼ÆÃÁß¿¡ ¿¡·¯¹ß»ý", vbCritical + vbOKOnly, "µ¥ÀÌÅÍ Á¢¼Ó"
+        MsgBox "tnsnames.oraï¿½ï¿½ï¿½Ï¿ï¿½ DBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß»ï¿½", vbCritical + vbOKOnly, "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½"
     End If
     
     DataBase_Connection = True
@@ -188,7 +188,7 @@ Public Function DataBase_Connection() As Boolean
     
 Error1:
     DataBase_Connection = False
-    MsgBox "DatabaseConnection Error", "µ¥ÀÌÅÍº£ÀÌ½º Á¢¼Ó"
+    MsgBox "DatabaseConnection Error", "ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ ï¿½ï¿½ï¿½ï¿½"
 
 End Function
 
@@ -196,7 +196,7 @@ End Function
 
 Public Function connectionOledb() As Boolean
     
-    On Error GoTo ErrorADODB                     'error Ã³¸®
+    On Error GoTo ErrorADODB                     'error Ã³ï¿½ï¿½
     
     Dim strDB As String
     
@@ -206,27 +206,16 @@ Public Function connectionOledb() As Boolean
     'READGAME  READGAME/eoqkrskfk7
     'MSDAORA.1.1
     'OraOLEDB.Oracle
-    Select Case UCase(Trim(basModule.connDB))
-            Case "MIMAC"
-               strDB = "Provider    =OraOLEDB.Oracle;" & _
-                        "Data Source =MI2_CLASS;" & _
-                        "User Id     =DSHW;" & _
-                        "Password    =sybaQ#12;"
-            Case Else
-                strDB = "Provider    =OraOLEDB.Oracle;" & _
-                        "Data Source =DMDB;" & _
-                        "User Id     =DSHW;" & _
-                        "Password    =sybaQ#12;"
-        End Select
+    
         
-    ' Data Source = Á¢¼ÓÇÒ µ¥ÀÌÅÍº£ÀÌ½º
-    DBConn.ConnectionString = strDB       'µ¥ÀÌÅÍº£ÀÌ½º¿Í ¿¬°áÀ» ½ÃµµÇÕ´Ï´Ù.
-    DBConn.ConnectionTimeout = 5          'Á¦ÇÑ ½Ã°£³»¿¡ ¿¬°áÀÌ µÇÁö ¾ÊÀ¸¸é ÀÚµ¿À¸·Î ²÷½À´Ï´Ù.
-    'DB.Properties("Prompt") = adPromptNever   'ÀÌ°ÍÀº ADO¿¡¼­ ±âº» ÇÁ·ÒÇÁÆ® ¸ðµåÀÔ´Ï´Ù.
-    'DB.CursorLocation = adUseClient           'Ä¿¼­À§Ä¡¸¦ Client ÂÊ¿¡ ³Ö½À´Ï´Ù.
+    ' Data Source = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½
+    DBConn.ConnectionString = strDB       'ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ãµï¿½ï¿½Õ´Ï´ï¿½.
+    DBConn.ConnectionTimeout = 5          'ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.
+    'DB.Properties("Prompt") = adPromptNever   'ï¿½Ì°ï¿½ï¿½ï¿½ ADOï¿½ï¿½ï¿½ï¿½ ï¿½âº» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½Ô´Ï´ï¿½.
+    'DB.CursorLocation = adUseClient           'Ä¿ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½ Client ï¿½Ê¿ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.
         
-    DBConn.Open                                   'µ¥ÀÌÅÍº£ÀÌ½º¸¦ ¿±´Ï´Ù.
-    'MsgBox "¿¬°á ¼º°ø"
+    DBConn.Open                                   'ï¿½ï¿½ï¿½ï¿½ï¿½Íºï¿½ï¿½Ì½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½.
+    'MsgBox "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½"
     DoEvents
 '    Do While DB.State And adStateConnecting
 '        DoEvents
@@ -237,8 +226,8 @@ Public Function connectionOledb() As Boolean
     Exit Function
     
 ErrorADODB:
-    MsgBox "connectionOledb½Ã ¿¡·¯°¡ ¹ß»ýÇÏ¿´½À´Ï´Ù." & vbCrLf & _
-           Trim(CStr(Err.Number)) & ":" & Err.Description, vbCritical + vbOKOnly, "ÇÐ»ýÁ¶È¸"
+    MsgBox "connectionOledbï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½." & vbCrLf & _
+           Trim(CStr(Err.Number)) & ":" & Err.Description, vbCritical + vbOKOnly, "ï¿½Ð»ï¿½ï¿½ï¿½È¸"
 
     'End
 End Function
@@ -247,45 +236,45 @@ End Function
 
 
 
-'>> ¿ì¼±¼øÀ§ 1. DAESUNG.INIÆÄÀÏ¿¡ PATH_ORACLE_TNS
-'>> ¿ì¼±¼øÀ§ 2. È¯°æº¯¼ö Path   (·¹Áö½ºÆ®¸®¿¡¼­ ÀÐÀ½)
-'>> TNS°æ·Î¿¡ tnsnames.oraÆÄÀÏÀÌ ¾øÀ»°æ¿ì »ý¼º   (\network\adminÆú´õ°¡ ¾øÀ»°æ¿ì ½ÇÆÐ)
+'>> ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ 1. DAESUNG.INIï¿½ï¿½ï¿½Ï¿ï¿½ PATH_ORACLE_TNS
+'>> ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ 2. È¯ï¿½æº¯ï¿½ï¿½ Path   (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+'>> TNSï¿½ï¿½ï¿½Î¿ï¿½ tnsnames.oraï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½   (\network\adminï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 Public Function Get_TNSNames_Path() As String
 
     Dim tns_Path As String
     
-    '>>>>>>>>> ¿À¶óÅ¬ °æ·Î °¡Á®¿À±â
-    ' È¯°æº¯¼ö PathÀÇ ·¹Áö½ºÆ®¸®°ªÀ» ÀÐ¾î¿Í¼­ ¿À¶óÅ¬°æ·Î¸¦ °¡Á®¿È.
+    '>>>>>>>>> ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    ' È¯ï¿½æº¯ï¿½ï¿½ Pathï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½Í¼ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
     tns_Path = Get_TnsFile_Path_Registry()
     
     
-    '>>>>>>>>>> DAESUNG.INIÆÄÀÏ¿¡¼­ ¿À¶óÅ¬ °æ·Î °¡Á®¿À±â
-    ' DAESUNG.INIÆÄÀÏ¿¡¼­ tns°æ·Î(PATH_ORACLE_TNS)°¡ ÀÖÀ¸¸é ±×°É·Î ÇÏ°í ¾øÀ¸¸é. Path¿¡ ÀâÇôÀÖ´Â°É·Î ÇÑ´Ù.
+    '>>>>>>>>>> DAESUNG.INIï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    ' DAESUNG.INIï¿½ï¿½ï¿½Ï¿ï¿½ï¿½ï¿½ tnsï¿½ï¿½ï¿½ï¿½(PATH_ORACLE_TNS)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×°É·ï¿½ ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½. Pathï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´Â°É·ï¿½ ï¿½Ñ´ï¿½.
     Dim sData               As String * 255
     Dim sTmp                As String
     
     sData = ""
-    Call basModule.GetPrivateProfileString("SCHOOL", "PATH_ORACLE_TNS", "", sData, 255, App.Path & "\DAESUNG.INI")             '>> ¿À¶óÅ¬ ÀÎ½ºÅÏ½º °æ·Î
+    Call basModule.GetPrivateProfileString("SCHOOL", "PATH_ORACLE_TNS", "", sData, 255, App.Path & "\DAESUNG.INI")             '>> ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½Î½ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½ï¿½ï¿½
     sTmp = Trim(Replace(sData, Chr(0), "", 1, -1, vbTextCompare))
     If "" <> sTmp Then
         tns_Path = sTmp
     End If
     
     If "" = tns_Path Then
-        MsgBox "¿À¶óÅ¬ °æ·Î¼³Á¤¿¡ ¹®Á¦°¡ ÀÖ½À´Ï´Ù. " & Chr(13) & "Á÷Á¢ INIÆÄÀÏ¿¡ PATH_ORACLE_TNS¸¦ Ãß°¡ÇÒ°ÍÀ» ±ÇÀåÇÕ´Ï´Ù.", vbCritical + vbOKOnly, "TNS°æ·Î °¡Á®¿À±â"
+        MsgBox "ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½. " & Chr(13) & "ï¿½ï¿½ï¿½ï¿½ INIï¿½ï¿½ï¿½Ï¿ï¿½ PATH_ORACLE_TNSï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ò°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½.", vbCritical + vbOKOnly, "TNSï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
         Get_TNSNames_Path = ""
         Exit Function
     End If
     
     
-    '>>>>>>>>>> tnsnames.oraÆÄÀÏ »ý¼º
-    ' tns_Path°æ·Î¿¡ tnsnames.oraÆÄÀÏÀÌ ¾øÀ»°æ¿ì »ý¼º
-    ' \network\admin Æú´õ°¡ ¾øÀ»°æ¿ì ÆÄÀÏ»ý¼º ½ÇÆÐ
+    '>>>>>>>>>> tnsnames.oraï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    ' tns_Pathï¿½ï¿½ï¿½Î¿ï¿½ tnsnames.oraï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    ' \network\admin ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     If "" = Dir(tns_Path) Then
     
         If False = Create_Tnsnames(tns_Path) Then
             Get_TNSNames_Path = ""
-            MsgBox "tnsnames.oraÆÄÀÏ »ý¼º½ÇÆÐ", "Create_Tnsnames"
+            MsgBox "tnsnames.oraï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", "Create_Tnsnames"
             Exit Function
         End If
     End If
@@ -295,8 +284,8 @@ End Function
 
 
 
-'RETURN VALLUE : Ã£À»°æ¿ì °æ·Î , ¸øÃ£À¸¸é ""
-'tnsnames.oraÆÄÀÏ °æ·Î °¡Á®¿À±â : È¯°æº¯¼ö PATHÀÇ ORACLE °æ·Î(·¹Áö½ºÆ®¸®¿¡¼­ ÀÐ¾î¿È)¸¦ ÂüÁ¶
+'RETURN VALLUE : Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ , ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ ""
+'tnsnames.oraï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : È¯ï¿½æº¯ï¿½ï¿½ PATHï¿½ï¿½ ORACLE ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 Private Function Get_TnsFile_Path_Registry() As String
 
     Dim RetStr      As String
@@ -311,7 +300,7 @@ Private Function Get_TnsFile_Path_Registry() As String
     '>> Registry Open
     Rtn = RegOpenKeyEx(hKey, "SYSTEM\CurrentControlSet\Control\Session Manager\Environment\", 0, KEY_ALL_ACCESS, hSubKey)
     
-    'ÇÏÀ§ Å°°ªÀ» ¾ò´Â´Ù.
+    'ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½.
     strLength = 256
     RetStr = String(strLength, 0)
 
@@ -319,22 +308,22 @@ Private Function Get_TnsFile_Path_Registry() As String
     Rtn = RegQueryValueEx(hSubKey, "Path", 0, dType, ByVal RetStr, strLength)
     
     
-    '>> PathÅ°°¡ Á¸ÀçÇÒ°æ¿ì
+    '>> PathÅ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½
     bFindPath = False
     If Rtn = ERROR_SUCCESS Then
     
-        '>> path¾ÈÀÇ ¹®ÀÚ¿­µéÀº ";"·Î ±¸ºÐµÇ¾îÀÖÀ½
+        '>> pathï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ ";"ï¿½ï¿½ ï¿½ï¿½ï¿½ÐµÇ¾ï¿½ï¿½ï¿½ï¿½ï¿½
         Dim strPaths
         Dim Path
         
-        sReturn = Left(RetStr, strLength - 1)   'µÚ¿¡ µû¶ó¿À´Â ¹®ÀÚ¿­À» Á¦°ÅÇÑ´Ù
+        sReturn = Left(RetStr, strLength - 1)   'ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
         strPaths = Split(sReturn, ";")
         
-        'PATH¾ÈÀÇ ¹®ÀÚµéÁß¿¡ oracle°æ·Î°¡ ÀÖ´ÂÁö È®ÀÎ. '(network\admin Æú´õ°¡ ÀÖÀ¸¸é OK)
+        'PATHï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ï¿½ß¿ï¿½ oracleï¿½ï¿½ï¿½Î°ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½. '(network\admin ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ OK)
         For Each Path In strPaths
             
             If "" <> Dir(Path & "\" & "network\admin", vbDirectory) Then
-                '°æ·Î°¡ ÀÖÀ½.
+                'ï¿½ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½.
                 sReturn = Path & "\network\admin\tnsnames.ora"
                 bFindPath = True
                 Exit For
@@ -342,10 +331,10 @@ Private Function Get_TnsFile_Path_Registry() As String
         Next
         
         If bFindPath = False Then
-            'MsgBox "È¯°æº¯¼ö PATH¿¡¼­ PATH\network\admin Æú´õ°¡ Á¸Àç ÇÏÁö ¾Ê½À´Ï´Ù"
+            'MsgBox "È¯ï¿½æº¯ï¿½ï¿½ PATHï¿½ï¿½ï¿½ï¿½ PATH\network\admin ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½"
          End If
     Else
-        'MsgBox "·¹Áö½ºÆ®¸®°ª ÀÐ¾î¿À±â ½ÇÆÐ " & vbCrLf & "rtn : " & Rtn & "  dType :" & dType & Left(RetStr, strLength - 1)
+        'MsgBox "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ " & vbCrLf & "rtn : " & Rtn & "  dType :" & dType & Left(RetStr, strLength - 1)
     End If
     
     Rtn = RegCloseKey(hSubKey)
@@ -359,7 +348,7 @@ Private Function Get_TnsFile_Path_Registry() As String
 End Function
 
 
-'>>>>>>>>>>>> tnsnames.oraÆÄÀÏÀÌ ¾øÀ»°æ¿ì ÆÄÀÏ »ý¼º
+'>>>>>>>>>>>> tnsnames.oraï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 Private Function Create_Tnsnames(tns_Path As String) As Boolean
 
     Dim strFolder
@@ -367,29 +356,29 @@ Private Function Create_Tnsnames(tns_Path As String) As Boolean
     
     strFile = Right(tns_Path, 12)
     If strFile <> "tnsnames.ora" Then
-        MsgBox tns_Path & " ´Â tnsnames.oraÆÄÀÏÀÌ ¾Æ´Õ´Ï´Ù", vbCritical + vbOKOnly, "tnsnames »ý¼º"
+        MsgBox tns_Path & " ï¿½ï¿½ tnsnames.oraï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Õ´Ï´ï¿½", vbCritical + vbOKOnly, "tnsnames ï¿½ï¿½ï¿½ï¿½"
         Create_Tnsnames = False
         Exit Function
     End If
     
-    ' Æú´õ°¡ Á¸ÀçÇÏ´ÂÁö
+    ' ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½
     strFolder = Split(UCase(tns_Path), "NETWORK\ADMIN\")
     strFolder(0) = strFolder(0) & "NETWORK\ADMIN\"
     
     If "" = Dir(strFolder(0), vbDirectory) Then
     
-        ' Æú´õ ¾øÀ½ FALSE(¿¡·¯) ¹ÝÈ¯
-        MsgBox tns_Path & "°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù."
+        ' ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ FALSE(ï¿½ï¿½ï¿½ï¿½) ï¿½ï¿½È¯
+        MsgBox tns_Path & "ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½."
         Create_Tnsnames = False
         Exit Function
         
     Else
-        ' Æú´õ´Â ÀÖ´Âµ¥ ÆÄÀÏÀÌ ¾øÀ½. >> ÆÄÀÏ»ý¼º
+        ' ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Âµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½. >> ï¿½ï¿½ï¿½Ï»ï¿½ï¿½ï¿½
         Dim FileNumber As Integer
         FileNumber = FreeFile
         
         Open tns_Path For Output As FileNumber
-            ' ¹Ø¿¡ FileStream.ReadAllÇÒ¶§ ÆÄÀÏ¾È¿¡ ¾Æ¹« TEXTµµ ¾øÀ¸¸é "ÆÄÀÏ ³¡À» ³Ñ¾î°¡´Â ÀÔ·ÂÀÔ´Ï´Ù" ¶ó´Â ¿¡·¯¹ß»ý
+            ' ï¿½Ø¿ï¿½ FileStream.ReadAllï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½Ï¾È¿ï¿½ ï¿½Æ¹ï¿½ TEXTï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾î°¡ï¿½ï¿½ ï¿½Ô·ï¿½ï¿½Ô´Ï´ï¿½" ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß»ï¿½
             Print #FileNumber, " "
         Close FileNumber
     End If
@@ -400,7 +389,7 @@ End Function
 
 
 '########################################
-'# ORACLE Tnsnames ÀÚµ¿ Ãß°¡
+'# ORACLE Tnsnames ï¿½Úµï¿½ ï¿½ß°ï¿½
 '########################################
 Public Function writeOraTnsName(tns_Path As String, sTns As String, DB_Name As String) As Boolean
 
@@ -413,7 +402,7 @@ Public Function writeOraTnsName(tns_Path As String, sTns As String, DB_Name As S
     On Error GoTo err_rtn
     
     
-    '>>>>>>>>>> ÆÄÀÏ¿¡ DBNameÀÌ ¾øÀ»°æ¿ì Ãß°¡ÇØ¼­ ÆÄÀÏÀ» µ¤¾î¾º¿î´Ù. <
+    '>>>>>>>>>> ï¿½ï¿½ï¿½Ï¿ï¿½ DBNameï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î¾ºï¿½ï¿½ï¿½ï¿½. <
     Set FS = CreateObject("Scripting.FileSystemObject")
     
     If tns_Path <> "" Then
@@ -443,7 +432,7 @@ Public Function writeOraTnsName(tns_Path As String, sTns As String, DB_Name As S
          OutStream.Write strTxt
          OutStream.Close
          
-         writeOraTnsName = True       'Á¤»óÀû Ã³¸®
+         writeOraTnsName = True       'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
     Else
     
          Set OutStream = FS.OpenTextFile(tns_Path, 2, True)
@@ -454,12 +443,12 @@ Public Function writeOraTnsName(tns_Path As String, sTns As String, DB_Name As S
 
     Set FS = Nothing
    
-   writeOraTnsName = True                'Á¤»óÀû Ã³¸®
+   writeOraTnsName = True                'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½
    Exit Function
    
 err_rtn:
    Set FS = Nothing
-   writeOraTnsName = False               'ºñÁ¤»óÀû Ã³¸® (°æ·Î°¡ Á¸ÀçÇÏÁö ¾Ê´Â °æ¿ì.)
+   writeOraTnsName = False               'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ (ï¿½ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½.)
    
 End Function
 
@@ -491,10 +480,10 @@ End Function
 '
 '    Rtn = RegOpenKeyEx(hKey, "SYSTEM\CurrentControlSet\Control\Session Manager\Environment\", 0, KEY_ALL_ACCESS, hSubKey)
 '    If Rtn <> ERROR_SUCCESS Then
-'        '·¹Áö½ºÆ®¸®¸¦ »ý¼º½ÃÄÑÁÖ¾î¾ß ÇÑ´Ù.
+'        'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 '        iRet = RegCreateKeyEx(hKey, SubKey, 0, vbNullString, REG_OPTION_NON_VOLATILE, KEY_ALL_ACCESS, iSecurity, KeyRet, dPosition)
 '        If iRet <> ERROR_SUCCESS Then
-'            MsgBox "¿À¶óÅ¬À» ¼³Ä¡ÇÏ¿© ÁÖ½Ê½Ã¿ä.", vbExclamation + vbOKOnly, "DB Connection"
+'            MsgBox "ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½Ï¿ï¿½ ï¿½Ö½Ê½Ã¿ï¿½.", vbExclamation + vbOKOnly, "DB Connection"
 '            Rtn = RegCloseKey(hSubKey)
 '
 '            Find_DB_Tnsnames_Location = sReturn
@@ -502,7 +491,7 @@ End Function
 '        End If
 '    End If
 '
-'    'ÇÏÀ§ Å°°ªÀ» ¾ò´Â´Ù.
+'    'ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â´ï¿½.
 '    strLength = 256
 '    RetStr = String(strLength, 0)
 '
@@ -511,7 +500,7 @@ End Function
 '        Rtn = RegQueryValueEx(hSubKey, "Path", 0, dType, ByVal RetStr, strLength)
 '
 '        If Rtn = ERROR_SUCCESS And dType = REG_SZ Then
-'            'µÚ¿¡ µû¶ó¿À´Â ¹®ÀÚ¿­À» Á¦°ÅÇÑ´Ù
+'            'ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 '            sReturn = Left(RetStr, strLength - 1)
 '            sReturn = sReturn & "\network\admin\tnsnames.ora"
 '
@@ -524,7 +513,7 @@ End Function
 '            If InStr(1, UCase(OracleVer), "ORAHOME9", vbTextCompare) > 0 Then OracleVer = "ORA9"
 '
 '        Else
-'            MsgBox "¿À¶óÅ¬ °æ·Î¼³Á¤¿¡ ¹®Á¦°¡ ÀÖ½À´Ï´Ù.", vbExclamation + vbOKOnly, "DB Connection"
+'            MsgBox "ï¿½ï¿½ï¿½ï¿½Å¬ ï¿½ï¿½ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö½ï¿½ï¿½Ï´ï¿½.", vbExclamation + vbOKOnly, "DB Connection"
 '
 '        End If
 '        Rtn = RegCloseKey(hSubKey)
